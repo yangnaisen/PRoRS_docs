@@ -1,0 +1,750 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>17. 随机森林、ExtraTrees、Adaboost、GradientBoost分类效果 &mdash; PRoRS 0.0.1 文档</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="索引"
+              href="../genindex.html"/>
+        <link rel="search" title="搜索" href="../search.html"/>
+    <link rel="top" title="PRoRS 0.0.1 文档" href="../index.html"/>
+        <link rel="up" title="像元特征分类" href="index.html"/>
+        <link rel="next" title="&lt;no title&gt;" href="One_7.1_Pan-Keans.html"/>
+        <link rel="prev" title="&lt;no title&gt;" href="6.1_DecisionTreeClassifier.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> PRoRS
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">第一部分:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">像元特征分类</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="2_SK_KNC_naive_bayesGB_QDA_SDGclassfier.html">1. 以Jupyter Notebook为基本工具</a></li>
+<li class="toctree-l2"><a class="reference internal" href="3.2_SGDLossfunction.html">2. SGD 损失函数</a></li>
+<li class="toctree-l2"><a class="reference internal" href="3.2_SGDLossfunction.html#训练样本的（归一化）损失值">3. 训练样本的（归一化）损失值</a></li>
+<li class="toctree-l2"><a class="reference internal" href="3.2_SGDLossfunction.html#假设测试样本分别为正类或负类的（归一化）损失值">4. 假设测试样本分别为正类或负类的（归一化）损失值</a></li>
+<li class="toctree-l2"><a class="reference internal" href="3.3_twoGB.html">5. 二维高斯分布</a></li>
+<li class="toctree-l2"><a class="reference internal" href="3.3_twoGB.html#协方差矩阵">6. 协方差矩阵</a></li>
+<li class="toctree-l2"><a class="reference internal" href="4.1_MLPClassfier.html">7. 多层神经网络</a></li>
+<li class="toctree-l2"><a class="reference internal" href="4.1_MLPClassfier.html#训练数据集">8. 训练数据集</a></li>
+<li class="toctree-l2"><a class="reference internal" href="4.1_MLPClassfier.html#测试数据集">9. 测试数据集</a></li>
+<li class="toctree-l2"><a class="reference internal" href="4.1_MLPClassfier.html#四种激活函数分类">10. 四种激活函数分类</a></li>
+<li class="toctree-l2"><a class="reference internal" href="4.2_MLPClassifier_hidenWeights.html">11. 多层神经网络</a></li>
+<li class="toctree-l2"><a class="reference internal" href="4.2_MLPClassifier_hidenWeights.html#训练数据集">12. 训练数据集</a></li>
+<li class="toctree-l2"><a class="reference internal" href="4.2_MLPClassifier_hidenWeights.html#测试数据集">13. 测试数据集</a></li>
+<li class="toctree-l2"><a class="reference internal" href="4.2_MLPClassifier_hidenWeights.html#存储各隐层权重的array">14. 存储各隐层权重的array</a></li>
+<li class="toctree-l2"><a class="reference internal" href="4.2_MLPClassifier_hidenWeights.html#四种激活函数分类">15. 四种激活函数分类</a></li>
+<li class="toctree-l2"><a class="reference internal" href="4.2_MLPClassifier_hidenWeights.html#隐层过程">16. 隐层过程</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">17. 随机森林、ExtraTrees、Adaboost、GradientBoost分类效果</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#RandomForest并行分类过程">18. RandomForest并行分类过程</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#AdaBoost串行分类过程">19. AdaBoost串行分类过程</a></li>
+<li class="toctree-l2"><a class="reference internal" href="One_7.4_Pan_GMM_MRF.html">20. 第一次MRF迭代</a></li>
+<li class="toctree-l2"><a class="reference internal" href="One_7.4_Pan_GMM_MRF.html#第二次MRF迭代">21. 第二次MRF迭代</a></li>
+<li class="toctree-l2"><a class="reference internal" href="One_7.4_Pan_GMM_MRF.html#第三次MRF迭代">22. 第三次MRF迭代</a></li>
+<li class="toctree-l2"><a class="reference internal" href="One_7.4_Pan_GMM_MRF.html#第四次MRF迭代">23. 第四次MRF迭代</a></li>
+<li class="toctree-l2"><a class="reference internal" href="One_7.4_Pan_GMM_MRF.html#第五次MRF迭代">24. 第五次MRF迭代</a></li>
+<li class="toctree-l2"><a class="reference internal" href="One_7.4_Pan_GMM_MRF.html#第六次MRF迭代">25. 第六次MRF迭代</a></li>
+<li class="toctree-l2"><a class="reference internal" href="One_7.4_Pan_GMM_MRF.html#第七次MRF迭代">26. 第七次MRF迭代</a></li>
+<li class="toctree-l2"><a class="reference internal" href="One_7.4_Pan_GMM_MRF.html#第八次MRF迭代">27. 第八次MRF迭代</a></li>
+<li class="toctree-l2"><a class="reference internal" href="One_7.4_Pan_GMM_MRF.html#第九次MRF迭代">28. 第九次MRF迭代</a></li>
+<li class="toctree-l2"><a class="reference internal" href="One_7.4_Pan_GMM_MRF.html#第十次MRF迭代">29. 第十次MRF迭代</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">第二部分:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../2ndPart/index.html">1. 图像平面分类</a></li>
+</ul>
+<p class="caption"><span class="caption-text">第三部分:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../3rdPart/index.html">地表覆盖制图</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">PRoRS</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">像元特征分类</a> &raquo;</li>
+        
+      <li>17. 随机森林、ExtraTrees、Adaboost、GradientBoost分类效果</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/1stPart/6.2_Ensemblemethods.ipynb.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+<style>
+/* CSS for nbsphinx extension */
+
+/* remove conflicting styling from Sphinx themes */
+div.nbinput,
+div.nbinput div.prompt,
+div.nbinput div.input_area,
+div.nbinput div[class*=highlight],
+div.nbinput div[class*=highlight] pre,
+div.nboutput,
+div.nbinput div.prompt,
+div.nbinput div.output_area,
+div.nboutput div[class*=highlight],
+div.nboutput div[class*=highlight] pre {
+    background: none;
+    border: none;
+    padding: 0 0;
+    margin: 0;
+    box-shadow: none;
+}
+
+/* avoid gaps between output lines */
+div.nboutput div[class*=highlight] pre {
+    line-height: normal;
+}
+
+/* input/output containers */
+div.nbinput,
+div.nboutput {
+    display: -webkit-flex;
+    display: flex;
+    align-items: flex-start;
+    margin: 0;
+    width: 100%;
+}
+@media (max-width: 540px) {
+    div.nbinput,
+    div.nboutput {
+        flex-direction: column;
+    }
+}
+
+/* input container */
+div.nbinput {
+    padding-top: 5px;
+}
+
+/* last container */
+div.nblast {
+    padding-bottom: 5px;
+}
+
+/* input prompt */
+div.nbinput div.prompt pre {
+    color: #303F9F;
+}
+
+/* output prompt */
+div.nboutput div.prompt pre {
+    color: #D84315;
+}
+
+/* all prompts */
+div.nbinput div.prompt,
+div.nboutput div.prompt {
+    min-width: 8ex;
+    padding-top: 0.4em;
+    padding-right: 0.4em;
+    text-align: right;
+    flex: 0;
+}
+@media (max-width: 540px) {
+    div.nbinput div.prompt,
+    div.nboutput div.prompt {
+        text-align: left;
+        padding: 0.4em;
+    }
+    div.nboutput div.prompt.empty {
+        padding: 0;
+    }
+}
+
+/* disable scrollbars on prompts */
+div.nbinput div.prompt pre,
+div.nboutput div.prompt pre {
+    overflow: hidden;
+}
+
+/* input/output area */
+div.nbinput div.input_area,
+div.nboutput div.output_area {
+    padding: 0.4em;
+    -webkit-flex: 1;
+    flex: 1;
+    overflow: auto;
+}
+@media (max-width: 540px) {
+    div.nbinput div.input_area,
+    div.nboutput div.output_area {
+        width: 100%;
+    }
+}
+
+/* input area */
+div.nbinput div.input_area {
+    border: 1px solid #cfcfcf;
+    border-radius: 2px;
+    background: #f7f7f7;
+}
+
+/* override MathJax center alignment in output cells */
+div.nboutput div[class*=MathJax] {
+    text-align: left !important;
+}
+
+/* override sphinx.ext.pngmath center alignment in output cells */
+div.nboutput div.math p {
+    text-align: left;
+}
+
+/* standard error */
+div.nboutput div.output_area.stderr {
+    background: #fdd;
+}
+
+/* ANSI colors */
+.ansi-black-fg { color: #3E424D; }
+.ansi-black-bg { background-color: #3E424D; }
+.ansi-black-intense-fg { color: #282C36; }
+.ansi-black-intense-bg { background-color: #282C36; }
+.ansi-red-fg { color: #E75C58; }
+.ansi-red-bg { background-color: #E75C58; }
+.ansi-red-intense-fg { color: #B22B31; }
+.ansi-red-intense-bg { background-color: #B22B31; }
+.ansi-green-fg { color: #00A250; }
+.ansi-green-bg { background-color: #00A250; }
+.ansi-green-intense-fg { color: #007427; }
+.ansi-green-intense-bg { background-color: #007427; }
+.ansi-yellow-fg { color: #DDB62B; }
+.ansi-yellow-bg { background-color: #DDB62B; }
+.ansi-yellow-intense-fg { color: #B27D12; }
+.ansi-yellow-intense-bg { background-color: #B27D12; }
+.ansi-blue-fg { color: #208FFB; }
+.ansi-blue-bg { background-color: #208FFB; }
+.ansi-blue-intense-fg { color: #0065CA; }
+.ansi-blue-intense-bg { background-color: #0065CA; }
+.ansi-magenta-fg { color: #D160C4; }
+.ansi-magenta-bg { background-color: #D160C4; }
+.ansi-magenta-intense-fg { color: #A03196; }
+.ansi-magenta-intense-bg { background-color: #A03196; }
+.ansi-cyan-fg { color: #60C6C8; }
+.ansi-cyan-bg { background-color: #60C6C8; }
+.ansi-cyan-intense-fg { color: #258F8F; }
+.ansi-cyan-intense-bg { background-color: #258F8F; }
+.ansi-white-fg { color: #C5C1B4; }
+.ansi-white-bg { background-color: #C5C1B4; }
+.ansi-white-intense-fg { color: #A1A6B2; }
+.ansi-white-intense-bg { background-color: #A1A6B2; }
+
+.ansi-bold { font-weight: bold; }
+
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast,
+.nboutput.nblast {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast + .nbinput {
+    margin-top: -19px;
+}
+
+/* nice headers on first paragraph of info/warning boxes */
+.admonition .first {
+    margin: -12px;
+    padding: 6px 12px;
+    margin-bottom: 12px;
+    color: #fff;
+    line-height: 1;
+    display: block;
+}
+.admonition.warning .first {
+    background: #f0b37e;
+}
+.admonition.note .first {
+    background: #6ab0de;
+}
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+</style>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span># -*- coding:UTF-8 -*- ＃
+# 导入模块
+import sys
+import time
+import random
+import numpy as np
+import matplotlib.pyplot as plt
+import pydotplus
+from IPython.display import Image
+from sklearn.datasets import load_iris
+from sklearn import tree
+
+from matplotlib.colors import ListedColormap
+from sklearn.ensemble import (RandomForestClassifier, ExtraTreesClassifier,AdaBoostClassifier)
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.ensemble import GradientBoostingClassifier
+from sklearn.preprocessing import StandardScaler
+
+from sklearn.neural_network import MLPClassifier
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.svm import SVC
+from sklearn.gaussian_process import GaussianProcessClassifier
+from sklearn.gaussian_process.kernels import RBF
+from sklearn.discriminant_analysis import QuadraticDiscriminantAnalysis
+
+sys.path.append(r&quot;C:\Users\zhang\Desktop\exeserise&quot;)
+import mymodule as MYD
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span>n_samples=500
+XB,yb=MYD.makeblods(n_samples)
+XR,yr=MYD.makerandoms(n_samples)
+XC,yc=MYD.makecircles(n_samples)
+XH,yh=MYD.makeHelixs(n_samples)
+XAS = [XB, XR, XC,XH]
+YAS=[yb,yr,yc,yh]
+
+cor = ListedColormap([&#39;Blue&#39;, &#39;Orange&#39;])
+titlename=[&#39;two blob&#39;,&#39;two random&#39;,&#39;two circle&#39;,&#39;two heixl&#39;]
+cmap=[cor,cor,cor,cor]
+MYD.DrawManyChart(XAS,YAS,cmap,24,4,titlename,10,1,4)
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/1stPart_6.2_Ensemblemethods_1_0.png" src="../_images/1stPart_6.2_Ensemblemethods_1_0.png" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span>Xzip,points=MYD.makeGrids()
+plt.figure()
+plt.scatter(points[:,0],points[:,1],s=0.009)
+plt.show(); points[:,0].shape;
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/1stPart_6.2_Ensemblemethods_2_0.png" src="../_images/1stPart_6.2_Ensemblemethods_2_0.png" />
+</div>
+</div>
+<div class="section" id="随机森林、ExtraTrees、Adaboost、GradientBoost分类效果">
+<h1>17. 随机森林、ExtraTrees、Adaboost、GradientBoost分类效果<a class="headerlink" href="#随机森林、ExtraTrees、Adaboost、GradientBoost分类效果" title="永久链接至标题">¶</a></h1>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span>LabelDTR=[]; LabelRAN=[];  LabelEXT=[]; LabelADA=[]; LabelGRA=[];
+lable=[LabelDTR,LabelRAN,LabelEXT,LabelADA,LabelGRA];
+ScoreDTR=[];  ScoreRAN=[];  ScoreEXT=[];  ScoreADA=[];  ScoreGRA=[];
+score=[ScoreDTR,ScoreRAN,ScoreEXT,ScoreADA,ScoreGRA];
+
+L=len(points);   a=1
+number_of_points = int(a*L)
+p = points[0:number_of_points]
+
+dt_stump = DecisionTreeClassifier(max_depth=1, min_samples_leaf=1)
+
+modelDTR=DecisionTreeClassifier(criterion=&#39;gini&#39;,max_depth=5)
+modelRandomForest=RandomForestClassifier(n_estimators=7, criterion=&#39;gini&#39;, max_depth=None)
+modelExtraTree=ExtraTreesClassifier()
+modelAdaBoost=AdaBoostClassifier(base_estimator=DecisionTreeClassifier(criterion=&#39;gini&#39;,max_depth=3), n_estimators=5,learning_rate=1.0,algorithm=&#39;SAMME&#39;)
+modelGradient=GradientBoostingClassifier(n_estimators=5,learning_rate=1.0,max_depth=4, random_state=0)
+
+allmodule=[modelDTR,modelRandomForest,modelExtraTree,modelAdaBoost,modelGradient]
+DI=2
+for i in range(0,len(allmodule)):
+    tempmodule=None
+    tempmodule=allmodule[i].fit(XAS[DI],YAS[DI])
+    lable[i].append(tempmodule.predict(p))
+    score[i].append(tempmodule.score(XAS[DI],YAS[DI]))
+
+print(score);
+cor = ListedColormap([&#39;Blue&#39;, &#39;Orange&#39;])
+titlename=[&#39;DecisionTreeClassifier&#39;,&#39;RandomForestClassifier&#39;,&#39;ExtraTreesClassifier&#39;,&#39;AdaBoostClassifier&#39;,&#39;GradientBoostingClassifier&#39;]
+PC=[p,p,p,p,p]
+cmap=[cor,cor,cor,cor,cor]
+MYD.DrawManyChart(PC,lable,cmap,25,4,titlename,10,1,5)
+
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[[1.0], [1.0], [1.0], [1.0], [1.0]]
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/1stPart_6.2_Ensemblemethods_4_1.png" src="../_images/1stPart_6.2_Ensemblemethods_4_1.png" />
+</div>
+</div>
+</div>
+<div class="section" id="RandomForest并行分类过程">
+<h1>18. RandomForest并行分类过程<a class="headerlink" href="#RandomForest并行分类过程" title="永久链接至标题">¶</a></h1>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span>Nestimators=modelRandomForest.estimators_
+Nclasses=modelRandomForest.n_classes_
+oobdecisionfunction=modelRandomForest.oob_score
+indicator,n_nodes_ptr=modelRandomForest.decision_path(XAS[DI])
+
+labelEST1=[];  labelEST2=[];  labelEST3=[];  labelEST4=[];  labelEST5=[];  labelEST6=[];   labelEST7=[];
+alllabelEST=[labelEST1,labelEST2,labelEST3,labelEST4,labelEST5,labelEST6,labelEST7];
+
+for k in range(0,len(Nestimators)):
+    Estimator=Nestimators[k]
+    alllabelEST[k].append(Estimator.predict(p))
+
+cor = ListedColormap([&#39;Blue&#39;, &#39;Orange&#39;])
+titlename=[&#39;RTestimator1&#39;,&#39;RTestimator2&#39;,&#39;RTestimator3&#39;,&#39;RTestimator4&#39;,&#39;RTestimator5&#39;,&#39;RTestimator6&#39;,&#39;RTestimator7&#39;];
+
+PCE=[p,p,p,p,p,p,p]
+cmap=[cor,cor,cor,cor,cor,cor,cor]
+MYD.DrawManyChart(PCE,alllabelEST,cmap,28,3.2,titlename,10,1,7)
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/1stPart_6.2_Ensemblemethods_6_0.png" src="../_images/1stPart_6.2_Ensemblemethods_6_0.png" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span>sumlabel=labelEST1;
+for n in range(1,len(alllabelEST)):
+    for m in range(0,len(labelEST1)):
+        sumlabel[m]=sumlabel[m]+alllabelEST[n][m]
+
+finallabel=[];
+for j in range(0,len(sumlabel[0])):
+    if(sumlabel[0][j]&gt;=4):
+        finallabel.append(1)
+    else:
+        finallabel.append(0)
+
+plt.figure(figsize=(4,4))
+plt.scatter(p[:,0],p[:,1],c=finallabel,s=0.9,cmap=cor)
+plt.show();
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/1stPart_6.2_Ensemblemethods_7_0.png" src="../_images/1stPart_6.2_Ensemblemethods_7_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="AdaBoost串行分类过程">
+<h1>19. AdaBoost串行分类过程<a class="headerlink" href="#AdaBoost串行分类过程" title="永久链接至标题">¶</a></h1>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span>ABestimator=modelAdaBoost.estimators_
+ABweight=modelAdaBoost.estimator_weights_
+ABerror=modelAdaBoost.estimator_errors_
+
+labelAB1=[];  labelAB2=[];  labelAB3=[];  labelAB4=[];  labelAB5=[];
+alllabelAB=[labelAB1,labelAB2,labelAB3,labelAB4,labelAB5];
+
+for WI in range(0,len(ABestimator)):
+    estimator=ABestimator[WI]
+    mylabel=estimator.predict(p)
+    templableTram=MYD.classtransform(mylabel)
+    alllabelAB[WI].append(templableTram)
+
+cor = ListedColormap([&#39;Blue&#39;, &#39;Orange&#39;])
+titlename=[&#39;ABestimator1&#39;,&#39;ABestimator2&#39;,&#39;ABestimator3&#39;,&#39;ABestimator4&#39;,&#39;ABestimator5&#39;];
+
+PCEAB=[p,p,p,p,p]
+cmap=[cor,cor,cor,cor,cor]
+MYD.DrawManyChart(PCEAB,alllabelAB,cmap,28,4,titlename,10,1,5)
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/1stPart_6.2_Ensemblemethods_9_0.png" src="../_images/1stPart_6.2_Ensemblemethods_9_0.png" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span>sumlabelAB=MYD.Multiplyonedata(alllabelAB[0],ABweight[0]);
+
+for WI in range(1,len(alllabelAB)):
+    sumlabelAB=MYD.addarray(sumlabelAB,MYD.Multiplyonedata(alllabelAB[WI],ABweight[WI]))
+
+finallabelAB=[];
+for j in range(0,len(sumlabelAB[0])):
+    if(sumlabelAB[0][j]&gt;0):
+        finallabelAB.append(1)
+    else:
+        finallabelAB.append(-1)
+
+plt.figure(figsize=(5,5))
+plt.scatter(p[:,0],p[:,1],c=finallabelAB,s=0.9,cmap=cor)
+plt.show();
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/1stPart_6.2_Ensemblemethods_10_0.png" src="../_images/1stPart_6.2_Ensemblemethods_10_0.png" />
+</div>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="One_7.1_Pan-Keans.html" class="btn btn-neutral float-right" title="&lt;no title&gt;" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="6.1_DecisionTreeClassifier.html" class="btn btn-neutral" title="&lt;no title&gt;" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, YNS.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'0.0.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="../_static/translations.js"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

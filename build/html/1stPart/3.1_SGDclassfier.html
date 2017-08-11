@@ -1,0 +1,732 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>&lt;no title&gt; &mdash; PRoRS 0.0.1 文档</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="索引"
+              href="../genindex.html"/>
+        <link rel="search" title="搜索" href="../search.html"/>
+    <link rel="top" title="PRoRS 0.0.1 文档" href="../index.html"/>
+        <link rel="up" title="像元特征分类" href="index.html"/>
+        <link rel="next" title="2. SGD 损失函数" href="3.2_SGDLossfunction.html"/>
+        <link rel="prev" title="1. 以Jupyter Notebook为基本工具" href="2_SK_KNC_naive_bayesGB_QDA_SDGclassfier.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> PRoRS
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">第一部分:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="index.html">像元特征分类</a></li>
+</ul>
+<p class="caption"><span class="caption-text">第二部分:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../2ndPart/index.html">1. 图像平面分类</a></li>
+</ul>
+<p class="caption"><span class="caption-text">第三部分:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../3rdPart/index.html">地表覆盖制图</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">PRoRS</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">像元特征分类</a> &raquo;</li>
+        
+      <li>&lt;no title&gt;</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/1stPart/3.1_SGDclassfier.ipynb.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+<style>
+/* CSS for nbsphinx extension */
+
+/* remove conflicting styling from Sphinx themes */
+div.nbinput,
+div.nbinput div.prompt,
+div.nbinput div.input_area,
+div.nbinput div[class*=highlight],
+div.nbinput div[class*=highlight] pre,
+div.nboutput,
+div.nbinput div.prompt,
+div.nbinput div.output_area,
+div.nboutput div[class*=highlight],
+div.nboutput div[class*=highlight] pre {
+    background: none;
+    border: none;
+    padding: 0 0;
+    margin: 0;
+    box-shadow: none;
+}
+
+/* avoid gaps between output lines */
+div.nboutput div[class*=highlight] pre {
+    line-height: normal;
+}
+
+/* input/output containers */
+div.nbinput,
+div.nboutput {
+    display: -webkit-flex;
+    display: flex;
+    align-items: flex-start;
+    margin: 0;
+    width: 100%;
+}
+@media (max-width: 540px) {
+    div.nbinput,
+    div.nboutput {
+        flex-direction: column;
+    }
+}
+
+/* input container */
+div.nbinput {
+    padding-top: 5px;
+}
+
+/* last container */
+div.nblast {
+    padding-bottom: 5px;
+}
+
+/* input prompt */
+div.nbinput div.prompt pre {
+    color: #303F9F;
+}
+
+/* output prompt */
+div.nboutput div.prompt pre {
+    color: #D84315;
+}
+
+/* all prompts */
+div.nbinput div.prompt,
+div.nboutput div.prompt {
+    min-width: 8ex;
+    padding-top: 0.4em;
+    padding-right: 0.4em;
+    text-align: right;
+    flex: 0;
+}
+@media (max-width: 540px) {
+    div.nbinput div.prompt,
+    div.nboutput div.prompt {
+        text-align: left;
+        padding: 0.4em;
+    }
+    div.nboutput div.prompt.empty {
+        padding: 0;
+    }
+}
+
+/* disable scrollbars on prompts */
+div.nbinput div.prompt pre,
+div.nboutput div.prompt pre {
+    overflow: hidden;
+}
+
+/* input/output area */
+div.nbinput div.input_area,
+div.nboutput div.output_area {
+    padding: 0.4em;
+    -webkit-flex: 1;
+    flex: 1;
+    overflow: auto;
+}
+@media (max-width: 540px) {
+    div.nbinput div.input_area,
+    div.nboutput div.output_area {
+        width: 100%;
+    }
+}
+
+/* input area */
+div.nbinput div.input_area {
+    border: 1px solid #cfcfcf;
+    border-radius: 2px;
+    background: #f7f7f7;
+}
+
+/* override MathJax center alignment in output cells */
+div.nboutput div[class*=MathJax] {
+    text-align: left !important;
+}
+
+/* override sphinx.ext.pngmath center alignment in output cells */
+div.nboutput div.math p {
+    text-align: left;
+}
+
+/* standard error */
+div.nboutput div.output_area.stderr {
+    background: #fdd;
+}
+
+/* ANSI colors */
+.ansi-black-fg { color: #3E424D; }
+.ansi-black-bg { background-color: #3E424D; }
+.ansi-black-intense-fg { color: #282C36; }
+.ansi-black-intense-bg { background-color: #282C36; }
+.ansi-red-fg { color: #E75C58; }
+.ansi-red-bg { background-color: #E75C58; }
+.ansi-red-intense-fg { color: #B22B31; }
+.ansi-red-intense-bg { background-color: #B22B31; }
+.ansi-green-fg { color: #00A250; }
+.ansi-green-bg { background-color: #00A250; }
+.ansi-green-intense-fg { color: #007427; }
+.ansi-green-intense-bg { background-color: #007427; }
+.ansi-yellow-fg { color: #DDB62B; }
+.ansi-yellow-bg { background-color: #DDB62B; }
+.ansi-yellow-intense-fg { color: #B27D12; }
+.ansi-yellow-intense-bg { background-color: #B27D12; }
+.ansi-blue-fg { color: #208FFB; }
+.ansi-blue-bg { background-color: #208FFB; }
+.ansi-blue-intense-fg { color: #0065CA; }
+.ansi-blue-intense-bg { background-color: #0065CA; }
+.ansi-magenta-fg { color: #D160C4; }
+.ansi-magenta-bg { background-color: #D160C4; }
+.ansi-magenta-intense-fg { color: #A03196; }
+.ansi-magenta-intense-bg { background-color: #A03196; }
+.ansi-cyan-fg { color: #60C6C8; }
+.ansi-cyan-bg { background-color: #60C6C8; }
+.ansi-cyan-intense-fg { color: #258F8F; }
+.ansi-cyan-intense-bg { background-color: #258F8F; }
+.ansi-white-fg { color: #C5C1B4; }
+.ansi-white-bg { background-color: #C5C1B4; }
+.ansi-white-intense-fg { color: #A1A6B2; }
+.ansi-white-intense-bg { background-color: #A1A6B2; }
+
+.ansi-bold { font-weight: bold; }
+
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast,
+.nboutput.nblast {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast + .nbinput {
+    margin-top: -19px;
+}
+
+/* nice headers on first paragraph of info/warning boxes */
+.admonition .first {
+    margin: -12px;
+    padding: 6px 12px;
+    margin-bottom: 12px;
+    color: #fff;
+    line-height: 1;
+    display: block;
+}
+.admonition.warning .first {
+    background: #f0b37e;
+}
+.admonition.note .first {
+    background: #6ab0de;
+}
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+</style>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span># coding: utf-8
+# 导入模块
+import sys
+import time
+import random
+import numpy as np
+import matplotlib.pyplot as plt
+from ipywidgets import interactive,FloatSlider
+
+from sklearn import cluster,datasets
+from matplotlib.colors import ListedColormap
+from sklearn.neighbors import kneighbors_graph
+from sklearn.preprocessing import StandardScaler
+
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.naive_bayes import GaussianNB
+from sklearn.discriminant_analysis import QuadraticDiscriminantAnalysis
+from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
+
+from sklearn.linear_model import SGDClassifier, Perceptron
+
+sys.path.append(r&quot;C:\Users\zhang\Desktop\exeserise&quot;)
+import mymodule as MYD
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span># # 四种数据集展示
+n_samples=1500
+XB,yb=MYD.makeblods(n_samples)
+XR,yr=MYD.makerandoms(n_samples)
+XC,yc=MYD.makecircles(n_samples)
+XH,yh=MYD.makeHelixs(n_samples)
+XAS = [XB, XR, XC,XH]
+YAS=[yb,yr,yc,yh]
+
+cor = ListedColormap([&#39;Blue&#39;, &#39;Orange&#39;])
+titlename=[&#39;two blob&#39;,&#39;two random&#39;,&#39;two circle&#39;,&#39;two heixl&#39;]
+cmap=[cor,cor,cor,cor]
+MYD.DrawManyChart(XAS,YAS,cmap,24,4,titlename,10,1,4)
+
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/1stPart_3.1_SGDclassfier_1_0.png" src="../_images/1stPart_3.1_SGDclassfier_1_0.png" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span># # 测试数据集
+
+# In[3]:
+
+Xzip,points=MYD.makeGrids()
+plt.figure()
+plt.scatter(points[:,0],points[:,1],s=0.009)
+plt.show()
+np.random.shuffle(points)
+points = np.array(points)
+points[:,0].shape
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/1stPart_3.1_SGDclassfier_2_0.png" src="../_images/1stPart_3.1_SGDclassfier_2_0.png" />
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>Out[3]:
+</pre></div>
+</div>
+<div class="output_area highlight-none"><div class="highlight"><pre>
+<span></span>(65536,)
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span># # 训练样本的（归一化）损失值
+
+# In[5]:
+
+SGDclfB = SGDClassifier(loss=&quot;log&quot;, alpha=0.01, n_iter=200, fit_intercept=True)
+SGDclfB.fit(XB, yb);
+
+SGDclfR = SGDClassifier(loss=&quot;log&quot;, alpha=0.01, n_iter=200, fit_intercept=True)
+SGDclfR.fit(XR, yr);
+
+SGDclfC = SGDClassifier(loss=&quot;log&quot;, alpha=0.01, n_iter=200, fit_intercept=True)
+SGDclfC.fit(XC, yc);
+
+SGDclfH = SGDClassifier(loss=&quot;log&quot;, alpha=0.01, n_iter=200, fit_intercept=True)
+SGDclfH.fit(XH, yh);
+
+GXB = SGDclfB.decision_function(XB); GXBNor=MYD.ZoomIn(GXB,1);
+GXR = SGDclfB.decision_function(XR); GXRNor=MYD.ZoomIn(GXR,1);
+GXC = SGDclfB.decision_function(XC); GXCNor=MYD.ZoomIn(GXC,1);
+GXH = SGDclfB.decision_function(XH); GXHNor=MYD.ZoomIn(GXH,1);
+
+HXB=np.array(MYD.MultiplyDW(GXBNor,yb)); HXR=np.array(MYD.MultiplyDW(GXRNor,yr));
+HXC=np.array(MYD.MultiplyDW(GXCNor,yc)); HXH=np.array(MYD.MultiplyDW(GXHNor,yh));
+
+ZeroonelossB,HingelossB,PerceptronlossB,LoglossB,SquaredhingelossB,ModifiedHuberlossB=MYD.lossfunction(HXB)
+ZeroonelossR,HingelossR,PerceptronlossR,LoglossR,SquaredhingelossR,ModifiedHuberlossR=MYD.lossfunction(HXR)
+ZeroonelossC,HingelossC,PerceptronlossC,LoglossC,SquaredhingelossC,ModifiedHuberlossC=MYD.lossfunction(HXC)
+ZeroonelossH,HingelossH,PerceptronlossH,LoglossH,SquaredhingelossH,ModifiedHuberlossH=MYD.lossfunction(HXH)
+
+cor=plt.cm.get_cmap(&#39;Reds_r&#39;);
+XBB=[XB,XB,XB,XB,XB,XB];  XRR=[XR,XR,XR,XR,XR,XR];
+XCC=[XC,XC,XC,XC,XC,XC];  XHH=[XH,XH,XH,XH,XH,XH];
+YBB=[ZeroonelossB,HingelossB,PerceptronlossB,LoglossB,SquaredhingelossB,ModifiedHuberlossB];
+YRR=[ZeroonelossR,HingelossR,PerceptronlossR,LoglossR,SquaredhingelossR,ModifiedHuberlossR];
+YCC=[ZeroonelossC,HingelossC,PerceptronlossC,LoglossC,SquaredhingelossC,ModifiedHuberlossC];
+YHH=[ZeroonelossH,HingelossH,PerceptronlossH,LoglossH,SquaredhingelossH,ModifiedHuberlossH];
+titlenameB=[&#39;ZeroonelossB&#39;,&#39;HingelossB&#39;,&#39;PerceptronlossB&#39;,&#39;LoglossB&#39;,&#39;SquaredhingelossB&#39;,&#39;ModifiedHuberlossB&#39;]
+titlenameR=[&#39;ZeroonelossR&#39;,&#39;HingelossR&#39;,&#39;PerceptronlossR&#39;,&#39;LoglossR&#39;,&#39;SquaredhingelossR&#39;,&#39;ModifiedHuberlossR&#39;]
+titlenameC=[&#39;ZeroonelossC&#39;,&#39;HingelossC&#39;,&#39;PerceptronlossC&#39;,&#39;LoglossC&#39;,&#39;SquaredhingelossC&#39;,&#39;ModifiedHuberlossC&#39;]
+titlenameH=[&#39;ZeroonelossH&#39;,&#39;HingelossH&#39;,&#39;PerceptronlossH&#39;,&#39;LoglossH&#39;,&#39;SquaredhingelossH&#39;,&#39;ModifiedHuberlossH&#39;]
+corbar=[cor,cor,cor,cor,cor,cor]
+MYD.DrawManyChart(XBB,YBB,corbar,24,4,titlenameB,10,1,6)
+MYD.DrawManyChart(XRR,YRR,corbar,24,4,titlenameR,10,1,6)
+MYD.DrawManyChart(XCC,YCC,corbar,24,4,titlenameC,10,1,6)
+MYD.DrawManyChart(XHH,YHH,corbar,24,4,titlenameH,10,1,6)
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="stderr output_area docutils container">
+<div class="highlight"><pre>
+C:\Users\zhang\Desktop\exeserise\mymodule.py:32: RuntimeWarning: invalid value encountered in true_divide
+  x=(x-minx)/(maxX-minx)
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/1stPart_3.1_SGDclassfier_3_1.png" src="../_images/1stPart_3.1_SGDclassfier_3_1.png" />
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/1stPart_3.1_SGDclassfier_3_2.png" src="../_images/1stPart_3.1_SGDclassfier_3_2.png" />
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/1stPart_3.1_SGDclassfier_3_3.png" src="../_images/1stPart_3.1_SGDclassfier_3_3.png" />
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/1stPart_3.1_SGDclassfier_3_4.png" src="../_images/1stPart_3.1_SGDclassfier_3_4.png" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span># #  假设测试样本损失值
+TestGXB= SGDclfB.decision_function(points)
+TestGXNorB=MYD.ZoomIn(TestGXB,1);
+TestGXNorarrayB=np.array(TestGXNorB)
+
+TestGXR= SGDclfR.decision_function(points)
+TestGXNorR=MYD.ZoomIn(TestGXR,1);
+TestGXNorarrayR=np.array(TestGXNorR)
+
+TestGXC= SGDclfC.decision_function(points)
+TestGXNorC=MYD.ZoomIn(TestGXC,1);
+TestGXNorarrayC=np.array(TestGXNorC)
+
+TestGXH= SGDclfH.decision_function(points)
+TestGXNorH=MYD.ZoomIn(TestGXH,1);
+TestGXNorarrayH=np.array(TestGXNorH)
+
+ZeroonelossB,HingelossB,PerceptronlossB,LoglossB,SquaredhingelossB,ModifiedHuberlossB=MYD.lossfunction(TestGXNorarrayB)
+ZeroonelossR,HingelossR,PerceptronlossR,LoglossR,SquaredhingelossR,ModifiedHuberlossR=MYD.lossfunction(TestGXNorarrayR)
+ZeroonelossC,HingelossC,PerceptronlossC,LoglossC,SquaredhingelossC,ModifiedHuberlossC=MYD.lossfunction(TestGXNorarrayC)
+ZeroonelossH,HingelossH,PerceptronlossH,LoglossH,SquaredhingelossH,ModifiedHuberlossH=MYD.lossfunction(TestGXNorarrayH)
+
+FZeroonelossB,FHingelossB,FPerceptronlossB,FLoglossB,FSquaredhingelossB,FModifiedHuberlossB=MYD.lossfunction(-TestGXNorarrayB)
+FZeroonelossR,FHingelossR,FPerceptronlossR,FLoglossR,FSquaredhingelossR,FModifiedHuberlossR=MYD.lossfunction(-TestGXNorarrayR)
+FZeroonelossC,FHingelossC,FPerceptronlossC,FLoglossC,FSquaredhingelossC,FModifiedHuberlossC=MYD.lossfunction(-TestGXNorarrayC)
+FZeroonelossH,FHingelossH,FPerceptronlossH,FLoglossH,FSquaredhingelossH,FModifiedHuberlossH=MYD.lossfunction(-TestGXNorarrayH)
+
+
+ZeroonelossB=MYD.addarray(ZeroonelossB,FZeroonelossB); HingelossB=MYD.addarray(HingelossB,FHingelossB);
+PerceptronlossB=MYD.addarray(PerceptronlossB,FPerceptronlossB); LoglossB=MYD.addarray(LoglossB,FLoglossB);
+SquaredhingelossB=MYD.addarray(SquaredhingelossB,FSquaredhingelossB); ModifiedHuberlossB=MYD.addarray(ModifiedHuberlossB,FModifiedHuberlossB);
+
+ZeroonelossR=MYD.addarray(ZeroonelossR,FZeroonelossR); HingelossR=MYD.addarray(HingelossR,FHingelossR);
+PerceptronlossR=MYD.addarray(PerceptronlossR,FPerceptronlossR); LoglossR=MYD.addarray(LoglossR,FLoglossR);
+SquaredhingelossR=MYD.addarray(SquaredhingelossR,FSquaredhingelossR);  ModifiedHuberlossR=MYD.addarray(ModifiedHuberlossR,FModifiedHuberlossR);
+
+ZeroonelossC=MYD.addarray(ZeroonelossC,FZeroonelossC); HingelossC=MYD.addarray(HingelossC,FHingelossC);
+PerceptronlossC=MYD.addarray(PerceptronlossC,FPerceptronlossC); LoglossC=MYD.addarray(LoglossC,FLoglossC);
+SquaredhingelossC=MYD.addarray(SquaredhingelossC,FSquaredhingelossC);  ModifiedHuberlossC=MYD.addarray(ModifiedHuberlossC,FModifiedHuberlossC);
+
+ZeroonelossH=MYD.addarray(ZeroonelossH,FZeroonelossH); HingelossH=MYD.addarray(HingelossH,FHingelossH);
+PerceptronlossH=MYD.addarray(PerceptronlossH,FPerceptronlossH); LoglossH=MYD.addarray(LoglossH,FLoglossH);
+SquaredhingelossH=MYD.addarray(SquaredhingelossH,FSquaredhingelossH);  ModifiedHuberlossH=MYD.addarray(ModifiedHuberlossH,FModifiedHuberlossH);
+
+
+cor=plt.cm.get_cmap(&#39;Reds_r&#39;);
+X=[points,points,points,points,points,points];
+YBB=[ZeroonelossB,HingelossB,PerceptronlossB,LoglossB,SquaredhingelossB,ModifiedHuberlossB];
+YRR=[ZeroonelossR,HingelossR,PerceptronlossR,LoglossR,SquaredhingelossR,ModifiedHuberlossR];
+YCC=[ZeroonelossC,HingelossC,PerceptronlossC,LoglossC,SquaredhingelossC,ModifiedHuberlossC];
+YHH=[ZeroonelossH,HingelossH,PerceptronlossH,LoglossH,SquaredhingelossH,ModifiedHuberlossH];
+
+MYD.DrawManyChart(X,YBB,corbar,30,3,titlenameB,1,1,6)
+MYD.DrawManyChart(X,YRR,corbar,30,3,titlenameR,1,1,6)
+MYD.DrawManyChart(X,YCC,corbar,30,3,titlenameC,1,1,6)
+MYD.DrawManyChart(X,YHH,corbar,30,3,titlenameH,1,1,6)
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/1stPart_3.1_SGDclassfier_4_0.png" src="../_images/1stPart_3.1_SGDclassfier_4_0.png" />
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/1stPart_3.1_SGDclassfier_4_1.png" src="../_images/1stPart_3.1_SGDclassfier_4_1.png" />
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/1stPart_3.1_SGDclassfier_4_2.png" src="../_images/1stPart_3.1_SGDclassfier_4_2.png" />
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/1stPart_3.1_SGDclassfier_4_3.png" src="../_images/1stPart_3.1_SGDclassfier_4_3.png" />
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span>
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="3.2_SGDLossfunction.html" class="btn btn-neutral float-right" title="2. SGD 损失函数" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="2_SK_KNC_naive_bayesGB_QDA_SDGclassfier.html" class="btn btn-neutral" title="1. 以Jupyter Notebook为基本工具" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, YNS.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'0.0.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="../_static/translations.js"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

@@ -1,0 +1,736 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>5. 二维高斯分布 &mdash; PRoRS 0.0.1 文档</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="索引"
+              href="../genindex.html"/>
+        <link rel="search" title="搜索" href="../search.html"/>
+    <link rel="top" title="PRoRS 0.0.1 文档" href="../index.html"/>
+        <link rel="up" title="像元特征分类" href="index.html"/>
+        <link rel="next" title="7. 多层神经网络" href="4.1_MLPClassfier.html"/>
+        <link rel="prev" title="2. SGD 损失函数" href="3.2_SGDLossfunction.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> PRoRS
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">第一部分:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">像元特征分类</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="2_SK_KNC_naive_bayesGB_QDA_SDGclassfier.html">1. 以Jupyter Notebook为基本工具</a></li>
+<li class="toctree-l2"><a class="reference internal" href="3.2_SGDLossfunction.html">2. SGD 损失函数</a></li>
+<li class="toctree-l2"><a class="reference internal" href="3.2_SGDLossfunction.html#训练样本的（归一化）损失值">3. 训练样本的（归一化）损失值</a></li>
+<li class="toctree-l2"><a class="reference internal" href="3.2_SGDLossfunction.html#假设测试样本分别为正类或负类的（归一化）损失值">4. 假设测试样本分别为正类或负类的（归一化）损失值</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">5. 二维高斯分布</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#协方差矩阵">6. 协方差矩阵</a></li>
+<li class="toctree-l2"><a class="reference internal" href="4.1_MLPClassfier.html">7. 多层神经网络</a></li>
+<li class="toctree-l2"><a class="reference internal" href="4.1_MLPClassfier.html#训练数据集">8. 训练数据集</a></li>
+<li class="toctree-l2"><a class="reference internal" href="4.1_MLPClassfier.html#测试数据集">9. 测试数据集</a></li>
+<li class="toctree-l2"><a class="reference internal" href="4.1_MLPClassfier.html#四种激活函数分类">10. 四种激活函数分类</a></li>
+<li class="toctree-l2"><a class="reference internal" href="4.2_MLPClassifier_hidenWeights.html">11. 多层神经网络</a></li>
+<li class="toctree-l2"><a class="reference internal" href="4.2_MLPClassifier_hidenWeights.html#训练数据集">12. 训练数据集</a></li>
+<li class="toctree-l2"><a class="reference internal" href="4.2_MLPClassifier_hidenWeights.html#测试数据集">13. 测试数据集</a></li>
+<li class="toctree-l2"><a class="reference internal" href="4.2_MLPClassifier_hidenWeights.html#存储各隐层权重的array">14. 存储各隐层权重的array</a></li>
+<li class="toctree-l2"><a class="reference internal" href="4.2_MLPClassifier_hidenWeights.html#四种激活函数分类">15. 四种激活函数分类</a></li>
+<li class="toctree-l2"><a class="reference internal" href="4.2_MLPClassifier_hidenWeights.html#隐层过程">16. 隐层过程</a></li>
+<li class="toctree-l2"><a class="reference internal" href="6.2_Ensemblemethods.html">17. 随机森林、ExtraTrees、Adaboost、GradientBoost分类效果</a></li>
+<li class="toctree-l2"><a class="reference internal" href="6.2_Ensemblemethods.html#RandomForest并行分类过程">18. RandomForest并行分类过程</a></li>
+<li class="toctree-l2"><a class="reference internal" href="6.2_Ensemblemethods.html#AdaBoost串行分类过程">19. AdaBoost串行分类过程</a></li>
+<li class="toctree-l2"><a class="reference internal" href="One_7.4_Pan_GMM_MRF.html">20. 第一次MRF迭代</a></li>
+<li class="toctree-l2"><a class="reference internal" href="One_7.4_Pan_GMM_MRF.html#第二次MRF迭代">21. 第二次MRF迭代</a></li>
+<li class="toctree-l2"><a class="reference internal" href="One_7.4_Pan_GMM_MRF.html#第三次MRF迭代">22. 第三次MRF迭代</a></li>
+<li class="toctree-l2"><a class="reference internal" href="One_7.4_Pan_GMM_MRF.html#第四次MRF迭代">23. 第四次MRF迭代</a></li>
+<li class="toctree-l2"><a class="reference internal" href="One_7.4_Pan_GMM_MRF.html#第五次MRF迭代">24. 第五次MRF迭代</a></li>
+<li class="toctree-l2"><a class="reference internal" href="One_7.4_Pan_GMM_MRF.html#第六次MRF迭代">25. 第六次MRF迭代</a></li>
+<li class="toctree-l2"><a class="reference internal" href="One_7.4_Pan_GMM_MRF.html#第七次MRF迭代">26. 第七次MRF迭代</a></li>
+<li class="toctree-l2"><a class="reference internal" href="One_7.4_Pan_GMM_MRF.html#第八次MRF迭代">27. 第八次MRF迭代</a></li>
+<li class="toctree-l2"><a class="reference internal" href="One_7.4_Pan_GMM_MRF.html#第九次MRF迭代">28. 第九次MRF迭代</a></li>
+<li class="toctree-l2"><a class="reference internal" href="One_7.4_Pan_GMM_MRF.html#第十次MRF迭代">29. 第十次MRF迭代</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">第二部分:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../2ndPart/index.html">1. 图像平面分类</a></li>
+</ul>
+<p class="caption"><span class="caption-text">第三部分:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../3rdPart/index.html">地表覆盖制图</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">PRoRS</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">像元特征分类</a> &raquo;</li>
+        
+      <li>5. 二维高斯分布</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/1stPart/3.3_twoGB.ipynb.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+<style>
+/* CSS for nbsphinx extension */
+
+/* remove conflicting styling from Sphinx themes */
+div.nbinput,
+div.nbinput div.prompt,
+div.nbinput div.input_area,
+div.nbinput div[class*=highlight],
+div.nbinput div[class*=highlight] pre,
+div.nboutput,
+div.nbinput div.prompt,
+div.nbinput div.output_area,
+div.nboutput div[class*=highlight],
+div.nboutput div[class*=highlight] pre {
+    background: none;
+    border: none;
+    padding: 0 0;
+    margin: 0;
+    box-shadow: none;
+}
+
+/* avoid gaps between output lines */
+div.nboutput div[class*=highlight] pre {
+    line-height: normal;
+}
+
+/* input/output containers */
+div.nbinput,
+div.nboutput {
+    display: -webkit-flex;
+    display: flex;
+    align-items: flex-start;
+    margin: 0;
+    width: 100%;
+}
+@media (max-width: 540px) {
+    div.nbinput,
+    div.nboutput {
+        flex-direction: column;
+    }
+}
+
+/* input container */
+div.nbinput {
+    padding-top: 5px;
+}
+
+/* last container */
+div.nblast {
+    padding-bottom: 5px;
+}
+
+/* input prompt */
+div.nbinput div.prompt pre {
+    color: #303F9F;
+}
+
+/* output prompt */
+div.nboutput div.prompt pre {
+    color: #D84315;
+}
+
+/* all prompts */
+div.nbinput div.prompt,
+div.nboutput div.prompt {
+    min-width: 8ex;
+    padding-top: 0.4em;
+    padding-right: 0.4em;
+    text-align: right;
+    flex: 0;
+}
+@media (max-width: 540px) {
+    div.nbinput div.prompt,
+    div.nboutput div.prompt {
+        text-align: left;
+        padding: 0.4em;
+    }
+    div.nboutput div.prompt.empty {
+        padding: 0;
+    }
+}
+
+/* disable scrollbars on prompts */
+div.nbinput div.prompt pre,
+div.nboutput div.prompt pre {
+    overflow: hidden;
+}
+
+/* input/output area */
+div.nbinput div.input_area,
+div.nboutput div.output_area {
+    padding: 0.4em;
+    -webkit-flex: 1;
+    flex: 1;
+    overflow: auto;
+}
+@media (max-width: 540px) {
+    div.nbinput div.input_area,
+    div.nboutput div.output_area {
+        width: 100%;
+    }
+}
+
+/* input area */
+div.nbinput div.input_area {
+    border: 1px solid #cfcfcf;
+    border-radius: 2px;
+    background: #f7f7f7;
+}
+
+/* override MathJax center alignment in output cells */
+div.nboutput div[class*=MathJax] {
+    text-align: left !important;
+}
+
+/* override sphinx.ext.pngmath center alignment in output cells */
+div.nboutput div.math p {
+    text-align: left;
+}
+
+/* standard error */
+div.nboutput div.output_area.stderr {
+    background: #fdd;
+}
+
+/* ANSI colors */
+.ansi-black-fg { color: #3E424D; }
+.ansi-black-bg { background-color: #3E424D; }
+.ansi-black-intense-fg { color: #282C36; }
+.ansi-black-intense-bg { background-color: #282C36; }
+.ansi-red-fg { color: #E75C58; }
+.ansi-red-bg { background-color: #E75C58; }
+.ansi-red-intense-fg { color: #B22B31; }
+.ansi-red-intense-bg { background-color: #B22B31; }
+.ansi-green-fg { color: #00A250; }
+.ansi-green-bg { background-color: #00A250; }
+.ansi-green-intense-fg { color: #007427; }
+.ansi-green-intense-bg { background-color: #007427; }
+.ansi-yellow-fg { color: #DDB62B; }
+.ansi-yellow-bg { background-color: #DDB62B; }
+.ansi-yellow-intense-fg { color: #B27D12; }
+.ansi-yellow-intense-bg { background-color: #B27D12; }
+.ansi-blue-fg { color: #208FFB; }
+.ansi-blue-bg { background-color: #208FFB; }
+.ansi-blue-intense-fg { color: #0065CA; }
+.ansi-blue-intense-bg { background-color: #0065CA; }
+.ansi-magenta-fg { color: #D160C4; }
+.ansi-magenta-bg { background-color: #D160C4; }
+.ansi-magenta-intense-fg { color: #A03196; }
+.ansi-magenta-intense-bg { background-color: #A03196; }
+.ansi-cyan-fg { color: #60C6C8; }
+.ansi-cyan-bg { background-color: #60C6C8; }
+.ansi-cyan-intense-fg { color: #258F8F; }
+.ansi-cyan-intense-bg { background-color: #258F8F; }
+.ansi-white-fg { color: #C5C1B4; }
+.ansi-white-bg { background-color: #C5C1B4; }
+.ansi-white-intense-fg { color: #A1A6B2; }
+.ansi-white-intense-bg { background-color: #A1A6B2; }
+
+.ansi-bold { font-weight: bold; }
+
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast,
+.nboutput.nblast {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast + .nbinput {
+    margin-top: -19px;
+}
+
+/* nice headers on first paragraph of info/warning boxes */
+.admonition .first {
+    margin: -12px;
+    padding: 6px 12px;
+    margin-bottom: 12px;
+    color: #fff;
+    line-height: 1;
+    display: block;
+}
+.admonition.warning .first {
+    background: #f0b37e;
+}
+.admonition.note .first {
+    background: #6ab0de;
+}
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+</style>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span># -*- coding:UTF-8 -*- ＃
+# 导入模块
+import sys
+import time
+import math
+import random
+import numpy as np
+from matplotlib.colors import ListedColormap
+from mpl_toolkits.mplot3d import Axes3D
+import matplotlib.pyplot as plt
+
+
+sys.path.append(r&quot;C:\Users\zhang\Desktop\exeserise&quot;)
+import mymodule as MYD
+</pre></div>
+</div>
+</div>
+<div class="section" id="二维高斯分布">
+<h1>5. 二维高斯分布<a class="headerlink" href="#二维高斯分布" title="永久链接至标题">¶</a></h1>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span>def CalculationMFS(X):
+    sumX=X[0];
+    for i in range(1,len(X)):
+        sumX=sumX+X[i];
+    mean=sumX/len(X);
+    VAR=math.pow((X[0]-mean),2)
+    for j in range(1,len(X)):
+        VAR=VAR+math.pow((X[j]-mean),2);
+    VAR=VAR/len(X);
+    Bar=math.sqrt(VAR);
+    return mean,VAR,Bar;
+
+def Zvalue(u1,u2,s1,s2,p,points):
+    Z=[];
+    for i in range(0,len(points)):
+        fenmu=2*math.pi*s1*s2*math.sqrt(1-p*p);
+        fenzi=(math.pow((points[i][0]-u1),2)/math.pow(s1,2))-(2*p*(points[i][0]-u1)*(points[i][1]-u2)/(u1*u2))+(math.pow((points[i][1]-u2),2)/math.pow(s2,2))
+        expfenzi=math.exp(-0.5*fenzi/(1-p*p))
+        tempz=expfenzi/fenmu
+        Z.append(tempz)
+    return Z;
+
+def COVM(u1,u2,points):
+    X0=points[:,0]; X1=points[:,1];
+    SUM=0;
+    for i in range(0,len(X0)):
+        for j in range(0,len(X1)):
+            SUM=SUM+(X0[i]-u1)*(X1[j]-u2)
+    COV=SUM/(len(X0)*len(X1))
+    return COV;
+
+def RelationP(COV,VAR1,VAR2):
+    P=COV/math.sqrt(VAR1*VAR2)
+    return P;
+
+def ZFclass(X,Y):
+    zheng=[]; fu=[];
+    for i in range(0,len(X)):
+        if(Y[i]&gt;0):
+            zheng.append(X[i])
+        else:
+            fu.append(X[i])
+    zheng=np.array(zheng)
+    fu=np.array(fu)
+    return zheng,fu;
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span>n_samples=4000
+XB,yb=MYD.makeblods(n_samples)
+XR,yr=MYD.makerandoms(n_samples)
+XC,yc=MYD.makecircles(n_samples)
+XH,yh=MYD.makeHelixs(n_samples)
+XAS = [XB, XR, XC,XH]
+YAS=[yb,yr,yc,yh]
+
+cor = ListedColormap([&#39;Blue&#39;, &#39;Orange&#39;])
+titlename=[&#39;two blob&#39;,&#39;two random&#39;,&#39;two circle&#39;,&#39;two heixl&#39;]
+cmap=[cor,cor,cor,cor]
+MYD.DrawManyChart(XAS,YAS,cmap,24,4,titlename,10,1,4)
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/1stPart_3.3_twoGB_3_0.png" src="../_images/1stPart_3.3_twoGB_3_0.png" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span>zhenglabel=[]; fulabel=[];
+fig = plt.figure(figsize=(26,5))
+for i in range(0,len(XAS)):
+    zheng,fu=ZFclass(XAS[i],YAS[i])
+    Xxmean,Xxvar,XxBar=CalculationMFS(zheng[:,0])
+    Xymean,Xyvar,XyBar=CalculationMFS(zheng[:,1])
+    Zlabelz=Zvalue(Xxmean,Xymean,XxBar,XyBar,0.5,zheng)
+    XFxmean,XFxvar,XFxBar=CalculationMFS(fu[:,0])
+    XFymean,XFyvar,XFyBar=CalculationMFS(fu[:,1])
+    ZlabelF=Zvalue(XFxmean,XFymean,XFxBar,XFyBar,0.5,fu)
+
+    COVzheng=COVM(Xxmean,Xymean,zheng)
+    COVfu=COVM(XFxmean,XFymean,fu)
+
+    COVMzheng=[Xxvar,COVzheng,COVzheng,Xyvar]
+    COVMFU=[XFxvar,COVfu,COVfu,XFyvar]
+
+    Pzheng=RelationP(COVzheng,Xxvar,Xyvar)
+    Pfu=RelationP(COVfu,XFxvar,XFyvar)
+
+    zhengxishu=[Xxmean,Xymean,Xxvar,Xyvar,Pzheng]
+    fuxishu=[XFxmean,XFymean,XFxvar,XFyvar,Pfu]
+
+    print(zhengxishu)
+    print(fuxishu)
+    #zhenglabel.append(Zlabelz)
+    #fulabel.append(ZlabelF);
+    ax = fig.add_subplot(1,4,i+1, projection=&#39;3d&#39;)
+    ax.plot_trisurf(zheng[:,0],zheng[:,1],Zlabelz)
+    ax.plot_trisurf(fu[:,0],fu[:,1],ZlabelF);
+
+plt.show()
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[210.24026681479845, 173.6237174709089, 158.343867453253, 172.05269890002194, 5.6335524809007579e-19]
+[174.61068469931089, 41.745129698098154, 168.83690939040645, 165.55197523475158, 4.3672562277501104e-19]
+[128.06877674349118, 126.65207646389588, 5362.807354432077, 5449.418154433293, -4.1944841187391094e-19]
+[124.72664449029773, 125.94274870209782, 5613.2821418594285, 5408.37991296333, -6.725687072192212e-19]
+[129.16588190222529, 128.87532801080772, 123.92775336931994, 124.24195125722804, 1.717846738470197e-19]
+[128.99288263432265, 129.11341263378034, 5485.616606146993, 5486.227563159336, -1.3553089314411682e-20]
+[123.5514186140241, 119.87014729877049, 2563.654126277549, 3187.8146170450777, -2.0207186041485761e-19]
+[131.48775352179808, 135.21074031445963, 2567.7002925838306, 3187.479256514957, -2.7103077793334062e-19]
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/1stPart_3.3_twoGB_4_1.png" src="../_images/1stPart_3.3_twoGB_4_1.png" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span>for i in range(0,len(XAS)):
+    zheng,fu=ZFclass(XAS[i],YAS[i])
+    Xxmean,Xxvar,XxBar=CalculationMFS(zheng[:,0])
+    Xymean,Xyvar,XyBar=CalculationMFS(zheng[:,1])
+    Zlabelz=Zvalue(Xxmean,Xymean,XxBar,XyBar,0.5,zheng)
+    XFxmean,XFxvar,XFxBar=CalculationMFS(fu[:,0])
+    XFymean,XFyvar,XFyBar=CalculationMFS(fu[:,1])
+    ZlabelF=Zvalue(XFxmean,XFymean,XFxBar,XFyBar,0.5,fu)
+    fig = plt.figure(figsize=(10,8))
+    ax = fig.add_subplot(111, projection=&#39;3d&#39;)
+    #ax.plot_surface(zheng[:,0],zheng[:,1],Zlabelz,rstride=2,cstride=1,cmap=plt.cm.coolwarm,alpha=0.8)
+    #ax.plot_surface(fu[:,0],fu[:,1],ZlabelF,rstride=2,cstride=1,cmap=plt.cm.coolwarm,alpha=0.8)
+    ax.plot_trisurf(zheng[:,0],zheng[:,1],Zlabelz)
+    ax.plot_trisurf(fu[:,0],fu[:,1],ZlabelF);
+    plt.show();
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/1stPart_3.3_twoGB_5_0.png" src="../_images/1stPart_3.3_twoGB_5_0.png" />
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/1stPart_3.3_twoGB_5_1.png" src="../_images/1stPart_3.3_twoGB_5_1.png" />
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/1stPart_3.3_twoGB_5_2.png" src="../_images/1stPart_3.3_twoGB_5_2.png" />
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/1stPart_3.3_twoGB_5_3.png" src="../_images/1stPart_3.3_twoGB_5_3.png" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span>zhengXB,fuXB=ZFclass(XB,yb)
+XBxmean,XBxvar,XBxBar=CalculationMFS(zhengXB[:,0])
+XBymean,XByvar,XByBar=CalculationMFS(zhengXB[:,1])
+Zlabel=Zvalue(XBxmean,XBymean,XBxBar,XByBar,0.5,zhengXB)
+
+XBFxmean,XBFxvar,XBFxBar=CalculationMFS(fuXB[:,0])
+XBFymean,XBFyvar,XBFyBar=CalculationMFS(fuXB[:,1])
+ZlabelF=Zvalue(XBFxmean,XBFymean,XBFxBar,XBFyBar,0.5,fuXB)
+
+fig = plt.figure()
+ax = fig.add_subplot(111, projection=&#39;3d&#39;)
+ax.plot_trisurf(zhengXB[:,0],zhengXB[:,1],Zlabel)
+ax.plot_trisurf(fuXB[:,0],fuXB[:,1],ZlabelF)
+plt.show()
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/1stPart_3.3_twoGB_6_0.png" src="../_images/1stPart_3.3_twoGB_6_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="协方差矩阵">
+<h1>6. 协方差矩阵<a class="headerlink" href="#协方差矩阵" title="永久链接至标题">¶</a></h1>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="4.1_MLPClassfier.html" class="btn btn-neutral float-right" title="7. 多层神经网络" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="3.2_SGDLossfunction.html" class="btn btn-neutral" title="2. SGD 损失函数" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, YNS.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'0.0.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="../_static/translations.js"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

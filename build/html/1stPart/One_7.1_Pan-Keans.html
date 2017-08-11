@@ -1,0 +1,838 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>&lt;no title&gt; &mdash; PRoRS 0.0.1 文档</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="索引"
+              href="../genindex.html"/>
+        <link rel="search" title="搜索" href="../search.html"/>
+    <link rel="top" title="PRoRS 0.0.1 文档" href="../index.html"/>
+        <link rel="up" title="像元特征分类" href="index.html"/>
+        <link rel="next" title="&lt;no title&gt;" href="One_7.2_Pan_GMM.html"/>
+        <link rel="prev" title="17. 随机森林、ExtraTrees、Adaboost、GradientBoost分类效果" href="6.2_Ensemblemethods.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> PRoRS
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">第一部分:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="index.html">像元特征分类</a></li>
+</ul>
+<p class="caption"><span class="caption-text">第二部分:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../2ndPart/index.html">1. 图像平面分类</a></li>
+</ul>
+<p class="caption"><span class="caption-text">第三部分:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../3rdPart/index.html">地表覆盖制图</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">PRoRS</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">像元特征分类</a> &raquo;</li>
+        
+      <li>&lt;no title&gt;</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/1stPart/One_7.1_Pan-Keans.ipynb.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+<style>
+/* CSS for nbsphinx extension */
+
+/* remove conflicting styling from Sphinx themes */
+div.nbinput,
+div.nbinput div.prompt,
+div.nbinput div.input_area,
+div.nbinput div[class*=highlight],
+div.nbinput div[class*=highlight] pre,
+div.nboutput,
+div.nbinput div.prompt,
+div.nbinput div.output_area,
+div.nboutput div[class*=highlight],
+div.nboutput div[class*=highlight] pre {
+    background: none;
+    border: none;
+    padding: 0 0;
+    margin: 0;
+    box-shadow: none;
+}
+
+/* avoid gaps between output lines */
+div.nboutput div[class*=highlight] pre {
+    line-height: normal;
+}
+
+/* input/output containers */
+div.nbinput,
+div.nboutput {
+    display: -webkit-flex;
+    display: flex;
+    align-items: flex-start;
+    margin: 0;
+    width: 100%;
+}
+@media (max-width: 540px) {
+    div.nbinput,
+    div.nboutput {
+        flex-direction: column;
+    }
+}
+
+/* input container */
+div.nbinput {
+    padding-top: 5px;
+}
+
+/* last container */
+div.nblast {
+    padding-bottom: 5px;
+}
+
+/* input prompt */
+div.nbinput div.prompt pre {
+    color: #303F9F;
+}
+
+/* output prompt */
+div.nboutput div.prompt pre {
+    color: #D84315;
+}
+
+/* all prompts */
+div.nbinput div.prompt,
+div.nboutput div.prompt {
+    min-width: 8ex;
+    padding-top: 0.4em;
+    padding-right: 0.4em;
+    text-align: right;
+    flex: 0;
+}
+@media (max-width: 540px) {
+    div.nbinput div.prompt,
+    div.nboutput div.prompt {
+        text-align: left;
+        padding: 0.4em;
+    }
+    div.nboutput div.prompt.empty {
+        padding: 0;
+    }
+}
+
+/* disable scrollbars on prompts */
+div.nbinput div.prompt pre,
+div.nboutput div.prompt pre {
+    overflow: hidden;
+}
+
+/* input/output area */
+div.nbinput div.input_area,
+div.nboutput div.output_area {
+    padding: 0.4em;
+    -webkit-flex: 1;
+    flex: 1;
+    overflow: auto;
+}
+@media (max-width: 540px) {
+    div.nbinput div.input_area,
+    div.nboutput div.output_area {
+        width: 100%;
+    }
+}
+
+/* input area */
+div.nbinput div.input_area {
+    border: 1px solid #cfcfcf;
+    border-radius: 2px;
+    background: #f7f7f7;
+}
+
+/* override MathJax center alignment in output cells */
+div.nboutput div[class*=MathJax] {
+    text-align: left !important;
+}
+
+/* override sphinx.ext.pngmath center alignment in output cells */
+div.nboutput div.math p {
+    text-align: left;
+}
+
+/* standard error */
+div.nboutput div.output_area.stderr {
+    background: #fdd;
+}
+
+/* ANSI colors */
+.ansi-black-fg { color: #3E424D; }
+.ansi-black-bg { background-color: #3E424D; }
+.ansi-black-intense-fg { color: #282C36; }
+.ansi-black-intense-bg { background-color: #282C36; }
+.ansi-red-fg { color: #E75C58; }
+.ansi-red-bg { background-color: #E75C58; }
+.ansi-red-intense-fg { color: #B22B31; }
+.ansi-red-intense-bg { background-color: #B22B31; }
+.ansi-green-fg { color: #00A250; }
+.ansi-green-bg { background-color: #00A250; }
+.ansi-green-intense-fg { color: #007427; }
+.ansi-green-intense-bg { background-color: #007427; }
+.ansi-yellow-fg { color: #DDB62B; }
+.ansi-yellow-bg { background-color: #DDB62B; }
+.ansi-yellow-intense-fg { color: #B27D12; }
+.ansi-yellow-intense-bg { background-color: #B27D12; }
+.ansi-blue-fg { color: #208FFB; }
+.ansi-blue-bg { background-color: #208FFB; }
+.ansi-blue-intense-fg { color: #0065CA; }
+.ansi-blue-intense-bg { background-color: #0065CA; }
+.ansi-magenta-fg { color: #D160C4; }
+.ansi-magenta-bg { background-color: #D160C4; }
+.ansi-magenta-intense-fg { color: #A03196; }
+.ansi-magenta-intense-bg { background-color: #A03196; }
+.ansi-cyan-fg { color: #60C6C8; }
+.ansi-cyan-bg { background-color: #60C6C8; }
+.ansi-cyan-intense-fg { color: #258F8F; }
+.ansi-cyan-intense-bg { background-color: #258F8F; }
+.ansi-white-fg { color: #C5C1B4; }
+.ansi-white-bg { background-color: #C5C1B4; }
+.ansi-white-intense-fg { color: #A1A6B2; }
+.ansi-white-intense-bg { background-color: #A1A6B2; }
+
+.ansi-bold { font-weight: bold; }
+
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast,
+.nboutput.nblast {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast + .nbinput {
+    margin-top: -19px;
+}
+
+/* nice headers on first paragraph of info/warning boxes */
+.admonition .first {
+    margin: -12px;
+    padding: 6px 12px;
+    margin-bottom: 12px;
+    color: #fff;
+    line-height: 1;
+    display: block;
+}
+.admonition.warning .first {
+    background: #f0b37e;
+}
+.admonition.note .first {
+    background: #6ab0de;
+}
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+</style>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span>import sklearn
+from PIL import Image
+import matplotlib.pyplot as plt
+from sklearn.cluster import KMeans
+from sklearn import metrics
+import numpy as np
+import pylab as pl
+from sklearn.feature_extraction import image
+from sklearn.cluster import spectral_clustering
+import osgeo.gdal as gdal
+import skimage.io as SKimg
+import scipy.io as sio
+#from color import Colors
+
+import sys
+import ALLNeighborhoodrelationship as ABL
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span>#读取tiff影像
+Tpan =SKimg.imread(&quot;F:/pythontestdata/MyTiff/tianhui1200pan.tif&quot;)
+SKimg.imshow(Tpan)
+SKimg.show()
+Tpan.shape
+
+Rows=Tpan.shape[0]; Cols=Tpan.shape[1];
+NewTpan=np.array(Tpan.reshape(Rows*Cols,1));
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/1stPart_One_7.1_Pan-Keans_1_0.png" src="../_images/1stPart_One_7.1_Pan-Keans_1_0.png" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span>#matlab文件名
+matfn=&#39;gt_tianhui1200.mat&#39;;
+data=sio.loadmat(matfn);
+mk = data[&#39;gt&#39;]
+print(mk)
+
+plt.figure(figsize=(6,6))
+im = Image.fromarray(mk);
+plt.imshow(im,cmap=plt.cm.get_cmap(&#39;cubehelix_r&#39;,7));
+cbar=plt.colorbar()
+cbar.set_ticks(np.linspace(0,7,8));
+cbar.set_ticklabels((&#39; &#39;,&#39;water&#39;,&#39;grass&#39;,&#39;bulding&#39;,&#39;road&#39;,&#39;luodi&#39;,&#39;background&#39;))
+plt.clim(-0.5,6.5);
+plt.show();
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[[6 6 4 ..., 6 6 6]
+ [6 6 6 ..., 6 6 6]
+ [6 6 6 ..., 6 6 6]
+ ...,
+ [3 3 3 ..., 2 2 2]
+ [6 3 3 ..., 2 2 2]
+ [6 3 3 ..., 2 2 2]]
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/1stPart_One_7.1_Pan-Keans_2_1.png" src="../_images/1stPart_One_7.1_Pan-Keans_2_1.png" />
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span>ALLlabel=[];   ALLclusCenters=[];
+for i in range(4,9):
+    KMS = KMeans(n_clusters=i, random_state=0).fit(NewTpan);
+    Labels=KMS.labels_; clus_centers=KMS.cluster_centers_;  ALLclusCenters.append(clus_centers);
+    Score=KMS.score(NewTpan);
+    ALLlabel.append(Labels);
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span>import math
+ALLfinaLabel=[];
+for j in range(0,len(ALLlabel)):
+    finaLabel=mk-2;
+    tempLabel=ALLlabel[j];
+    for HL in range(0,len(tempLabel)):
+        h=math.floor(HL/1200); l=HL%1200;
+        finaLabel[h][l]=tempLabel[HL];
+    ALLfinaLabel.append(finaLabel);
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span># 成图展示
+plt.figure(figsize=(30,5));  titleName=[&#39;Kmeans-4&#39;,&#39;Kmeans-5&#39;,&#39;Kmeans-6&#39;,&#39;Kmeans-7&#39;,&#39;Kmeans-8&#39;];
+for index in range(0,len(ALLfinaLabel)):
+    plt.subplot(1,5,index+1);
+    mylabel=ALLfinaLabel[index];
+    im2 = Image.fromarray(mylabel);
+    plt.imshow(im2,cmap=plt.cm.get_cmap(&#39;cubehelix_r&#39;,7));
+    cbar=plt.colorbar();  cbar.set_ticks(np.linspace(0,7,8));
+    plt.title(titleName[index]);
+    #cbar.set_ticklabels((&#39;  &#39;,&#39;water&#39;,&#39;grass&#39;,&#39;bulding&#39;,&#39;road&#39;,&#39;luodi&#39;,&#39;background&#39;));
+    #plt.clim(-0.5,6.5)
+plt.show();
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/1stPart_One_7.1_Pan-Keans_5_0.png" src="../_images/1stPart_One_7.1_Pan-Keans_5_0.png" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span>allValue=[];  Kmeans_4=ALLfinaLabel[0];
+for h in range(4):
+    tempLabel=(Kmeans_4==h)
+    tempMask=tempLabel*Tpan;
+    finalTemp = tempMask[tempMask&gt;0];
+    allValue.append(finalTemp);
+
+Kwars=dict(histtype=&#39;stepfilled&#39;,alpha=0.4,normed=True,bins=np.arange(0,255));
+allLabel=[&#39;water&#39;,&#39;Grass&#39;,&#39;Building&#39;,&#39;Roda&#39;,&#39;barlSoil&#39;,&#39;background&#39;];  cor=[&#39;r&#39;,&#39;g&#39;,&#39;b&#39;,&#39;y&#39;,&#39;k&#39;,&#39;c&#39;,&#39;m&#39;];
+
+plt.figure(figsize=(6,5));
+for S in range(4):
+    intervals=plt.hist(allValue[S],color=cor[S],**Kwars);
+plt.xlim(0,255); plt.ylim(0,0.2);
+plt.title(&quot;Kmeans-4&quot;);
+plt.show();
+
+print(ALLclusCenters[0]);
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/1stPart_One_7.1_Pan-Keans_6_0.png" src="../_images/1stPart_One_7.1_Pan-Keans_6_0.png" />
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[[  38.52563243]
+ [  96.74319169]
+ [  63.66862909]
+ [ 181.35938063]]
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span>allValue=[];  Kmeans_5=ALLfinaLabel[1];
+for h in range(5):
+    tempLabel=(Kmeans_5==h)
+    tempMask=tempLabel*Tpan;
+    finalTemp = tempMask[tempMask&gt;0];
+    allValue.append(finalTemp);
+
+Kwars=dict(histtype=&#39;stepfilled&#39;,alpha=0.4,normed=True,bins=np.arange(0,255));
+allLabel=[&#39;water&#39;,&#39;Grass&#39;,&#39;Building&#39;,&#39;Roda&#39;,&#39;barlSoil&#39;,&#39;background&#39;];  cor=[&#39;r&#39;,&#39;g&#39;,&#39;b&#39;,&#39;y&#39;,&#39;k&#39;,&#39;c&#39;,&#39;m&#39;];
+
+plt.figure(figsize=(6,5));
+for S in range(5):
+    intervals=plt.hist(allValue[S],color=cor[S],**Kwars);
+plt.xlim(0,255); plt.ylim(0,0.2);
+plt.title(&quot;Kmeans-5&quot;);
+plt.show();
+
+print(ALLclusCenters[1]);
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/1stPart_One_7.1_Pan-Keans_7_0.png" src="../_images/1stPart_One_7.1_Pan-Keans_7_0.png" />
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[[  53.86461747]
+ [  36.6455269 ]
+ [ 106.15392303]
+ [  75.21914476]
+ [ 191.7359387 ]]
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span>allValue=[];  Kmeans_6=ALLfinaLabel[2];
+for h in range(6):
+    tempLabel=(Kmeans_6==h)
+    tempMask=tempLabel*Tpan;
+    finalTemp = tempMask[tempMask&gt;0];
+    allValue.append(finalTemp);
+
+Kwars=dict(histtype=&#39;stepfilled&#39;,alpha=0.4,normed=True,bins=np.arange(0,255));
+allLabel=[&#39;water&#39;,&#39;Grass&#39;,&#39;Building&#39;,&#39;Roda&#39;,&#39;barlSoil&#39;,&#39;background&#39;];  cor=[&#39;r&#39;,&#39;g&#39;,&#39;b&#39;,&#39;y&#39;,&#39;k&#39;,&#39;c&#39;,&#39;m&#39;];
+
+plt.figure(figsize=(6,5));
+for S in range(6):
+    intervals=plt.hist(allValue[S],color=cor[S],**Kwars);
+plt.xlim(0,255); plt.ylim(0,0.2);
+plt.title(&quot;Kmeans-6&quot;);
+plt.show();
+
+print(ALLclusCenters[2]);
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/1stPart_One_7.1_Pan-Keans_8_0.png" src="../_images/1stPart_One_7.1_Pan-Keans_8_0.png" />
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[[  35.06592882]
+ [ 113.28308276]
+ [  82.30318354]
+ [  47.54978357]
+ [ 209.77923547]
+ [  63.16048631]]
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span>allValue=[];  Kmeans_7=ALLfinaLabel[3];
+for h in range(7):
+    tempLabel=(Kmeans_7==h)
+    tempMask=tempLabel*Tpan;
+    finalTemp = tempMask[tempMask&gt;0];
+    allValue.append(finalTemp);
+
+Kwars=dict(histtype=&#39;stepfilled&#39;,alpha=0.4,normed=True,bins=np.arange(0,255));
+allLabel=[&#39;water&#39;,&#39;Grass&#39;,&#39;Building&#39;,&#39;Roda&#39;,&#39;barlSoil&#39;,&#39;background&#39;];  cor=[&#39;r&#39;,&#39;g&#39;,&#39;b&#39;,&#39;y&#39;,&#39;k&#39;,&#39;c&#39;,&#39;m&#39;];
+
+plt.figure(figsize=(6,5));
+for S in range(7):
+    intervals=plt.hist(allValue[S],color=cor[S],**Kwars);
+plt.xlim(0,255); plt.ylim(0,0.2);
+plt.title(&quot;Kmeans-7&quot;);
+plt.show();
+
+print(ALLclusCenters[3]);
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/1stPart_One_7.1_Pan-Keans_9_0.png" src="../_images/1stPart_One_7.1_Pan-Keans_9_0.png" />
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[[  32.8449157 ]
+ [  72.65527548]
+ [  42.16542133]
+ [ 121.17532862]
+ [  55.73577756]
+ [ 213.40595994]
+ [  92.1562775 ]]
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span>allValue=[];  Kmeans_8=ALLfinaLabel[4];
+for h in range(8):
+    tempLabel=(Kmeans_8==h)
+    tempMask=tempLabel*Tpan;
+    finalTemp = tempMask[tempMask&gt;0];
+    allValue.append(finalTemp);
+
+Kwars=dict(histtype=&#39;stepfilled&#39;,alpha=0.4,normed=True,bins=np.arange(0,255));
+allLabel=[&#39;water&#39;,&#39;Grass&#39;,&#39;Building&#39;,&#39;Roda&#39;,&#39;barlSoil&#39;,&#39;background&#39;];  cor=[&#39;r&#39;,&#39;g&#39;,&#39;b&#39;,&#39;y&#39;,&#39;k&#39;,&#39;c&#39;,&#39;m&#39;,&#39;orange&#39;];
+
+plt.figure(figsize=(6,5));
+for S in range(8):
+    intervals=plt.hist(allValue[S],color=cor[S],**Kwars);
+plt.xlim(0,255); plt.ylim(0,0.2);
+plt.title(&quot;Kmeans-8&quot;);
+plt.show();
+
+print(ALLclusCenters[4]);
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/1stPart_One_7.1_Pan-Keans_10_0.png" src="../_images/1stPart_One_7.1_Pan-Keans_10_0.png" />
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[[  65.07205272]
+ [  32.32876125]
+ [ 125.70155039]
+ [  52.15832979]
+ [  98.06930237]
+ [ 215.45298927]
+ [  40.97480268]
+ [  79.41125269]]
+</pre></div></div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span>
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="One_7.2_Pan_GMM.html" class="btn btn-neutral float-right" title="&lt;no title&gt;" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="6.2_Ensemblemethods.html" class="btn btn-neutral" title="17. 随机森林、ExtraTrees、Adaboost、GradientBoost分类效果" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, YNS.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'0.0.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="../_static/translations.js"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

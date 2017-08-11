@@ -1,0 +1,969 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>11. 多层神经网络 &mdash; PRoRS 0.0.1 文档</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="索引"
+              href="../genindex.html"/>
+        <link rel="search" title="搜索" href="../search.html"/>
+    <link rel="top" title="PRoRS 0.0.1 文档" href="../index.html"/>
+        <link rel="up" title="像元特征分类" href="index.html"/>
+        <link rel="next" title="&lt;no title&gt;" href="5.1_SVMclassfication.html"/>
+        <link rel="prev" title="7. 多层神经网络" href="4.1_MLPClassfier.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> PRoRS
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">第一部分:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">像元特征分类</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="2_SK_KNC_naive_bayesGB_QDA_SDGclassfier.html">1. 以Jupyter Notebook为基本工具</a></li>
+<li class="toctree-l2"><a class="reference internal" href="3.2_SGDLossfunction.html">2. SGD 损失函数</a></li>
+<li class="toctree-l2"><a class="reference internal" href="3.2_SGDLossfunction.html#训练样本的（归一化）损失值">3. 训练样本的（归一化）损失值</a></li>
+<li class="toctree-l2"><a class="reference internal" href="3.2_SGDLossfunction.html#假设测试样本分别为正类或负类的（归一化）损失值">4. 假设测试样本分别为正类或负类的（归一化）损失值</a></li>
+<li class="toctree-l2"><a class="reference internal" href="3.3_twoGB.html">5. 二维高斯分布</a></li>
+<li class="toctree-l2"><a class="reference internal" href="3.3_twoGB.html#协方差矩阵">6. 协方差矩阵</a></li>
+<li class="toctree-l2"><a class="reference internal" href="4.1_MLPClassfier.html">7. 多层神经网络</a></li>
+<li class="toctree-l2"><a class="reference internal" href="4.1_MLPClassfier.html#训练数据集">8. 训练数据集</a></li>
+<li class="toctree-l2"><a class="reference internal" href="4.1_MLPClassfier.html#测试数据集">9. 测试数据集</a></li>
+<li class="toctree-l2"><a class="reference internal" href="4.1_MLPClassfier.html#四种激活函数分类">10. 四种激活函数分类</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">11. 多层神经网络</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#训练数据集">12. 训练数据集</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#测试数据集">13. 测试数据集</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#存储各隐层权重的array">14. 存储各隐层权重的array</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#四种激活函数分类">15. 四种激活函数分类</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#隐层过程">16. 隐层过程</a></li>
+<li class="toctree-l2"><a class="reference internal" href="6.2_Ensemblemethods.html">17. 随机森林、ExtraTrees、Adaboost、GradientBoost分类效果</a></li>
+<li class="toctree-l2"><a class="reference internal" href="6.2_Ensemblemethods.html#RandomForest并行分类过程">18. RandomForest并行分类过程</a></li>
+<li class="toctree-l2"><a class="reference internal" href="6.2_Ensemblemethods.html#AdaBoost串行分类过程">19. AdaBoost串行分类过程</a></li>
+<li class="toctree-l2"><a class="reference internal" href="One_7.4_Pan_GMM_MRF.html">20. 第一次MRF迭代</a></li>
+<li class="toctree-l2"><a class="reference internal" href="One_7.4_Pan_GMM_MRF.html#第二次MRF迭代">21. 第二次MRF迭代</a></li>
+<li class="toctree-l2"><a class="reference internal" href="One_7.4_Pan_GMM_MRF.html#第三次MRF迭代">22. 第三次MRF迭代</a></li>
+<li class="toctree-l2"><a class="reference internal" href="One_7.4_Pan_GMM_MRF.html#第四次MRF迭代">23. 第四次MRF迭代</a></li>
+<li class="toctree-l2"><a class="reference internal" href="One_7.4_Pan_GMM_MRF.html#第五次MRF迭代">24. 第五次MRF迭代</a></li>
+<li class="toctree-l2"><a class="reference internal" href="One_7.4_Pan_GMM_MRF.html#第六次MRF迭代">25. 第六次MRF迭代</a></li>
+<li class="toctree-l2"><a class="reference internal" href="One_7.4_Pan_GMM_MRF.html#第七次MRF迭代">26. 第七次MRF迭代</a></li>
+<li class="toctree-l2"><a class="reference internal" href="One_7.4_Pan_GMM_MRF.html#第八次MRF迭代">27. 第八次MRF迭代</a></li>
+<li class="toctree-l2"><a class="reference internal" href="One_7.4_Pan_GMM_MRF.html#第九次MRF迭代">28. 第九次MRF迭代</a></li>
+<li class="toctree-l2"><a class="reference internal" href="One_7.4_Pan_GMM_MRF.html#第十次MRF迭代">29. 第十次MRF迭代</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">第二部分:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../2ndPart/index.html">1. 图像平面分类</a></li>
+</ul>
+<p class="caption"><span class="caption-text">第三部分:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../3rdPart/index.html">地表覆盖制图</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">PRoRS</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">像元特征分类</a> &raquo;</li>
+        
+      <li>11. 多层神经网络</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/1stPart/4.2_MLPClassifier_hidenWeights.ipynb.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+<style>
+/* CSS for nbsphinx extension */
+
+/* remove conflicting styling from Sphinx themes */
+div.nbinput,
+div.nbinput div.prompt,
+div.nbinput div.input_area,
+div.nbinput div[class*=highlight],
+div.nbinput div[class*=highlight] pre,
+div.nboutput,
+div.nbinput div.prompt,
+div.nbinput div.output_area,
+div.nboutput div[class*=highlight],
+div.nboutput div[class*=highlight] pre {
+    background: none;
+    border: none;
+    padding: 0 0;
+    margin: 0;
+    box-shadow: none;
+}
+
+/* avoid gaps between output lines */
+div.nboutput div[class*=highlight] pre {
+    line-height: normal;
+}
+
+/* input/output containers */
+div.nbinput,
+div.nboutput {
+    display: -webkit-flex;
+    display: flex;
+    align-items: flex-start;
+    margin: 0;
+    width: 100%;
+}
+@media (max-width: 540px) {
+    div.nbinput,
+    div.nboutput {
+        flex-direction: column;
+    }
+}
+
+/* input container */
+div.nbinput {
+    padding-top: 5px;
+}
+
+/* last container */
+div.nblast {
+    padding-bottom: 5px;
+}
+
+/* input prompt */
+div.nbinput div.prompt pre {
+    color: #303F9F;
+}
+
+/* output prompt */
+div.nboutput div.prompt pre {
+    color: #D84315;
+}
+
+/* all prompts */
+div.nbinput div.prompt,
+div.nboutput div.prompt {
+    min-width: 8ex;
+    padding-top: 0.4em;
+    padding-right: 0.4em;
+    text-align: right;
+    flex: 0;
+}
+@media (max-width: 540px) {
+    div.nbinput div.prompt,
+    div.nboutput div.prompt {
+        text-align: left;
+        padding: 0.4em;
+    }
+    div.nboutput div.prompt.empty {
+        padding: 0;
+    }
+}
+
+/* disable scrollbars on prompts */
+div.nbinput div.prompt pre,
+div.nboutput div.prompt pre {
+    overflow: hidden;
+}
+
+/* input/output area */
+div.nbinput div.input_area,
+div.nboutput div.output_area {
+    padding: 0.4em;
+    -webkit-flex: 1;
+    flex: 1;
+    overflow: auto;
+}
+@media (max-width: 540px) {
+    div.nbinput div.input_area,
+    div.nboutput div.output_area {
+        width: 100%;
+    }
+}
+
+/* input area */
+div.nbinput div.input_area {
+    border: 1px solid #cfcfcf;
+    border-radius: 2px;
+    background: #f7f7f7;
+}
+
+/* override MathJax center alignment in output cells */
+div.nboutput div[class*=MathJax] {
+    text-align: left !important;
+}
+
+/* override sphinx.ext.pngmath center alignment in output cells */
+div.nboutput div.math p {
+    text-align: left;
+}
+
+/* standard error */
+div.nboutput div.output_area.stderr {
+    background: #fdd;
+}
+
+/* ANSI colors */
+.ansi-black-fg { color: #3E424D; }
+.ansi-black-bg { background-color: #3E424D; }
+.ansi-black-intense-fg { color: #282C36; }
+.ansi-black-intense-bg { background-color: #282C36; }
+.ansi-red-fg { color: #E75C58; }
+.ansi-red-bg { background-color: #E75C58; }
+.ansi-red-intense-fg { color: #B22B31; }
+.ansi-red-intense-bg { background-color: #B22B31; }
+.ansi-green-fg { color: #00A250; }
+.ansi-green-bg { background-color: #00A250; }
+.ansi-green-intense-fg { color: #007427; }
+.ansi-green-intense-bg { background-color: #007427; }
+.ansi-yellow-fg { color: #DDB62B; }
+.ansi-yellow-bg { background-color: #DDB62B; }
+.ansi-yellow-intense-fg { color: #B27D12; }
+.ansi-yellow-intense-bg { background-color: #B27D12; }
+.ansi-blue-fg { color: #208FFB; }
+.ansi-blue-bg { background-color: #208FFB; }
+.ansi-blue-intense-fg { color: #0065CA; }
+.ansi-blue-intense-bg { background-color: #0065CA; }
+.ansi-magenta-fg { color: #D160C4; }
+.ansi-magenta-bg { background-color: #D160C4; }
+.ansi-magenta-intense-fg { color: #A03196; }
+.ansi-magenta-intense-bg { background-color: #A03196; }
+.ansi-cyan-fg { color: #60C6C8; }
+.ansi-cyan-bg { background-color: #60C6C8; }
+.ansi-cyan-intense-fg { color: #258F8F; }
+.ansi-cyan-intense-bg { background-color: #258F8F; }
+.ansi-white-fg { color: #C5C1B4; }
+.ansi-white-bg { background-color: #C5C1B4; }
+.ansi-white-intense-fg { color: #A1A6B2; }
+.ansi-white-intense-bg { background-color: #A1A6B2; }
+
+.ansi-bold { font-weight: bold; }
+
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast,
+.nboutput.nblast {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast + .nbinput {
+    margin-top: -19px;
+}
+
+/* nice headers on first paragraph of info/warning boxes */
+.admonition .first {
+    margin: -12px;
+    padding: 6px 12px;
+    margin-bottom: 12px;
+    color: #fff;
+    line-height: 1;
+    display: block;
+}
+.admonition.warning .first {
+    background: #f0b37e;
+}
+.admonition.note .first {
+    background: #6ab0de;
+}
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+</style>
+<div class="section" id="多层神经网络">
+<h1>11. 多层神经网络<a class="headerlink" href="#多层神经网络" title="永久链接至标题">¶</a></h1>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span># -*- coding:UTF-8 -*- ＃
+# 导入模块
+import sys
+import time
+import random
+import numpy as np
+import matplotlib.pyplot as plt
+from mpl_toolkits.mplot3d import Axes3D
+
+from matplotlib.colors import ListedColormap
+from sklearn.neural_network import MLPClassifier
+from sklearn.preprocessing import StandardScaler
+
+
+sys.path.append(r&quot;C:\Users\zhang\Desktop\exeserise&quot;)
+import mymodule as MYD
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="训练数据集">
+<h1>12. 训练数据集<a class="headerlink" href="#训练数据集" title="永久链接至标题">¶</a></h1>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span>n_samples=2000
+XB,yb=MYD.makeblods(n_samples)
+XR,yr=MYD.makerandoms(n_samples)
+XC,yc=MYD.makecircles(n_samples)
+XH,yh=MYD.makeHelixs(n_samples)
+XAS = [XB, XR, XC,XH]
+YAS=[yb,yr,yc,yh]
+
+std_nearalB = StandardScaler(); std_nearalR = StandardScaler(); std_nearalC = StandardScaler(); std_nearalH = StandardScaler();
+XBstd=std_nearalB.fit_transform(XB); XRstd=std_nearalR.fit_transform(XR);  XCstd=std_nearalC.fit_transform(XC);  XHstd=std_nearalH.fit_transform(XH);
+XASstd=[XBstd,XRstd,XCstd,XHstd];
+
+cor = ListedColormap([&#39;Blue&#39;, &#39;Orange&#39;])
+titlename=[&#39;two blob&#39;,&#39;two random&#39;,&#39;two circle&#39;,&#39;two heixl&#39;]
+cmap=[cor,cor,cor,cor]
+MYD.DrawManyChart(XAS,YAS,cmap,24,4,titlename,10,1,4)
+
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/1stPart_4.2_MLPClassifier_hidenWeights_3_0.png" src="../_images/1stPart_4.2_MLPClassifier_hidenWeights_3_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="测试数据集">
+<h1>13. 测试数据集<a class="headerlink" href="#测试数据集" title="永久链接至标题">¶</a></h1>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span>Xzip,points=MYD.makeGrids()
+plt.figure()
+plt.scatter(points[:,0],points[:,1],s=0.009)
+plt.show()
+# np.random.shuffle(points)
+
+
+pointsBMLP=std_nearalB.transform(Xzip); pointsRMLP=std_nearalR.transform(Xzip);
+pointsCMLP=std_nearalC.transform(Xzip); pointsHMLP=std_nearalH.transform(Xzip)
+pointsBML=[pointsBMLP,pointsRMLP,pointsCMLP,pointsHMLP];
+
+# Xzip01,points01=MYD.makeGrids()
+# points = np.array(points)
+
+points[:,0].shape
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/1stPart_4.2_MLPClassifier_hidenWeights_5_0.png" src="../_images/1stPart_4.2_MLPClassifier_hidenWeights_5_0.png" />
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>Out[3]:
+</pre></div>
+</div>
+<div class="output_area highlight-none"><div class="highlight"><pre>
+<span></span>(65536,)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="存储各隐层权重的array">
+<h1>14. 存储各隐层权重的array<a class="headerlink" href="#存储各隐层权重的array" title="永久链接至标题">¶</a></h1>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span>weightIDENB=[]; weightIDENR=[]; weightIDENC=[]; weightIDENH=[];
+weightidentity=[weightIDENB,weightIDENR,weightIDENC,weightIDENH];
+
+weightLOGB=[];  weightLOGR=[];  weightLOGC=[];  weightLOGH=[];
+weightlogistic=[weightLOGB,weightLOGR,weightLOGC,weightLOGH];
+
+weightTanB=[];  weightTanR=[];  weightTanC=[];  weightTanH=[];
+weighttanh=[weightTanB,weightTanR,weightTanC,weightTanH];
+
+weightRELB=[];  weightRELR=[];  weightRELC=[];  weightRELH=[];
+weightrelu=[weightRELB,weightRELR,weightRELC,weightRELH];
+
+weightvalue=[weightidentity,weightlogistic,weighttanh,weightrelu];
+
+
+OffsetIDENB=[]; OffsetIDENR=[]; OffsetIDENC=[]; OffsetIDENH=[];
+Offsetidentity=[OffsetIDENB,OffsetIDENR,OffsetIDENC,OffsetIDENH];
+
+OffsetLOGB=[]; OffsetLOGR=[]; OffsetLOGC=[]; OffsetLOGH=[];
+Offsetlogistic=[OffsetLOGB,OffsetLOGR,OffsetLOGC,OffsetLOGH];
+
+OffsetTanB=[]; OffsetTanR=[]; OffsetTanC=[]; OffsetTanH=[];
+Offsettanh=[OffsetTanB,OffsetTanR,OffsetTanC,OffsetTanH];
+
+OffsetRELB=[]; OffsetRELR=[]; OffsetRELC=[]; OffsetRELH=[];
+Offsetrelu=[OffsetRELB,OffsetRELR,OffsetRELC,OffsetRELH];
+
+Offsetvalue=[Offsetidentity,Offsetlogistic,Offsettanh,Offsetrelu];
+
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="四种激活函数分类">
+<h1>15. 四种激活函数分类<a class="headerlink" href="#四种激活函数分类" title="永久链接至标题">¶</a></h1>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span>cor = ListedColormap([&#39;Blue&#39;, &#39;Orange&#39;])
+
+labelidentity=[]; labelogistic=[]; labetanh=[]; labelrelu=[];
+lableMLP=[labelidentity,labelogistic,labetanh,labelrelu];
+
+scoreidentity=[]; scoreogistic=[]; scoretanh=[]; scorerelu=[];
+scoreMLP=[scoreidentity,scoreogistic,scoretanh,scorerelu];
+
+activationF=[&#39;identity&#39;, &#39;logistic&#39;, &#39;tanh&#39;, &#39;relu&#39;];
+solvername=[&#39;lbfgs&#39;,&#39;sgd&#39;]
+leranrate=[&#39;constant&#39;, &#39;invscaling&#39;, &#39;adaptive&#39;];
+
+
+for k in range(0,len(activationF)):
+    modelMLP=None
+    modelMLP = MLPClassifier(hidden_layer_sizes=(3,2),activation=activationF[k],solver=solvername[0],
+                             alpha=0.001,batch_size=20,learning_rate=leranrate[1],learning_rate_init=0.3,
+                             random_state=4, max_iter=20000)
+    for i in range(0,len(XAS)):
+        tempmodule=None
+        tempmodule=modelMLP.fit(XASstd[i],YAS[i])
+        weightvalue[k][i].append(tempmodule.coefs_)
+        Offsetvalue[k][i].append(tempmodule.intercepts_)
+        lableMLP[k].append(tempmodule.predict(pointsBML[i]))
+        scoreMLP[k].append(tempmodule.score(XASstd[i],YAS[i]));
+
+
+print(scoreMLP); P=[points,points,points,points];
+identityname=[&#39;Bidentity&#39;,&#39;Ridentity&#39;,&#39;Cidentity&#39;,&#39;Hidentity&#39;];
+logisticyname=[&#39;Blogistic&#39;,&#39;Rlogistic&#39;,&#39;Clogistic&#39;,&#39;Hlogistic&#39;];
+tanhname=[&#39;Btanh&#39;,&#39;Rtanh&#39;,&#39;Ctanh&#39;,&#39;Htanh&#39;];
+reluname=[&#39;Brelu&#39;,&#39;Rrelu&#39;,&#39;Crelu&#39;,&#39;Hrelu&#39;];
+MPLname=[identityname,logisticyname,tanhname,reluname];
+
+cormap=[cor,cor,cor,cor];
+for F in range(0,len(activationF)):
+    MYD.DrawManyChart(P,lableMLP[F],cormap,18,3.5,MPLname[F],10,1,4);
+
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[[1.0, 0.49299999999999999, 0.50149999999999995, 0.58299999999999996], [0.99950000000000006, 1.0, 0.999, 0.59424999999999994], [1.0, 0.89149999999999996, 1.0, 0.54949999999999999], [1.0, 0.76349999999999996, 0.91449999999999998, 0.60850000000000004]]
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/1stPart_4.2_MLPClassifier_hidenWeights_9_1.png" src="../_images/1stPart_4.2_MLPClassifier_hidenWeights_9_1.png" />
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/1stPart_4.2_MLPClassifier_hidenWeights_9_2.png" src="../_images/1stPart_4.2_MLPClassifier_hidenWeights_9_2.png" />
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/1stPart_4.2_MLPClassifier_hidenWeights_9_3.png" src="../_images/1stPart_4.2_MLPClassifier_hidenWeights_9_3.png" />
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/1stPart_4.2_MLPClassifier_hidenWeights_9_4.png" src="../_images/1stPart_4.2_MLPClassifier_hidenWeights_9_4.png" />
+</div>
+</div>
+</div>
+<div class="section" id="隐层过程">
+<h1>16. 隐层过程<a class="headerlink" href="#隐层过程" title="永久链接至标题">¶</a></h1>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span>#每一个数组都包含四种数据集的，依次为B、R、C、H
+
+for i in range(0,len(weightvalue)):
+    for j in range(0,len(weightidentity)):
+        weightFirst=weightvalue[i][j][0][0]; weightSecond=weightvalue[i][j][0][1];  weightThird=weightvalue[i][j][0][2];
+        offsetFirst=Offsetvalue[i][j][0][0]; offsetSecond=Offsetvalue[i][j][0][1];  offsetThird=Offsetvalue[i][j][0][2];
+        ziparray=np.array(Xzip)
+        MatrixMultipy=np.dot(ziparray,weightFirst)
+        INputHIdlayer1Note1=MYD.MatrixAddoneData((MatrixMultipy.T)[0],offsetFirst[0]);
+        INputHIdlayer1Note2=MYD.MatrixAddoneData((MatrixMultipy.T)[1],offsetFirst[1]);
+        INputHIdlayer1Note3=MYD.MatrixAddoneData((MatrixMultipy.T)[2],offsetFirst[2]);
+        OHILNote1=MYD.logisticF(INputHIdlayer1Note1)
+        OHILNote2=MYD.logisticF(INputHIdlayer1Note2)
+        OHILNote3=MYD.logisticF(INputHIdlayer1Note3)
+
+        labelLOG_C=lableMLP[i][j]
+        fig = plt.figure(figsize=(4,4))
+        ax1 = fig.add_subplot(111, projection=&#39;3d&#39;)
+        cor = ListedColormap([&#39;Blue&#39;, &#39;Orange&#39;]);
+        ax1.scatter(OHILNote1,OHILNote2,OHILNote3,c=labelLOG_C,alpha=0.4)
+        #ax1.set_xlabel(&#39;OHILNote1&#39;); ax1.set_ylabel(&#39;OHILNote2&#39;); ax1.set_zlabel(&#39;OHILNote3&#39;);
+        plt.show()
+
+
+
+
+
+
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/1stPart_4.2_MLPClassifier_hidenWeights_11_0.png" src="../_images/1stPart_4.2_MLPClassifier_hidenWeights_11_0.png" />
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/1stPart_4.2_MLPClassifier_hidenWeights_11_1.png" src="../_images/1stPart_4.2_MLPClassifier_hidenWeights_11_1.png" />
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/1stPart_4.2_MLPClassifier_hidenWeights_11_2.png" src="../_images/1stPart_4.2_MLPClassifier_hidenWeights_11_2.png" />
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/1stPart_4.2_MLPClassifier_hidenWeights_11_3.png" src="../_images/1stPart_4.2_MLPClassifier_hidenWeights_11_3.png" />
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/1stPart_4.2_MLPClassifier_hidenWeights_11_4.png" src="../_images/1stPart_4.2_MLPClassifier_hidenWeights_11_4.png" />
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/1stPart_4.2_MLPClassifier_hidenWeights_11_5.png" src="../_images/1stPart_4.2_MLPClassifier_hidenWeights_11_5.png" />
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/1stPart_4.2_MLPClassifier_hidenWeights_11_6.png" src="../_images/1stPart_4.2_MLPClassifier_hidenWeights_11_6.png" />
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/1stPart_4.2_MLPClassifier_hidenWeights_11_7.png" src="../_images/1stPart_4.2_MLPClassifier_hidenWeights_11_7.png" />
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/1stPart_4.2_MLPClassifier_hidenWeights_11_8.png" src="../_images/1stPart_4.2_MLPClassifier_hidenWeights_11_8.png" />
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/1stPart_4.2_MLPClassifier_hidenWeights_11_9.png" src="../_images/1stPart_4.2_MLPClassifier_hidenWeights_11_9.png" />
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/1stPart_4.2_MLPClassifier_hidenWeights_11_10.png" src="../_images/1stPart_4.2_MLPClassifier_hidenWeights_11_10.png" />
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/1stPart_4.2_MLPClassifier_hidenWeights_11_11.png" src="../_images/1stPart_4.2_MLPClassifier_hidenWeights_11_11.png" />
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/1stPart_4.2_MLPClassifier_hidenWeights_11_12.png" src="../_images/1stPart_4.2_MLPClassifier_hidenWeights_11_12.png" />
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/1stPart_4.2_MLPClassifier_hidenWeights_11_13.png" src="../_images/1stPart_4.2_MLPClassifier_hidenWeights_11_13.png" />
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/1stPart_4.2_MLPClassifier_hidenWeights_11_14.png" src="../_images/1stPart_4.2_MLPClassifier_hidenWeights_11_14.png" />
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/1stPart_4.2_MLPClassifier_hidenWeights_11_15.png" src="../_images/1stPart_4.2_MLPClassifier_hidenWeights_11_15.png" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span>Xhiden2=list(zip(OHILNote1,OHILNote2,OHILNote3))
+Xhiden2=np.array(Xhiden2)
+MatrixMultipy2=np.dot(Xhiden2,weightSecond)
+
+INputHIdlayer2Note1=MYD.MatrixAddoneData((MatrixMultipy2.T)[0],offsetSecond[0]);
+INputHIdlayer2Note2=MYD.MatrixAddoneData((MatrixMultipy2.T)[1],offsetSecond[1]);
+
+OHIL2Note1=MYD.logisticF(INputHIdlayer2Note1)
+OHIL2Note2=MYD.logisticF(INputHIdlayer2Note2)
+
+labelLOG_C=labelogistic[2]
+fig = plt.figure(figsize=(6,6))
+ax1 = fig.add_subplot(111)
+cor = ListedColormap([&#39;Blue&#39;, &#39;Orange&#39;]);
+ax1.scatter(OHIL2Note1,OHIL2Note2,c=labelLOG_C,cmap=cor,alpha=0.4)
+ax1.set_xlabel(&#39;OHIL2Note1&#39;); ax1.set_ylabel(&#39;OHIL2Note2&#39;);
+plt.show()
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/1stPart_4.2_MLPClassifier_hidenWeights_12_0.png" src="../_images/1stPart_4.2_MLPClassifier_hidenWeights_12_0.png" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span>Xhiden3=list(zip(OHIL2Note1,OHIL2Note2))
+Xhiden3=np.array(Xhiden3)
+
+MatrixMultipy3=np.dot(Xhiden3,weightThird)
+
+outputLast=MYD.MatrixAddoneData((MatrixMultipy3.T)[0],offsetSecond[0]);
+
+print(outputLast)
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[ -5.19683112  -5.19492622  -5.19302629 ..., -10.49083719 -10.48893727
+ -10.48703236]
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span>weightFirst=weightLOGR[0][0]; weightSecond=weightLOGR[0][1];  weightThird=weightLOGR[0][2];
+offsetFirst=OffsetLOGR[0][0]; offsetSecond=OffsetLOGR[0][1];  offsetThird=OffsetLOGR[0][2];
+
+ziparray=np.array(Xzip)
+
+MatrixMultipy=np.dot(ziparray,weightFirst)
+
+INputHIdlayer1Note1=MYD.MatrixAddoneData((MatrixMultipy.T)[0],offsetFirst[0]);
+INputHIdlayer1Note2=MYD.MatrixAddoneData((MatrixMultipy.T)[1],offsetFirst[1]);
+INputHIdlayer1Note3=MYD.MatrixAddoneData((MatrixMultipy.T)[2],offsetFirst[2]);
+
+
+OHILNote1=MYD.logisticF(INputHIdlayer1Note1)
+OHILNote2=MYD.logisticF(INputHIdlayer1Note2)
+OHILNote3=MYD.logisticF(INputHIdlayer1Note3)
+
+labelLOG_C=labelogistic[1]
+fig = plt.figure(figsize=(24,5))
+ax1 = fig.add_subplot(131, projection=&#39;3d&#39;)
+cor = ListedColormap([&#39;Blue&#39;, &#39;Orange&#39;]);
+ax1.scatter(OHILNote1,OHILNote2,OHILNote3,c=labelLOG_C,alpha=0.4)
+ax1.set_xlabel(&#39;OHILNote1&#39;); ax1.set_ylabel(&#39;OHILNote2&#39;); ax1.set_zlabel(&#39;OHILNote3&#39;);
+
+
+#ax2 = fig.add_subplot(132)
+#ax2.scatter(OHILNote1,OHILNote2,c=labelLOG_C,cmap=cor,alpha=0.4)
+plt.show()
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/1stPart_4.2_MLPClassifier_hidenWeights_14_0.png" src="../_images/1stPart_4.2_MLPClassifier_hidenWeights_14_0.png" />
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="5.1_SVMclassfication.html" class="btn btn-neutral float-right" title="&lt;no title&gt;" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="4.1_MLPClassfier.html" class="btn btn-neutral" title="7. 多层神经网络" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, YNS.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'0.0.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="../_static/translations.js"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

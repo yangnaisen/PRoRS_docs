@@ -1,0 +1,805 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>&lt;no title&gt; &mdash; PRoRS 0.0.1 文档</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="索引"
+              href="../genindex.html"/>
+        <link rel="search" title="搜索" href="../search.html"/>
+    <link rel="top" title="PRoRS 0.0.1 文档" href="../index.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> PRoRS
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">第一部分:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../1stPart/index.html">像元特征分类</a></li>
+</ul>
+<p class="caption"><span class="caption-text">第二部分:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="index.html">1. 图像平面分类</a></li>
+</ul>
+<p class="caption"><span class="caption-text">第三部分:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../3rdPart/index.html">地表覆盖制图</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">PRoRS</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>&lt;no title&gt;</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/2ndPart/2.5_Eight_PPB_PanRelations.ipynb.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+<style>
+/* CSS for nbsphinx extension */
+
+/* remove conflicting styling from Sphinx themes */
+div.nbinput,
+div.nbinput div.prompt,
+div.nbinput div.input_area,
+div.nbinput div[class*=highlight],
+div.nbinput div[class*=highlight] pre,
+div.nboutput,
+div.nbinput div.prompt,
+div.nbinput div.output_area,
+div.nboutput div[class*=highlight],
+div.nboutput div[class*=highlight] pre {
+    background: none;
+    border: none;
+    padding: 0 0;
+    margin: 0;
+    box-shadow: none;
+}
+
+/* avoid gaps between output lines */
+div.nboutput div[class*=highlight] pre {
+    line-height: normal;
+}
+
+/* input/output containers */
+div.nbinput,
+div.nboutput {
+    display: -webkit-flex;
+    display: flex;
+    align-items: flex-start;
+    margin: 0;
+    width: 100%;
+}
+@media (max-width: 540px) {
+    div.nbinput,
+    div.nboutput {
+        flex-direction: column;
+    }
+}
+
+/* input container */
+div.nbinput {
+    padding-top: 5px;
+}
+
+/* last container */
+div.nblast {
+    padding-bottom: 5px;
+}
+
+/* input prompt */
+div.nbinput div.prompt pre {
+    color: #303F9F;
+}
+
+/* output prompt */
+div.nboutput div.prompt pre {
+    color: #D84315;
+}
+
+/* all prompts */
+div.nbinput div.prompt,
+div.nboutput div.prompt {
+    min-width: 8ex;
+    padding-top: 0.4em;
+    padding-right: 0.4em;
+    text-align: right;
+    flex: 0;
+}
+@media (max-width: 540px) {
+    div.nbinput div.prompt,
+    div.nboutput div.prompt {
+        text-align: left;
+        padding: 0.4em;
+    }
+    div.nboutput div.prompt.empty {
+        padding: 0;
+    }
+}
+
+/* disable scrollbars on prompts */
+div.nbinput div.prompt pre,
+div.nboutput div.prompt pre {
+    overflow: hidden;
+}
+
+/* input/output area */
+div.nbinput div.input_area,
+div.nboutput div.output_area {
+    padding: 0.4em;
+    -webkit-flex: 1;
+    flex: 1;
+    overflow: auto;
+}
+@media (max-width: 540px) {
+    div.nbinput div.input_area,
+    div.nboutput div.output_area {
+        width: 100%;
+    }
+}
+
+/* input area */
+div.nbinput div.input_area {
+    border: 1px solid #cfcfcf;
+    border-radius: 2px;
+    background: #f7f7f7;
+}
+
+/* override MathJax center alignment in output cells */
+div.nboutput div[class*=MathJax] {
+    text-align: left !important;
+}
+
+/* override sphinx.ext.pngmath center alignment in output cells */
+div.nboutput div.math p {
+    text-align: left;
+}
+
+/* standard error */
+div.nboutput div.output_area.stderr {
+    background: #fdd;
+}
+
+/* ANSI colors */
+.ansi-black-fg { color: #3E424D; }
+.ansi-black-bg { background-color: #3E424D; }
+.ansi-black-intense-fg { color: #282C36; }
+.ansi-black-intense-bg { background-color: #282C36; }
+.ansi-red-fg { color: #E75C58; }
+.ansi-red-bg { background-color: #E75C58; }
+.ansi-red-intense-fg { color: #B22B31; }
+.ansi-red-intense-bg { background-color: #B22B31; }
+.ansi-green-fg { color: #00A250; }
+.ansi-green-bg { background-color: #00A250; }
+.ansi-green-intense-fg { color: #007427; }
+.ansi-green-intense-bg { background-color: #007427; }
+.ansi-yellow-fg { color: #DDB62B; }
+.ansi-yellow-bg { background-color: #DDB62B; }
+.ansi-yellow-intense-fg { color: #B27D12; }
+.ansi-yellow-intense-bg { background-color: #B27D12; }
+.ansi-blue-fg { color: #208FFB; }
+.ansi-blue-bg { background-color: #208FFB; }
+.ansi-blue-intense-fg { color: #0065CA; }
+.ansi-blue-intense-bg { background-color: #0065CA; }
+.ansi-magenta-fg { color: #D160C4; }
+.ansi-magenta-bg { background-color: #D160C4; }
+.ansi-magenta-intense-fg { color: #A03196; }
+.ansi-magenta-intense-bg { background-color: #A03196; }
+.ansi-cyan-fg { color: #60C6C8; }
+.ansi-cyan-bg { background-color: #60C6C8; }
+.ansi-cyan-intense-fg { color: #258F8F; }
+.ansi-cyan-intense-bg { background-color: #258F8F; }
+.ansi-white-fg { color: #C5C1B4; }
+.ansi-white-bg { background-color: #C5C1B4; }
+.ansi-white-intense-fg { color: #A1A6B2; }
+.ansi-white-intense-bg { background-color: #A1A6B2; }
+
+.ansi-bold { font-weight: bold; }
+
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast,
+.nboutput.nblast {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast + .nbinput {
+    margin-top: -19px;
+}
+
+/* nice headers on first paragraph of info/warning boxes */
+.admonition .first {
+    margin: -12px;
+    padding: 6px 12px;
+    margin-bottom: 12px;
+    color: #fff;
+    line-height: 1;
+    display: block;
+}
+.admonition.warning .first {
+    background: #f0b37e;
+}
+.admonition.note .first {
+    background: #6ab0de;
+}
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+</style>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span>import sklearn
+from PIL import Image
+import skimage.io as SKimg
+import numpy as np
+import random
+import matplotlib.pyplot as plt
+import rasterio as rio
+from scipy.sparse import csr_matrix
+import scipy.io as sio
+import pandas as pd
+
+import MatrixNeighborhood  as MNB
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span>Tpan =SKimg.imread(&quot;F:/pythontestdata/MyTiff/tianhui1200pan.tif&quot;)
+SKimg.imshow(Tpan)
+SKimg.show()
+Tpan.shape
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/2ndPart_2.5_Eight_PPB_PanRelations_1_0.png" src="../_images/2ndPart_2.5_Eight_PPB_PanRelations_1_0.png" />
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>Out[2]:
+</pre></div>
+</div>
+<div class="output_area highlight-none"><div class="highlight"><pre>
+<span></span>(1200, 1200)
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span>#matlab文件名
+matfn=&#39;gt_tianhui1200.mat&#39;;
+data=sio.loadmat(matfn);
+mk = data[&#39;gt&#39;]
+print(mk)
+
+moban=(mk*0)+1;
+
+plt.figure(figsize=(6,6))
+im = Image.fromarray(mk);
+plt.imshow(im,cmap=plt.cm.get_cmap(&#39;cubehelix_r&#39;,7));
+cbar=plt.colorbar()
+cbar.set_ticks(np.linspace(0,7,8))
+cbar.set_ticklabels((&#39;  &#39;,&#39;water&#39;,&#39;grass&#39;,&#39;bulding&#39;,&#39;road&#39;,&#39;luodi&#39;,&#39;background&#39;))
+plt.clim(-0.5,6.5)
+plt.show();
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[[6 6 4 ..., 6 6 6]
+ [6 6 6 ..., 6 6 6]
+ [6 6 6 ..., 6 6 6]
+ ...,
+ [3 3 3 ..., 2 2 2]
+ [6 3 3 ..., 2 2 2]
+ [6 3 3 ..., 2 2 2]]
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/2ndPart_2.5_Eight_PPB_PanRelations_2_1.png" src="../_images/2ndPart_2.5_Eight_PPB_PanRelations_2_1.png" />
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span>PPB=MNB.PPBeight(mk)
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span>L1F=0.000001+np.sum((PPB==1),axis=0)/8;
+L2F=0.000001+np.sum((PPB==2),axis=0)/8;
+L3F=0.000001+np.sum((PPB==3),axis=0)/8;
+L4F=0.000001+np.sum((PPB==4),axis=0)/8;
+L5F=0.000001+np.sum((PPB==5),axis=0)/8;
+L6F=0.000001+np.sum((PPB==6),axis=0)/8;
+
+ALL=[L1F,L2F,L3F,L4F,L5F,L6F];
+
+proLabel=np.zeros(mk.shape[0]*mk.shape[1]);
+for p in range(0,mk.shape[0]*mk.shape[1]):
+    MAXP=0;   maxindex=0;
+    tempF=[ALL[0][p],ALL[1][p],ALL[2][p],ALL[3][p],ALL[4][p],ALL[5][p]];
+    for MI in range(0,len(tempF)):
+        if(tempF[MI]&gt;MAXP):
+            MAXP=tempF[MI];
+            maxindex=MI+1;
+    proLabel[p]=maxindex;
+
+import math
+PROfinal=mk-2;
+for HL in range(0,len(proLabel)):
+    h=math.floor(HL/1200); l=HL%1200;
+    PROfinal[h][l]=proLabel[HL];
+
+# 成图展示
+mylabelPRO=PROfinal;
+print(mylabelPRO)
+plt.figure(figsize=(6,6))
+im2 = Image.fromarray(mylabelPRO);
+plt.imshow(im2,cmap=plt.cm.get_cmap(&#39;cubehelix_r&#39;,7));
+cbar=plt.colorbar()
+cbar.set_ticks(np.linspace(0,7,8))
+cbar.set_ticklabels((&#39;  &#39;,&#39;water&#39;,&#39;grass&#39;,&#39;bulding&#39;,&#39;road&#39;,&#39;luodi&#39;,&#39;background&#39;))
+plt.clim(-0.5,6.5)
+plt.title(&#39;XianyanclassTruth&#39;);
+plt.show();
+
+TrueOrFalse=(mylabelPRO==mk)
+TrueValue=TrueOrFalse[TrueOrFalse&gt;0]
+FalseValue=TrueOrFalse[TrueOrFalse==0]
+correct=len(TrueValue)/(len(TrueValue)+len(FalseValue));
+print(len(TrueValue));  print(len(FalseValue));  print(correct);
+
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[[6 6 4 ..., 6 6 6]
+ [6 6 4 ..., 6 6 6]
+ [6 6 6 ..., 6 6 6]
+ ...,
+ [3 3 3 ..., 2 2 2]
+ [3 3 3 ..., 2 2 2]
+ [6 3 3 ..., 2 2 2]]
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/2ndPart_2.5_Eight_PPB_PanRelations_4_1.png" src="../_images/2ndPart_2.5_Eight_PPB_PanRelations_4_1.png" />
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+1425946
+14054
+0.9902402777777778
+</pre></div></div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span>NewTpan=Tpan.reshape(1,Tpan.shape[0]*Tpan.shape[1]);
+NewMK=mk.reshape(1,mk.shape[0]*mk.shape[1]);
+
+ALLUvalue=np.unique(NewTpan,return_index=True,return_inverse=True,return_counts = True)[0];
+ALLUinverse=np.unique(NewTpan,return_index=True,return_inverse=True,return_counts = True)[2];
+LenthofALLunique=len(ALLUvalue);
+
+
+ALLfinalF=[];
+for i in range(1,7):
+    TF=(NewMK==i);
+    TempMask=TF*NewTpan;
+    usefulValue=TempMask[TF];
+
+    Uvalue=np.unique(usefulValue,return_index=True,return_inverse=True,return_counts = True)[0];
+    Uinverse=np.unique(usefulValue,return_index=True,return_inverse=True,return_counts = True)[2];
+    Ufrence=(np.unique(usefulValue,return_index=True,return_inverse=True,return_counts = True)[3])/len(usefulValue);
+
+    fram1=pd.DataFrame({&#39;id&#39;:ALLUvalue});
+    fram2=pd.DataFrame({&#39;id&#39;:Uvalue,&#39;F&#39;:Ufrence});
+
+    MEge=pd.merge(fram1,fram2,on=&#39;id&#39;,how=&#39;outer&#39;);
+    MegeFILL=MEge.fillna({&#39;F&#39;:0.0});
+    finalF=MegeFILL[&#39;F&#39;];
+
+    newfinalF=np.array(finalF[ALLUinverse]);
+    ALLfinalF.append(newfinalF);
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span>ALLpost=[];
+for i in range(0,len(ALLfinalF)):
+    TEMPpost=10000*(ALLfinalF[i]+0)*ALL[i];
+    ALLpost.append(TEMPpost);
+
+
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span>LastLabel=np.zeros(mk.shape[0]*mk.shape[1]);
+
+for j in range(0,mk.shape[0]*mk.shape[1]):
+    MAXP=0;   maxindex=0;
+    tempF=[ALLpost[0][j],ALLpost[1][j],ALLpost[2][j],ALLpost[3][j],ALLpost[4][j],ALLpost[5][j]];
+    for k in range(0,len(tempF)):
+        if(tempF[k]&gt;MAXP):
+            MAXP=tempF[k];
+            maxindex=k+1;
+    LastLabel[j]=maxindex;
+
+finaLabel=mk-2;
+for HL in range(0,len(LastLabel)):
+    h=math.floor(HL/1200); l=HL%1200;
+    finaLabel[h][l]=LastLabel[HL];
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span># 成图展示
+mylabel=finaLabel;
+print(mylabel)
+plt.figure(figsize=(6,6))
+im2 = Image.fromarray(mylabel);
+plt.imshow(im2,cmap=plt.cm.get_cmap(&#39;cubehelix_r&#39;,7));
+cbar=plt.colorbar()
+cbar.set_ticks(np.linspace(0,7,8))
+cbar.set_ticklabels((&#39;  &#39;,&#39;water&#39;,&#39;grass&#39;,&#39;bulding&#39;,&#39;road&#39;,&#39;luodi&#39;,&#39;background&#39;))
+plt.clim(-0.5,6.5)
+plt.title(&#39;Eight-XianyanclassTruth&#39;);
+plt.show();
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[[6 6 6 ..., 6 6 6]
+ [6 6 6 ..., 6 6 6]
+ [6 6 6 ..., 6 6 6]
+ ...,
+ [3 3 3 ..., 2 2 2]
+ [3 3 3 ..., 2 2 2]
+ [3 3 3 ..., 2 2 2]]
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/2ndPart_2.5_Eight_PPB_PanRelations_8_1.png" src="../_images/2ndPart_2.5_Eight_PPB_PanRelations_8_1.png" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span>TrueOrFalse=(mylabel==mk)
+TrueValue=TrueOrFalse[TrueOrFalse&gt;0]
+FalseValue=TrueOrFalse[TrueOrFalse==0]
+correct=len(TrueValue)/(len(TrueValue)+len(FalseValue));
+print(len(TrueValue));  print(len(FalseValue));  print(correct);
+
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+1395441
+44559
+0.96905625
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span>TRUEplace=(mylabel==mk)*10000;
+FalsePlace=(mylabel!=mk)*10000;
+
+plt.figure(figsize=(6,6))
+imT = Image.fromarray(TRUEplace);
+plt.imshow(imT,cmap=&#39;Oranges&#39;);
+plt.title(&#39;Eight-Xianyan-trueplace&#39;);
+plt.show();
+
+plt.figure(figsize=(6,6))
+imF = Image.fromarray(FalsePlace);
+plt.imshow(imF,cmap=&#39;Reds&#39;);
+plt.title(&#39;falseplace&#39;);
+plt.show();
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/2ndPart_2.5_Eight_PPB_PanRelations_10_0.png" src="../_images/2ndPart_2.5_Eight_PPB_PanRelations_10_0.png" />
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/2ndPart_2.5_Eight_PPB_PanRelations_10_1.png" src="../_images/2ndPart_2.5_Eight_PPB_PanRelations_10_1.png" />
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span>
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, YNS.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'0.0.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="../_static/translations.js"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

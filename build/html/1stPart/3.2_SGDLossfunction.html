@@ -1,0 +1,783 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>2. SGD 损失函数 &mdash; PRoRS 0.0.1 文档</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="索引"
+              href="../genindex.html"/>
+        <link rel="search" title="搜索" href="../search.html"/>
+    <link rel="top" title="PRoRS 0.0.1 文档" href="../index.html"/>
+        <link rel="up" title="像元特征分类" href="index.html"/>
+        <link rel="next" title="5. 二维高斯分布" href="3.3_twoGB.html"/>
+        <link rel="prev" title="&lt;no title&gt;" href="3.1_SGDclassfier.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> PRoRS
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">第一部分:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">像元特征分类</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="2_SK_KNC_naive_bayesGB_QDA_SDGclassfier.html">1. 以Jupyter Notebook为基本工具</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">2. SGD 损失函数</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#训练样本的（归一化）损失值">3. 训练样本的（归一化）损失值</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#假设测试样本分别为正类或负类的（归一化）损失值">4. 假设测试样本分别为正类或负类的（归一化）损失值</a></li>
+<li class="toctree-l2"><a class="reference internal" href="3.3_twoGB.html">5. 二维高斯分布</a></li>
+<li class="toctree-l2"><a class="reference internal" href="3.3_twoGB.html#协方差矩阵">6. 协方差矩阵</a></li>
+<li class="toctree-l2"><a class="reference internal" href="4.1_MLPClassfier.html">7. 多层神经网络</a></li>
+<li class="toctree-l2"><a class="reference internal" href="4.1_MLPClassfier.html#训练数据集">8. 训练数据集</a></li>
+<li class="toctree-l2"><a class="reference internal" href="4.1_MLPClassfier.html#测试数据集">9. 测试数据集</a></li>
+<li class="toctree-l2"><a class="reference internal" href="4.1_MLPClassfier.html#四种激活函数分类">10. 四种激活函数分类</a></li>
+<li class="toctree-l2"><a class="reference internal" href="4.2_MLPClassifier_hidenWeights.html">11. 多层神经网络</a></li>
+<li class="toctree-l2"><a class="reference internal" href="4.2_MLPClassifier_hidenWeights.html#训练数据集">12. 训练数据集</a></li>
+<li class="toctree-l2"><a class="reference internal" href="4.2_MLPClassifier_hidenWeights.html#测试数据集">13. 测试数据集</a></li>
+<li class="toctree-l2"><a class="reference internal" href="4.2_MLPClassifier_hidenWeights.html#存储各隐层权重的array">14. 存储各隐层权重的array</a></li>
+<li class="toctree-l2"><a class="reference internal" href="4.2_MLPClassifier_hidenWeights.html#四种激活函数分类">15. 四种激活函数分类</a></li>
+<li class="toctree-l2"><a class="reference internal" href="4.2_MLPClassifier_hidenWeights.html#隐层过程">16. 隐层过程</a></li>
+<li class="toctree-l2"><a class="reference internal" href="6.2_Ensemblemethods.html">17. 随机森林、ExtraTrees、Adaboost、GradientBoost分类效果</a></li>
+<li class="toctree-l2"><a class="reference internal" href="6.2_Ensemblemethods.html#RandomForest并行分类过程">18. RandomForest并行分类过程</a></li>
+<li class="toctree-l2"><a class="reference internal" href="6.2_Ensemblemethods.html#AdaBoost串行分类过程">19. AdaBoost串行分类过程</a></li>
+<li class="toctree-l2"><a class="reference internal" href="One_7.4_Pan_GMM_MRF.html">20. 第一次MRF迭代</a></li>
+<li class="toctree-l2"><a class="reference internal" href="One_7.4_Pan_GMM_MRF.html#第二次MRF迭代">21. 第二次MRF迭代</a></li>
+<li class="toctree-l2"><a class="reference internal" href="One_7.4_Pan_GMM_MRF.html#第三次MRF迭代">22. 第三次MRF迭代</a></li>
+<li class="toctree-l2"><a class="reference internal" href="One_7.4_Pan_GMM_MRF.html#第四次MRF迭代">23. 第四次MRF迭代</a></li>
+<li class="toctree-l2"><a class="reference internal" href="One_7.4_Pan_GMM_MRF.html#第五次MRF迭代">24. 第五次MRF迭代</a></li>
+<li class="toctree-l2"><a class="reference internal" href="One_7.4_Pan_GMM_MRF.html#第六次MRF迭代">25. 第六次MRF迭代</a></li>
+<li class="toctree-l2"><a class="reference internal" href="One_7.4_Pan_GMM_MRF.html#第七次MRF迭代">26. 第七次MRF迭代</a></li>
+<li class="toctree-l2"><a class="reference internal" href="One_7.4_Pan_GMM_MRF.html#第八次MRF迭代">27. 第八次MRF迭代</a></li>
+<li class="toctree-l2"><a class="reference internal" href="One_7.4_Pan_GMM_MRF.html#第九次MRF迭代">28. 第九次MRF迭代</a></li>
+<li class="toctree-l2"><a class="reference internal" href="One_7.4_Pan_GMM_MRF.html#第十次MRF迭代">29. 第十次MRF迭代</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">第二部分:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../2ndPart/index.html">1. 图像平面分类</a></li>
+</ul>
+<p class="caption"><span class="caption-text">第三部分:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../3rdPart/index.html">地表覆盖制图</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">PRoRS</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">像元特征分类</a> &raquo;</li>
+        
+      <li>2. SGD 损失函数</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/1stPart/3.2_SGDLossfunction.ipynb.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+<style>
+/* CSS for nbsphinx extension */
+
+/* remove conflicting styling from Sphinx themes */
+div.nbinput,
+div.nbinput div.prompt,
+div.nbinput div.input_area,
+div.nbinput div[class*=highlight],
+div.nbinput div[class*=highlight] pre,
+div.nboutput,
+div.nbinput div.prompt,
+div.nbinput div.output_area,
+div.nboutput div[class*=highlight],
+div.nboutput div[class*=highlight] pre {
+    background: none;
+    border: none;
+    padding: 0 0;
+    margin: 0;
+    box-shadow: none;
+}
+
+/* avoid gaps between output lines */
+div.nboutput div[class*=highlight] pre {
+    line-height: normal;
+}
+
+/* input/output containers */
+div.nbinput,
+div.nboutput {
+    display: -webkit-flex;
+    display: flex;
+    align-items: flex-start;
+    margin: 0;
+    width: 100%;
+}
+@media (max-width: 540px) {
+    div.nbinput,
+    div.nboutput {
+        flex-direction: column;
+    }
+}
+
+/* input container */
+div.nbinput {
+    padding-top: 5px;
+}
+
+/* last container */
+div.nblast {
+    padding-bottom: 5px;
+}
+
+/* input prompt */
+div.nbinput div.prompt pre {
+    color: #303F9F;
+}
+
+/* output prompt */
+div.nboutput div.prompt pre {
+    color: #D84315;
+}
+
+/* all prompts */
+div.nbinput div.prompt,
+div.nboutput div.prompt {
+    min-width: 8ex;
+    padding-top: 0.4em;
+    padding-right: 0.4em;
+    text-align: right;
+    flex: 0;
+}
+@media (max-width: 540px) {
+    div.nbinput div.prompt,
+    div.nboutput div.prompt {
+        text-align: left;
+        padding: 0.4em;
+    }
+    div.nboutput div.prompt.empty {
+        padding: 0;
+    }
+}
+
+/* disable scrollbars on prompts */
+div.nbinput div.prompt pre,
+div.nboutput div.prompt pre {
+    overflow: hidden;
+}
+
+/* input/output area */
+div.nbinput div.input_area,
+div.nboutput div.output_area {
+    padding: 0.4em;
+    -webkit-flex: 1;
+    flex: 1;
+    overflow: auto;
+}
+@media (max-width: 540px) {
+    div.nbinput div.input_area,
+    div.nboutput div.output_area {
+        width: 100%;
+    }
+}
+
+/* input area */
+div.nbinput div.input_area {
+    border: 1px solid #cfcfcf;
+    border-radius: 2px;
+    background: #f7f7f7;
+}
+
+/* override MathJax center alignment in output cells */
+div.nboutput div[class*=MathJax] {
+    text-align: left !important;
+}
+
+/* override sphinx.ext.pngmath center alignment in output cells */
+div.nboutput div.math p {
+    text-align: left;
+}
+
+/* standard error */
+div.nboutput div.output_area.stderr {
+    background: #fdd;
+}
+
+/* ANSI colors */
+.ansi-black-fg { color: #3E424D; }
+.ansi-black-bg { background-color: #3E424D; }
+.ansi-black-intense-fg { color: #282C36; }
+.ansi-black-intense-bg { background-color: #282C36; }
+.ansi-red-fg { color: #E75C58; }
+.ansi-red-bg { background-color: #E75C58; }
+.ansi-red-intense-fg { color: #B22B31; }
+.ansi-red-intense-bg { background-color: #B22B31; }
+.ansi-green-fg { color: #00A250; }
+.ansi-green-bg { background-color: #00A250; }
+.ansi-green-intense-fg { color: #007427; }
+.ansi-green-intense-bg { background-color: #007427; }
+.ansi-yellow-fg { color: #DDB62B; }
+.ansi-yellow-bg { background-color: #DDB62B; }
+.ansi-yellow-intense-fg { color: #B27D12; }
+.ansi-yellow-intense-bg { background-color: #B27D12; }
+.ansi-blue-fg { color: #208FFB; }
+.ansi-blue-bg { background-color: #208FFB; }
+.ansi-blue-intense-fg { color: #0065CA; }
+.ansi-blue-intense-bg { background-color: #0065CA; }
+.ansi-magenta-fg { color: #D160C4; }
+.ansi-magenta-bg { background-color: #D160C4; }
+.ansi-magenta-intense-fg { color: #A03196; }
+.ansi-magenta-intense-bg { background-color: #A03196; }
+.ansi-cyan-fg { color: #60C6C8; }
+.ansi-cyan-bg { background-color: #60C6C8; }
+.ansi-cyan-intense-fg { color: #258F8F; }
+.ansi-cyan-intense-bg { background-color: #258F8F; }
+.ansi-white-fg { color: #C5C1B4; }
+.ansi-white-bg { background-color: #C5C1B4; }
+.ansi-white-intense-fg { color: #A1A6B2; }
+.ansi-white-intense-bg { background-color: #A1A6B2; }
+
+.ansi-bold { font-weight: bold; }
+
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast,
+.nboutput.nblast {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast + .nbinput {
+    margin-top: -19px;
+}
+
+/* nice headers on first paragraph of info/warning boxes */
+.admonition .first {
+    margin: -12px;
+    padding: 6px 12px;
+    margin-bottom: 12px;
+    color: #fff;
+    line-height: 1;
+    display: block;
+}
+.admonition.warning .first {
+    background: #f0b37e;
+}
+.admonition.note .first {
+    background: #6ab0de;
+}
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+</style>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span># -*- coding:UTF-8 -*- ＃
+#导入模块
+import time
+import random
+import numpy as np
+import matplotlib.pyplot as plt
+
+from sklearn import cluster,datasets
+from matplotlib.colors import ListedColormap
+
+from sklearn.preprocessing import StandardScaler
+
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import SGDClassifier, Perceptron
+
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span># 拉伸至0-255
+def guiyihua(x):
+    minx=np.min(x)
+    maxX=np.max(x)
+    x=(x-minx)/(maxX-minx)
+    return x;
+
+def classtransform(x):
+    for i in range(0,len(x)):
+        if(x[i]&gt;0):
+            x[i]=1
+        else:
+            x[i]=-1
+    return x;
+
+
+def MultiplyDW(D,W):
+    for i in range(0,len(D)):
+       D[i]=D[i]*W[i]
+    return D;
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span># picture 1  two blobs
+n_samples = 50000
+
+X,m = datasets.make_blobs(n_samples=n_samples, centers=2, n_features=2, cluster_std=2, random_state=2)
+xa=X[:, 0]
+xb=X[:, 1]
+
+marray = np.array(m).ravel()
+
+marraytr=classtransform(marray)
+
+x1=255*guiyihua(xa)
+x2=255*guiyihua(xb)
+
+cm_bright = ListedColormap([&#39;Blue&#39;, &#39;Orange&#39;])
+
+rand_X =list(zip(x1,x2))
+
+plt.figure()
+plt.scatter(x1, x2, c=marraytr, cmap=cm_bright,label=&#39;mydata&#39;)
+
+
+plt.title(&#39;two blods&#39;)
+plt.show()
+
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/1stPart_3.2_SGDLossfunction_2_0.png" src="../_images/1stPart_3.2_SGDLossfunction_2_0.png" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span>x = np.linspace(0,255,256)
+y = np.linspace(0,255,256)
+X,Y = np.meshgrid(x,y)
+points = [point for point in zip(X.flat,Y.flat)]
+
+plt.figure()
+plt.scatter(X.flat,Y.flat,s=0.009)
+plt.show()
+
+#np.random.shuffle(points)
+parray = np.array(points)
+
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/1stPart_3.2_SGDLossfunction_3_0.png" src="../_images/1stPart_3.2_SGDLossfunction_3_0.png" />
+</div>
+</div>
+<div class="section" id="SGD-损失函数">
+<h1>2. SGD 损失函数<a class="headerlink" href="#SGD-损失函数" title="永久链接至标题">¶</a></h1>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+
+<span></span>SGDclf = SGDClassifier(loss=&quot;log&quot;, alpha=0.01, n_iter=200, fit_intercept=True)
+SGDclf.fit(rand_X, marraytr)
+
+GX = SGDclf.decision_function(rand_X)
+
+# 收缩至-1-1
+def ZoomIN(x):
+    minx=np.min(x)
+    maxX=np.max(x)
+    x=(2*(x-minx)/(maxX-minx))-1
+    return x;
+
+GXNor=ZoomIN(GX)
+print(GX)
+HX=[]
+for i in range(0,len(GXNor)):
+    if(marray[i]&gt;0):
+        HX.append(GXNor[i]*1)
+    else:
+        HX.append(GXNor[i]*(-1))
+
+plt.figure()
+
+def modified_huber_loss(y_true, y_pred):
+    z = y_pred * y_true
+    loss = -4 * z
+    loss[z &gt;= -1] = (1 - z[z &gt;= -1]) ** 2
+    loss[z &gt;= 1.] = 0
+    return loss
+
+xmin, xmax = -4, 4
+xx = np.linspace(xmin, xmax, 100)
+lw = 2
+plt.plot([xmin, 0, 0, xmax], [1, 1, 0, 0], color=&#39;gold&#39;, lw=lw,label=&quot;Zero-one loss&quot;)
+plt.plot(xx, np.where(xx &lt; 1, 1 - xx, 0), color=&#39;teal&#39;, lw=lw,label=&quot;Hinge loss&quot;)
+plt.plot(xx, -np.minimum(xx, 0), color=&#39;yellowgreen&#39;, lw=lw,label=&quot;Perceptron loss&quot;)
+plt.plot(xx, np.log2(1 + np.exp(-xx)), color=&#39;cornflowerblue&#39;, lw=lw,label=&quot;Log loss&quot;)
+plt.plot(xx, np.where(xx &lt; 1, 1 - xx, 0) ** 2, color=&#39;orange&#39;, lw=lw,label=&quot;Squared hinge loss&quot;)
+plt.plot(xx, modified_huber_loss(xx, 1), color=&#39;darkorchid&#39;, lw=lw,linestyle=&#39;--&#39;, label=&quot;Modified Huber loss&quot;)
+plt.ylim((0, 8))
+plt.legend(loc=&quot;upper right&quot;)
+plt.xlabel(r&quot;Decision function $f(x)$&quot;)
+plt.ylabel(&quot;$L(y, f(x))$&quot;)
+plt.show()
+
+#print(HX)
+GXNorZI=np.array(GXNor)
+print(GXNorZI)
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[-12.28480848 -35.42699676   2.47844806 ...,  26.81206381 -22.14955797
+  10.25163573]
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/1stPart_3.2_SGDLossfunction_5_1.png" src="../_images/1stPart_3.2_SGDLossfunction_5_1.png" />
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[-0.24647086 -0.71553309  0.05276127 ...,  0.5459722  -0.44641657
+  0.21031373]
+</pre></div></div>
+</div>
+</div>
+<div class="section" id="训练样本的（归一化）损失值">
+<h1>3. 训练样本的（归一化）损失值<a class="headerlink" href="#训练样本的（归一化）损失值" title="永久链接至标题">¶</a></h1>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span>Hingeloss=np.where(GXNorZI &lt; 1, 1 - GXNorZI, 0)
+Perceptronloss=-np.minimum(GXNorZI, 0)
+Logloss=np.log2(1 + np.exp(-GXNorZI))
+Squaredhingeloss=np.where(GXNorZI &lt; 1, 1 - GXNorZI, 0)**2
+ModifiedHuberloss=modified_huber_loss(GXNorZI, 1)
+
+plt.figure(figsize=(8,5))
+cor=plt.cm.get_cmap(&#39;RdBu&#39;)
+
+lossvalue=MultiplyDW(ZoomIN(Logloss),marraytr)
+print(lossvalue);print(np.max(lossvalue));print(np.min(lossvalue))
+
+sct=plt.scatter(x1, x2,c=lossvalue,cmap=cor,s=2)
+plt.colorbar(sct,label=&#39;lossvalue&#39;)
+plt.show()
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[-0.02139053 -0.60066017 -0.29229443 ..., -0.71258739 -0.25560121
+ -0.4395051 ]
+0.503599389293
+-1.0
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/1stPart_3.2_SGDLossfunction_7_1.png" src="../_images/1stPart_3.2_SGDLossfunction_7_1.png" />
+</div>
+</div>
+</div>
+<div class="section" id="假设测试样本分别为正类或负类的（归一化）损失值">
+<h1>4. 假设测试样本分别为正类或负类的（归一化）损失值<a class="headerlink" href="#假设测试样本分别为正类或负类的（归一化）损失值" title="永久链接至标题">¶</a></h1>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span>TestHX= SGDclf.decision_function(parray)
+
+TestGXNor=ZoomIN(TestHX)
+TestGXNorZI=np.array(TestGXNor)
+
+#print(TestGXNorZI)
+#print(len(TestGXNorZI))
+HingelossTest=np.where(TestGXNorZI &lt; 1, 1 - TestGXNorZI, 0)
+PerceptronlossTest=-np.minimum(TestGXNorZI, 0)
+LoglossTest=np.log2(1 + np.exp(-TestGXNorZI))
+SquaredhingelossTest=np.where(TestGXNorZI &lt; 1, 1 - TestGXNorZI, 0)**2
+ModifiedHuberlossTest=modified_huber_loss(TestGXNorZI, 1)
+
+cor=plt.cm.get_cmap(&#39;RdBu&#39;)
+plt.figure(figsize=(23,5))
+
+plt.subplot(141)
+lossvalue=ZoomIN(HingelossTest)
+plt.scatter(parray[:,0], parray[:,1],c=lossvalue,cmap=cor,s=2)
+plt.title(&#39;test data-Hinge loss&#39;)
+
+ax=plt.subplot(142)
+#lossTest=1/LoglossTest
+lossvalue=ZoomIN(LoglossTest)
+ax.scatter(parray[:,0], parray[:,1],c=lossvalue,cmap=cor,s=2)
+ax.set_xlabel(&#39;function(x)&#39;)
+ax.set_ylabel(&#39;lossvalue&#39;)
+ax.set_title(&#39;test data-Log loss&#39;)
+
+plt.subplot(143)
+lossvalue=ZoomIN(SquaredhingelossTest)
+plt.scatter(parray[:,0], parray[:,1],c=lossvalue,cmap=cor,s=2)
+plt.title(&#39;test data-Squaredhinge loss&#39;)
+
+plt.subplot(144)
+lossvalue=ZoomIN(ModifiedHuberlossTest)
+plt.scatter(parray[:,0], parray[:,1],c=lossvalue,cmap=cor,s=2)
+plt.title(&#39;test data-ModifiedHuber loss&#39;)
+
+# plt.legend(loc=&#39;upper right&#39;)
+plt.show()
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/1stPart_3.2_SGDLossfunction_9_0.png" src="../_images/1stPart_3.2_SGDLossfunction_9_0.png" />
+</div>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="3.3_twoGB.html" class="btn btn-neutral float-right" title="5. 二维高斯分布" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="3.1_SGDclassfier.html" class="btn btn-neutral" title="&lt;no title&gt;" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, YNS.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'0.0.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="../_static/translations.js"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

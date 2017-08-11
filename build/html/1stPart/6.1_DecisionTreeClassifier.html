@@ -1,0 +1,846 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>&lt;no title&gt; &mdash; PRoRS 0.0.1 文档</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="索引"
+              href="../genindex.html"/>
+        <link rel="search" title="搜索" href="../search.html"/>
+    <link rel="top" title="PRoRS 0.0.1 文档" href="../index.html"/>
+        <link rel="up" title="像元特征分类" href="index.html"/>
+        <link rel="next" title="17. 随机森林、ExtraTrees、Adaboost、GradientBoost分类效果" href="6.2_Ensemblemethods.html"/>
+        <link rel="prev" title="&lt;no title&gt;" href="5.2_SVMclass_oneF.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> PRoRS
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">第一部分:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="index.html">像元特征分类</a></li>
+</ul>
+<p class="caption"><span class="caption-text">第二部分:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../2ndPart/index.html">1. 图像平面分类</a></li>
+</ul>
+<p class="caption"><span class="caption-text">第三部分:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../3rdPart/index.html">地表覆盖制图</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">PRoRS</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">像元特征分类</a> &raquo;</li>
+        
+      <li>&lt;no title&gt;</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/1stPart/6.1_DecisionTreeClassifier.ipynb.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+<style>
+/* CSS for nbsphinx extension */
+
+/* remove conflicting styling from Sphinx themes */
+div.nbinput,
+div.nbinput div.prompt,
+div.nbinput div.input_area,
+div.nbinput div[class*=highlight],
+div.nbinput div[class*=highlight] pre,
+div.nboutput,
+div.nbinput div.prompt,
+div.nbinput div.output_area,
+div.nboutput div[class*=highlight],
+div.nboutput div[class*=highlight] pre {
+    background: none;
+    border: none;
+    padding: 0 0;
+    margin: 0;
+    box-shadow: none;
+}
+
+/* avoid gaps between output lines */
+div.nboutput div[class*=highlight] pre {
+    line-height: normal;
+}
+
+/* input/output containers */
+div.nbinput,
+div.nboutput {
+    display: -webkit-flex;
+    display: flex;
+    align-items: flex-start;
+    margin: 0;
+    width: 100%;
+}
+@media (max-width: 540px) {
+    div.nbinput,
+    div.nboutput {
+        flex-direction: column;
+    }
+}
+
+/* input container */
+div.nbinput {
+    padding-top: 5px;
+}
+
+/* last container */
+div.nblast {
+    padding-bottom: 5px;
+}
+
+/* input prompt */
+div.nbinput div.prompt pre {
+    color: #303F9F;
+}
+
+/* output prompt */
+div.nboutput div.prompt pre {
+    color: #D84315;
+}
+
+/* all prompts */
+div.nbinput div.prompt,
+div.nboutput div.prompt {
+    min-width: 8ex;
+    padding-top: 0.4em;
+    padding-right: 0.4em;
+    text-align: right;
+    flex: 0;
+}
+@media (max-width: 540px) {
+    div.nbinput div.prompt,
+    div.nboutput div.prompt {
+        text-align: left;
+        padding: 0.4em;
+    }
+    div.nboutput div.prompt.empty {
+        padding: 0;
+    }
+}
+
+/* disable scrollbars on prompts */
+div.nbinput div.prompt pre,
+div.nboutput div.prompt pre {
+    overflow: hidden;
+}
+
+/* input/output area */
+div.nbinput div.input_area,
+div.nboutput div.output_area {
+    padding: 0.4em;
+    -webkit-flex: 1;
+    flex: 1;
+    overflow: auto;
+}
+@media (max-width: 540px) {
+    div.nbinput div.input_area,
+    div.nboutput div.output_area {
+        width: 100%;
+    }
+}
+
+/* input area */
+div.nbinput div.input_area {
+    border: 1px solid #cfcfcf;
+    border-radius: 2px;
+    background: #f7f7f7;
+}
+
+/* override MathJax center alignment in output cells */
+div.nboutput div[class*=MathJax] {
+    text-align: left !important;
+}
+
+/* override sphinx.ext.pngmath center alignment in output cells */
+div.nboutput div.math p {
+    text-align: left;
+}
+
+/* standard error */
+div.nboutput div.output_area.stderr {
+    background: #fdd;
+}
+
+/* ANSI colors */
+.ansi-black-fg { color: #3E424D; }
+.ansi-black-bg { background-color: #3E424D; }
+.ansi-black-intense-fg { color: #282C36; }
+.ansi-black-intense-bg { background-color: #282C36; }
+.ansi-red-fg { color: #E75C58; }
+.ansi-red-bg { background-color: #E75C58; }
+.ansi-red-intense-fg { color: #B22B31; }
+.ansi-red-intense-bg { background-color: #B22B31; }
+.ansi-green-fg { color: #00A250; }
+.ansi-green-bg { background-color: #00A250; }
+.ansi-green-intense-fg { color: #007427; }
+.ansi-green-intense-bg { background-color: #007427; }
+.ansi-yellow-fg { color: #DDB62B; }
+.ansi-yellow-bg { background-color: #DDB62B; }
+.ansi-yellow-intense-fg { color: #B27D12; }
+.ansi-yellow-intense-bg { background-color: #B27D12; }
+.ansi-blue-fg { color: #208FFB; }
+.ansi-blue-bg { background-color: #208FFB; }
+.ansi-blue-intense-fg { color: #0065CA; }
+.ansi-blue-intense-bg { background-color: #0065CA; }
+.ansi-magenta-fg { color: #D160C4; }
+.ansi-magenta-bg { background-color: #D160C4; }
+.ansi-magenta-intense-fg { color: #A03196; }
+.ansi-magenta-intense-bg { background-color: #A03196; }
+.ansi-cyan-fg { color: #60C6C8; }
+.ansi-cyan-bg { background-color: #60C6C8; }
+.ansi-cyan-intense-fg { color: #258F8F; }
+.ansi-cyan-intense-bg { background-color: #258F8F; }
+.ansi-white-fg { color: #C5C1B4; }
+.ansi-white-bg { background-color: #C5C1B4; }
+.ansi-white-intense-fg { color: #A1A6B2; }
+.ansi-white-intense-bg { background-color: #A1A6B2; }
+
+.ansi-bold { font-weight: bold; }
+
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast,
+.nboutput.nblast {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast + .nbinput {
+    margin-top: -19px;
+}
+
+/* nice headers on first paragraph of info/warning boxes */
+.admonition .first {
+    margin: -12px;
+    padding: 6px 12px;
+    margin-bottom: 12px;
+    color: #fff;
+    line-height: 1;
+    display: block;
+}
+.admonition.warning .first {
+    background: #f0b37e;
+}
+.admonition.note .first {
+    background: #6ab0de;
+}
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+</style>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span># -*- coding:UTF-8 -*- ＃
+# 导入模块
+import sys
+import time
+import random
+import numpy as np
+import matplotlib.pyplot as plt
+
+import pydotplus
+from IPython.display import Image
+from mpl_toolkits.mplot3d import Axes3D
+
+from matplotlib.colors import ListedColormap
+from sklearn.tree import DecisionTreeClassifier
+from sklearn import tree
+from sklearn.preprocessing import StandardScaler
+
+import mymodule as MYD
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span>n_samples=2000
+XB,yb=MYD.makeblods(n_samples)
+XR,yr=MYD.makerandoms(n_samples)
+XC,yc=MYD.makecircles(n_samples)
+XH,yh=MYD.makeHelixs(n_samples)
+XAS = [XB, XR, XC,XH]
+YAS=[yb,yr,yc,yh]
+
+cor = ListedColormap([&#39;Blue&#39;, &#39;Orange&#39;])
+titlename=[&#39;two blob&#39;,&#39;two random&#39;,&#39;two circle&#39;,&#39;two heixl&#39;]
+cmap=[cor,cor,cor,cor]
+MYD.DrawManyChart(XAS,YAS,cmap,24,4,titlename,10,1,4)
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/1stPart_6.1_DecisionTreeClassifier_1_0.png" src="../_images/1stPart_6.1_DecisionTreeClassifier_1_0.png" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span>Xzip,points=MYD.makeGrids()
+plt.figure()
+plt.scatter(points[:,0],points[:,1],s=0.009)
+plt.show()
+
+points[:,0].shape
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/1stPart_6.1_DecisionTreeClassifier_2_0.png" src="../_images/1stPart_6.1_DecisionTreeClassifier_2_0.png" />
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>Out[3]:
+</pre></div>
+</div>
+<div class="output_area highlight-none"><div class="highlight"><pre>
+<span></span>(65536,)
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span>cor = ListedColormap([&#39;Blue&#39;, &#39;Orange&#39;])
+
+lableDTR=[]; scoreDTR=[];
+L=len(points); a=1
+number_of_points = int(a*L)
+p = points[0:number_of_points]
+
+DI=1
+modelDTR=tree.DecisionTreeClassifier(criterion=&#39;gini&#39;,max_depth=3)
+tempmodule=modelDTR.fit(XAS[DI],YAS[DI])
+lableDTR.append(tempmodule.predict(p))
+scoreDTR.append(tempmodule.score(XAS[DI],YAS[DI]))
+
+print(scoreDTR);
+MYD.DrawChartColorBar(p,lableDTR,cor,5,4,&#39;DtreeC&#39;,&#39;DtreeC&#39;)
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[0.90800000000000003]
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/1stPart_6.1_DecisionTreeClassifier_3_1.png" src="../_images/1stPart_6.1_DecisionTreeClassifier_3_1.png" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span>dot_data = tree.export_graphviz(tempmodule, out_file=None,class_names=&quot;01&quot;,label=&#39;all&#39;,filled=True,rounded=True,special_characters=True)
+graph = pydotplus.graph_from_dot_data(dot_data)
+#Image(graph.write_pdf(&quot;Helixs.pdf&quot;))
+Image(graph.create_jpg())
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>Out[5]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/1stPart_6.1_DecisionTreeClassifier_4_0.jpeg" src="../_images/1stPart_6.1_DecisionTreeClassifier_4_0.jpeg" />
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span>treeobject=modelDTR.tree_
+treeclass=modelDTR.classes_
+featureimportance=modelDTR.feature_importances_
+getparams=modelDTR.get_params(deep=True)
+applyDTR=modelDTR.apply(p)
+Decisionpath=modelDTR.decision_path(XAS[DI],check_input=True)
+# print(treeobject)
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span>label=[]; pointR=[]; pointL=[];
+for k in range(0,len(p)):
+    if(points[k][0]&lt;=253.9763):
+        label.append(0)
+        pointL.append(p[k])
+    else:
+        label.append(1)
+        pointR.append(p[k])
+
+pointL=np.array(pointL);
+label2=[];    pointR2=[]; pointL2=[];
+for j in range(0,len(pointL)):
+    if(pointL[j][0]&lt;=104.4643):
+        label2.append(0)
+        pointL2.append(pointL[j])
+    else:
+        label2.append(1)
+        pointR2.append(pointL[j])
+
+pointL2=np.array(pointL2); pointR2=np.array(pointR2);
+label31=[];     label32=[];
+for m in range(0,len(pointL2)):
+    if(pointL2[m][1]&lt;=126.8268):
+        label31.append(0)
+    else:
+        label31.append(1)
+
+for n in range(0,len(pointR2)):
+    if(pointR2[n][1]&lt;=127.9898):
+        label32.append(1)
+    else:
+        label32.append(0)
+
+labelAll=[];
+for k in range(0,len(points)):
+    if(((points[:,0][k]&lt;=104.4643) and (points[:,1][k]&lt;=126.8268)) or (((points[:,0][k]&gt;104.4643) and (points[:,0][k]&lt;=253.9763)) and ((points[:,1][k]&gt;127.9898) and (points[:,1][k]&lt;=255)))):
+        labelAll.append(0)
+    else:
+        labelAll.append(1)
+
+plt.figure(figsize=(24,4))
+plt.subplot(151)
+plt.xlim(0,255);  plt.ylim(0,255);
+plt.scatter(p[:,0], p[:,1], c=label,s=0.1,cmap=cor)
+plt.subplot(152)
+plt.xlim(0,255);  plt.ylim(0,255);
+plt.scatter(pointL[:,0], pointL[:,1], c=label2,s=0.1,cmap=cor)
+plt.subplot(153)
+plt.xlim(0,255);  plt.ylim(0,255);
+plt.scatter(pointL2[:,0], pointL2[:,1], c=label31,s=0.1,cmap=cor)
+plt.subplot(154)
+plt.xlim(0,255);  plt.ylim(0,255);
+plt.scatter(pointR2[:,0], pointR2[:,1], c=label32,s=0.1,cmap=cor)
+plt.subplot(155)
+plt.xlim(0,255);  plt.ylim(0,255);
+plt.scatter(points[:,0], points[:,1], c=labelAll,s=0.1,cmap=cor)
+plt.show()
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/1stPart_6.1_DecisionTreeClassifier_6_0.png" src="../_images/1stPart_6.1_DecisionTreeClassifier_6_0.png" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span>plt.figure(figsize=(6,6))
+
+cm_bright = ListedColormap([&#39;Blue&#39;,&#39;White&#39; ,&#39;Orange&#39;])
+cm = plt.cm.get_cmap(&#39;RdBu&#39;)
+##C0 = np.array(label32)+np.array(label31)+np.array(label)+0.5*(np.array(label)+np.array(label2))
+C0 = label
+ax =plt.subplot(111,projection=&#39;3d&#39;)
+ax.plot_trisurf(p[:,0],p[:,1],C0,cmap=cm)
+ax.set_zlim(-4,4)
+plt.show()
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/1stPart_6.1_DecisionTreeClassifier_7_0.png" src="../_images/1stPart_6.1_DecisionTreeClassifier_7_0.png" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span>Z=[]; Z1=[]; Z2=[]; Z3=[];
+for z in range(0,len(label)):
+    Z.append(1);
+
+for j in range(0,len(label2)):
+    Z1.append(2);
+
+for m in range(0,len(label31)):
+    Z2.append(3);
+
+for n in range(0,len(label32)):
+    Z3.append(4);
+
+fig = plt.figure()
+ax = fig.add_subplot(111, projection=&#39;3d&#39;)
+ax.scatter3D(points[:,0], points[:,1], Z,c=label,cmap=cor)
+ax.scatter3D(pointL[:,0], pointL[:,1], Z1,c=label2,cmap=cor)
+ax.scatter3D(pointL2[:,0], pointL2[:,1], Z2,c=label31,cmap=cor)
+ax.scatter3D(pointR2[:,0], pointR2[:,1], Z3,c=label32,cmap=cor)
+ax.set_zlim(0,5)
+plt.show();
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/1stPart_6.1_DecisionTreeClassifier_8_0.png" src="../_images/1stPart_6.1_DecisionTreeClassifier_8_0.png" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span>Zvalue=[];
+for k in range(0,len(points)):
+    if(points[k][0]&lt;=253.9763):
+        if(points[k][0]&lt;=104.4643):
+            if(points[k][1]&lt;=126.8268):
+                Zvalue.append(2)
+            else:
+                Zvalue.append(1)
+        else:
+            if(points[k][1]&lt;=127.9898):
+                Zvalue.append(1)
+            else:
+                Zvalue.append(-1)
+    else:
+        Zvalue.append(-1);
+
+fig = plt.figure()
+cm_bright = ListedColormap([&#39;Blue&#39;,&#39;Orange&#39;])
+ax = fig.add_subplot(111, projection=&#39;3d&#39;)
+ax.plot_trisurf(points[:,0],points[:,1],Zvalue,cmap=cm)
+plt.show()
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/1stPart_6.1_DecisionTreeClassifier_9_0.png" src="../_images/1stPart_6.1_DecisionTreeClassifier_9_0.png" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span>fig = plt.figure()
+ax = fig.add_subplot(111, projection=&#39;3d&#39;)
+ax.plot_trisurf(points[:,0], points[:,1], label,cmap=cor)
+ax.plot_trisurf(pointL[:,0], pointL[:,1], label2,cmap=cor)
+ax.plot_trisurf(pointL2[:,0], pointL2[:,1], label31,cmap=cor)
+ax.plot_trisurf(pointR2[:,0], pointR2[:,1], label32,cmap=cor)
+plt.show();
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/1stPart_6.1_DecisionTreeClassifier_10_0.png" src="../_images/1stPart_6.1_DecisionTreeClassifier_10_0.png" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [12]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span>Zvalue=[];
+for k in range(0,len(points)):
+    if(points[k][0]&lt;=253.9763):
+        if(points[k][0]&lt;=104.4643):
+            if(points[k][1]&lt;=126.8268):
+                Zvalue.append(0)
+            else:
+                Zvalue.append(1)
+        else:
+            if(points[k][1]&lt;=127.9898):
+                Zvalue.append(1)
+            else:
+                Zvalue.append(0)
+    else:
+        Zvalue.append(1);
+
+fig = plt.figure()
+cm_bright = ListedColormap([&#39;Blue&#39;,&#39;Orange&#39;])
+ax = fig.add_subplot(111, projection=&#39;3d&#39;)
+ax.plot_trisurf(points[:,0],points[:,1],Zvalue,cmap=cm)
+plt.show()
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/1stPart_6.1_DecisionTreeClassifier_11_0.png" src="../_images/1stPart_6.1_DecisionTreeClassifier_11_0.png" />
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span>
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="6.2_Ensemblemethods.html" class="btn btn-neutral float-right" title="17. 随机森林、ExtraTrees、Adaboost、GradientBoost分类效果" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="5.2_SVMclass_oneF.html" class="btn btn-neutral" title="&lt;no title&gt;" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, YNS.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'0.0.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="../_static/translations.js"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>
