@@ -97,11 +97,13 @@
 </ul>
 <p class="caption"><span class="caption-text">第二部分:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../2ndPart/index.html">1. 图像平面分类</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../2ndPart/index.html">图像模式识别</a></li>
 </ul>
 <p class="caption"><span class="caption-text">第三部分:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../3rdPart/index.html">地表覆盖制图</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../TestContent.html">目录测试</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../TestContent.html#第二层">第二层</a></li>
 </ul>
 
             
@@ -367,21 +369,21 @@ div.nboutput div.output_area.stderr {
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3"><div class="highlight"><pre>
-<span></span># -*- coding:UTF-8 -*- ＃
-# 导入模块
-import sys
-import time
-import random
-import numpy as np
-import matplotlib.pyplot as plt
-from mpl_toolkits.mplot3d import Axes3D
+<span></span><span class="c1"># -*- coding:UTF-8 -*- ＃</span>
+<span class="c1"># 导入模块</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">import</span> <span class="nn">random</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">mpl_toolkits.mplot3d</span> <span class="kn">import</span> <span class="n">Axes3D</span>
 
-from matplotlib.colors import ListedColormap
-from sklearn.svm import SVC
-from sklearn.preprocessing import StandardScaler
+<span class="kn">from</span> <span class="nn">matplotlib.colors</span> <span class="kn">import</span> <span class="n">ListedColormap</span>
+<span class="kn">from</span> <span class="nn">sklearn.svm</span> <span class="kn">import</span> <span class="n">SVC</span>
+<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">StandardScaler</span>
 
-sys.path.append(r&quot;C:\Users\zhang\Desktop\exeserise&quot;)
-import mymodule as MYD
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">r&quot;C:\Users\zhang\Desktop\exeserise&quot;</span><span class="p">)</span>
+<span class="kn">import</span> <span class="nn">mymodule</span> <span class="kn">as</span> <span class="nn">MYD</span>
 </pre></div>
 </div>
 </div>
@@ -391,20 +393,20 @@ import mymodule as MYD
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3"><div class="highlight"><pre>
-<span></span>n_samples=50
-XB,yb=MYD.makeblods(n_samples)
-XR,yr=MYD.makerandoms(n_samples)
-XC,yc=MYD.makecircles(n_samples)
-XH,yh=MYD.makeHelixs(n_samples)
-XAS = [XB, XR, XC,XH]
-YAS=[yb,yr,yc,yh]
-XBzoom=MYD.ZoomIn(XB,1); XRzoom=MYD.ZoomIn(XR,1); XCzoom=MYD.ZoomIn(XC,1); XHzoom=MYD.ZoomIn(XH,1);
-XASzoom=[XBzoom,XRzoom,XCzoom,XHzoom];
+<span></span><span class="n">n_samples</span><span class="o">=</span><span class="mi">50</span>
+<span class="n">XB</span><span class="p">,</span><span class="n">yb</span><span class="o">=</span><span class="n">MYD</span><span class="o">.</span><span class="n">makeblods</span><span class="p">(</span><span class="n">n_samples</span><span class="p">)</span>
+<span class="n">XR</span><span class="p">,</span><span class="n">yr</span><span class="o">=</span><span class="n">MYD</span><span class="o">.</span><span class="n">makerandoms</span><span class="p">(</span><span class="n">n_samples</span><span class="p">)</span>
+<span class="n">XC</span><span class="p">,</span><span class="n">yc</span><span class="o">=</span><span class="n">MYD</span><span class="o">.</span><span class="n">makecircles</span><span class="p">(</span><span class="n">n_samples</span><span class="p">)</span>
+<span class="n">XH</span><span class="p">,</span><span class="n">yh</span><span class="o">=</span><span class="n">MYD</span><span class="o">.</span><span class="n">makeHelixs</span><span class="p">(</span><span class="n">n_samples</span><span class="p">)</span>
+<span class="n">XAS</span> <span class="o">=</span> <span class="p">[</span><span class="n">XB</span><span class="p">,</span> <span class="n">XR</span><span class="p">,</span> <span class="n">XC</span><span class="p">,</span><span class="n">XH</span><span class="p">]</span>
+<span class="n">YAS</span><span class="o">=</span><span class="p">[</span><span class="n">yb</span><span class="p">,</span><span class="n">yr</span><span class="p">,</span><span class="n">yc</span><span class="p">,</span><span class="n">yh</span><span class="p">]</span>
+<span class="n">XBzoom</span><span class="o">=</span><span class="n">MYD</span><span class="o">.</span><span class="n">ZoomIn</span><span class="p">(</span><span class="n">XB</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span> <span class="n">XRzoom</span><span class="o">=</span><span class="n">MYD</span><span class="o">.</span><span class="n">ZoomIn</span><span class="p">(</span><span class="n">XR</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span> <span class="n">XCzoom</span><span class="o">=</span><span class="n">MYD</span><span class="o">.</span><span class="n">ZoomIn</span><span class="p">(</span><span class="n">XC</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span> <span class="n">XHzoom</span><span class="o">=</span><span class="n">MYD</span><span class="o">.</span><span class="n">ZoomIn</span><span class="p">(</span><span class="n">XH</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span>
+<span class="n">XASzoom</span><span class="o">=</span><span class="p">[</span><span class="n">XBzoom</span><span class="p">,</span><span class="n">XRzoom</span><span class="p">,</span><span class="n">XCzoom</span><span class="p">,</span><span class="n">XHzoom</span><span class="p">];</span>
 
-cor = ListedColormap([&#39;Blue&#39;, &#39;Orange&#39;])
-titlename=[&#39;two blob&#39;,&#39;two random&#39;,&#39;two circle&#39;,&#39;two heixl&#39;]
-cmap=[cor,cor,cor,cor]
-MYD.DrawManyChart(XAS,YAS,cmap,24,4,titlename,10,1,4)
+<span class="n">cor</span> <span class="o">=</span> <span class="n">ListedColormap</span><span class="p">([</span><span class="s1">&#39;Blue&#39;</span><span class="p">,</span> <span class="s1">&#39;Orange&#39;</span><span class="p">])</span>
+<span class="n">titlename</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;two blob&#39;</span><span class="p">,</span><span class="s1">&#39;two random&#39;</span><span class="p">,</span><span class="s1">&#39;two circle&#39;</span><span class="p">,</span><span class="s1">&#39;two heixl&#39;</span><span class="p">]</span>
+<span class="n">cmap</span><span class="o">=</span><span class="p">[</span><span class="n">cor</span><span class="p">,</span><span class="n">cor</span><span class="p">,</span><span class="n">cor</span><span class="p">,</span><span class="n">cor</span><span class="p">]</span>
+<span class="n">MYD</span><span class="o">.</span><span class="n">DrawManyChart</span><span class="p">(</span><span class="n">XAS</span><span class="p">,</span><span class="n">YAS</span><span class="p">,</span><span class="n">cmap</span><span class="p">,</span><span class="mi">24</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="n">titlename</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span>
 
 </pre></div>
 </div>
@@ -422,12 +424,12 @@ MYD.DrawManyChart(XAS,YAS,cmap,24,4,titlename,10,1,4)
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3"><div class="highlight"><pre>
-<span></span>Xzip,points=MYD.makeGrids()
-plt.figure()
-plt.scatter(points[:,0],points[:,1],s=0.009)
-plt.show()
+<span></span><span class="n">Xzip</span><span class="p">,</span><span class="n">points</span><span class="o">=</span><span class="n">MYD</span><span class="o">.</span><span class="n">makeGrids</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">points</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span><span class="n">points</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span><span class="n">s</span><span class="o">=</span><span class="mf">0.009</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 
-Xzipzoom,pointszoom=MYD.makeGrids1_1();
+<span class="n">Xzipzoom</span><span class="p">,</span><span class="n">pointszoom</span><span class="o">=</span><span class="n">MYD</span><span class="o">.</span><span class="n">makeGrids1_1</span><span class="p">();</span>
 </pre></div>
 </div>
 </div>
@@ -444,37 +446,37 @@ Xzipzoom,pointszoom=MYD.makeGrids1_1();
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3"><div class="highlight"><pre>
-<span></span>cor = ListedColormap([&#39;Blue&#39;, &#39;Orange&#39;])
+<span></span><span class="n">cor</span> <span class="o">=</span> <span class="n">ListedColormap</span><span class="p">([</span><span class="s1">&#39;Blue&#39;</span><span class="p">,</span> <span class="s1">&#39;Orange&#39;</span><span class="p">])</span>
 
-labellinear=[]; labelpoly=[]; labelrbf=[]; labelsigmoid=[]; labelprecomputed=[];
-lableSVM=[labellinear,labelpoly,labelrbf,labelsigmoid,labelprecomputed];
+<span class="n">labellinear</span><span class="o">=</span><span class="p">[];</span> <span class="n">labelpoly</span><span class="o">=</span><span class="p">[];</span> <span class="n">labelrbf</span><span class="o">=</span><span class="p">[];</span> <span class="n">labelsigmoid</span><span class="o">=</span><span class="p">[];</span> <span class="n">labelprecomputed</span><span class="o">=</span><span class="p">[];</span>
+<span class="n">lableSVM</span><span class="o">=</span><span class="p">[</span><span class="n">labellinear</span><span class="p">,</span><span class="n">labelpoly</span><span class="p">,</span><span class="n">labelrbf</span><span class="p">,</span><span class="n">labelsigmoid</span><span class="p">,</span><span class="n">labelprecomputed</span><span class="p">];</span>
 
-scorelinear=[]; scorepoly=[]; scorerbf=[]; scoresigmoid=[]; scoreprecomputed=[];
-scoreSVM=[scorelinear,scorepoly,scorerbf,scoresigmoid,scoreprecomputed];
+<span class="n">scorelinear</span><span class="o">=</span><span class="p">[];</span> <span class="n">scorepoly</span><span class="o">=</span><span class="p">[];</span> <span class="n">scorerbf</span><span class="o">=</span><span class="p">[];</span> <span class="n">scoresigmoid</span><span class="o">=</span><span class="p">[];</span> <span class="n">scoreprecomputed</span><span class="o">=</span><span class="p">[];</span>
+<span class="n">scoreSVM</span><span class="o">=</span><span class="p">[</span><span class="n">scorelinear</span><span class="p">,</span><span class="n">scorepoly</span><span class="p">,</span><span class="n">scorerbf</span><span class="p">,</span><span class="n">scoresigmoid</span><span class="p">,</span><span class="n">scoreprecomputed</span><span class="p">];</span>
 
-Kernelfunction=[&#39;linear&#39;, &#39;poly&#39;, &#39;rbf&#39;, &#39;sigmoid&#39;,&#39;precomputed&#39;];
+<span class="n">Kernelfunction</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;linear&#39;</span><span class="p">,</span> <span class="s1">&#39;poly&#39;</span><span class="p">,</span> <span class="s1">&#39;rbf&#39;</span><span class="p">,</span> <span class="s1">&#39;sigmoid&#39;</span><span class="p">,</span><span class="s1">&#39;precomputed&#39;</span><span class="p">];</span>
 
-for k in range(0,len(Kernelfunction)):
-    modelSVM=None
-    modelSVM=SVC(C=1.0, kernel=Kernelfunction[k])
-    for i in range(0,len(XAS)):
-        tempmodule=None
-        tempmodule=modelSVM.fit(XAS[i],YAS[i])
-        lableSVM[k].append(tempmodule.predict(points))
-        scoreSVM[k].append(tempmodule.score(XAS[i],YAS[i]));
+<span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">Kernelfunction</span><span class="p">)):</span>
+    <span class="n">modelSVM</span><span class="o">=</span><span class="bp">None</span>
+    <span class="n">modelSVM</span><span class="o">=</span><span class="n">SVC</span><span class="p">(</span><span class="n">C</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">kernel</span><span class="o">=</span><span class="n">Kernelfunction</span><span class="p">[</span><span class="n">k</span><span class="p">])</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">XAS</span><span class="p">)):</span>
+        <span class="n">tempmodule</span><span class="o">=</span><span class="bp">None</span>
+        <span class="n">tempmodule</span><span class="o">=</span><span class="n">modelSVM</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">XAS</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">YAS</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+        <span class="n">lableSVM</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">tempmodule</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">points</span><span class="p">))</span>
+        <span class="n">scoreSVM</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">tempmodule</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">XAS</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">YAS</span><span class="p">[</span><span class="n">i</span><span class="p">]));</span>
 
-print(scoreSVM); P=[points,points,points,points,points];
-linearname=[&#39;Blinear&#39;,&#39;Rlinear&#39;,&#39;Clinear&#39;,&#39;Hlinear&#39;];
-polyname=[&#39;Bpoly&#39;,&#39;Rpoly&#39;,&#39;Cpoly&#39;,&#39;Hpoly&#39;];
-rbfname=[&#39;Brbf&#39;,&#39;Rrbf&#39;,&#39;Crbf&#39;,&#39;Hrbf&#39;];
-sigmoidname=[&#39;Bsigmoid&#39;,&#39;Rsigmoid&#39;,&#39;Csigmoid&#39;,&#39;Hsigmoid&#39;];
-precomputedname=[&#39;Bprecomputed&#39;,&#39;Rprecomputed&#39;,&#39;Cprecomputed&#39;,&#39;Hprecomputed&#39;];
+<span class="k">print</span><span class="p">(</span><span class="n">scoreSVM</span><span class="p">);</span> <span class="n">P</span><span class="o">=</span><span class="p">[</span><span class="n">points</span><span class="p">,</span><span class="n">points</span><span class="p">,</span><span class="n">points</span><span class="p">,</span><span class="n">points</span><span class="p">,</span><span class="n">points</span><span class="p">];</span>
+<span class="n">linearname</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Blinear&#39;</span><span class="p">,</span><span class="s1">&#39;Rlinear&#39;</span><span class="p">,</span><span class="s1">&#39;Clinear&#39;</span><span class="p">,</span><span class="s1">&#39;Hlinear&#39;</span><span class="p">];</span>
+<span class="n">polyname</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Bpoly&#39;</span><span class="p">,</span><span class="s1">&#39;Rpoly&#39;</span><span class="p">,</span><span class="s1">&#39;Cpoly&#39;</span><span class="p">,</span><span class="s1">&#39;Hpoly&#39;</span><span class="p">];</span>
+<span class="n">rbfname</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Brbf&#39;</span><span class="p">,</span><span class="s1">&#39;Rrbf&#39;</span><span class="p">,</span><span class="s1">&#39;Crbf&#39;</span><span class="p">,</span><span class="s1">&#39;Hrbf&#39;</span><span class="p">];</span>
+<span class="n">sigmoidname</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Bsigmoid&#39;</span><span class="p">,</span><span class="s1">&#39;Rsigmoid&#39;</span><span class="p">,</span><span class="s1">&#39;Csigmoid&#39;</span><span class="p">,</span><span class="s1">&#39;Hsigmoid&#39;</span><span class="p">];</span>
+<span class="n">precomputedname</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Bprecomputed&#39;</span><span class="p">,</span><span class="s1">&#39;Rprecomputed&#39;</span><span class="p">,</span><span class="s1">&#39;Cprecomputed&#39;</span><span class="p">,</span><span class="s1">&#39;Hprecomputed&#39;</span><span class="p">];</span>
 
-SVMname=[linearname,polyname,rbfname,sigmoidname,precomputedname];
+<span class="n">SVMname</span><span class="o">=</span><span class="p">[</span><span class="n">linearname</span><span class="p">,</span><span class="n">polyname</span><span class="p">,</span><span class="n">rbfname</span><span class="p">,</span><span class="n">sigmoidname</span><span class="p">,</span><span class="n">precomputedname</span><span class="p">];</span>
 
-cormap=[cor,cor,cor,cor,cor];
-for F in range(0,len(Kernelfunction)):
-    MYD.DrawManyChart(P,lableSVM[F],cormap,24,3.5,SVMname[F],10,1,5);
+<span class="n">cormap</span><span class="o">=</span><span class="p">[</span><span class="n">cor</span><span class="p">,</span><span class="n">cor</span><span class="p">,</span><span class="n">cor</span><span class="p">,</span><span class="n">cor</span><span class="p">,</span><span class="n">cor</span><span class="p">];</span>
+<span class="k">for</span> <span class="n">F</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">Kernelfunction</span><span class="p">)):</span>
+    <span class="n">MYD</span><span class="o">.</span><span class="n">DrawManyChart</span><span class="p">(</span><span class="n">P</span><span class="p">,</span><span class="n">lableSVM</span><span class="p">[</span><span class="n">F</span><span class="p">],</span><span class="n">cormap</span><span class="p">,</span><span class="mi">24</span><span class="p">,</span><span class="mf">3.5</span><span class="p">,</span><span class="n">SVMname</span><span class="p">[</span><span class="n">F</span><span class="p">],</span><span class="mi">10</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>

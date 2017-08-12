@@ -31,12 +31,15 @@
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
-extensions = ['sphinx.ext.autodoc',
-    'sphinx.ext.doctest',
-    'sphinx.ext.intersphinx',
+
+extensions = [
+#'sphinx.ext.autodoc',
+#    'sphinx.ext.doctest',
+#    'sphinx.ext.intersphinx',
     'sphinx.ext.todo',
     'sphinx.ext.mathjax',
-    'sphinx.ext.viewcode',
+    'IPython.sphinxext.ipython_console_highlighting',
+    #'sphinx.ext.viewcode',
     'nbsphinx']
 
 # Add any paths that contain templates here, relative to this directory.
@@ -45,11 +48,9 @@ templates_path = ['_templates']
 # The suffix(es) of source filenames.
 # You can specify multiple suffix as a list of string:
 #
-source_suffix = ['.rst', '.md','.ipynb']
+source_suffix = ['.rst', '.ipynb']
 #source_suffix = '.rst'
-source_parsers = {
-   '.md': 'recommonmark.parser.CommonMarkParser',
-}
+
 # The master toctree document.
 master_doc = 'index'
 
@@ -77,8 +78,9 @@ language = 'zh_CN'
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
 # This patterns also effect to html_static_path and html_extra_path
-exclude_patterns = []
+exclude_patterns = ['_build', '**.ipynb_checkpoints']
 
+highlight_language = 'python3'
 # The name of the Pygments (syntax highlighting) style to use.
 pygments_style = 'sphinx'
 

@@ -128,11 +128,13 @@
 </ul>
 <p class="caption"><span class="caption-text">第二部分:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../2ndPart/index.html">1. 图像平面分类</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../2ndPart/index.html">图像模式识别</a></li>
 </ul>
 <p class="caption"><span class="caption-text">第三部分:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../3rdPart/index.html">地表覆盖制图</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../TestContent.html">目录测试</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../TestContent.html#第二层">第二层</a></li>
 </ul>
 
             
@@ -400,21 +402,21 @@ div.nboutput div.output_area.stderr {
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3"><div class="highlight"><pre>
-<span></span># -*- coding:UTF-8 -*- ＃
-# 导入模块
-import sys
-import time
-import random
-import numpy as np
-import matplotlib.pyplot as plt
-from mpl_toolkits.mplot3d import Axes3D
+<span></span><span class="c1"># -*- coding:UTF-8 -*- ＃</span>
+<span class="c1"># 导入模块</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">import</span> <span class="nn">random</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">mpl_toolkits.mplot3d</span> <span class="kn">import</span> <span class="n">Axes3D</span>
 
-from matplotlib.colors import ListedColormap
-from sklearn.neural_network import MLPClassifier
-from sklearn.preprocessing import StandardScaler
+<span class="kn">from</span> <span class="nn">matplotlib.colors</span> <span class="kn">import</span> <span class="n">ListedColormap</span>
+<span class="kn">from</span> <span class="nn">sklearn.neural_network</span> <span class="kn">import</span> <span class="n">MLPClassifier</span>
+<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">StandardScaler</span>
 
-sys.path.append(r&quot;C:\Users\zhang\Desktop\exeserise&quot;)
-import mymodule as MYD
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">r&quot;C:\Users\zhang\Desktop\exeserise&quot;</span><span class="p">)</span>
+<span class="kn">import</span> <span class="nn">mymodule</span> <span class="kn">as</span> <span class="nn">MYD</span>
 </pre></div>
 </div>
 </div>
@@ -427,22 +429,22 @@ import mymodule as MYD
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3"><div class="highlight"><pre>
-<span></span>n_samples=2000
-XB,yb=MYD.makeblods(n_samples)
-XR,yr=MYD.makerandoms(n_samples)
-XC,yc=MYD.makecircles(n_samples)
-XH,yh=MYD.makeHelixs(n_samples)
-XAS = [XB, XR, XC,XH]
-YAS=[yb,yr,yc,yh]
+<span></span><span class="n">n_samples</span><span class="o">=</span><span class="mi">2000</span>
+<span class="n">XB</span><span class="p">,</span><span class="n">yb</span><span class="o">=</span><span class="n">MYD</span><span class="o">.</span><span class="n">makeblods</span><span class="p">(</span><span class="n">n_samples</span><span class="p">)</span>
+<span class="n">XR</span><span class="p">,</span><span class="n">yr</span><span class="o">=</span><span class="n">MYD</span><span class="o">.</span><span class="n">makerandoms</span><span class="p">(</span><span class="n">n_samples</span><span class="p">)</span>
+<span class="n">XC</span><span class="p">,</span><span class="n">yc</span><span class="o">=</span><span class="n">MYD</span><span class="o">.</span><span class="n">makecircles</span><span class="p">(</span><span class="n">n_samples</span><span class="p">)</span>
+<span class="n">XH</span><span class="p">,</span><span class="n">yh</span><span class="o">=</span><span class="n">MYD</span><span class="o">.</span><span class="n">makeHelixs</span><span class="p">(</span><span class="n">n_samples</span><span class="p">)</span>
+<span class="n">XAS</span> <span class="o">=</span> <span class="p">[</span><span class="n">XB</span><span class="p">,</span> <span class="n">XR</span><span class="p">,</span> <span class="n">XC</span><span class="p">,</span><span class="n">XH</span><span class="p">]</span>
+<span class="n">YAS</span><span class="o">=</span><span class="p">[</span><span class="n">yb</span><span class="p">,</span><span class="n">yr</span><span class="p">,</span><span class="n">yc</span><span class="p">,</span><span class="n">yh</span><span class="p">]</span>
 
-std_nearalB = StandardScaler(); std_nearalR = StandardScaler(); std_nearalC = StandardScaler(); std_nearalH = StandardScaler();
-XBstd=std_nearalB.fit_transform(XB); XRstd=std_nearalR.fit_transform(XR);  XCstd=std_nearalC.fit_transform(XC);  XHstd=std_nearalH.fit_transform(XH);
-XASstd=[XBstd,XRstd,XCstd,XHstd];
+<span class="n">std_nearalB</span> <span class="o">=</span> <span class="n">StandardScaler</span><span class="p">();</span> <span class="n">std_nearalR</span> <span class="o">=</span> <span class="n">StandardScaler</span><span class="p">();</span> <span class="n">std_nearalC</span> <span class="o">=</span> <span class="n">StandardScaler</span><span class="p">();</span> <span class="n">std_nearalH</span> <span class="o">=</span> <span class="n">StandardScaler</span><span class="p">();</span>
+<span class="n">XBstd</span><span class="o">=</span><span class="n">std_nearalB</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">XB</span><span class="p">);</span> <span class="n">XRstd</span><span class="o">=</span><span class="n">std_nearalR</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">XR</span><span class="p">);</span>  <span class="n">XCstd</span><span class="o">=</span><span class="n">std_nearalC</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">XC</span><span class="p">);</span>  <span class="n">XHstd</span><span class="o">=</span><span class="n">std_nearalH</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">XH</span><span class="p">);</span>
+<span class="n">XASstd</span><span class="o">=</span><span class="p">[</span><span class="n">XBstd</span><span class="p">,</span><span class="n">XRstd</span><span class="p">,</span><span class="n">XCstd</span><span class="p">,</span><span class="n">XHstd</span><span class="p">];</span>
 
-cor = ListedColormap([&#39;Blue&#39;, &#39;Orange&#39;])
-titlename=[&#39;two blob&#39;,&#39;two random&#39;,&#39;two circle&#39;,&#39;two heixl&#39;]
-cmap=[cor,cor,cor,cor]
-MYD.DrawManyChart(XAS,YAS,cmap,24,4,titlename,10,1,4)
+<span class="n">cor</span> <span class="o">=</span> <span class="n">ListedColormap</span><span class="p">([</span><span class="s1">&#39;Blue&#39;</span><span class="p">,</span> <span class="s1">&#39;Orange&#39;</span><span class="p">])</span>
+<span class="n">titlename</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;two blob&#39;</span><span class="p">,</span><span class="s1">&#39;two random&#39;</span><span class="p">,</span><span class="s1">&#39;two circle&#39;</span><span class="p">,</span><span class="s1">&#39;two heixl&#39;</span><span class="p">]</span>
+<span class="n">cmap</span><span class="o">=</span><span class="p">[</span><span class="n">cor</span><span class="p">,</span><span class="n">cor</span><span class="p">,</span><span class="n">cor</span><span class="p">,</span><span class="n">cor</span><span class="p">]</span>
+<span class="n">MYD</span><span class="o">.</span><span class="n">DrawManyChart</span><span class="p">(</span><span class="n">XAS</span><span class="p">,</span><span class="n">YAS</span><span class="p">,</span><span class="n">cmap</span><span class="p">,</span><span class="mi">24</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="n">titlename</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span>
 
 </pre></div>
 </div>
@@ -463,19 +465,19 @@ MYD.DrawManyChart(XAS,YAS,cmap,24,4,titlename,10,1,4)
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3"><div class="highlight"><pre>
-<span></span>Xzip,points=MYD.makeGrids()
-plt.figure()
-plt.scatter(points[:,0],points[:,1],s=0.009)
-plt.show()
-# np.random.shuffle(points)
+<span></span><span class="n">Xzip</span><span class="p">,</span><span class="n">points</span><span class="o">=</span><span class="n">MYD</span><span class="o">.</span><span class="n">makeGrids</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">points</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span><span class="n">points</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span><span class="n">s</span><span class="o">=</span><span class="mf">0.009</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="c1"># np.random.shuffle(points)</span>
 
-pointsBMLP=std_nearalB.transform(Xzip); pointsRMLP=std_nearalR.transform(Xzip);
-pointsCMLP=std_nearalC.transform(Xzip); pointsHMLP=std_nearalH.transform(Xzip)
-pointsBML=[pointsBMLP,pointsRMLP,pointsCMLP,pointsHMLP];
+<span class="n">pointsBMLP</span><span class="o">=</span><span class="n">std_nearalB</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">Xzip</span><span class="p">);</span> <span class="n">pointsRMLP</span><span class="o">=</span><span class="n">std_nearalR</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">Xzip</span><span class="p">);</span>
+<span class="n">pointsCMLP</span><span class="o">=</span><span class="n">std_nearalC</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">Xzip</span><span class="p">);</span> <span class="n">pointsHMLP</span><span class="o">=</span><span class="n">std_nearalH</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">Xzip</span><span class="p">)</span>
+<span class="n">pointsBML</span><span class="o">=</span><span class="p">[</span><span class="n">pointsBMLP</span><span class="p">,</span><span class="n">pointsRMLP</span><span class="p">,</span><span class="n">pointsCMLP</span><span class="p">,</span><span class="n">pointsHMLP</span><span class="p">];</span>
 
-# Xzip01,points01=MYD.makeGrids()
-# points = np.array(points)
-points[:,0].shape
+<span class="c1"># Xzip01,points01=MYD.makeGrids()</span>
+<span class="c1"># points = np.array(points)</span>
+<span class="n">points</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span>
 </pre></div>
 </div>
 </div>
@@ -505,40 +507,40 @@ points[:,0].shape
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3"><div class="highlight"><pre>
-<span></span>cor = ListedColormap([&#39;Blue&#39;, &#39;Orange&#39;])
+<span></span><span class="n">cor</span> <span class="o">=</span> <span class="n">ListedColormap</span><span class="p">([</span><span class="s1">&#39;Blue&#39;</span><span class="p">,</span> <span class="s1">&#39;Orange&#39;</span><span class="p">])</span>
 
-labelidentity=[]; labelogistic=[]; labetanh=[]; labelrelu=[];
-lableMLP=[labelidentity,labelogistic,labetanh,labelrelu];
+<span class="n">labelidentity</span><span class="o">=</span><span class="p">[];</span> <span class="n">labelogistic</span><span class="o">=</span><span class="p">[];</span> <span class="n">labetanh</span><span class="o">=</span><span class="p">[];</span> <span class="n">labelrelu</span><span class="o">=</span><span class="p">[];</span>
+<span class="n">lableMLP</span><span class="o">=</span><span class="p">[</span><span class="n">labelidentity</span><span class="p">,</span><span class="n">labelogistic</span><span class="p">,</span><span class="n">labetanh</span><span class="p">,</span><span class="n">labelrelu</span><span class="p">];</span>
 
-scoreidentity=[]; scoreogistic=[]; scoretanh=[]; scorerelu=[];
-scoreMLP=[scoreidentity,scoreogistic,scoretanh,scorerelu];
+<span class="n">scoreidentity</span><span class="o">=</span><span class="p">[];</span> <span class="n">scoreogistic</span><span class="o">=</span><span class="p">[];</span> <span class="n">scoretanh</span><span class="o">=</span><span class="p">[];</span> <span class="n">scorerelu</span><span class="o">=</span><span class="p">[];</span>
+<span class="n">scoreMLP</span><span class="o">=</span><span class="p">[</span><span class="n">scoreidentity</span><span class="p">,</span><span class="n">scoreogistic</span><span class="p">,</span><span class="n">scoretanh</span><span class="p">,</span><span class="n">scorerelu</span><span class="p">];</span>
 
-activationF=[&#39;identity&#39;, &#39;logistic&#39;, &#39;tanh&#39;, &#39;relu&#39;];
-solvername=[&#39;lbfgs&#39;,&#39;sgd&#39;]
-leranrate=[&#39;constant&#39;, &#39;invscaling&#39;, &#39;adaptive&#39;];
+<span class="n">activationF</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;identity&#39;</span><span class="p">,</span> <span class="s1">&#39;logistic&#39;</span><span class="p">,</span> <span class="s1">&#39;tanh&#39;</span><span class="p">,</span> <span class="s1">&#39;relu&#39;</span><span class="p">];</span>
+<span class="n">solvername</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;lbfgs&#39;</span><span class="p">,</span><span class="s1">&#39;sgd&#39;</span><span class="p">]</span>
+<span class="n">leranrate</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;constant&#39;</span><span class="p">,</span> <span class="s1">&#39;invscaling&#39;</span><span class="p">,</span> <span class="s1">&#39;adaptive&#39;</span><span class="p">];</span>
 
 
-for k in range(0,len(activationF)):
-    modelMLP=None
-    modelMLP = MLPClassifier(hidden_layer_sizes=(10,10,10,10),activation=activationF[k],solver=solvername[0],
-                             alpha=0.001,batch_size=20,learning_rate=leranrate[1],learning_rate_init=0.3,
-                             random_state=4, max_iter=20000)
-    for i in range(0,len(XAS)):
-        tempmodule=None
-        tempmodule=modelMLP.fit(XASstd[i],YAS[i])
-        lableMLP[k].append(tempmodule.predict(pointsBML[i]))
-        scoreMLP[k].append(tempmodule.score(XASstd[i],YAS[i]));
+<span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">activationF</span><span class="p">)):</span>
+    <span class="n">modelMLP</span><span class="o">=</span><span class="bp">None</span>
+    <span class="n">modelMLP</span> <span class="o">=</span> <span class="n">MLPClassifier</span><span class="p">(</span><span class="n">hidden_layer_sizes</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">),</span><span class="n">activation</span><span class="o">=</span><span class="n">activationF</span><span class="p">[</span><span class="n">k</span><span class="p">],</span><span class="n">solver</span><span class="o">=</span><span class="n">solvername</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                             <span class="n">alpha</span><span class="o">=</span><span class="mf">0.001</span><span class="p">,</span><span class="n">batch_size</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span><span class="n">learning_rate</span><span class="o">=</span><span class="n">leranrate</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">learning_rate_init</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span>
+                             <span class="n">random_state</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">20000</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">XAS</span><span class="p">)):</span>
+        <span class="n">tempmodule</span><span class="o">=</span><span class="bp">None</span>
+        <span class="n">tempmodule</span><span class="o">=</span><span class="n">modelMLP</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">XASstd</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">YAS</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+        <span class="n">lableMLP</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">tempmodule</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">pointsBML</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span>
+        <span class="n">scoreMLP</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">tempmodule</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">XASstd</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">YAS</span><span class="p">[</span><span class="n">i</span><span class="p">]));</span>
 
-print(scoreMLP); P=[points,points,points,points];
-identityname=[&#39;Bidentity&#39;,&#39;Ridentity&#39;,&#39;Cidentity&#39;,&#39;Hidentity&#39;];
-logisticyname=[&#39;Blogistic&#39;,&#39;Rlogistic&#39;,&#39;Clogistic&#39;,&#39;Hlogistic&#39;];
-tanhname=[&#39;Btanh&#39;,&#39;Rtanh&#39;,&#39;Ctanh&#39;,&#39;Htanh&#39;];
-reluname=[&#39;Brelu&#39;,&#39;Rrelu&#39;,&#39;Crelu&#39;,&#39;Hrelu&#39;];
-MPLname=[identityname,logisticyname,tanhname,reluname];
+<span class="k">print</span><span class="p">(</span><span class="n">scoreMLP</span><span class="p">);</span> <span class="n">P</span><span class="o">=</span><span class="p">[</span><span class="n">points</span><span class="p">,</span><span class="n">points</span><span class="p">,</span><span class="n">points</span><span class="p">,</span><span class="n">points</span><span class="p">];</span>
+<span class="n">identityname</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Bidentity&#39;</span><span class="p">,</span><span class="s1">&#39;Ridentity&#39;</span><span class="p">,</span><span class="s1">&#39;Cidentity&#39;</span><span class="p">,</span><span class="s1">&#39;Hidentity&#39;</span><span class="p">];</span>
+<span class="n">logisticyname</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Blogistic&#39;</span><span class="p">,</span><span class="s1">&#39;Rlogistic&#39;</span><span class="p">,</span><span class="s1">&#39;Clogistic&#39;</span><span class="p">,</span><span class="s1">&#39;Hlogistic&#39;</span><span class="p">];</span>
+<span class="n">tanhname</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Btanh&#39;</span><span class="p">,</span><span class="s1">&#39;Rtanh&#39;</span><span class="p">,</span><span class="s1">&#39;Ctanh&#39;</span><span class="p">,</span><span class="s1">&#39;Htanh&#39;</span><span class="p">];</span>
+<span class="n">reluname</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Brelu&#39;</span><span class="p">,</span><span class="s1">&#39;Rrelu&#39;</span><span class="p">,</span><span class="s1">&#39;Crelu&#39;</span><span class="p">,</span><span class="s1">&#39;Hrelu&#39;</span><span class="p">];</span>
+<span class="n">MPLname</span><span class="o">=</span><span class="p">[</span><span class="n">identityname</span><span class="p">,</span><span class="n">logisticyname</span><span class="p">,</span><span class="n">tanhname</span><span class="p">,</span><span class="n">reluname</span><span class="p">];</span>
 
-cormap=[cor,cor,cor,cor];
-for F in range(0,len(activationF)):
-    MYD.DrawManyChart(P,lableMLP[F],cormap,18,3.5,MPLname[F],10,1,4);
+<span class="n">cormap</span><span class="o">=</span><span class="p">[</span><span class="n">cor</span><span class="p">,</span><span class="n">cor</span><span class="p">,</span><span class="n">cor</span><span class="p">,</span><span class="n">cor</span><span class="p">];</span>
+<span class="k">for</span> <span class="n">F</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">activationF</span><span class="p">)):</span>
+    <span class="n">MYD</span><span class="o">.</span><span class="n">DrawManyChart</span><span class="p">(</span><span class="n">P</span><span class="p">,</span><span class="n">lableMLP</span><span class="p">[</span><span class="n">F</span><span class="p">],</span><span class="n">cormap</span><span class="p">,</span><span class="mi">18</span><span class="p">,</span><span class="mf">3.5</span><span class="p">,</span><span class="n">MPLname</span><span class="p">[</span><span class="n">F</span><span class="p">],</span><span class="mi">10</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="p">);</span>
 
 </pre></div>
 </div>

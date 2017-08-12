@@ -97,11 +97,13 @@
 </ul>
 <p class="caption"><span class="caption-text">第二部分:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../2ndPart/index.html">1. 图像平面分类</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../2ndPart/index.html">图像模式识别</a></li>
 </ul>
 <p class="caption"><span class="caption-text">第三部分:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../3rdPart/index.html">地表覆盖制图</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../TestContent.html">目录测试</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../TestContent.html#第二层">第二层</a></li>
 </ul>
 
             
@@ -367,21 +369,21 @@ div.nboutput div.output_area.stderr {
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3"><div class="highlight"><pre>
-<span></span>import sklearn
-from PIL import Image
-import matplotlib.pyplot as plt
-from sklearn.cluster import KMeans
-from sklearn import metrics
-import numpy as np
-import pylab as pl
-from sklearn.feature_extraction import image
-from sklearn.cluster import spectral_clustering
-import osgeo.gdal as gdal
-import skimage.io as SKimg
-import scipy.io as sio
+<span></span><span class="kn">import</span> <span class="nn">sklearn</span>
+<span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">sklearn.cluster</span> <span class="kn">import</span> <span class="n">KMeans</span>
+<span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">metrics</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pylab</span> <span class="kn">as</span> <span class="nn">pl</span>
+<span class="kn">from</span> <span class="nn">sklearn.feature_extraction</span> <span class="kn">import</span> <span class="n">image</span>
+<span class="kn">from</span> <span class="nn">sklearn.cluster</span> <span class="kn">import</span> <span class="n">spectral_clustering</span>
+<span class="kn">import</span> <span class="nn">osgeo.gdal</span> <span class="kn">as</span> <span class="nn">gdal</span>
+<span class="kn">import</span> <span class="nn">skimage.io</span> <span class="kn">as</span> <span class="nn">SKimg</span>
+<span class="kn">import</span> <span class="nn">scipy.io</span> <span class="kn">as</span> <span class="nn">sio</span>
 
-import sys
-import ALLNeighborhoodrelationship as ABL
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">ALLNeighborhoodrelationship</span> <span class="kn">as</span> <span class="nn">ABL</span>
 </pre></div>
 </div>
 </div>
@@ -391,11 +393,11 @@ import ALLNeighborhoodrelationship as ABL
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3"><div class="highlight"><pre>
-<span></span>Tmul =SKimg.imread(&quot;F:/pythontestdata/MyTiff/tianhui1200ms.tif&quot;)
-SKimg.imshow(Tmul)
-SKimg.show()
-Tmul.shape
-Rows=Tmul.shape[0]; Cols=Tmul.shape[1];
+<span></span><span class="n">Tmul</span> <span class="o">=</span><span class="n">SKimg</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="s2">&quot;F:/pythontestdata/MyTiff/tianhui1200ms.tif&quot;</span><span class="p">)</span>
+<span class="n">SKimg</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">Tmul</span><span class="p">)</span>
+<span class="n">SKimg</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="n">Tmul</span><span class="o">.</span><span class="n">shape</span>
+<span class="n">Rows</span><span class="o">=</span><span class="n">Tmul</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span> <span class="n">Cols</span><span class="o">=</span><span class="n">Tmul</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span>
 </pre></div>
 </div>
 </div>
@@ -412,20 +414,20 @@ Rows=Tmul.shape[0]; Cols=Tmul.shape[1];
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3"><div class="highlight"><pre>
-<span></span>#matlab文件名  groudTrue
-matfn=&#39;gt_tianhui1200.mat&#39;;
-data=sio.loadmat(matfn);
-mk = data[&#39;gt&#39;]
-print(mk)
+<span></span><span class="c1">#matlab文件名  groudTrue</span>
+<span class="n">matfn</span><span class="o">=</span><span class="s1">&#39;gt_tianhui1200.mat&#39;</span><span class="p">;</span>
+<span class="n">data</span><span class="o">=</span><span class="n">sio</span><span class="o">.</span><span class="n">loadmat</span><span class="p">(</span><span class="n">matfn</span><span class="p">);</span>
+<span class="n">mk</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;gt&#39;</span><span class="p">]</span>
+<span class="k">print</span><span class="p">(</span><span class="n">mk</span><span class="p">)</span>
 
-plt.figure(figsize=(6,6))
-im = Image.fromarray(mk);
-plt.imshow(im,cmap=plt.cm.get_cmap(&#39;cubehelix_r&#39;,7));
-cbar=plt.colorbar();
-cbar.set_ticks(np.linspace(0,7,8))
-cbar.set_ticklabels((&#39;  &#39;,&#39;water&#39;,&#39;grass&#39;,&#39;bulding&#39;,&#39;road&#39;,&#39;luodi&#39;,&#39;background&#39;))
-plt.clim(-0.5,6.5)
-plt.show();
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+<span class="n">im</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">fromarray</span><span class="p">(</span><span class="n">mk</span><span class="p">);</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">im</span><span class="p">,</span><span class="n">cmap</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">get_cmap</span><span class="p">(</span><span class="s1">&#39;cubehelix_r&#39;</span><span class="p">,</span><span class="mi">7</span><span class="p">));</span>
+<span class="n">cbar</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">();</span>
+<span class="n">cbar</span><span class="o">.</span><span class="n">set_ticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">))</span>
+<span class="n">cbar</span><span class="o">.</span><span class="n">set_ticklabels</span><span class="p">((</span><span class="s1">&#39;  &#39;</span><span class="p">,</span><span class="s1">&#39;water&#39;</span><span class="p">,</span><span class="s1">&#39;grass&#39;</span><span class="p">,</span><span class="s1">&#39;bulding&#39;</span><span class="p">,</span><span class="s1">&#39;road&#39;</span><span class="p">,</span><span class="s1">&#39;luodi&#39;</span><span class="p">,</span><span class="s1">&#39;background&#39;</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">clim</span><span class="p">(</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span><span class="mf">6.5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">();</span>
 </pre></div>
 </div>
 </div>
@@ -456,16 +458,16 @@ plt.show();
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3"><div class="highlight"><pre>
-<span></span>NewMul=ABL.MUltibandFour().flatten();
+<span></span><span class="n">NewMul</span><span class="o">=</span><span class="n">ABL</span><span class="o">.</span><span class="n">MUltibandFour</span><span class="p">()</span><span class="o">.</span><span class="n">flatten</span><span class="p">();</span>
 
-ALLMU=[];
-for LI in range(0,len(NewMul)):
-    T=np.array(NewMul[LI]);
-    ALLMU.append(T);
+<span class="n">ALLMU</span><span class="o">=</span><span class="p">[];</span>
+<span class="k">for</span> <span class="n">LI</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">NewMul</span><span class="p">)):</span>
+    <span class="n">T</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">NewMul</span><span class="p">[</span><span class="n">LI</span><span class="p">]);</span>
+    <span class="n">ALLMU</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">T</span><span class="p">);</span>
 
-ALLMU=np.array(ALLMU);
+<span class="n">ALLMU</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">ALLMU</span><span class="p">);</span>
 
-print(ALLMU);
+<span class="k">print</span><span class="p">(</span><span class="n">ALLMU</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
@@ -489,14 +491,14 @@ print(ALLMU);
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3"><div class="highlight"><pre>
-<span></span>ALLlabel=[];   ALLclusCenters=[];
-for i in range(4,9):
-    KMS = KMeans(n_clusters=i, random_state=0).fit(ALLMU);
-    Labels=KMS.labels_;  clus_centers=KMS.cluster_centers_;  ALLclusCenters.append(clus_centers);
-    Score=KMS.score(ALLMU);
-    ALLlabel.append(Labels);
+<span></span><span class="n">ALLlabel</span><span class="o">=</span><span class="p">[];</span>   <span class="n">ALLclusCenters</span><span class="o">=</span><span class="p">[];</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">9</span><span class="p">):</span>
+    <span class="n">KMS</span> <span class="o">=</span> <span class="n">KMeans</span><span class="p">(</span><span class="n">n_clusters</span><span class="o">=</span><span class="n">i</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">ALLMU</span><span class="p">);</span>
+    <span class="n">Labels</span><span class="o">=</span><span class="n">KMS</span><span class="o">.</span><span class="n">labels_</span><span class="p">;</span>  <span class="n">clus_centers</span><span class="o">=</span><span class="n">KMS</span><span class="o">.</span><span class="n">cluster_centers_</span><span class="p">;</span>  <span class="n">ALLclusCenters</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">clus_centers</span><span class="p">);</span>
+    <span class="n">Score</span><span class="o">=</span><span class="n">KMS</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">ALLMU</span><span class="p">);</span>
+    <span class="n">ALLlabel</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Labels</span><span class="p">);</span>
 
-print(ALLclusCenters[3]); print(len(ALLlabel[3]));
+<span class="k">print</span><span class="p">(</span><span class="n">ALLclusCenters</span><span class="p">[</span><span class="mi">3</span><span class="p">]);</span> <span class="k">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">ALLlabel</span><span class="p">[</span><span class="mi">3</span><span class="p">]));</span>
 </pre></div>
 </div>
 </div>
@@ -520,15 +522,15 @@ print(ALLclusCenters[3]); print(len(ALLlabel[3]));
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3"><div class="highlight"><pre>
-<span></span>import math
-ALLfinaLabel=[];
-for j in range(0,len(ALLlabel)):
-    finaLabel=mk-2;
-    tempLabel=ALLlabel[j];
-    for HL in range(0,len(tempLabel)):
-        h=math.floor(HL/1200); l=HL%1200;
-        finaLabel[h][l]=tempLabel[HL];
-    ALLfinaLabel.append(finaLabel);
+<span></span><span class="kn">import</span> <span class="nn">math</span>
+<span class="n">ALLfinaLabel</span><span class="o">=</span><span class="p">[];</span>
+<span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">ALLlabel</span><span class="p">)):</span>
+    <span class="n">finaLabel</span><span class="o">=</span><span class="n">mk</span><span class="o">-</span><span class="mi">2</span><span class="p">;</span>
+    <span class="n">tempLabel</span><span class="o">=</span><span class="n">ALLlabel</span><span class="p">[</span><span class="n">j</span><span class="p">];</span>
+    <span class="k">for</span> <span class="n">HL</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">tempLabel</span><span class="p">)):</span>
+        <span class="n">h</span><span class="o">=</span><span class="n">math</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="n">HL</span><span class="o">/</span><span class="mi">1200</span><span class="p">);</span> <span class="n">l</span><span class="o">=</span><span class="n">HL</span><span class="o">%</span><span class="k">1200</span>;
+        <span class="n">finaLabel</span><span class="p">[</span><span class="n">h</span><span class="p">][</span><span class="n">l</span><span class="p">]</span><span class="o">=</span><span class="n">tempLabel</span><span class="p">[</span><span class="n">HL</span><span class="p">];</span>
+    <span class="n">ALLfinaLabel</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">finaLabel</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
@@ -538,18 +540,18 @@ for j in range(0,len(ALLlabel)):
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3"><div class="highlight"><pre>
-<span></span># 成图展示
-plt.figure(figsize=(30,5));  titleName=[&#39;Mul-Kmeans-4&#39;,&#39;Mul-Kmeans-5&#39;,&#39;Mul-Kmeans-6&#39;,&#39;Mul-Kmeans-7&#39;,&#39;Mul-Kmeans-8&#39;];
-for index in range(0,len(ALLfinaLabel)):
-    plt.subplot(1,5,index+1);
-    mylabel=ALLfinaLabel[index];
-    im2 = Image.fromarray(mylabel);
-    plt.imshow(im2,cmap=plt.cm.get_cmap(&#39;cubehelix_r&#39;,7));
-    cbar=plt.colorbar();  cbar.set_ticks(np.linspace(0,7,8));
-    plt.title(titleName[index]);
-    #cbar.set_ticklabels((&#39;  &#39;,&#39;water&#39;,&#39;grass&#39;,&#39;bulding&#39;,&#39;road&#39;,&#39;luodi&#39;,&#39;background&#39;));
-    #plt.clim(-0.5,6.5)
-plt.show();
+<span></span><span class="c1"># 成图展示</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">30</span><span class="p">,</span><span class="mi">5</span><span class="p">));</span>  <span class="n">titleName</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Mul-Kmeans-4&#39;</span><span class="p">,</span><span class="s1">&#39;Mul-Kmeans-5&#39;</span><span class="p">,</span><span class="s1">&#39;Mul-Kmeans-6&#39;</span><span class="p">,</span><span class="s1">&#39;Mul-Kmeans-7&#39;</span><span class="p">,</span><span class="s1">&#39;Mul-Kmeans-8&#39;</span><span class="p">];</span>
+<span class="k">for</span> <span class="n">index</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">ALLfinaLabel</span><span class="p">)):</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="n">index</span><span class="o">+</span><span class="mi">1</span><span class="p">);</span>
+    <span class="n">mylabel</span><span class="o">=</span><span class="n">ALLfinaLabel</span><span class="p">[</span><span class="n">index</span><span class="p">];</span>
+    <span class="n">im2</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">fromarray</span><span class="p">(</span><span class="n">mylabel</span><span class="p">);</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">im2</span><span class="p">,</span><span class="n">cmap</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">get_cmap</span><span class="p">(</span><span class="s1">&#39;cubehelix_r&#39;</span><span class="p">,</span><span class="mi">7</span><span class="p">));</span>
+    <span class="n">cbar</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">();</span>  <span class="n">cbar</span><span class="o">.</span><span class="n">set_ticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">));</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">titleName</span><span class="p">[</span><span class="n">index</span><span class="p">]);</span>
+    <span class="c1">#cbar.set_ticklabels((&#39;  &#39;,&#39;water&#39;,&#39;grass&#39;,&#39;bulding&#39;,&#39;road&#39;,&#39;luodi&#39;,&#39;background&#39;));</span>
+    <span class="c1">#plt.clim(-0.5,6.5)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">();</span>
 </pre></div>
 </div>
 </div>

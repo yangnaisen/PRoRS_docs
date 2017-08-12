@@ -97,11 +97,13 @@
 </ul>
 <p class="caption"><span class="caption-text">第二部分:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../2ndPart/index.html">1. 图像平面分类</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../2ndPart/index.html">图像模式识别</a></li>
 </ul>
 <p class="caption"><span class="caption-text">第三部分:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../3rdPart/index.html">地表覆盖制图</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../TestContent.html">目录测试</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../TestContent.html#第二层">第二层</a></li>
 </ul>
 
             
@@ -367,22 +369,22 @@ div.nboutput div.output_area.stderr {
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3"><div class="highlight"><pre>
-<span></span>import sklearn
-from PIL import Image
-import matplotlib.pyplot as plt
-from sklearn.cluster import KMeans
-from sklearn import metrics
-import numpy as np
-import pylab as pl
-from sklearn.feature_extraction import image
-from sklearn.cluster import spectral_clustering
-import osgeo.gdal as gdal
-import skimage.io as SKimg
-import scipy.io as sio
-#from color import Colors
+<span></span><span class="kn">import</span> <span class="nn">sklearn</span>
+<span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">sklearn.cluster</span> <span class="kn">import</span> <span class="n">KMeans</span>
+<span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">metrics</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pylab</span> <span class="kn">as</span> <span class="nn">pl</span>
+<span class="kn">from</span> <span class="nn">sklearn.feature_extraction</span> <span class="kn">import</span> <span class="n">image</span>
+<span class="kn">from</span> <span class="nn">sklearn.cluster</span> <span class="kn">import</span> <span class="n">spectral_clustering</span>
+<span class="kn">import</span> <span class="nn">osgeo.gdal</span> <span class="kn">as</span> <span class="nn">gdal</span>
+<span class="kn">import</span> <span class="nn">skimage.io</span> <span class="kn">as</span> <span class="nn">SKimg</span>
+<span class="kn">import</span> <span class="nn">scipy.io</span> <span class="kn">as</span> <span class="nn">sio</span>
+<span class="c1">#from color import Colors</span>
 
-import sys
-import ALLNeighborhoodrelationship as ABL
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">ALLNeighborhoodrelationship</span> <span class="kn">as</span> <span class="nn">ABL</span>
 </pre></div>
 </div>
 </div>
@@ -392,14 +394,14 @@ import ALLNeighborhoodrelationship as ABL
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3"><div class="highlight"><pre>
-<span></span>#读取tiff影像
-Tpan =SKimg.imread(&quot;F:/pythontestdata/MyTiff/tianhui1200pan.tif&quot;)
-SKimg.imshow(Tpan)
-SKimg.show()
-Tpan.shape
+<span></span><span class="c1">#读取tiff影像</span>
+<span class="n">Tpan</span> <span class="o">=</span><span class="n">SKimg</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="s2">&quot;F:/pythontestdata/MyTiff/tianhui1200pan.tif&quot;</span><span class="p">)</span>
+<span class="n">SKimg</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">Tpan</span><span class="p">)</span>
+<span class="n">SKimg</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="n">Tpan</span><span class="o">.</span><span class="n">shape</span>
 
-Rows=Tpan.shape[0]; Cols=Tpan.shape[1];
-NewTpan=np.array(Tpan.reshape(Rows*Cols,1));
+<span class="n">Rows</span><span class="o">=</span><span class="n">Tpan</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span> <span class="n">Cols</span><span class="o">=</span><span class="n">Tpan</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span>
+<span class="n">NewTpan</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">Tpan</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">Rows</span><span class="o">*</span><span class="n">Cols</span><span class="p">,</span><span class="mi">1</span><span class="p">));</span>
 </pre></div>
 </div>
 </div>
@@ -416,20 +418,20 @@ NewTpan=np.array(Tpan.reshape(Rows*Cols,1));
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3"><div class="highlight"><pre>
-<span></span>#matlab文件名
-matfn=&#39;gt_tianhui1200.mat&#39;;
-data=sio.loadmat(matfn);
-mk = data[&#39;gt&#39;]
-print(mk)
+<span></span><span class="c1">#matlab文件名</span>
+<span class="n">matfn</span><span class="o">=</span><span class="s1">&#39;gt_tianhui1200.mat&#39;</span><span class="p">;</span>
+<span class="n">data</span><span class="o">=</span><span class="n">sio</span><span class="o">.</span><span class="n">loadmat</span><span class="p">(</span><span class="n">matfn</span><span class="p">);</span>
+<span class="n">mk</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;gt&#39;</span><span class="p">]</span>
+<span class="k">print</span><span class="p">(</span><span class="n">mk</span><span class="p">)</span>
 
-plt.figure(figsize=(6,6))
-im = Image.fromarray(mk);
-plt.imshow(im,cmap=plt.cm.get_cmap(&#39;cubehelix_r&#39;,7));
-cbar=plt.colorbar()
-cbar.set_ticks(np.linspace(0,7,8));
-cbar.set_ticklabels((&#39; &#39;,&#39;water&#39;,&#39;grass&#39;,&#39;bulding&#39;,&#39;road&#39;,&#39;luodi&#39;,&#39;background&#39;))
-plt.clim(-0.5,6.5);
-plt.show();
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+<span class="n">im</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">fromarray</span><span class="p">(</span><span class="n">mk</span><span class="p">);</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">im</span><span class="p">,</span><span class="n">cmap</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">get_cmap</span><span class="p">(</span><span class="s1">&#39;cubehelix_r&#39;</span><span class="p">,</span><span class="mi">7</span><span class="p">));</span>
+<span class="n">cbar</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">()</span>
+<span class="n">cbar</span><span class="o">.</span><span class="n">set_ticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">));</span>
+<span class="n">cbar</span><span class="o">.</span><span class="n">set_ticklabels</span><span class="p">((</span><span class="s1">&#39; &#39;</span><span class="p">,</span><span class="s1">&#39;water&#39;</span><span class="p">,</span><span class="s1">&#39;grass&#39;</span><span class="p">,</span><span class="s1">&#39;bulding&#39;</span><span class="p">,</span><span class="s1">&#39;road&#39;</span><span class="p">,</span><span class="s1">&#39;luodi&#39;</span><span class="p">,</span><span class="s1">&#39;background&#39;</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">clim</span><span class="p">(</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span><span class="mf">6.5</span><span class="p">);</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">();</span>
 </pre></div>
 </div>
 </div>
@@ -460,12 +462,12 @@ plt.show();
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3"><div class="highlight"><pre>
-<span></span>ALLlabel=[];   ALLclusCenters=[];
-for i in range(4,9):
-    KMS = KMeans(n_clusters=i, random_state=0).fit(NewTpan);
-    Labels=KMS.labels_; clus_centers=KMS.cluster_centers_;  ALLclusCenters.append(clus_centers);
-    Score=KMS.score(NewTpan);
-    ALLlabel.append(Labels);
+<span></span><span class="n">ALLlabel</span><span class="o">=</span><span class="p">[];</span>   <span class="n">ALLclusCenters</span><span class="o">=</span><span class="p">[];</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">9</span><span class="p">):</span>
+    <span class="n">KMS</span> <span class="o">=</span> <span class="n">KMeans</span><span class="p">(</span><span class="n">n_clusters</span><span class="o">=</span><span class="n">i</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">NewTpan</span><span class="p">);</span>
+    <span class="n">Labels</span><span class="o">=</span><span class="n">KMS</span><span class="o">.</span><span class="n">labels_</span><span class="p">;</span> <span class="n">clus_centers</span><span class="o">=</span><span class="n">KMS</span><span class="o">.</span><span class="n">cluster_centers_</span><span class="p">;</span>  <span class="n">ALLclusCenters</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">clus_centers</span><span class="p">);</span>
+    <span class="n">Score</span><span class="o">=</span><span class="n">KMS</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">NewTpan</span><span class="p">);</span>
+    <span class="n">ALLlabel</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Labels</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
@@ -475,15 +477,15 @@ for i in range(4,9):
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3"><div class="highlight"><pre>
-<span></span>import math
-ALLfinaLabel=[];
-for j in range(0,len(ALLlabel)):
-    finaLabel=mk-2;
-    tempLabel=ALLlabel[j];
-    for HL in range(0,len(tempLabel)):
-        h=math.floor(HL/1200); l=HL%1200;
-        finaLabel[h][l]=tempLabel[HL];
-    ALLfinaLabel.append(finaLabel);
+<span></span><span class="kn">import</span> <span class="nn">math</span>
+<span class="n">ALLfinaLabel</span><span class="o">=</span><span class="p">[];</span>
+<span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">ALLlabel</span><span class="p">)):</span>
+    <span class="n">finaLabel</span><span class="o">=</span><span class="n">mk</span><span class="o">-</span><span class="mi">2</span><span class="p">;</span>
+    <span class="n">tempLabel</span><span class="o">=</span><span class="n">ALLlabel</span><span class="p">[</span><span class="n">j</span><span class="p">];</span>
+    <span class="k">for</span> <span class="n">HL</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">tempLabel</span><span class="p">)):</span>
+        <span class="n">h</span><span class="o">=</span><span class="n">math</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="n">HL</span><span class="o">/</span><span class="mi">1200</span><span class="p">);</span> <span class="n">l</span><span class="o">=</span><span class="n">HL</span><span class="o">%</span><span class="k">1200</span>;
+        <span class="n">finaLabel</span><span class="p">[</span><span class="n">h</span><span class="p">][</span><span class="n">l</span><span class="p">]</span><span class="o">=</span><span class="n">tempLabel</span><span class="p">[</span><span class="n">HL</span><span class="p">];</span>
+    <span class="n">ALLfinaLabel</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">finaLabel</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
@@ -493,18 +495,18 @@ for j in range(0,len(ALLlabel)):
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3"><div class="highlight"><pre>
-<span></span># 成图展示
-plt.figure(figsize=(30,5));  titleName=[&#39;Kmeans-4&#39;,&#39;Kmeans-5&#39;,&#39;Kmeans-6&#39;,&#39;Kmeans-7&#39;,&#39;Kmeans-8&#39;];
-for index in range(0,len(ALLfinaLabel)):
-    plt.subplot(1,5,index+1);
-    mylabel=ALLfinaLabel[index];
-    im2 = Image.fromarray(mylabel);
-    plt.imshow(im2,cmap=plt.cm.get_cmap(&#39;cubehelix_r&#39;,7));
-    cbar=plt.colorbar();  cbar.set_ticks(np.linspace(0,7,8));
-    plt.title(titleName[index]);
-    #cbar.set_ticklabels((&#39;  &#39;,&#39;water&#39;,&#39;grass&#39;,&#39;bulding&#39;,&#39;road&#39;,&#39;luodi&#39;,&#39;background&#39;));
-    #plt.clim(-0.5,6.5)
-plt.show();
+<span></span><span class="c1"># 成图展示</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">30</span><span class="p">,</span><span class="mi">5</span><span class="p">));</span>  <span class="n">titleName</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Kmeans-4&#39;</span><span class="p">,</span><span class="s1">&#39;Kmeans-5&#39;</span><span class="p">,</span><span class="s1">&#39;Kmeans-6&#39;</span><span class="p">,</span><span class="s1">&#39;Kmeans-7&#39;</span><span class="p">,</span><span class="s1">&#39;Kmeans-8&#39;</span><span class="p">];</span>
+<span class="k">for</span> <span class="n">index</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">ALLfinaLabel</span><span class="p">)):</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="n">index</span><span class="o">+</span><span class="mi">1</span><span class="p">);</span>
+    <span class="n">mylabel</span><span class="o">=</span><span class="n">ALLfinaLabel</span><span class="p">[</span><span class="n">index</span><span class="p">];</span>
+    <span class="n">im2</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">fromarray</span><span class="p">(</span><span class="n">mylabel</span><span class="p">);</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">im2</span><span class="p">,</span><span class="n">cmap</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">get_cmap</span><span class="p">(</span><span class="s1">&#39;cubehelix_r&#39;</span><span class="p">,</span><span class="mi">7</span><span class="p">));</span>
+    <span class="n">cbar</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">();</span>  <span class="n">cbar</span><span class="o">.</span><span class="n">set_ticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">));</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">titleName</span><span class="p">[</span><span class="n">index</span><span class="p">]);</span>
+    <span class="c1">#cbar.set_ticklabels((&#39;  &#39;,&#39;water&#39;,&#39;grass&#39;,&#39;bulding&#39;,&#39;road&#39;,&#39;luodi&#39;,&#39;background&#39;));</span>
+    <span class="c1">#plt.clim(-0.5,6.5)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">();</span>
 </pre></div>
 </div>
 </div>
@@ -521,24 +523,24 @@ plt.show();
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3"><div class="highlight"><pre>
-<span></span>allValue=[];  Kmeans_4=ALLfinaLabel[0];
-for h in range(4):
-    tempLabel=(Kmeans_4==h)
-    tempMask=tempLabel*Tpan;
-    finalTemp = tempMask[tempMask&gt;0];
-    allValue.append(finalTemp);
+<span></span><span class="n">allValue</span><span class="o">=</span><span class="p">[];</span>  <span class="n">Kmeans_4</span><span class="o">=</span><span class="n">ALLfinaLabel</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+<span class="k">for</span> <span class="n">h</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">):</span>
+    <span class="n">tempLabel</span><span class="o">=</span><span class="p">(</span><span class="n">Kmeans_4</span><span class="o">==</span><span class="n">h</span><span class="p">)</span>
+    <span class="n">tempMask</span><span class="o">=</span><span class="n">tempLabel</span><span class="o">*</span><span class="n">Tpan</span><span class="p">;</span>
+    <span class="n">finalTemp</span> <span class="o">=</span> <span class="n">tempMask</span><span class="p">[</span><span class="n">tempMask</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">];</span>
+    <span class="n">allValue</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">finalTemp</span><span class="p">);</span>
 
-Kwars=dict(histtype=&#39;stepfilled&#39;,alpha=0.4,normed=True,bins=np.arange(0,255));
-allLabel=[&#39;water&#39;,&#39;Grass&#39;,&#39;Building&#39;,&#39;Roda&#39;,&#39;barlSoil&#39;,&#39;background&#39;];  cor=[&#39;r&#39;,&#39;g&#39;,&#39;b&#39;,&#39;y&#39;,&#39;k&#39;,&#39;c&#39;,&#39;m&#39;];
+<span class="n">Kwars</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">histtype</span><span class="o">=</span><span class="s1">&#39;stepfilled&#39;</span><span class="p">,</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span><span class="n">normed</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span><span class="n">bins</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">255</span><span class="p">));</span>
+<span class="n">allLabel</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;water&#39;</span><span class="p">,</span><span class="s1">&#39;Grass&#39;</span><span class="p">,</span><span class="s1">&#39;Building&#39;</span><span class="p">,</span><span class="s1">&#39;Roda&#39;</span><span class="p">,</span><span class="s1">&#39;barlSoil&#39;</span><span class="p">,</span><span class="s1">&#39;background&#39;</span><span class="p">];</span>  <span class="n">cor</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;r&#39;</span><span class="p">,</span><span class="s1">&#39;g&#39;</span><span class="p">,</span><span class="s1">&#39;b&#39;</span><span class="p">,</span><span class="s1">&#39;y&#39;</span><span class="p">,</span><span class="s1">&#39;k&#39;</span><span class="p">,</span><span class="s1">&#39;c&#39;</span><span class="p">,</span><span class="s1">&#39;m&#39;</span><span class="p">];</span>
 
-plt.figure(figsize=(6,5));
-for S in range(4):
-    intervals=plt.hist(allValue[S],color=cor[S],**Kwars);
-plt.xlim(0,255); plt.ylim(0,0.2);
-plt.title(&quot;Kmeans-4&quot;);
-plt.show();
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">5</span><span class="p">));</span>
+<span class="k">for</span> <span class="n">S</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">):</span>
+    <span class="n">intervals</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">allValue</span><span class="p">[</span><span class="n">S</span><span class="p">],</span><span class="n">color</span><span class="o">=</span><span class="n">cor</span><span class="p">[</span><span class="n">S</span><span class="p">],</span><span class="o">**</span><span class="n">Kwars</span><span class="p">);</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">255</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mf">0.2</span><span class="p">);</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Kmeans-4&quot;</span><span class="p">);</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">();</span>
 
-print(ALLclusCenters[0]);
+<span class="k">print</span><span class="p">(</span><span class="n">ALLclusCenters</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
 </pre></div>
 </div>
 </div>
@@ -566,24 +568,24 @@ print(ALLclusCenters[0]);
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3"><div class="highlight"><pre>
-<span></span>allValue=[];  Kmeans_5=ALLfinaLabel[1];
-for h in range(5):
-    tempLabel=(Kmeans_5==h)
-    tempMask=tempLabel*Tpan;
-    finalTemp = tempMask[tempMask&gt;0];
-    allValue.append(finalTemp);
+<span></span><span class="n">allValue</span><span class="o">=</span><span class="p">[];</span>  <span class="n">Kmeans_5</span><span class="o">=</span><span class="n">ALLfinaLabel</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span>
+<span class="k">for</span> <span class="n">h</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
+    <span class="n">tempLabel</span><span class="o">=</span><span class="p">(</span><span class="n">Kmeans_5</span><span class="o">==</span><span class="n">h</span><span class="p">)</span>
+    <span class="n">tempMask</span><span class="o">=</span><span class="n">tempLabel</span><span class="o">*</span><span class="n">Tpan</span><span class="p">;</span>
+    <span class="n">finalTemp</span> <span class="o">=</span> <span class="n">tempMask</span><span class="p">[</span><span class="n">tempMask</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">];</span>
+    <span class="n">allValue</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">finalTemp</span><span class="p">);</span>
 
-Kwars=dict(histtype=&#39;stepfilled&#39;,alpha=0.4,normed=True,bins=np.arange(0,255));
-allLabel=[&#39;water&#39;,&#39;Grass&#39;,&#39;Building&#39;,&#39;Roda&#39;,&#39;barlSoil&#39;,&#39;background&#39;];  cor=[&#39;r&#39;,&#39;g&#39;,&#39;b&#39;,&#39;y&#39;,&#39;k&#39;,&#39;c&#39;,&#39;m&#39;];
+<span class="n">Kwars</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">histtype</span><span class="o">=</span><span class="s1">&#39;stepfilled&#39;</span><span class="p">,</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span><span class="n">normed</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span><span class="n">bins</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">255</span><span class="p">));</span>
+<span class="n">allLabel</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;water&#39;</span><span class="p">,</span><span class="s1">&#39;Grass&#39;</span><span class="p">,</span><span class="s1">&#39;Building&#39;</span><span class="p">,</span><span class="s1">&#39;Roda&#39;</span><span class="p">,</span><span class="s1">&#39;barlSoil&#39;</span><span class="p">,</span><span class="s1">&#39;background&#39;</span><span class="p">];</span>  <span class="n">cor</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;r&#39;</span><span class="p">,</span><span class="s1">&#39;g&#39;</span><span class="p">,</span><span class="s1">&#39;b&#39;</span><span class="p">,</span><span class="s1">&#39;y&#39;</span><span class="p">,</span><span class="s1">&#39;k&#39;</span><span class="p">,</span><span class="s1">&#39;c&#39;</span><span class="p">,</span><span class="s1">&#39;m&#39;</span><span class="p">];</span>
 
-plt.figure(figsize=(6,5));
-for S in range(5):
-    intervals=plt.hist(allValue[S],color=cor[S],**Kwars);
-plt.xlim(0,255); plt.ylim(0,0.2);
-plt.title(&quot;Kmeans-5&quot;);
-plt.show();
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">5</span><span class="p">));</span>
+<span class="k">for</span> <span class="n">S</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
+    <span class="n">intervals</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">allValue</span><span class="p">[</span><span class="n">S</span><span class="p">],</span><span class="n">color</span><span class="o">=</span><span class="n">cor</span><span class="p">[</span><span class="n">S</span><span class="p">],</span><span class="o">**</span><span class="n">Kwars</span><span class="p">);</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">255</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mf">0.2</span><span class="p">);</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Kmeans-5&quot;</span><span class="p">);</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">();</span>
 
-print(ALLclusCenters[1]);
+<span class="k">print</span><span class="p">(</span><span class="n">ALLclusCenters</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
 </pre></div>
 </div>
 </div>
@@ -612,24 +614,24 @@ print(ALLclusCenters[1]);
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3"><div class="highlight"><pre>
-<span></span>allValue=[];  Kmeans_6=ALLfinaLabel[2];
-for h in range(6):
-    tempLabel=(Kmeans_6==h)
-    tempMask=tempLabel*Tpan;
-    finalTemp = tempMask[tempMask&gt;0];
-    allValue.append(finalTemp);
+<span></span><span class="n">allValue</span><span class="o">=</span><span class="p">[];</span>  <span class="n">Kmeans_6</span><span class="o">=</span><span class="n">ALLfinaLabel</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span>
+<span class="k">for</span> <span class="n">h</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">6</span><span class="p">):</span>
+    <span class="n">tempLabel</span><span class="o">=</span><span class="p">(</span><span class="n">Kmeans_6</span><span class="o">==</span><span class="n">h</span><span class="p">)</span>
+    <span class="n">tempMask</span><span class="o">=</span><span class="n">tempLabel</span><span class="o">*</span><span class="n">Tpan</span><span class="p">;</span>
+    <span class="n">finalTemp</span> <span class="o">=</span> <span class="n">tempMask</span><span class="p">[</span><span class="n">tempMask</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">];</span>
+    <span class="n">allValue</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">finalTemp</span><span class="p">);</span>
 
-Kwars=dict(histtype=&#39;stepfilled&#39;,alpha=0.4,normed=True,bins=np.arange(0,255));
-allLabel=[&#39;water&#39;,&#39;Grass&#39;,&#39;Building&#39;,&#39;Roda&#39;,&#39;barlSoil&#39;,&#39;background&#39;];  cor=[&#39;r&#39;,&#39;g&#39;,&#39;b&#39;,&#39;y&#39;,&#39;k&#39;,&#39;c&#39;,&#39;m&#39;];
+<span class="n">Kwars</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">histtype</span><span class="o">=</span><span class="s1">&#39;stepfilled&#39;</span><span class="p">,</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span><span class="n">normed</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span><span class="n">bins</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">255</span><span class="p">));</span>
+<span class="n">allLabel</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;water&#39;</span><span class="p">,</span><span class="s1">&#39;Grass&#39;</span><span class="p">,</span><span class="s1">&#39;Building&#39;</span><span class="p">,</span><span class="s1">&#39;Roda&#39;</span><span class="p">,</span><span class="s1">&#39;barlSoil&#39;</span><span class="p">,</span><span class="s1">&#39;background&#39;</span><span class="p">];</span>  <span class="n">cor</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;r&#39;</span><span class="p">,</span><span class="s1">&#39;g&#39;</span><span class="p">,</span><span class="s1">&#39;b&#39;</span><span class="p">,</span><span class="s1">&#39;y&#39;</span><span class="p">,</span><span class="s1">&#39;k&#39;</span><span class="p">,</span><span class="s1">&#39;c&#39;</span><span class="p">,</span><span class="s1">&#39;m&#39;</span><span class="p">];</span>
 
-plt.figure(figsize=(6,5));
-for S in range(6):
-    intervals=plt.hist(allValue[S],color=cor[S],**Kwars);
-plt.xlim(0,255); plt.ylim(0,0.2);
-plt.title(&quot;Kmeans-6&quot;);
-plt.show();
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">5</span><span class="p">));</span>
+<span class="k">for</span> <span class="n">S</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">6</span><span class="p">):</span>
+    <span class="n">intervals</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">allValue</span><span class="p">[</span><span class="n">S</span><span class="p">],</span><span class="n">color</span><span class="o">=</span><span class="n">cor</span><span class="p">[</span><span class="n">S</span><span class="p">],</span><span class="o">**</span><span class="n">Kwars</span><span class="p">);</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">255</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mf">0.2</span><span class="p">);</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Kmeans-6&quot;</span><span class="p">);</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">();</span>
 
-print(ALLclusCenters[2]);
+<span class="k">print</span><span class="p">(</span><span class="n">ALLclusCenters</span><span class="p">[</span><span class="mi">2</span><span class="p">]);</span>
 </pre></div>
 </div>
 </div>
@@ -659,24 +661,24 @@ print(ALLclusCenters[2]);
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3"><div class="highlight"><pre>
-<span></span>allValue=[];  Kmeans_7=ALLfinaLabel[3];
-for h in range(7):
-    tempLabel=(Kmeans_7==h)
-    tempMask=tempLabel*Tpan;
-    finalTemp = tempMask[tempMask&gt;0];
-    allValue.append(finalTemp);
+<span></span><span class="n">allValue</span><span class="o">=</span><span class="p">[];</span>  <span class="n">Kmeans_7</span><span class="o">=</span><span class="n">ALLfinaLabel</span><span class="p">[</span><span class="mi">3</span><span class="p">];</span>
+<span class="k">for</span> <span class="n">h</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">7</span><span class="p">):</span>
+    <span class="n">tempLabel</span><span class="o">=</span><span class="p">(</span><span class="n">Kmeans_7</span><span class="o">==</span><span class="n">h</span><span class="p">)</span>
+    <span class="n">tempMask</span><span class="o">=</span><span class="n">tempLabel</span><span class="o">*</span><span class="n">Tpan</span><span class="p">;</span>
+    <span class="n">finalTemp</span> <span class="o">=</span> <span class="n">tempMask</span><span class="p">[</span><span class="n">tempMask</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">];</span>
+    <span class="n">allValue</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">finalTemp</span><span class="p">);</span>
 
-Kwars=dict(histtype=&#39;stepfilled&#39;,alpha=0.4,normed=True,bins=np.arange(0,255));
-allLabel=[&#39;water&#39;,&#39;Grass&#39;,&#39;Building&#39;,&#39;Roda&#39;,&#39;barlSoil&#39;,&#39;background&#39;];  cor=[&#39;r&#39;,&#39;g&#39;,&#39;b&#39;,&#39;y&#39;,&#39;k&#39;,&#39;c&#39;,&#39;m&#39;];
+<span class="n">Kwars</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">histtype</span><span class="o">=</span><span class="s1">&#39;stepfilled&#39;</span><span class="p">,</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span><span class="n">normed</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span><span class="n">bins</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">255</span><span class="p">));</span>
+<span class="n">allLabel</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;water&#39;</span><span class="p">,</span><span class="s1">&#39;Grass&#39;</span><span class="p">,</span><span class="s1">&#39;Building&#39;</span><span class="p">,</span><span class="s1">&#39;Roda&#39;</span><span class="p">,</span><span class="s1">&#39;barlSoil&#39;</span><span class="p">,</span><span class="s1">&#39;background&#39;</span><span class="p">];</span>  <span class="n">cor</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;r&#39;</span><span class="p">,</span><span class="s1">&#39;g&#39;</span><span class="p">,</span><span class="s1">&#39;b&#39;</span><span class="p">,</span><span class="s1">&#39;y&#39;</span><span class="p">,</span><span class="s1">&#39;k&#39;</span><span class="p">,</span><span class="s1">&#39;c&#39;</span><span class="p">,</span><span class="s1">&#39;m&#39;</span><span class="p">];</span>
 
-plt.figure(figsize=(6,5));
-for S in range(7):
-    intervals=plt.hist(allValue[S],color=cor[S],**Kwars);
-plt.xlim(0,255); plt.ylim(0,0.2);
-plt.title(&quot;Kmeans-7&quot;);
-plt.show();
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">5</span><span class="p">));</span>
+<span class="k">for</span> <span class="n">S</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">7</span><span class="p">):</span>
+    <span class="n">intervals</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">allValue</span><span class="p">[</span><span class="n">S</span><span class="p">],</span><span class="n">color</span><span class="o">=</span><span class="n">cor</span><span class="p">[</span><span class="n">S</span><span class="p">],</span><span class="o">**</span><span class="n">Kwars</span><span class="p">);</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">255</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mf">0.2</span><span class="p">);</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Kmeans-7&quot;</span><span class="p">);</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">();</span>
 
-print(ALLclusCenters[3]);
+<span class="k">print</span><span class="p">(</span><span class="n">ALLclusCenters</span><span class="p">[</span><span class="mi">3</span><span class="p">]);</span>
 </pre></div>
 </div>
 </div>
@@ -707,24 +709,24 @@ print(ALLclusCenters[3]);
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3"><div class="highlight"><pre>
-<span></span>allValue=[];  Kmeans_8=ALLfinaLabel[4];
-for h in range(8):
-    tempLabel=(Kmeans_8==h)
-    tempMask=tempLabel*Tpan;
-    finalTemp = tempMask[tempMask&gt;0];
-    allValue.append(finalTemp);
+<span></span><span class="n">allValue</span><span class="o">=</span><span class="p">[];</span>  <span class="n">Kmeans_8</span><span class="o">=</span><span class="n">ALLfinaLabel</span><span class="p">[</span><span class="mi">4</span><span class="p">];</span>
+<span class="k">for</span> <span class="n">h</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">8</span><span class="p">):</span>
+    <span class="n">tempLabel</span><span class="o">=</span><span class="p">(</span><span class="n">Kmeans_8</span><span class="o">==</span><span class="n">h</span><span class="p">)</span>
+    <span class="n">tempMask</span><span class="o">=</span><span class="n">tempLabel</span><span class="o">*</span><span class="n">Tpan</span><span class="p">;</span>
+    <span class="n">finalTemp</span> <span class="o">=</span> <span class="n">tempMask</span><span class="p">[</span><span class="n">tempMask</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">];</span>
+    <span class="n">allValue</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">finalTemp</span><span class="p">);</span>
 
-Kwars=dict(histtype=&#39;stepfilled&#39;,alpha=0.4,normed=True,bins=np.arange(0,255));
-allLabel=[&#39;water&#39;,&#39;Grass&#39;,&#39;Building&#39;,&#39;Roda&#39;,&#39;barlSoil&#39;,&#39;background&#39;];  cor=[&#39;r&#39;,&#39;g&#39;,&#39;b&#39;,&#39;y&#39;,&#39;k&#39;,&#39;c&#39;,&#39;m&#39;,&#39;orange&#39;];
+<span class="n">Kwars</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">histtype</span><span class="o">=</span><span class="s1">&#39;stepfilled&#39;</span><span class="p">,</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span><span class="n">normed</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span><span class="n">bins</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">255</span><span class="p">));</span>
+<span class="n">allLabel</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;water&#39;</span><span class="p">,</span><span class="s1">&#39;Grass&#39;</span><span class="p">,</span><span class="s1">&#39;Building&#39;</span><span class="p">,</span><span class="s1">&#39;Roda&#39;</span><span class="p">,</span><span class="s1">&#39;barlSoil&#39;</span><span class="p">,</span><span class="s1">&#39;background&#39;</span><span class="p">];</span>  <span class="n">cor</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;r&#39;</span><span class="p">,</span><span class="s1">&#39;g&#39;</span><span class="p">,</span><span class="s1">&#39;b&#39;</span><span class="p">,</span><span class="s1">&#39;y&#39;</span><span class="p">,</span><span class="s1">&#39;k&#39;</span><span class="p">,</span><span class="s1">&#39;c&#39;</span><span class="p">,</span><span class="s1">&#39;m&#39;</span><span class="p">,</span><span class="s1">&#39;orange&#39;</span><span class="p">];</span>
 
-plt.figure(figsize=(6,5));
-for S in range(8):
-    intervals=plt.hist(allValue[S],color=cor[S],**Kwars);
-plt.xlim(0,255); plt.ylim(0,0.2);
-plt.title(&quot;Kmeans-8&quot;);
-plt.show();
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">5</span><span class="p">));</span>
+<span class="k">for</span> <span class="n">S</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">8</span><span class="p">):</span>
+    <span class="n">intervals</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">allValue</span><span class="p">[</span><span class="n">S</span><span class="p">],</span><span class="n">color</span><span class="o">=</span><span class="n">cor</span><span class="p">[</span><span class="n">S</span><span class="p">],</span><span class="o">**</span><span class="n">Kwars</span><span class="p">);</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">255</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mf">0.2</span><span class="p">);</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Kmeans-8&quot;</span><span class="p">);</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">();</span>
 
-print(ALLclusCenters[4]);
+<span class="k">print</span><span class="p">(</span><span class="n">ALLclusCenters</span><span class="p">[</span><span class="mi">4</span><span class="p">]);</span>
 </pre></div>
 </div>
 </div>

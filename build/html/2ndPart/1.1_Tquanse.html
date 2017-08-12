@@ -35,7 +35,10 @@
         <link rel="index" title="索引"
               href="../genindex.html"/>
         <link rel="search" title="搜索" href="../search.html"/>
-    <link rel="top" title="PRoRS 0.0.1 文档" href="../index.html"/> 
+    <link rel="top" title="PRoRS 0.0.1 文档" href="../index.html"/>
+        <link rel="up" title="图像模式识别" href="index.html"/>
+        <link rel="next" title="&lt;no title&gt;" href="1.2_NewMultyBand.html"/>
+        <link rel="prev" title="图像模式识别" href="index.html"/> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
@@ -94,11 +97,13 @@
 </ul>
 <p class="caption"><span class="caption-text">第二部分:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="index.html">1. 图像平面分类</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index.html">图像模式识别</a></li>
 </ul>
 <p class="caption"><span class="caption-text">第三部分:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../3rdPart/index.html">地表覆盖制图</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../TestContent.html">目录测试</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../TestContent.html#第二层">第二层</a></li>
 </ul>
 
             
@@ -142,6 +147,8 @@
   <ul class="wy-breadcrumbs">
     
       <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">图像模式识别</a> &raquo;</li>
         
       <li>&lt;no title&gt;</li>
     
@@ -362,22 +369,22 @@ div.nboutput div.output_area.stderr {
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3"><div class="highlight"><pre>
-<span></span>import sklearn
-from PIL import Image
-import skimage.io as SKimg
-import numpy as np
-import random
-import pyhdf.SD as hdf
-import matplotlib.pyplot as plt
-import ogr
-import gdal
-from osgeo import gdalconst
-import rasterio as rio
-from scipy.sparse import csr_matrix
-import scipy.io as sio
+<span></span><span class="kn">import</span> <span class="nn">sklearn</span>
+<span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span>
+<span class="kn">import</span> <span class="nn">skimage.io</span> <span class="kn">as</span> <span class="nn">SKimg</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">random</span>
+<span class="kn">import</span> <span class="nn">pyhdf.SD</span> <span class="kn">as</span> <span class="nn">hdf</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">ogr</span>
+<span class="kn">import</span> <span class="nn">gdal</span>
+<span class="kn">from</span> <span class="nn">osgeo</span> <span class="kn">import</span> <span class="n">gdalconst</span>
+<span class="kn">import</span> <span class="nn">rasterio</span> <span class="kn">as</span> <span class="nn">rio</span>
+<span class="kn">from</span> <span class="nn">scipy.sparse</span> <span class="kn">import</span> <span class="n">csr_matrix</span>
+<span class="kn">import</span> <span class="nn">scipy.io</span> <span class="kn">as</span> <span class="nn">sio</span>
 
-from sklearn.cluster import MiniBatchKMeans, KMeans
-from sklearn.metrics.pairwise import pairwise_distances_argmin
+<span class="kn">from</span> <span class="nn">sklearn.cluster</span> <span class="kn">import</span> <span class="n">MiniBatchKMeans</span><span class="p">,</span> <span class="n">KMeans</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics.pairwise</span> <span class="kn">import</span> <span class="n">pairwise_distances_argmin</span>
 </pre></div>
 </div>
 </div>
@@ -387,10 +394,10 @@ from sklearn.metrics.pairwise import pairwise_distances_argmin
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3"><div class="highlight"><pre>
-<span></span>Tpan =SKimg.imread(&quot;F:/pythontestdata/MyTiff/tianhui1200pan.tif&quot;)
-SKimg.imshow(Tpan)
-SKimg.show()
-Tpan.shape
+<span></span><span class="n">Tpan</span> <span class="o">=</span><span class="n">SKimg</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="s2">&quot;F:/pythontestdata/MyTiff/tianhui1200pan.tif&quot;</span><span class="p">)</span>
+<span class="n">SKimg</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">Tpan</span><span class="p">)</span>
+<span class="n">SKimg</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="n">Tpan</span><span class="o">.</span><span class="n">shape</span>
 </pre></div>
 </div>
 </div>
@@ -417,11 +424,11 @@ Tpan.shape
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3"><div class="highlight"><pre>
-<span></span>plt.figure()
-#要对图像求直方图，就需要先把图像矩阵进行flatten操作，使之变为一维数组，然后再进行统计
-arr=Tpan.flatten()
-n, bins, patches = plt.hist(arr, bins=np.arange(0,255), normed=1, facecolor=&#39;red&#39;, alpha=0.75)
-plt.show()
+<span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="c1">#要对图像求直方图，就需要先把图像矩阵进行flatten操作，使之变为一维数组，然后再进行统计</span>
+<span class="n">arr</span><span class="o">=</span><span class="n">Tpan</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+<span class="n">n</span><span class="p">,</span> <span class="n">bins</span><span class="p">,</span> <span class="n">patches</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">255</span><span class="p">),</span> <span class="n">normed</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.75</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -438,10 +445,10 @@ plt.show()
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3"><div class="highlight"><pre>
-<span></span>GroudTrue =SKimg.imread(&quot;F:/pythontestdata/MyTiff/gt_tianhui1200.tif&quot;)
-SKimg.imshow(GroudTrue)
-SKimg.show()
-GroudTrue.shape
+<span></span><span class="n">GroudTrue</span> <span class="o">=</span><span class="n">SKimg</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="s2">&quot;F:/pythontestdata/MyTiff/gt_tianhui1200.tif&quot;</span><span class="p">)</span>
+<span class="n">SKimg</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">GroudTrue</span><span class="p">)</span>
+<span class="n">SKimg</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="n">GroudTrue</span><span class="o">.</span><span class="n">shape</span>
 </pre></div>
 </div>
 </div>
@@ -468,22 +475,22 @@ GroudTrue.shape
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3"><div class="highlight"><pre>
-<span></span>#matlab文件名
-matfn=&#39;gt_tianhui1200.mat&#39;;
-data=sio.loadmat(matfn);
-mk = data[&#39;gt&#39;]
-print(mk)
+<span></span><span class="c1">#matlab文件名</span>
+<span class="n">matfn</span><span class="o">=</span><span class="s1">&#39;gt_tianhui1200.mat&#39;</span><span class="p">;</span>
+<span class="n">data</span><span class="o">=</span><span class="n">sio</span><span class="o">.</span><span class="n">loadmat</span><span class="p">(</span><span class="n">matfn</span><span class="p">);</span>
+<span class="n">mk</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;gt&#39;</span><span class="p">]</span>
+<span class="k">print</span><span class="p">(</span><span class="n">mk</span><span class="p">)</span>
 
-moban=(mk*0)+1;
+<span class="n">moban</span><span class="o">=</span><span class="p">(</span><span class="n">mk</span><span class="o">*</span><span class="mi">0</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span>
 
-plt.figure(figsize=(6,6))
-im = Image.fromarray(mk);
-plt.imshow(im,cmap=plt.cm.get_cmap(&#39;cubehelix_r&#39;,7));
-cbar=plt.colorbar()
-cbar.set_ticks(np.linspace(0,7,8))
-cbar.set_ticklabels((&#39;  &#39;,&#39;water&#39;,&#39;grass&#39;,&#39;bulding&#39;,&#39;road&#39;,&#39;luodi&#39;,&#39;background&#39;))
-plt.clim(-0.5,6.5)
-plt.show();
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+<span class="n">im</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">fromarray</span><span class="p">(</span><span class="n">mk</span><span class="p">);</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">im</span><span class="p">,</span><span class="n">cmap</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">get_cmap</span><span class="p">(</span><span class="s1">&#39;cubehelix_r&#39;</span><span class="p">,</span><span class="mi">7</span><span class="p">));</span>
+<span class="n">cbar</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">()</span>
+<span class="n">cbar</span><span class="o">.</span><span class="n">set_ticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">))</span>
+<span class="n">cbar</span><span class="o">.</span><span class="n">set_ticklabels</span><span class="p">((</span><span class="s1">&#39;  &#39;</span><span class="p">,</span><span class="s1">&#39;water&#39;</span><span class="p">,</span><span class="s1">&#39;grass&#39;</span><span class="p">,</span><span class="s1">&#39;bulding&#39;</span><span class="p">,</span><span class="s1">&#39;road&#39;</span><span class="p">,</span><span class="s1">&#39;luodi&#39;</span><span class="p">,</span><span class="s1">&#39;background&#39;</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">clim</span><span class="p">(</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span><span class="mf">6.5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">();</span>
 </pre></div>
 </div>
 </div>
@@ -514,31 +521,31 @@ plt.show();
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3"><div class="highlight"><pre>
-<span></span>allValue=[];  allTempMask=[];
-for j in range(1,7):
-    tempLabel=mk==j
-    tempMask=tempLabel*Tpan
-    allTempMask.append(tempMask)
-    finalTemp = tempMask[tempMask&gt;0]
-    allValue.append(finalTemp);
+<span></span><span class="n">allValue</span><span class="o">=</span><span class="p">[];</span>  <span class="n">allTempMask</span><span class="o">=</span><span class="p">[];</span>
+<span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">7</span><span class="p">):</span>
+    <span class="n">tempLabel</span><span class="o">=</span><span class="n">mk</span><span class="o">==</span><span class="n">j</span>
+    <span class="n">tempMask</span><span class="o">=</span><span class="n">tempLabel</span><span class="o">*</span><span class="n">Tpan</span>
+    <span class="n">allTempMask</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">tempMask</span><span class="p">)</span>
+    <span class="n">finalTemp</span> <span class="o">=</span> <span class="n">tempMask</span><span class="p">[</span><span class="n">tempMask</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">allValue</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">finalTemp</span><span class="p">);</span>
 
-plt.figure(figsize=(24,5))
-Cmap=[&#39;Blues&#39;,&#39;Greens&#39;,&#39;Reds&#39;,&#39;Greys&#39;,&#39;Oranges&#39;,&#39;cool&#39;];
-for k in range(0,len(allTempMask)):
-    plt.subplot(1,6,k+1)
-    im = Image.fromarray(allTempMask[k])
-    plt.imshow(im,cmap=Cmap[k]);
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">24</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+<span class="n">Cmap</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Blues&#39;</span><span class="p">,</span><span class="s1">&#39;Greens&#39;</span><span class="p">,</span><span class="s1">&#39;Reds&#39;</span><span class="p">,</span><span class="s1">&#39;Greys&#39;</span><span class="p">,</span><span class="s1">&#39;Oranges&#39;</span><span class="p">,</span><span class="s1">&#39;cool&#39;</span><span class="p">];</span>
+<span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">allTempMask</span><span class="p">)):</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">im</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">fromarray</span><span class="p">(</span><span class="n">allTempMask</span><span class="p">[</span><span class="n">k</span><span class="p">])</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">im</span><span class="p">,</span><span class="n">cmap</span><span class="o">=</span><span class="n">Cmap</span><span class="p">[</span><span class="n">k</span><span class="p">]);</span>
 
-plt.figure(figsize=(24,4));cor=[&#39;r&#39;,&#39;g&#39;,&#39;b&#39;,&#39;y&#39;,&#39;k&#39;,&#39;c&#39;];
-allLabel=[&#39;water&#39;,&#39;Grass&#39;,&#39;Building&#39;,&#39;Roda&#39;,&#39;barlSoil&#39;,&#39;background&#39;];
-Kwars=dict(histtype=&#39;stepfilled&#39;,alpha=0.9,normed=True,bins=np.arange(0,255));
-for N in range(0,len(allValue)):
-    plt.subplot(1,6,N+1)
-    plt.hist(allValue[N],color=cor[N],**Kwars,label=allLabel[N]);
-    plt.ylim(0,0.12)
-    plt.xlim(0,120)
-    plt.legend();
-plt.show();
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">24</span><span class="p">,</span><span class="mi">4</span><span class="p">));</span><span class="n">cor</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;r&#39;</span><span class="p">,</span><span class="s1">&#39;g&#39;</span><span class="p">,</span><span class="s1">&#39;b&#39;</span><span class="p">,</span><span class="s1">&#39;y&#39;</span><span class="p">,</span><span class="s1">&#39;k&#39;</span><span class="p">,</span><span class="s1">&#39;c&#39;</span><span class="p">];</span>
+<span class="n">allLabel</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;water&#39;</span><span class="p">,</span><span class="s1">&#39;Grass&#39;</span><span class="p">,</span><span class="s1">&#39;Building&#39;</span><span class="p">,</span><span class="s1">&#39;Roda&#39;</span><span class="p">,</span><span class="s1">&#39;barlSoil&#39;</span><span class="p">,</span><span class="s1">&#39;background&#39;</span><span class="p">];</span>
+<span class="n">Kwars</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">histtype</span><span class="o">=</span><span class="s1">&#39;stepfilled&#39;</span><span class="p">,</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.9</span><span class="p">,</span><span class="n">normed</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span><span class="n">bins</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">255</span><span class="p">));</span>
+<span class="k">for</span> <span class="n">N</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">allValue</span><span class="p">)):</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="n">N</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">allValue</span><span class="p">[</span><span class="n">N</span><span class="p">],</span><span class="n">color</span><span class="o">=</span><span class="n">cor</span><span class="p">[</span><span class="n">N</span><span class="p">],</span><span class="o">**</span><span class="n">Kwars</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="n">allLabel</span><span class="p">[</span><span class="n">N</span><span class="p">]);</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mf">0.12</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">120</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">();</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">();</span>
 </pre></div>
 </div>
 </div>
@@ -562,25 +569,25 @@ plt.show();
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3"><div class="highlight"><pre>
-<span></span>Kwars=dict(histtype=&#39;stepfilled&#39;,alpha=0.5,normed=True,bins=np.arange(0,255));
-print(allValue[0])
-allLabel=[&#39;water&#39;,&#39;Grass&#39;,&#39;Building&#39;,&#39;Roda&#39;,&#39;barlSoil&#39;,&#39;background&#39;];  cor=[&#39;r&#39;,&#39;g&#39;,&#39;b&#39;,&#39;y&#39;,&#39;k&#39;,&#39;c&#39;];
+<span></span><span class="n">Kwars</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">histtype</span><span class="o">=</span><span class="s1">&#39;stepfilled&#39;</span><span class="p">,</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span><span class="n">normed</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span><span class="n">bins</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">255</span><span class="p">));</span>
+<span class="k">print</span><span class="p">(</span><span class="n">allValue</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">allLabel</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;water&#39;</span><span class="p">,</span><span class="s1">&#39;Grass&#39;</span><span class="p">,</span><span class="s1">&#39;Building&#39;</span><span class="p">,</span><span class="s1">&#39;Roda&#39;</span><span class="p">,</span><span class="s1">&#39;barlSoil&#39;</span><span class="p">,</span><span class="s1">&#39;background&#39;</span><span class="p">];</span>  <span class="n">cor</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;r&#39;</span><span class="p">,</span><span class="s1">&#39;g&#39;</span><span class="p">,</span><span class="s1">&#39;b&#39;</span><span class="p">,</span><span class="s1">&#39;y&#39;</span><span class="p">,</span><span class="s1">&#39;k&#39;</span><span class="p">,</span><span class="s1">&#39;c&#39;</span><span class="p">];</span>
 
-plt.figure(figsize=(6,5));   returnValue=[];
-for i in range(0,6):
-    intervals=plt.hist(allValue[i],color=cor[i],**Kwars,label=allLabel[i])
-    returnValue.append(intervals);
-plt.legend(); plt.xlim(0,150); plt.ylim(0,0.2);
-plt.show()
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">5</span><span class="p">));</span>   <span class="n">returnValue</span><span class="o">=</span><span class="p">[];</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">6</span><span class="p">):</span>
+    <span class="n">intervals</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">allValue</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">color</span><span class="o">=</span><span class="n">cor</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="o">**</span><span class="n">Kwars</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="n">allLabel</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+    <span class="n">returnValue</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">intervals</span><span class="p">);</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">();</span> <span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">150</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mf">0.2</span><span class="p">);</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 
-Xvalue=[]; YFrenquce=[];
-for F in range(0,len(returnValue)):
-    Xvalue.append(returnValue[F][1])
-    YFrenquce.append(returnValue[F][0]);
+<span class="n">Xvalue</span><span class="o">=</span><span class="p">[];</span> <span class="n">YFrenquce</span><span class="o">=</span><span class="p">[];</span>
+<span class="k">for</span> <span class="n">F</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">returnValue</span><span class="p">)):</span>
+    <span class="n">Xvalue</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">returnValue</span><span class="p">[</span><span class="n">F</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">YFrenquce</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">returnValue</span><span class="p">[</span><span class="n">F</span><span class="p">][</span><span class="mi">0</span><span class="p">]);</span>
 
-l=len(YFrenquce[4])
-print(bins[2])
-print(YFrenquce[2][8])
+<span class="n">l</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">YFrenquce</span><span class="p">[</span><span class="mi">4</span><span class="p">])</span>
+<span class="k">print</span><span class="p">(</span><span class="n">bins</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+<span class="k">print</span><span class="p">(</span><span class="n">YFrenquce</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="mi">8</span><span class="p">])</span>
 
 </pre></div>
 </div>
@@ -615,35 +622,35 @@ print(YFrenquce[2][8])
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3"><div class="highlight"><pre>
-<span></span>cols=Tpan.shape[0];  Rows=Tpan.shape[1];
+<span></span><span class="n">cols</span><span class="o">=</span><span class="n">Tpan</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>  <span class="n">Rows</span><span class="o">=</span><span class="n">Tpan</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span>
 
-AllPlabel=[];
-for k in range(0,len(bins)-1):
-    maxP=0;  INdex=0;
-    temp=[YFrenquce[0][k],YFrenquce[1][k],YFrenquce[2][k],YFrenquce[3][k],YFrenquce[4][k],YFrenquce[5][k]];
+<span class="n">AllPlabel</span><span class="o">=</span><span class="p">[];</span>
+<span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">bins</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+    <span class="n">maxP</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>  <span class="n">INdex</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+    <span class="n">temp</span><span class="o">=</span><span class="p">[</span><span class="n">YFrenquce</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">k</span><span class="p">],</span><span class="n">YFrenquce</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="n">k</span><span class="p">],</span><span class="n">YFrenquce</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="n">k</span><span class="p">],</span><span class="n">YFrenquce</span><span class="p">[</span><span class="mi">3</span><span class="p">][</span><span class="n">k</span><span class="p">],</span><span class="n">YFrenquce</span><span class="p">[</span><span class="mi">4</span><span class="p">][</span><span class="n">k</span><span class="p">],</span><span class="n">YFrenquce</span><span class="p">[</span><span class="mi">5</span><span class="p">][</span><span class="n">k</span><span class="p">]];</span>
 
-    for L in range(0,len(temp)):
-        if(temp[L]&gt;maxP):
-            maxP=temp[L]
-            INdex=L+1;
+    <span class="k">for</span> <span class="n">L</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">temp</span><span class="p">)):</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">temp</span><span class="p">[</span><span class="n">L</span><span class="p">]</span><span class="o">&gt;</span><span class="n">maxP</span><span class="p">):</span>
+            <span class="n">maxP</span><span class="o">=</span><span class="n">temp</span><span class="p">[</span><span class="n">L</span><span class="p">]</span>
+            <span class="n">INdex</span><span class="o">=</span><span class="n">L</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span>
 
-    tempIndex=((np.abs(Tpan-bins[k]))&lt;0.1)*moban;
-    temLabel=tempIndex*INdex
-    AllPlabel.append(temLabel);
+    <span class="n">tempIndex</span><span class="o">=</span><span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">Tpan</span><span class="o">-</span><span class="n">bins</span><span class="p">[</span><span class="n">k</span><span class="p">]))</span><span class="o">&lt;</span><span class="mf">0.1</span><span class="p">)</span><span class="o">*</span><span class="n">moban</span><span class="p">;</span>
+    <span class="n">temLabel</span><span class="o">=</span><span class="n">tempIndex</span><span class="o">*</span><span class="n">INdex</span>
+    <span class="n">AllPlabel</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">temLabel</span><span class="p">);</span>
 
-sumLabel=AllPlabel[0];
-for i in range(1,len(AllPlabel)):
-    sumLabel=sumLabel+AllPlabel[i];
+<span class="n">sumLabel</span><span class="o">=</span><span class="n">AllPlabel</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">AllPlabel</span><span class="p">)):</span>
+    <span class="n">sumLabel</span><span class="o">=</span><span class="n">sumLabel</span><span class="o">+</span><span class="n">AllPlabel</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
 
-predictLabel=sumLabel;
+<span class="n">predictLabel</span><span class="o">=</span><span class="n">sumLabel</span><span class="p">;</span>
 
-print(predictLabel)
+<span class="k">print</span><span class="p">(</span><span class="n">predictLabel</span><span class="p">)</span>
 
-TrueOrFalse=(predictLabel==mk)
-TrueValue=TrueOrFalse[TrueOrFalse&gt;0]
-FalseValue=TrueOrFalse[TrueOrFalse==0]
-correct=len(TrueValue)/(len(TrueValue)+len(FalseValue));
-print(len(TrueValue));  print(len(FalseValue));  print(correct);
+<span class="n">TrueOrFalse</span><span class="o">=</span><span class="p">(</span><span class="n">predictLabel</span><span class="o">==</span><span class="n">mk</span><span class="p">)</span>
+<span class="n">TrueValue</span><span class="o">=</span><span class="n">TrueOrFalse</span><span class="p">[</span><span class="n">TrueOrFalse</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">FalseValue</span><span class="o">=</span><span class="n">TrueOrFalse</span><span class="p">[</span><span class="n">TrueOrFalse</span><span class="o">==</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">correct</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">TrueValue</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">TrueValue</span><span class="p">)</span><span class="o">+</span><span class="nb">len</span><span class="p">(</span><span class="n">FalseValue</span><span class="p">));</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">TrueValue</span><span class="p">));</span>  <span class="k">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">FalseValue</span><span class="p">));</span>  <span class="k">print</span><span class="p">(</span><span class="n">correct</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
@@ -670,19 +677,19 @@ print(len(TrueValue));  print(len(FalseValue));  print(correct);
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3"><div class="highlight"><pre>
-<span></span>print(np.max(predictLabel)); print(np.min(predictLabel));
+<span></span><span class="k">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">predictLabel</span><span class="p">));</span> <span class="k">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">predictLabel</span><span class="p">));</span>
 
-mylabel=predictLabel;
+<span class="n">mylabel</span><span class="o">=</span><span class="n">predictLabel</span><span class="p">;</span>
 
-plt.figure(figsize=(6,6));
-imF = Image.fromarray(mylabel);
-plt.imshow(imF,cmap=plt.cm.get_cmap(&#39;cubehelix_r&#39;,7));
-cbar=plt.colorbar()
-cbar.set_ticks(np.linspace(0,7,8))
-cbar.set_ticklabels((&#39;  &#39;,&#39;water&#39;,&#39;grass&#39;,&#39;bulding&#39;,&#39;road&#39;,&#39;luodi&#39;,&#39;background&#39;))
-plt.clim(-0.5,6.5);
-plt.title(&#39;PanClassTruth&#39;);
-plt.show();
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">6</span><span class="p">));</span>
+<span class="n">imF</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">fromarray</span><span class="p">(</span><span class="n">mylabel</span><span class="p">);</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">imF</span><span class="p">,</span><span class="n">cmap</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">get_cmap</span><span class="p">(</span><span class="s1">&#39;cubehelix_r&#39;</span><span class="p">,</span><span class="mi">7</span><span class="p">));</span>
+<span class="n">cbar</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">()</span>
+<span class="n">cbar</span><span class="o">.</span><span class="n">set_ticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">))</span>
+<span class="n">cbar</span><span class="o">.</span><span class="n">set_ticklabels</span><span class="p">((</span><span class="s1">&#39;  &#39;</span><span class="p">,</span><span class="s1">&#39;water&#39;</span><span class="p">,</span><span class="s1">&#39;grass&#39;</span><span class="p">,</span><span class="s1">&#39;bulding&#39;</span><span class="p">,</span><span class="s1">&#39;road&#39;</span><span class="p">,</span><span class="s1">&#39;luodi&#39;</span><span class="p">,</span><span class="s1">&#39;background&#39;</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">clim</span><span class="p">(</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span><span class="mf">6.5</span><span class="p">);</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;PanClassTruth&#39;</span><span class="p">);</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">();</span>
 </pre></div>
 </div>
 </div>
@@ -708,14 +715,14 @@ plt.show();
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3"><div class="highlight"><pre>
-<span></span>TRUEplace=(mylabel==mk)*10000;
-FalsePlace=(mylabel!=mk)*10000;
+<span></span><span class="n">TRUEplace</span><span class="o">=</span><span class="p">(</span><span class="n">mylabel</span><span class="o">==</span><span class="n">mk</span><span class="p">)</span><span class="o">*</span><span class="mi">10000</span><span class="p">;</span>
+<span class="n">FalsePlace</span><span class="o">=</span><span class="p">(</span><span class="n">mylabel</span><span class="o">!=</span><span class="n">mk</span><span class="p">)</span><span class="o">*</span><span class="mi">10000</span><span class="p">;</span>
 
-plt.figure(figsize=(6,6))
-imT = Image.fromarray(TRUEplace);
-plt.imshow(imT,cmap=&#39;Oranges&#39;);
-plt.title(&#39;Pantrueplace&#39;);
-plt.show();
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+<span class="n">imT</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">fromarray</span><span class="p">(</span><span class="n">TRUEplace</span><span class="p">);</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">imT</span><span class="p">,</span><span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;Oranges&#39;</span><span class="p">);</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Pantrueplace&#39;</span><span class="p">);</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">();</span>
 </pre></div>
 </div>
 </div>
@@ -732,12 +739,12 @@ plt.show();
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3"><div class="highlight"><pre>
-<span></span>x = np.linspace(0,1200,1200)
-y = np.linspace(0,1200,1200)
-X,Y = np.meshgrid(x,y)
-Xzip=list(zip(X.flat,Y.flat))
-points = [point for point in zip(X.flat,Y.flat)]
-points = np.array(points)
+<span></span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1200</span><span class="p">,</span><span class="mi">1200</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1200</span><span class="p">,</span><span class="mi">1200</span><span class="p">)</span>
+<span class="n">X</span><span class="p">,</span><span class="n">Y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+<span class="n">Xzip</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">flat</span><span class="p">,</span><span class="n">Y</span><span class="o">.</span><span class="n">flat</span><span class="p">))</span>
+<span class="n">points</span> <span class="o">=</span> <span class="p">[</span><span class="n">point</span> <span class="k">for</span> <span class="n">point</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">flat</span><span class="p">,</span><span class="n">Y</span><span class="o">.</span><span class="n">flat</span><span class="p">)]</span>
+<span class="n">points</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">points</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -747,16 +754,16 @@ points = np.array(points)
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3"><div class="highlight"><pre>
-<span></span>Cmap=[&#39;winter&#39;,&#39;Blues&#39;,&#39;Greens&#39;,&#39;Reds&#39;,&#39;Greys&#39;,&#39;Oranges&#39;,&#39;cool&#39;]
-allLabel=[&#39;water&#39;,&#39;Grass&#39;,&#39;Building&#39;,&#39;Roda&#39;,&#39;barlSoil&#39;,&#39;background&#39;];
-plt.figure(figsize=(30,4))
-for M in range(0,7):
-    temp=(predictLabel==M)*predictLabel
-    plt.subplot(1,7,M+1)
-    im = Image.fromarray(temp*100)
-    sct=plt.imshow(im,cmap=Cmap[M])
-    #plt.colorbar(sct,allLabel[M-1])
-plt.show()
+<span></span><span class="n">Cmap</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;winter&#39;</span><span class="p">,</span><span class="s1">&#39;Blues&#39;</span><span class="p">,</span><span class="s1">&#39;Greens&#39;</span><span class="p">,</span><span class="s1">&#39;Reds&#39;</span><span class="p">,</span><span class="s1">&#39;Greys&#39;</span><span class="p">,</span><span class="s1">&#39;Oranges&#39;</span><span class="p">,</span><span class="s1">&#39;cool&#39;</span><span class="p">]</span>
+<span class="n">allLabel</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;water&#39;</span><span class="p">,</span><span class="s1">&#39;Grass&#39;</span><span class="p">,</span><span class="s1">&#39;Building&#39;</span><span class="p">,</span><span class="s1">&#39;Roda&#39;</span><span class="p">,</span><span class="s1">&#39;barlSoil&#39;</span><span class="p">,</span><span class="s1">&#39;background&#39;</span><span class="p">];</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">30</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">M</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">7</span><span class="p">):</span>
+    <span class="n">temp</span><span class="o">=</span><span class="p">(</span><span class="n">predictLabel</span><span class="o">==</span><span class="n">M</span><span class="p">)</span><span class="o">*</span><span class="n">predictLabel</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="n">M</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">im</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">fromarray</span><span class="p">(</span><span class="n">temp</span><span class="o">*</span><span class="mi">100</span><span class="p">)</span>
+    <span class="n">sct</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">im</span><span class="p">,</span><span class="n">cmap</span><span class="o">=</span><span class="n">Cmap</span><span class="p">[</span><span class="n">M</span><span class="p">])</span>
+    <span class="c1">#plt.colorbar(sct,allLabel[M-1])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -775,6 +782,15 @@ plt.show()
            </div>
           </div>
           <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="1.2_NewMultyBand.html" class="btn btn-neutral float-right" title="&lt;no title&gt;" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral" title="图像模式识别" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
   
 
   <hr/>

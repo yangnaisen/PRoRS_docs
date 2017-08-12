@@ -35,7 +35,10 @@
         <link rel="index" title="索引"
               href="../genindex.html"/>
         <link rel="search" title="搜索" href="../search.html"/>
-    <link rel="top" title="PRoRS 0.0.1 文档" href="../index.html"/> 
+    <link rel="top" title="PRoRS 0.0.1 文档" href="../index.html"/>
+        <link rel="up" title="图像模式识别" href="index.html"/>
+        <link rel="next" title="1. 二维特征空间类条件慨率可视化" href="2.1_TwoNeiborHood.html"/>
+        <link rel="prev" title="&lt;no title&gt;" href="1.1_Tquanse.html"/> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
@@ -94,11 +97,13 @@
 </ul>
 <p class="caption"><span class="caption-text">第二部分:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="index.html">1. 图像平面分类</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index.html">图像模式识别</a></li>
 </ul>
 <p class="caption"><span class="caption-text">第三部分:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../3rdPart/index.html">地表覆盖制图</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../TestContent.html">目录测试</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../TestContent.html#第二层">第二层</a></li>
 </ul>
 
             
@@ -142,6 +147,8 @@
   <ul class="wy-breadcrumbs">
     
       <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">图像模式识别</a> &raquo;</li>
         
       <li>&lt;no title&gt;</li>
     
@@ -362,15 +369,15 @@ div.nboutput div.output_area.stderr {
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3"><div class="highlight"><pre>
-<span></span>import sklearn
-from PIL import Image
-import skimage.io as SKimg
-import numpy as np
-import matplotlib.pyplot as plt
-from osgeo import gdalconst
-import rasterio as rio
-from scipy.sparse import csr_matrix
-import scipy.io as sio
+<span></span><span class="kn">import</span> <span class="nn">sklearn</span>
+<span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span>
+<span class="kn">import</span> <span class="nn">skimage.io</span> <span class="kn">as</span> <span class="nn">SKimg</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">osgeo</span> <span class="kn">import</span> <span class="n">gdalconst</span>
+<span class="kn">import</span> <span class="nn">rasterio</span> <span class="kn">as</span> <span class="nn">rio</span>
+<span class="kn">from</span> <span class="nn">scipy.sparse</span> <span class="kn">import</span> <span class="n">csr_matrix</span>
+<span class="kn">import</span> <span class="nn">scipy.io</span> <span class="kn">as</span> <span class="nn">sio</span>
 
 </pre></div>
 </div>
@@ -381,10 +388,10 @@ import scipy.io as sio
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3"><div class="highlight"><pre>
-<span></span>Tmul =SKimg.imread(&quot;F:/pythontestdata/MyTiff/tianhui1200ms.tif&quot;)
-SKimg.imshow(Tmul)
-SKimg.show()
-Tmul.shape
+<span></span><span class="n">Tmul</span> <span class="o">=</span><span class="n">SKimg</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="s2">&quot;F:/pythontestdata/MyTiff/tianhui1200ms.tif&quot;</span><span class="p">)</span>
+<span class="n">SKimg</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">Tmul</span><span class="p">)</span>
+<span class="n">SKimg</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="n">Tmul</span><span class="o">.</span><span class="n">shape</span>
 </pre></div>
 </div>
 </div>
@@ -411,22 +418,22 @@ Tmul.shape
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3"><div class="highlight"><pre>
-<span></span>#matlab文件名  groudTrue
-matfn=&#39;gt_tianhui1200.mat&#39;;
-data=sio.loadmat(matfn);
-mk = data[&#39;gt&#39;]
-print(mk)
+<span></span><span class="c1">#matlab文件名  groudTrue</span>
+<span class="n">matfn</span><span class="o">=</span><span class="s1">&#39;gt_tianhui1200.mat&#39;</span><span class="p">;</span>
+<span class="n">data</span><span class="o">=</span><span class="n">sio</span><span class="o">.</span><span class="n">loadmat</span><span class="p">(</span><span class="n">matfn</span><span class="p">);</span>
+<span class="n">mk</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;gt&#39;</span><span class="p">]</span>
+<span class="k">print</span><span class="p">(</span><span class="n">mk</span><span class="p">)</span>
 
-moban=mk*0.0;
+<span class="n">moban</span><span class="o">=</span><span class="n">mk</span><span class="o">*</span><span class="mf">0.0</span><span class="p">;</span>
 
-plt.figure(figsize=(6,6))
-im = Image.fromarray(mk);
-plt.imshow(im,cmap=plt.cm.get_cmap(&#39;cubehelix_r&#39;,7));
-cbar=plt.colorbar()
-cbar.set_ticks(np.linspace(0,7,8))
-cbar.set_ticklabels((&#39;  &#39;,&#39;water&#39;,&#39;grass&#39;,&#39;bulding&#39;,&#39;road&#39;,&#39;luodi&#39;,&#39;background&#39;))
-plt.clim(-0.5,6.5)
-plt.show();
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+<span class="n">im</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">fromarray</span><span class="p">(</span><span class="n">mk</span><span class="p">);</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">im</span><span class="p">,</span><span class="n">cmap</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">get_cmap</span><span class="p">(</span><span class="s1">&#39;cubehelix_r&#39;</span><span class="p">,</span><span class="mi">7</span><span class="p">));</span>
+<span class="n">cbar</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">()</span>
+<span class="n">cbar</span><span class="o">.</span><span class="n">set_ticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">))</span>
+<span class="n">cbar</span><span class="o">.</span><span class="n">set_ticklabels</span><span class="p">((</span><span class="s1">&#39;  &#39;</span><span class="p">,</span><span class="s1">&#39;water&#39;</span><span class="p">,</span><span class="s1">&#39;grass&#39;</span><span class="p">,</span><span class="s1">&#39;bulding&#39;</span><span class="p">,</span><span class="s1">&#39;road&#39;</span><span class="p">,</span><span class="s1">&#39;luodi&#39;</span><span class="p">,</span><span class="s1">&#39;background&#39;</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">clim</span><span class="p">(</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span><span class="mf">6.5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">();</span>
 
 </pre></div>
 </div>
@@ -458,14 +465,14 @@ plt.show();
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3"><div class="highlight"><pre>
-<span></span>cols=Tmul.shape[0];  Rows=Tmul.shape[1];
-EarthGround=np.zeros((cols,Rows),dtype=tuple);
+<span></span><span class="n">cols</span><span class="o">=</span><span class="n">Tmul</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>  <span class="n">Rows</span><span class="o">=</span><span class="n">Tmul</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span>
+<span class="n">EarthGround</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">cols</span><span class="p">,</span><span class="n">Rows</span><span class="p">),</span><span class="n">dtype</span><span class="o">=</span><span class="nb">tuple</span><span class="p">);</span>
 
-for i in range(0,cols):
-    for j in range(0,Rows):
-        B1=Tmul[i][j][0]; B2=Tmul[i][j][1]; B3=Tmul[i][j][2]; B4=Tmul[i][j][3];
-        Fourbands=(B1,B2,B3,B4);
-        EarthGround[i][j]=Fourbands;
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">cols</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">Rows</span><span class="p">):</span>
+        <span class="n">B1</span><span class="o">=</span><span class="n">Tmul</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">][</span><span class="mi">0</span><span class="p">];</span> <span class="n">B2</span><span class="o">=</span><span class="n">Tmul</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">][</span><span class="mi">1</span><span class="p">];</span> <span class="n">B3</span><span class="o">=</span><span class="n">Tmul</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">][</span><span class="mi">2</span><span class="p">];</span> <span class="n">B4</span><span class="o">=</span><span class="n">Tmul</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">][</span><span class="mi">3</span><span class="p">];</span>
+        <span class="n">Fourbands</span><span class="o">=</span><span class="p">(</span><span class="n">B1</span><span class="p">,</span><span class="n">B2</span><span class="p">,</span><span class="n">B3</span><span class="p">,</span><span class="n">B4</span><span class="p">);</span>
+        <span class="n">EarthGround</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span><span class="o">=</span><span class="n">Fourbands</span><span class="p">;</span>
 </pre></div>
 </div>
 </div>
@@ -475,20 +482,20 @@ for i in range(0,cols):
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3"><div class="highlight"><pre>
-<span></span>ALLuniqueFrence=[]; ALLuniqueValue=[];  allsum=[];
-for j in range(1,7):
-   tempLabel=None;
-   tempLabel=(mk==j);
-   tempMask=tempLabel*EarthGround;
-   #allTempMask.append(tempMask);
-   SUM=len(tempLabel[tempLabel&gt;0]);  allsum.append(SUM);
-   mytemp=tempMask[tempLabel];
+<span></span><span class="n">ALLuniqueFrence</span><span class="o">=</span><span class="p">[];</span> <span class="n">ALLuniqueValue</span><span class="o">=</span><span class="p">[];</span>  <span class="n">allsum</span><span class="o">=</span><span class="p">[];</span>
+<span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">7</span><span class="p">):</span>
+   <span class="n">tempLabel</span><span class="o">=</span><span class="bp">None</span><span class="p">;</span>
+   <span class="n">tempLabel</span><span class="o">=</span><span class="p">(</span><span class="n">mk</span><span class="o">==</span><span class="n">j</span><span class="p">);</span>
+   <span class="n">tempMask</span><span class="o">=</span><span class="n">tempLabel</span><span class="o">*</span><span class="n">EarthGround</span><span class="p">;</span>
+   <span class="c1">#allTempMask.append(tempMask);</span>
+   <span class="n">SUM</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">tempLabel</span><span class="p">[</span><span class="n">tempLabel</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">]);</span>  <span class="n">allsum</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">SUM</span><span class="p">);</span>
+   <span class="n">mytemp</span><span class="o">=</span><span class="n">tempMask</span><span class="p">[</span><span class="n">tempLabel</span><span class="p">];</span>
 
-   Uvalue=np.unique(mytemp,return_index=True,return_inverse=True,return_counts = True)[0];
+   <span class="n">Uvalue</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">mytemp</span><span class="p">,</span><span class="n">return_index</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span><span class="n">return_inverse</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span><span class="n">return_counts</span> <span class="o">=</span> <span class="bp">True</span><span class="p">)[</span><span class="mi">0</span><span class="p">];</span>
 
-   Uinverse=np.unique(mytemp,return_index=True,return_inverse=True,return_counts = True)[2];
-   Ufrence=100*(np.unique(mytemp,return_index=True,return_inverse=True,return_counts = True)[3])/SUM;
-   ALLuniqueValue.append(Uvalue);  ALLuniqueFrence.append(Ufrence);
+   <span class="n">Uinverse</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">mytemp</span><span class="p">,</span><span class="n">return_index</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span><span class="n">return_inverse</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span><span class="n">return_counts</span> <span class="o">=</span> <span class="bp">True</span><span class="p">)[</span><span class="mi">2</span><span class="p">];</span>
+   <span class="n">Ufrence</span><span class="o">=</span><span class="mi">100</span><span class="o">*</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">mytemp</span><span class="p">,</span><span class="n">return_index</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span><span class="n">return_inverse</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span><span class="n">return_counts</span> <span class="o">=</span> <span class="bp">True</span><span class="p">)[</span><span class="mi">3</span><span class="p">])</span><span class="o">/</span><span class="n">SUM</span><span class="p">;</span>
+   <span class="n">ALLuniqueValue</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Uvalue</span><span class="p">);</span>  <span class="n">ALLuniqueFrence</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Ufrence</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
@@ -498,22 +505,22 @@ for j in range(1,7):
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3"><div class="highlight"><pre>
-<span></span>earth=EarthGround.flatten()
-ALLUV=np.unique(earth,return_index=True,return_inverse=True,return_counts = True)[0];
-ALLinverse=np.unique(earth,return_index=True,return_inverse=True,return_counts = True)[2];
+<span></span><span class="n">earth</span><span class="o">=</span><span class="n">EarthGround</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+<span class="n">ALLUV</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">earth</span><span class="p">,</span><span class="n">return_index</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span><span class="n">return_inverse</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span><span class="n">return_counts</span> <span class="o">=</span> <span class="bp">True</span><span class="p">)[</span><span class="mi">0</span><span class="p">];</span>
+<span class="n">ALLinverse</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">earth</span><span class="p">,</span><span class="n">return_index</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span><span class="n">return_inverse</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span><span class="n">return_counts</span> <span class="o">=</span> <span class="bp">True</span><span class="p">)[</span><span class="mi">2</span><span class="p">];</span>
 
-Countall=len(ALLUV);
-sixFrency=np.zeros((6,Countall),dtype=float);
+<span class="n">Countall</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">ALLUV</span><span class="p">);</span>
+<span class="n">sixFrency</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">6</span><span class="p">,</span><span class="n">Countall</span><span class="p">),</span><span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">);</span>
 
-for index in range(0,Countall):
-    for m in range(0,len(ALLuniqueValue)):
-        TempUvalue=[];  TempUFrency=[];
-        TempUvalue=ALLuniqueValue[m]; TempUFrency=ALLuniqueFrence[m];
-        for h in range(0,len(TempUvalue)):
-            if(ALLUV[index]==TempUvalue[h]):
-                sixFrency[m][index]=TempUFrency[h];
+<span class="k">for</span> <span class="n">index</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">Countall</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">ALLuniqueValue</span><span class="p">)):</span>
+        <span class="n">TempUvalue</span><span class="o">=</span><span class="p">[];</span>  <span class="n">TempUFrency</span><span class="o">=</span><span class="p">[];</span>
+        <span class="n">TempUvalue</span><span class="o">=</span><span class="n">ALLuniqueValue</span><span class="p">[</span><span class="n">m</span><span class="p">];</span> <span class="n">TempUFrency</span><span class="o">=</span><span class="n">ALLuniqueFrence</span><span class="p">[</span><span class="n">m</span><span class="p">];</span>
+        <span class="k">for</span> <span class="n">h</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">TempUvalue</span><span class="p">)):</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">ALLUV</span><span class="p">[</span><span class="n">index</span><span class="p">]</span><span class="o">==</span><span class="n">TempUvalue</span><span class="p">[</span><span class="n">h</span><span class="p">]):</span>
+                <span class="n">sixFrency</span><span class="p">[</span><span class="n">m</span><span class="p">][</span><span class="n">index</span><span class="p">]</span><span class="o">=</span><span class="n">TempUFrency</span><span class="p">[</span><span class="n">h</span><span class="p">];</span>
 
-print(sixFrency);  LastLabel=np.zeros(Countall);
+<span class="k">print</span><span class="p">(</span><span class="n">sixFrency</span><span class="p">);</span>  <span class="n">LastLabel</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">Countall</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
@@ -536,19 +543,19 @@ print(sixFrency);  LastLabel=np.zeros(Countall);
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3"><div class="highlight"><pre>
-<span></span>for xuhao in range(0,Countall):
-    TEMPSIX=[sixFrency[0][xuhao],sixFrency[1][xuhao],sixFrency[2][xuhao],sixFrency[3][xuhao],sixFrency[4][xuhao],sixFrency[5][xuhao]];
-    MAXP=0;   maxindex=0;
-    for  MI in range(0,len(TEMPSIX)):
-        if(TEMPSIX[MI]&gt;MAXP):
-            MAXP=TEMPSIX[MI]
-            maxindex=MI+1;
-    LastLabel[xuhao]=maxindex;
+<span></span><span class="k">for</span> <span class="n">xuhao</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">Countall</span><span class="p">):</span>
+    <span class="n">TEMPSIX</span><span class="o">=</span><span class="p">[</span><span class="n">sixFrency</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">xuhao</span><span class="p">],</span><span class="n">sixFrency</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="n">xuhao</span><span class="p">],</span><span class="n">sixFrency</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="n">xuhao</span><span class="p">],</span><span class="n">sixFrency</span><span class="p">[</span><span class="mi">3</span><span class="p">][</span><span class="n">xuhao</span><span class="p">],</span><span class="n">sixFrency</span><span class="p">[</span><span class="mi">4</span><span class="p">][</span><span class="n">xuhao</span><span class="p">],</span><span class="n">sixFrency</span><span class="p">[</span><span class="mi">5</span><span class="p">][</span><span class="n">xuhao</span><span class="p">]];</span>
+    <span class="n">MAXP</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>   <span class="n">maxindex</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+    <span class="k">for</span>  <span class="n">MI</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">TEMPSIX</span><span class="p">)):</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">TEMPSIX</span><span class="p">[</span><span class="n">MI</span><span class="p">]</span><span class="o">&gt;</span><span class="n">MAXP</span><span class="p">):</span>
+            <span class="n">MAXP</span><span class="o">=</span><span class="n">TEMPSIX</span><span class="p">[</span><span class="n">MI</span><span class="p">]</span>
+            <span class="n">maxindex</span><span class="o">=</span><span class="n">MI</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span>
+    <span class="n">LastLabel</span><span class="p">[</span><span class="n">xuhao</span><span class="p">]</span><span class="o">=</span><span class="n">maxindex</span><span class="p">;</span>
 
-finalLabel=mk-1;
-ALLfinalLabel=LastLabel[ALLinverse];
+<span class="n">finalLabel</span><span class="o">=</span><span class="n">mk</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+<span class="n">ALLfinalLabel</span><span class="o">=</span><span class="n">LastLabel</span><span class="p">[</span><span class="n">ALLinverse</span><span class="p">];</span>
 
-print(ALLfinalLabel);
+<span class="k">print</span><span class="p">(</span><span class="n">ALLfinalLabel</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
@@ -566,12 +573,12 @@ print(ALLfinalLabel);
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3"><div class="highlight"><pre>
-<span></span>import math
-for HL in range(0,len(ALLfinalLabel)):
-    h=math.floor(HL/1200); l=HL%1200;
-    finalLabel[h][l]=ALLfinalLabel[HL];
+<span></span><span class="kn">import</span> <span class="nn">math</span>
+<span class="k">for</span> <span class="n">HL</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">ALLfinalLabel</span><span class="p">)):</span>
+    <span class="n">h</span><span class="o">=</span><span class="n">math</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="n">HL</span><span class="o">/</span><span class="mi">1200</span><span class="p">);</span> <span class="n">l</span><span class="o">=</span><span class="n">HL</span><span class="o">%</span><span class="k">1200</span>;
+    <span class="n">finalLabel</span><span class="p">[</span><span class="n">h</span><span class="p">][</span><span class="n">l</span><span class="p">]</span><span class="o">=</span><span class="n">ALLfinalLabel</span><span class="p">[</span><span class="n">HL</span><span class="p">];</span>
 
-print(finalLabel);
+<span class="k">print</span><span class="p">(</span><span class="n">finalLabel</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
@@ -595,18 +602,18 @@ print(finalLabel);
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3"><div class="highlight"><pre>
-<span></span># 成图展示
-mylabel=finalLabel;
-print(mylabel)
-plt.figure(figsize=(6,6))
-im2 = Image.fromarray(mylabel);
-plt.imshow(im2,cmap=plt.cm.get_cmap(&#39;cubehelix_r&#39;,7));
-cbar=plt.colorbar()
-cbar.set_ticks(np.linspace(0,7,8))
-cbar.set_ticklabels((&#39;  &#39;,&#39;water&#39;,&#39;grass&#39;,&#39;bulding&#39;,&#39;road&#39;,&#39;luodi&#39;,&#39;background&#39;))
-plt.clim(-0.5,6.5)
-plt.title(&#39;MultiBand-four-predict&#39;);
-plt.show();
+<span></span><span class="c1"># 成图展示</span>
+<span class="n">mylabel</span><span class="o">=</span><span class="n">finalLabel</span><span class="p">;</span>
+<span class="k">print</span><span class="p">(</span><span class="n">mylabel</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+<span class="n">im2</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">fromarray</span><span class="p">(</span><span class="n">mylabel</span><span class="p">);</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">im2</span><span class="p">,</span><span class="n">cmap</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">get_cmap</span><span class="p">(</span><span class="s1">&#39;cubehelix_r&#39;</span><span class="p">,</span><span class="mi">7</span><span class="p">));</span>
+<span class="n">cbar</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">()</span>
+<span class="n">cbar</span><span class="o">.</span><span class="n">set_ticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">))</span>
+<span class="n">cbar</span><span class="o">.</span><span class="n">set_ticklabels</span><span class="p">((</span><span class="s1">&#39;  &#39;</span><span class="p">,</span><span class="s1">&#39;water&#39;</span><span class="p">,</span><span class="s1">&#39;grass&#39;</span><span class="p">,</span><span class="s1">&#39;bulding&#39;</span><span class="p">,</span><span class="s1">&#39;road&#39;</span><span class="p">,</span><span class="s1">&#39;luodi&#39;</span><span class="p">,</span><span class="s1">&#39;background&#39;</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">clim</span><span class="p">(</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span><span class="mf">6.5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;MultiBand-four-predict&#39;</span><span class="p">);</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">();</span>
 </pre></div>
 </div>
 </div>
@@ -637,11 +644,11 @@ plt.show();
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3"><div class="highlight"><pre>
-<span></span>TrueOrFalse=(mylabel==mk)
-TrueValue=TrueOrFalse[TrueOrFalse&gt;0]
-FalseValue=TrueOrFalse[TrueOrFalse==0]
-correct=len(TrueValue)/(len(TrueValue)+len(FalseValue));
-print(len(TrueValue));  print(len(FalseValue));  print(correct);
+<span></span><span class="n">TrueOrFalse</span><span class="o">=</span><span class="p">(</span><span class="n">mylabel</span><span class="o">==</span><span class="n">mk</span><span class="p">)</span>
+<span class="n">TrueValue</span><span class="o">=</span><span class="n">TrueOrFalse</span><span class="p">[</span><span class="n">TrueOrFalse</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">FalseValue</span><span class="o">=</span><span class="n">TrueOrFalse</span><span class="p">[</span><span class="n">TrueOrFalse</span><span class="o">==</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">correct</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">TrueValue</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">TrueValue</span><span class="p">)</span><span class="o">+</span><span class="nb">len</span><span class="p">(</span><span class="n">FalseValue</span><span class="p">));</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">TrueValue</span><span class="p">));</span>  <span class="k">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">FalseValue</span><span class="p">));</span>  <span class="k">print</span><span class="p">(</span><span class="n">correct</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
@@ -661,20 +668,20 @@ print(len(TrueValue));  print(len(FalseValue));  print(correct);
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3"><div class="highlight"><pre>
-<span></span>TRUEplace=(mylabel==mk)*10000;
-FalsePlace=(mylabel!=mk)*10000;
+<span></span><span class="n">TRUEplace</span><span class="o">=</span><span class="p">(</span><span class="n">mylabel</span><span class="o">==</span><span class="n">mk</span><span class="p">)</span><span class="o">*</span><span class="mi">10000</span><span class="p">;</span>
+<span class="n">FalsePlace</span><span class="o">=</span><span class="p">(</span><span class="n">mylabel</span><span class="o">!=</span><span class="n">mk</span><span class="p">)</span><span class="o">*</span><span class="mi">10000</span><span class="p">;</span>
 
-plt.figure(figsize=(6,6))
-imT = Image.fromarray(TRUEplace);
-plt.imshow(imT,cmap=&#39;Oranges&#39;);
-plt.title(&#39;Multiband-trueplace&#39;);
-plt.show();
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+<span class="n">imT</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">fromarray</span><span class="p">(</span><span class="n">TRUEplace</span><span class="p">);</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">imT</span><span class="p">,</span><span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;Oranges&#39;</span><span class="p">);</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Multiband-trueplace&#39;</span><span class="p">);</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">();</span>
 
-plt.figure(figsize=(6,6))
-imF = Image.fromarray(FalsePlace);
-plt.imshow(imF,cmap=&#39;Reds&#39;);
-plt.title(&#39;falseplace&#39;);
-plt.show();
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+<span class="n">imF</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">fromarray</span><span class="p">(</span><span class="n">FalsePlace</span><span class="p">);</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">imF</span><span class="p">,</span><span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;Reds&#39;</span><span class="p">);</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;falseplace&#39;</span><span class="p">);</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">();</span>
 </pre></div>
 </div>
 </div>
@@ -700,6 +707,15 @@ plt.show();
            </div>
           </div>
           <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="2.1_TwoNeiborHood.html" class="btn btn-neutral float-right" title="1. 二维特征空间类条件慨率可视化" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="1.1_Tquanse.html" class="btn btn-neutral" title="&lt;no title&gt;" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
   
 
   <hr/>

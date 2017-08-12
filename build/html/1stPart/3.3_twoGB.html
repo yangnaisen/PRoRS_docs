@@ -128,11 +128,13 @@
 </ul>
 <p class="caption"><span class="caption-text">第二部分:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../2ndPart/index.html">1. 图像平面分类</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../2ndPart/index.html">图像模式识别</a></li>
 </ul>
 <p class="caption"><span class="caption-text">第三部分:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../3rdPart/index.html">地表覆盖制图</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../TestContent.html">目录测试</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../TestContent.html#第二层">第二层</a></li>
 </ul>
 
             
@@ -398,20 +400,20 @@ div.nboutput div.output_area.stderr {
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3"><div class="highlight"><pre>
-<span></span># -*- coding:UTF-8 -*- ＃
-# 导入模块
-import sys
-import time
-import math
-import random
-import numpy as np
-from matplotlib.colors import ListedColormap
-from mpl_toolkits.mplot3d import Axes3D
-import matplotlib.pyplot as plt
+<span></span><span class="c1"># -*- coding:UTF-8 -*- ＃</span>
+<span class="c1"># 导入模块</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">import</span> <span class="nn">math</span>
+<span class="kn">import</span> <span class="nn">random</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">matplotlib.colors</span> <span class="kn">import</span> <span class="n">ListedColormap</span>
+<span class="kn">from</span> <span class="nn">mpl_toolkits.mplot3d</span> <span class="kn">import</span> <span class="n">Axes3D</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
 
 
-sys.path.append(r&quot;C:\Users\zhang\Desktop\exeserise&quot;)
-import mymodule as MYD
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">r&quot;C:\Users\zhang\Desktop\exeserise&quot;</span><span class="p">)</span>
+<span class="kn">import</span> <span class="nn">mymodule</span> <span class="kn">as</span> <span class="nn">MYD</span>
 </pre></div>
 </div>
 </div>
@@ -423,51 +425,51 @@ import mymodule as MYD
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3"><div class="highlight"><pre>
-<span></span>def CalculationMFS(X):
-    sumX=X[0];
-    for i in range(1,len(X)):
-        sumX=sumX+X[i];
-    mean=sumX/len(X);
-    VAR=math.pow((X[0]-mean),2)
-    for j in range(1,len(X)):
-        VAR=VAR+math.pow((X[j]-mean),2);
-    VAR=VAR/len(X);
-    Bar=math.sqrt(VAR);
-    return mean,VAR,Bar;
+<span></span><span class="k">def</span> <span class="nf">CalculationMFS</span><span class="p">(</span><span class="n">X</span><span class="p">):</span>
+    <span class="n">sumX</span><span class="o">=</span><span class="n">X</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">X</span><span class="p">)):</span>
+        <span class="n">sumX</span><span class="o">=</span><span class="n">sumX</span><span class="o">+</span><span class="n">X</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+    <span class="n">mean</span><span class="o">=</span><span class="n">sumX</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">X</span><span class="p">);</span>
+    <span class="n">VAR</span><span class="o">=</span><span class="n">math</span><span class="o">.</span><span class="n">pow</span><span class="p">((</span><span class="n">X</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="n">mean</span><span class="p">),</span><span class="mi">2</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">X</span><span class="p">)):</span>
+        <span class="n">VAR</span><span class="o">=</span><span class="n">VAR</span><span class="o">+</span><span class="n">math</span><span class="o">.</span><span class="n">pow</span><span class="p">((</span><span class="n">X</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">-</span><span class="n">mean</span><span class="p">),</span><span class="mi">2</span><span class="p">);</span>
+    <span class="n">VAR</span><span class="o">=</span><span class="n">VAR</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">X</span><span class="p">);</span>
+    <span class="n">Bar</span><span class="o">=</span><span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">VAR</span><span class="p">);</span>
+    <span class="k">return</span> <span class="n">mean</span><span class="p">,</span><span class="n">VAR</span><span class="p">,</span><span class="n">Bar</span><span class="p">;</span>
 
-def Zvalue(u1,u2,s1,s2,p,points):
-    Z=[];
-    for i in range(0,len(points)):
-        fenmu=2*math.pi*s1*s2*math.sqrt(1-p*p);
-        fenzi=(math.pow((points[i][0]-u1),2)/math.pow(s1,2))-(2*p*(points[i][0]-u1)*(points[i][1]-u2)/(u1*u2))+(math.pow((points[i][1]-u2),2)/math.pow(s2,2))
-        expfenzi=math.exp(-0.5*fenzi/(1-p*p))
-        tempz=expfenzi/fenmu
-        Z.append(tempz)
-    return Z;
+<span class="k">def</span> <span class="nf">Zvalue</span><span class="p">(</span><span class="n">u1</span><span class="p">,</span><span class="n">u2</span><span class="p">,</span><span class="n">s1</span><span class="p">,</span><span class="n">s2</span><span class="p">,</span><span class="n">p</span><span class="p">,</span><span class="n">points</span><span class="p">):</span>
+    <span class="n">Z</span><span class="o">=</span><span class="p">[];</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">points</span><span class="p">)):</span>
+        <span class="n">fenmu</span><span class="o">=</span><span class="mi">2</span><span class="o">*</span><span class="n">math</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">s1</span><span class="o">*</span><span class="n">s2</span><span class="o">*</span><span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">p</span><span class="o">*</span><span class="n">p</span><span class="p">);</span>
+        <span class="n">fenzi</span><span class="o">=</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">pow</span><span class="p">((</span><span class="n">points</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="n">u1</span><span class="p">),</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="n">math</span><span class="o">.</span><span class="n">pow</span><span class="p">(</span><span class="n">s1</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span><span class="o">-</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">p</span><span class="o">*</span><span class="p">(</span><span class="n">points</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="n">u1</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">points</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">u2</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">u1</span><span class="o">*</span><span class="n">u2</span><span class="p">))</span><span class="o">+</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">pow</span><span class="p">((</span><span class="n">points</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">u2</span><span class="p">),</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="n">math</span><span class="o">.</span><span class="n">pow</span><span class="p">(</span><span class="n">s2</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
+        <span class="n">expfenzi</span><span class="o">=</span><span class="n">math</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mf">0.5</span><span class="o">*</span><span class="n">fenzi</span><span class="o">/</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">p</span><span class="o">*</span><span class="n">p</span><span class="p">))</span>
+        <span class="n">tempz</span><span class="o">=</span><span class="n">expfenzi</span><span class="o">/</span><span class="n">fenmu</span>
+        <span class="n">Z</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">tempz</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">Z</span><span class="p">;</span>
 
-def COVM(u1,u2,points):
-    X0=points[:,0]; X1=points[:,1];
-    SUM=0;
-    for i in range(0,len(X0)):
-        for j in range(0,len(X1)):
-            SUM=SUM+(X0[i]-u1)*(X1[j]-u2)
-    COV=SUM/(len(X0)*len(X1))
-    return COV;
+<span class="k">def</span> <span class="nf">COVM</span><span class="p">(</span><span class="n">u1</span><span class="p">,</span><span class="n">u2</span><span class="p">,</span><span class="n">points</span><span class="p">):</span>
+    <span class="n">X0</span><span class="o">=</span><span class="n">points</span><span class="p">[:,</span><span class="mi">0</span><span class="p">];</span> <span class="n">X1</span><span class="o">=</span><span class="n">points</span><span class="p">[:,</span><span class="mi">1</span><span class="p">];</span>
+    <span class="n">SUM</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">X0</span><span class="p">)):</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">X1</span><span class="p">)):</span>
+            <span class="n">SUM</span><span class="o">=</span><span class="n">SUM</span><span class="o">+</span><span class="p">(</span><span class="n">X0</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-</span><span class="n">u1</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">X1</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">-</span><span class="n">u2</span><span class="p">)</span>
+    <span class="n">COV</span><span class="o">=</span><span class="n">SUM</span><span class="o">/</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">X0</span><span class="p">)</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">X1</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">COV</span><span class="p">;</span>
 
-def RelationP(COV,VAR1,VAR2):
-    P=COV/math.sqrt(VAR1*VAR2)
-    return P;
+<span class="k">def</span> <span class="nf">RelationP</span><span class="p">(</span><span class="n">COV</span><span class="p">,</span><span class="n">VAR1</span><span class="p">,</span><span class="n">VAR2</span><span class="p">):</span>
+    <span class="n">P</span><span class="o">=</span><span class="n">COV</span><span class="o">/</span><span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">VAR1</span><span class="o">*</span><span class="n">VAR2</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">P</span><span class="p">;</span>
 
-def ZFclass(X,Y):
-    zheng=[]; fu=[];
-    for i in range(0,len(X)):
-        if(Y[i]&gt;0):
-            zheng.append(X[i])
-        else:
-            fu.append(X[i])
-    zheng=np.array(zheng)
-    fu=np.array(fu)
-    return zheng,fu;
+<span class="k">def</span> <span class="nf">ZFclass</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">Y</span><span class="p">):</span>
+    <span class="n">zheng</span><span class="o">=</span><span class="p">[];</span> <span class="n">fu</span><span class="o">=</span><span class="p">[];</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">X</span><span class="p">)):</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">Y</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">):</span>
+            <span class="n">zheng</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">X</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">fu</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">X</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+    <span class="n">zheng</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">zheng</span><span class="p">)</span>
+    <span class="n">fu</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">fu</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">zheng</span><span class="p">,</span><span class="n">fu</span><span class="p">;</span>
 </pre></div>
 </div>
 </div>
@@ -477,18 +479,18 @@ def ZFclass(X,Y):
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3"><div class="highlight"><pre>
-<span></span>n_samples=4000
-XB,yb=MYD.makeblods(n_samples)
-XR,yr=MYD.makerandoms(n_samples)
-XC,yc=MYD.makecircles(n_samples)
-XH,yh=MYD.makeHelixs(n_samples)
-XAS = [XB, XR, XC,XH]
-YAS=[yb,yr,yc,yh]
+<span></span><span class="n">n_samples</span><span class="o">=</span><span class="mi">4000</span>
+<span class="n">XB</span><span class="p">,</span><span class="n">yb</span><span class="o">=</span><span class="n">MYD</span><span class="o">.</span><span class="n">makeblods</span><span class="p">(</span><span class="n">n_samples</span><span class="p">)</span>
+<span class="n">XR</span><span class="p">,</span><span class="n">yr</span><span class="o">=</span><span class="n">MYD</span><span class="o">.</span><span class="n">makerandoms</span><span class="p">(</span><span class="n">n_samples</span><span class="p">)</span>
+<span class="n">XC</span><span class="p">,</span><span class="n">yc</span><span class="o">=</span><span class="n">MYD</span><span class="o">.</span><span class="n">makecircles</span><span class="p">(</span><span class="n">n_samples</span><span class="p">)</span>
+<span class="n">XH</span><span class="p">,</span><span class="n">yh</span><span class="o">=</span><span class="n">MYD</span><span class="o">.</span><span class="n">makeHelixs</span><span class="p">(</span><span class="n">n_samples</span><span class="p">)</span>
+<span class="n">XAS</span> <span class="o">=</span> <span class="p">[</span><span class="n">XB</span><span class="p">,</span> <span class="n">XR</span><span class="p">,</span> <span class="n">XC</span><span class="p">,</span><span class="n">XH</span><span class="p">]</span>
+<span class="n">YAS</span><span class="o">=</span><span class="p">[</span><span class="n">yb</span><span class="p">,</span><span class="n">yr</span><span class="p">,</span><span class="n">yc</span><span class="p">,</span><span class="n">yh</span><span class="p">]</span>
 
-cor = ListedColormap([&#39;Blue&#39;, &#39;Orange&#39;])
-titlename=[&#39;two blob&#39;,&#39;two random&#39;,&#39;two circle&#39;,&#39;two heixl&#39;]
-cmap=[cor,cor,cor,cor]
-MYD.DrawManyChart(XAS,YAS,cmap,24,4,titlename,10,1,4)
+<span class="n">cor</span> <span class="o">=</span> <span class="n">ListedColormap</span><span class="p">([</span><span class="s1">&#39;Blue&#39;</span><span class="p">,</span> <span class="s1">&#39;Orange&#39;</span><span class="p">])</span>
+<span class="n">titlename</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;two blob&#39;</span><span class="p">,</span><span class="s1">&#39;two random&#39;</span><span class="p">,</span><span class="s1">&#39;two circle&#39;</span><span class="p">,</span><span class="s1">&#39;two heixl&#39;</span><span class="p">]</span>
+<span class="n">cmap</span><span class="o">=</span><span class="p">[</span><span class="n">cor</span><span class="p">,</span><span class="n">cor</span><span class="p">,</span><span class="n">cor</span><span class="p">,</span><span class="n">cor</span><span class="p">]</span>
+<span class="n">MYD</span><span class="o">.</span><span class="n">DrawManyChart</span><span class="p">(</span><span class="n">XAS</span><span class="p">,</span><span class="n">YAS</span><span class="p">,</span><span class="n">cmap</span><span class="p">,</span><span class="mi">24</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="n">titlename</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -505,38 +507,38 @@ MYD.DrawManyChart(XAS,YAS,cmap,24,4,titlename,10,1,4)
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3"><div class="highlight"><pre>
-<span></span>zhenglabel=[]; fulabel=[];
-fig = plt.figure(figsize=(26,5))
-for i in range(0,len(XAS)):
-    zheng,fu=ZFclass(XAS[i],YAS[i])
-    Xxmean,Xxvar,XxBar=CalculationMFS(zheng[:,0])
-    Xymean,Xyvar,XyBar=CalculationMFS(zheng[:,1])
-    Zlabelz=Zvalue(Xxmean,Xymean,XxBar,XyBar,0.5,zheng)
-    XFxmean,XFxvar,XFxBar=CalculationMFS(fu[:,0])
-    XFymean,XFyvar,XFyBar=CalculationMFS(fu[:,1])
-    ZlabelF=Zvalue(XFxmean,XFymean,XFxBar,XFyBar,0.5,fu)
+<span></span><span class="n">zhenglabel</span><span class="o">=</span><span class="p">[];</span> <span class="n">fulabel</span><span class="o">=</span><span class="p">[];</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">26</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">XAS</span><span class="p">)):</span>
+    <span class="n">zheng</span><span class="p">,</span><span class="n">fu</span><span class="o">=</span><span class="n">ZFclass</span><span class="p">(</span><span class="n">XAS</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">YAS</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+    <span class="n">Xxmean</span><span class="p">,</span><span class="n">Xxvar</span><span class="p">,</span><span class="n">XxBar</span><span class="o">=</span><span class="n">CalculationMFS</span><span class="p">(</span><span class="n">zheng</span><span class="p">[:,</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">Xymean</span><span class="p">,</span><span class="n">Xyvar</span><span class="p">,</span><span class="n">XyBar</span><span class="o">=</span><span class="n">CalculationMFS</span><span class="p">(</span><span class="n">zheng</span><span class="p">[:,</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">Zlabelz</span><span class="o">=</span><span class="n">Zvalue</span><span class="p">(</span><span class="n">Xxmean</span><span class="p">,</span><span class="n">Xymean</span><span class="p">,</span><span class="n">XxBar</span><span class="p">,</span><span class="n">XyBar</span><span class="p">,</span><span class="mf">0.5</span><span class="p">,</span><span class="n">zheng</span><span class="p">)</span>
+    <span class="n">XFxmean</span><span class="p">,</span><span class="n">XFxvar</span><span class="p">,</span><span class="n">XFxBar</span><span class="o">=</span><span class="n">CalculationMFS</span><span class="p">(</span><span class="n">fu</span><span class="p">[:,</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">XFymean</span><span class="p">,</span><span class="n">XFyvar</span><span class="p">,</span><span class="n">XFyBar</span><span class="o">=</span><span class="n">CalculationMFS</span><span class="p">(</span><span class="n">fu</span><span class="p">[:,</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">ZlabelF</span><span class="o">=</span><span class="n">Zvalue</span><span class="p">(</span><span class="n">XFxmean</span><span class="p">,</span><span class="n">XFymean</span><span class="p">,</span><span class="n">XFxBar</span><span class="p">,</span><span class="n">XFyBar</span><span class="p">,</span><span class="mf">0.5</span><span class="p">,</span><span class="n">fu</span><span class="p">)</span>
 
-    COVzheng=COVM(Xxmean,Xymean,zheng)
-    COVfu=COVM(XFxmean,XFymean,fu)
+    <span class="n">COVzheng</span><span class="o">=</span><span class="n">COVM</span><span class="p">(</span><span class="n">Xxmean</span><span class="p">,</span><span class="n">Xymean</span><span class="p">,</span><span class="n">zheng</span><span class="p">)</span>
+    <span class="n">COVfu</span><span class="o">=</span><span class="n">COVM</span><span class="p">(</span><span class="n">XFxmean</span><span class="p">,</span><span class="n">XFymean</span><span class="p">,</span><span class="n">fu</span><span class="p">)</span>
 
-    COVMzheng=[Xxvar,COVzheng,COVzheng,Xyvar]
-    COVMFU=[XFxvar,COVfu,COVfu,XFyvar]
+    <span class="n">COVMzheng</span><span class="o">=</span><span class="p">[</span><span class="n">Xxvar</span><span class="p">,</span><span class="n">COVzheng</span><span class="p">,</span><span class="n">COVzheng</span><span class="p">,</span><span class="n">Xyvar</span><span class="p">]</span>
+    <span class="n">COVMFU</span><span class="o">=</span><span class="p">[</span><span class="n">XFxvar</span><span class="p">,</span><span class="n">COVfu</span><span class="p">,</span><span class="n">COVfu</span><span class="p">,</span><span class="n">XFyvar</span><span class="p">]</span>
 
-    Pzheng=RelationP(COVzheng,Xxvar,Xyvar)
-    Pfu=RelationP(COVfu,XFxvar,XFyvar)
+    <span class="n">Pzheng</span><span class="o">=</span><span class="n">RelationP</span><span class="p">(</span><span class="n">COVzheng</span><span class="p">,</span><span class="n">Xxvar</span><span class="p">,</span><span class="n">Xyvar</span><span class="p">)</span>
+    <span class="n">Pfu</span><span class="o">=</span><span class="n">RelationP</span><span class="p">(</span><span class="n">COVfu</span><span class="p">,</span><span class="n">XFxvar</span><span class="p">,</span><span class="n">XFyvar</span><span class="p">)</span>
 
-    zhengxishu=[Xxmean,Xymean,Xxvar,Xyvar,Pzheng]
-    fuxishu=[XFxmean,XFymean,XFxvar,XFyvar,Pfu]
+    <span class="n">zhengxishu</span><span class="o">=</span><span class="p">[</span><span class="n">Xxmean</span><span class="p">,</span><span class="n">Xymean</span><span class="p">,</span><span class="n">Xxvar</span><span class="p">,</span><span class="n">Xyvar</span><span class="p">,</span><span class="n">Pzheng</span><span class="p">]</span>
+    <span class="n">fuxishu</span><span class="o">=</span><span class="p">[</span><span class="n">XFxmean</span><span class="p">,</span><span class="n">XFymean</span><span class="p">,</span><span class="n">XFxvar</span><span class="p">,</span><span class="n">XFyvar</span><span class="p">,</span><span class="n">Pfu</span><span class="p">]</span>
 
-    print(zhengxishu)
-    print(fuxishu)
-    #zhenglabel.append(Zlabelz)
-    #fulabel.append(ZlabelF);
-    ax = fig.add_subplot(1,4,i+1, projection=&#39;3d&#39;)
-    ax.plot_trisurf(zheng[:,0],zheng[:,1],Zlabelz)
-    ax.plot_trisurf(fu[:,0],fu[:,1],ZlabelF);
+    <span class="k">print</span><span class="p">(</span><span class="n">zhengxishu</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">fuxishu</span><span class="p">)</span>
+    <span class="c1">#zhenglabel.append(Zlabelz)</span>
+    <span class="c1">#fulabel.append(ZlabelF);</span>
+    <span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">projection</span><span class="o">=</span><span class="s1">&#39;3d&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot_trisurf</span><span class="p">(</span><span class="n">zheng</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span><span class="n">zheng</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span><span class="n">Zlabelz</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot_trisurf</span><span class="p">(</span><span class="n">fu</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span><span class="n">fu</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span><span class="n">ZlabelF</span><span class="p">);</span>
 
-plt.show()
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -568,21 +570,21 @@ plt.show()
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3"><div class="highlight"><pre>
-<span></span>for i in range(0,len(XAS)):
-    zheng,fu=ZFclass(XAS[i],YAS[i])
-    Xxmean,Xxvar,XxBar=CalculationMFS(zheng[:,0])
-    Xymean,Xyvar,XyBar=CalculationMFS(zheng[:,1])
-    Zlabelz=Zvalue(Xxmean,Xymean,XxBar,XyBar,0.5,zheng)
-    XFxmean,XFxvar,XFxBar=CalculationMFS(fu[:,0])
-    XFymean,XFyvar,XFyBar=CalculationMFS(fu[:,1])
-    ZlabelF=Zvalue(XFxmean,XFymean,XFxBar,XFyBar,0.5,fu)
-    fig = plt.figure(figsize=(10,8))
-    ax = fig.add_subplot(111, projection=&#39;3d&#39;)
-    #ax.plot_surface(zheng[:,0],zheng[:,1],Zlabelz,rstride=2,cstride=1,cmap=plt.cm.coolwarm,alpha=0.8)
-    #ax.plot_surface(fu[:,0],fu[:,1],ZlabelF,rstride=2,cstride=1,cmap=plt.cm.coolwarm,alpha=0.8)
-    ax.plot_trisurf(zheng[:,0],zheng[:,1],Zlabelz)
-    ax.plot_trisurf(fu[:,0],fu[:,1],ZlabelF);
-    plt.show();
+<span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">XAS</span><span class="p">)):</span>
+    <span class="n">zheng</span><span class="p">,</span><span class="n">fu</span><span class="o">=</span><span class="n">ZFclass</span><span class="p">(</span><span class="n">XAS</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">YAS</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+    <span class="n">Xxmean</span><span class="p">,</span><span class="n">Xxvar</span><span class="p">,</span><span class="n">XxBar</span><span class="o">=</span><span class="n">CalculationMFS</span><span class="p">(</span><span class="n">zheng</span><span class="p">[:,</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">Xymean</span><span class="p">,</span><span class="n">Xyvar</span><span class="p">,</span><span class="n">XyBar</span><span class="o">=</span><span class="n">CalculationMFS</span><span class="p">(</span><span class="n">zheng</span><span class="p">[:,</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">Zlabelz</span><span class="o">=</span><span class="n">Zvalue</span><span class="p">(</span><span class="n">Xxmean</span><span class="p">,</span><span class="n">Xymean</span><span class="p">,</span><span class="n">XxBar</span><span class="p">,</span><span class="n">XyBar</span><span class="p">,</span><span class="mf">0.5</span><span class="p">,</span><span class="n">zheng</span><span class="p">)</span>
+    <span class="n">XFxmean</span><span class="p">,</span><span class="n">XFxvar</span><span class="p">,</span><span class="n">XFxBar</span><span class="o">=</span><span class="n">CalculationMFS</span><span class="p">(</span><span class="n">fu</span><span class="p">[:,</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">XFymean</span><span class="p">,</span><span class="n">XFyvar</span><span class="p">,</span><span class="n">XFyBar</span><span class="o">=</span><span class="n">CalculationMFS</span><span class="p">(</span><span class="n">fu</span><span class="p">[:,</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">ZlabelF</span><span class="o">=</span><span class="n">Zvalue</span><span class="p">(</span><span class="n">XFxmean</span><span class="p">,</span><span class="n">XFymean</span><span class="p">,</span><span class="n">XFxBar</span><span class="p">,</span><span class="n">XFyBar</span><span class="p">,</span><span class="mf">0.5</span><span class="p">,</span><span class="n">fu</span><span class="p">)</span>
+    <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">8</span><span class="p">))</span>
+    <span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">,</span> <span class="n">projection</span><span class="o">=</span><span class="s1">&#39;3d&#39;</span><span class="p">)</span>
+    <span class="c1">#ax.plot_surface(zheng[:,0],zheng[:,1],Zlabelz,rstride=2,cstride=1,cmap=plt.cm.coolwarm,alpha=0.8)</span>
+    <span class="c1">#ax.plot_surface(fu[:,0],fu[:,1],ZlabelF,rstride=2,cstride=1,cmap=plt.cm.coolwarm,alpha=0.8)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot_trisurf</span><span class="p">(</span><span class="n">zheng</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span><span class="n">zheng</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span><span class="n">Zlabelz</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot_trisurf</span><span class="p">(</span><span class="n">fu</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span><span class="n">fu</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span><span class="n">ZlabelF</span><span class="p">);</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">();</span>
 </pre></div>
 </div>
 </div>
@@ -620,20 +622,20 @@ plt.show()
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3"><div class="highlight"><pre>
-<span></span>zhengXB,fuXB=ZFclass(XB,yb)
-XBxmean,XBxvar,XBxBar=CalculationMFS(zhengXB[:,0])
-XBymean,XByvar,XByBar=CalculationMFS(zhengXB[:,1])
-Zlabel=Zvalue(XBxmean,XBymean,XBxBar,XByBar,0.5,zhengXB)
+<span></span><span class="n">zhengXB</span><span class="p">,</span><span class="n">fuXB</span><span class="o">=</span><span class="n">ZFclass</span><span class="p">(</span><span class="n">XB</span><span class="p">,</span><span class="n">yb</span><span class="p">)</span>
+<span class="n">XBxmean</span><span class="p">,</span><span class="n">XBxvar</span><span class="p">,</span><span class="n">XBxBar</span><span class="o">=</span><span class="n">CalculationMFS</span><span class="p">(</span><span class="n">zhengXB</span><span class="p">[:,</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">XBymean</span><span class="p">,</span><span class="n">XByvar</span><span class="p">,</span><span class="n">XByBar</span><span class="o">=</span><span class="n">CalculationMFS</span><span class="p">(</span><span class="n">zhengXB</span><span class="p">[:,</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">Zlabel</span><span class="o">=</span><span class="n">Zvalue</span><span class="p">(</span><span class="n">XBxmean</span><span class="p">,</span><span class="n">XBymean</span><span class="p">,</span><span class="n">XBxBar</span><span class="p">,</span><span class="n">XByBar</span><span class="p">,</span><span class="mf">0.5</span><span class="p">,</span><span class="n">zhengXB</span><span class="p">)</span>
 
-XBFxmean,XBFxvar,XBFxBar=CalculationMFS(fuXB[:,0])
-XBFymean,XBFyvar,XBFyBar=CalculationMFS(fuXB[:,1])
-ZlabelF=Zvalue(XBFxmean,XBFymean,XBFxBar,XBFyBar,0.5,fuXB)
+<span class="n">XBFxmean</span><span class="p">,</span><span class="n">XBFxvar</span><span class="p">,</span><span class="n">XBFxBar</span><span class="o">=</span><span class="n">CalculationMFS</span><span class="p">(</span><span class="n">fuXB</span><span class="p">[:,</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">XBFymean</span><span class="p">,</span><span class="n">XBFyvar</span><span class="p">,</span><span class="n">XBFyBar</span><span class="o">=</span><span class="n">CalculationMFS</span><span class="p">(</span><span class="n">fuXB</span><span class="p">[:,</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">ZlabelF</span><span class="o">=</span><span class="n">Zvalue</span><span class="p">(</span><span class="n">XBFxmean</span><span class="p">,</span><span class="n">XBFymean</span><span class="p">,</span><span class="n">XBFxBar</span><span class="p">,</span><span class="n">XBFyBar</span><span class="p">,</span><span class="mf">0.5</span><span class="p">,</span><span class="n">fuXB</span><span class="p">)</span>
 
-fig = plt.figure()
-ax = fig.add_subplot(111, projection=&#39;3d&#39;)
-ax.plot_trisurf(zhengXB[:,0],zhengXB[:,1],Zlabel)
-ax.plot_trisurf(fuXB[:,0],fuXB[:,1],ZlabelF)
-plt.show()
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">,</span> <span class="n">projection</span><span class="o">=</span><span class="s1">&#39;3d&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot_trisurf</span><span class="p">(</span><span class="n">zhengXB</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span><span class="n">zhengXB</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span><span class="n">Zlabel</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot_trisurf</span><span class="p">(</span><span class="n">fuXB</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span><span class="n">fuXB</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span><span class="n">ZlabelF</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>

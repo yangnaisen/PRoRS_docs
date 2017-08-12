@@ -136,11 +136,13 @@
 </ul>
 <p class="caption"><span class="caption-text">第二部分:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../2ndPart/index.html">1. 图像平面分类</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../2ndPart/index.html">图像模式识别</a></li>
 </ul>
 <p class="caption"><span class="caption-text">第三部分:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../3rdPart/index.html">地表覆盖制图</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../TestContent.html">目录测试</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../TestContent.html#第二层">第二层</a></li>
 </ul>
 
             
@@ -410,28 +412,28 @@ div.nboutput div.output_area.stderr {
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3"><div class="highlight"><pre>
-<span></span># -*- coding:UTF-8 -*- ＃
-# 导入模块
-import sys
-import time
-import random
-import numpy as np
-import matplotlib.pyplot as plt
-from ipywidgets import interactive,FloatSlider
+<span></span><span class="c1"># -*- coding:UTF-8 -*- ＃</span>
+<span class="c1"># 导入模块</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">import</span> <span class="nn">random</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">ipywidgets</span> <span class="kn">import</span> <span class="n">interactive</span><span class="p">,</span><span class="n">FloatSlider</span>
 
-from sklearn import cluster,datasets
-from matplotlib.colors import ListedColormap
-from sklearn.neighbors import kneighbors_graph
-from sklearn.preprocessing import StandardScaler
+<span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">cluster</span><span class="p">,</span><span class="n">datasets</span>
+<span class="kn">from</span> <span class="nn">matplotlib.colors</span> <span class="kn">import</span> <span class="n">ListedColormap</span>
+<span class="kn">from</span> <span class="nn">sklearn.neighbors</span> <span class="kn">import</span> <span class="n">kneighbors_graph</span>
+<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">StandardScaler</span>
 
-from sklearn.neighbors import KNeighborsClassifier
-from sklearn.naive_bayes import GaussianNB
-from sklearn.discriminant_analysis import QuadraticDiscriminantAnalysis
-from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
+<span class="kn">from</span> <span class="nn">sklearn.neighbors</span> <span class="kn">import</span> <span class="n">KNeighborsClassifier</span>
+<span class="kn">from</span> <span class="nn">sklearn.naive_bayes</span> <span class="kn">import</span> <span class="n">GaussianNB</span>
+<span class="kn">from</span> <span class="nn">sklearn.discriminant_analysis</span> <span class="kn">import</span> <span class="n">QuadraticDiscriminantAnalysis</span>
+<span class="kn">from</span> <span class="nn">sklearn.discriminant_analysis</span> <span class="kn">import</span> <span class="n">LinearDiscriminantAnalysis</span>
 
-from sklearn.linear_model import SGDClassifier, Perceptron
+<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">SGDClassifier</span><span class="p">,</span> <span class="n">Perceptron</span>
 
-import mymodule as MYD
+<span class="kn">import</span> <span class="nn">mymodule</span> <span class="kn">as</span> <span class="nn">MYD</span>
 </pre></div>
 </div>
 </div>
@@ -443,18 +445,18 @@ import mymodule as MYD
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3"><div class="highlight"><pre>
-<span></span>n_samples=1500
-XB,yb=MYD.makeblods(n_samples)
-XR,yr=MYD.makerandoms(n_samples)
-XC,yc=MYD.makecircles(n_samples)
-XH,yh=MYD.makeHelixs(n_samples)
-XAS = [XB, XR, XC,XH]
-YAS=[yb,yr,yc,yh]
+<span></span><span class="n">n_samples</span><span class="o">=</span><span class="mi">1500</span>
+<span class="n">XB</span><span class="p">,</span><span class="n">yb</span><span class="o">=</span><span class="n">MYD</span><span class="o">.</span><span class="n">makeblods</span><span class="p">(</span><span class="n">n_samples</span><span class="p">)</span>
+<span class="n">XR</span><span class="p">,</span><span class="n">yr</span><span class="o">=</span><span class="n">MYD</span><span class="o">.</span><span class="n">makerandoms</span><span class="p">(</span><span class="n">n_samples</span><span class="p">)</span>
+<span class="n">XC</span><span class="p">,</span><span class="n">yc</span><span class="o">=</span><span class="n">MYD</span><span class="o">.</span><span class="n">makecircles</span><span class="p">(</span><span class="n">n_samples</span><span class="p">)</span>
+<span class="n">XH</span><span class="p">,</span><span class="n">yh</span><span class="o">=</span><span class="n">MYD</span><span class="o">.</span><span class="n">makeHelixs</span><span class="p">(</span><span class="n">n_samples</span><span class="p">)</span>
+<span class="n">XAS</span> <span class="o">=</span> <span class="p">[</span><span class="n">XB</span><span class="p">,</span> <span class="n">XR</span><span class="p">,</span> <span class="n">XC</span><span class="p">,</span><span class="n">XH</span><span class="p">]</span>
+<span class="n">YAS</span><span class="o">=</span><span class="p">[</span><span class="n">yb</span><span class="p">,</span><span class="n">yr</span><span class="p">,</span><span class="n">yc</span><span class="p">,</span><span class="n">yh</span><span class="p">]</span>
 
-cor = ListedColormap([&#39;Blue&#39;, &#39;Orange&#39;])
-titlename=[&#39;two blob&#39;,&#39;two random&#39;,&#39;two circle&#39;,&#39;two heixl&#39;]
-cmap=[cor,cor,cor,cor]
-MYD.DrawManyChart(XAS,YAS,cmap,24,4,titlename,10,1,4)
+<span class="n">cor</span> <span class="o">=</span> <span class="n">ListedColormap</span><span class="p">([</span><span class="s1">&#39;Blue&#39;</span><span class="p">,</span> <span class="s1">&#39;Orange&#39;</span><span class="p">])</span>
+<span class="n">titlename</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;two blob&#39;</span><span class="p">,</span><span class="s1">&#39;two random&#39;</span><span class="p">,</span><span class="s1">&#39;two circle&#39;</span><span class="p">,</span><span class="s1">&#39;two heixl&#39;</span><span class="p">]</span>
+<span class="n">cmap</span><span class="o">=</span><span class="p">[</span><span class="n">cor</span><span class="p">,</span><span class="n">cor</span><span class="p">,</span><span class="n">cor</span><span class="p">,</span><span class="n">cor</span><span class="p">]</span>
+<span class="n">MYD</span><span class="o">.</span><span class="n">DrawManyChart</span><span class="p">(</span><span class="n">XAS</span><span class="p">,</span><span class="n">YAS</span><span class="p">,</span><span class="n">cmap</span><span class="p">,</span><span class="mi">24</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="n">titlename</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span>
 
 </pre></div>
 </div>
@@ -475,13 +477,13 @@ MYD.DrawManyChart(XAS,YAS,cmap,24,4,titlename,10,1,4)
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3"><div class="highlight"><pre>
-<span></span>Xzip,points=MYD.makeGrids()
-plt.figure()
-plt.scatter(points[:,0],points[:,1],s=0.009)
-plt.show()
-np.random.shuffle(points)
-points = np.array(points)
-points[:,0].shape
+<span></span><span class="n">Xzip</span><span class="p">,</span><span class="n">points</span><span class="o">=</span><span class="n">MYD</span><span class="o">.</span><span class="n">makeGrids</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">points</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span><span class="n">points</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span><span class="n">s</span><span class="o">=</span><span class="mf">0.009</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">points</span><span class="p">)</span>
+<span class="n">points</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">points</span><span class="p">)</span>
+<span class="n">points</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span>
 </pre></div>
 </div>
 </div>
@@ -511,41 +513,41 @@ points[:,0].shape
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3"><div class="highlight"><pre>
-<span></span>L=len(points)
-def f(a=0.1):
+<span></span><span class="n">L</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">points</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="mf">0.1</span><span class="p">):</span>
 
-    number_of_samples = int(a*L)
-    p = points[0:number_of_samples]
+    <span class="n">number_of_samples</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">a</span><span class="o">*</span><span class="n">L</span><span class="p">)</span>
+    <span class="n">p</span> <span class="o">=</span> <span class="n">points</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">number_of_samples</span><span class="p">]</span>
 
-    cor = ListedColormap([&#39;Blue&#39;, &#39;Orange&#39;])
-    lableKNC=[];  lableGB=[];  lableQDA=[];
+    <span class="n">cor</span> <span class="o">=</span> <span class="n">ListedColormap</span><span class="p">([</span><span class="s1">&#39;Blue&#39;</span><span class="p">,</span> <span class="s1">&#39;Orange&#39;</span><span class="p">])</span>
+    <span class="n">lableKNC</span><span class="o">=</span><span class="p">[];</span>  <span class="n">lableGB</span><span class="o">=</span><span class="p">[];</span>  <span class="n">lableQDA</span><span class="o">=</span><span class="p">[];</span>
 
-    for i in range(0,len(XAS)):
-        modelKNC=KNeighborsClassifier(1)
-        modelGB=GaussianNB()
-        modelQDA=QuadraticDiscriminantAnalysis()
-        modelKNC.fit(XAS[i],YAS[i])
-        modelGB.fit(XAS[i],YAS[i])
-        modelQDA.fit(XAS[i],YAS[i])
-        Lknc=modelKNC.predict(p); Lgb=modelGB.predict(p); Lqda=modelQDA.predict(p);
-        lableKNC.append(Lknc)
-        lableGB.append(Lgb)
-        lableQDA.append(Lqda);
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">XAS</span><span class="p">)):</span>
+        <span class="n">modelKNC</span><span class="o">=</span><span class="n">KNeighborsClassifier</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">modelGB</span><span class="o">=</span><span class="n">GaussianNB</span><span class="p">()</span>
+        <span class="n">modelQDA</span><span class="o">=</span><span class="n">QuadraticDiscriminantAnalysis</span><span class="p">()</span>
+        <span class="n">modelKNC</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">XAS</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">YAS</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+        <span class="n">modelGB</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">XAS</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">YAS</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+        <span class="n">modelQDA</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">XAS</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">YAS</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+        <span class="n">Lknc</span><span class="o">=</span><span class="n">modelKNC</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">p</span><span class="p">);</span> <span class="n">Lgb</span><span class="o">=</span><span class="n">modelGB</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">p</span><span class="p">);</span> <span class="n">Lqda</span><span class="o">=</span><span class="n">modelQDA</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">p</span><span class="p">);</span>
+        <span class="n">lableKNC</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Lknc</span><span class="p">)</span>
+        <span class="n">lableGB</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Lgb</span><span class="p">)</span>
+        <span class="n">lableQDA</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Lqda</span><span class="p">);</span>
 
-    labelclass=[lableKNC,lableGB,lableQDA]
+    <span class="n">labelclass</span><span class="o">=</span><span class="p">[</span><span class="n">lableKNC</span><span class="p">,</span><span class="n">lableGB</span><span class="p">,</span><span class="n">lableQDA</span><span class="p">]</span>
 
-    cormap=[cor,cor,cor,cor]
-    X=[p,p,p,p]
-    KNCname=[&#39;KNCB&#39;,&#39;KNCR&#39;,&#39;KNCC&#39;,&#39;KNCH&#39;]
-    GBname=[&#39;GBB&#39;,&#39;GBR&#39;,&#39;GBC&#39;,&#39;GBH&#39;]
-    QDAname=[&#39;QDAB&#39;,&#39;QDAR&#39;,&#39;QDAC&#39;,&#39;QDAH&#39;]
-    name=[KNCname,GBname,QDAname]
-    for k in range(0,3):
-        MYD.DrawManyChart(X,labelclass[k],cormap,18,4,name[k],10,1,4)
+    <span class="n">cormap</span><span class="o">=</span><span class="p">[</span><span class="n">cor</span><span class="p">,</span><span class="n">cor</span><span class="p">,</span><span class="n">cor</span><span class="p">,</span><span class="n">cor</span><span class="p">]</span>
+    <span class="n">X</span><span class="o">=</span><span class="p">[</span><span class="n">p</span><span class="p">,</span><span class="n">p</span><span class="p">,</span><span class="n">p</span><span class="p">,</span><span class="n">p</span><span class="p">]</span>
+    <span class="n">KNCname</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;KNCB&#39;</span><span class="p">,</span><span class="s1">&#39;KNCR&#39;</span><span class="p">,</span><span class="s1">&#39;KNCC&#39;</span><span class="p">,</span><span class="s1">&#39;KNCH&#39;</span><span class="p">]</span>
+    <span class="n">GBname</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;GBB&#39;</span><span class="p">,</span><span class="s1">&#39;GBR&#39;</span><span class="p">,</span><span class="s1">&#39;GBC&#39;</span><span class="p">,</span><span class="s1">&#39;GBH&#39;</span><span class="p">]</span>
+    <span class="n">QDAname</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;QDAB&#39;</span><span class="p">,</span><span class="s1">&#39;QDAR&#39;</span><span class="p">,</span><span class="s1">&#39;QDAC&#39;</span><span class="p">,</span><span class="s1">&#39;QDAH&#39;</span><span class="p">]</span>
+    <span class="n">name</span><span class="o">=</span><span class="p">[</span><span class="n">KNCname</span><span class="p">,</span><span class="n">GBname</span><span class="p">,</span><span class="n">QDAname</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">3</span><span class="p">):</span>
+        <span class="n">MYD</span><span class="o">.</span><span class="n">DrawManyChart</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">labelclass</span><span class="p">[</span><span class="n">k</span><span class="p">],</span><span class="n">cormap</span><span class="p">,</span><span class="mi">18</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="n">name</span><span class="p">[</span><span class="n">k</span><span class="p">],</span><span class="mi">10</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span>
 
-    #return number_of_samples
+    <span class="c1">#return number_of_samples</span>
 
-interactive(f, a=FloatSlider(min=0.1, max=1.0, step=0.1,value=0.1))
+<span class="n">interactive</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="n">FloatSlider</span><span class="p">(</span><span class="nb">min</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="nb">max</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span><span class="n">value</span><span class="o">=</span><span class="mf">0.1</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -564,47 +566,47 @@ interactive(f, a=FloatSlider(min=0.1, max=1.0, step=0.1,value=0.1))
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3"><div class="highlight"><pre>
-<span></span>SGDclfB = SGDClassifier(loss=&quot;log&quot;, alpha=0.01, n_iter=200, fit_intercept=True)
-SGDclfB.fit(XB, yb);
+<span></span><span class="n">SGDclfB</span> <span class="o">=</span> <span class="n">SGDClassifier</span><span class="p">(</span><span class="n">loss</span><span class="o">=</span><span class="s2">&quot;log&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">n_iter</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">fit_intercept</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">SGDclfB</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">XB</span><span class="p">,</span> <span class="n">yb</span><span class="p">);</span>
 
-SGDclfR = SGDClassifier(loss=&quot;log&quot;, alpha=0.01, n_iter=200, fit_intercept=True)
-SGDclfR.fit(XR, yr);
+<span class="n">SGDclfR</span> <span class="o">=</span> <span class="n">SGDClassifier</span><span class="p">(</span><span class="n">loss</span><span class="o">=</span><span class="s2">&quot;log&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">n_iter</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">fit_intercept</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">SGDclfR</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">XR</span><span class="p">,</span> <span class="n">yr</span><span class="p">);</span>
 
-SGDclfC = SGDClassifier(loss=&quot;log&quot;, alpha=0.01, n_iter=200, fit_intercept=True)
-SGDclfC.fit(XC, yc);
+<span class="n">SGDclfC</span> <span class="o">=</span> <span class="n">SGDClassifier</span><span class="p">(</span><span class="n">loss</span><span class="o">=</span><span class="s2">&quot;log&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">n_iter</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">fit_intercept</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">SGDclfC</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">XC</span><span class="p">,</span> <span class="n">yc</span><span class="p">);</span>
 
-SGDclfH = SGDClassifier(loss=&quot;log&quot;, alpha=0.01, n_iter=200, fit_intercept=True)
-SGDclfH.fit(XH, yh);
+<span class="n">SGDclfH</span> <span class="o">=</span> <span class="n">SGDClassifier</span><span class="p">(</span><span class="n">loss</span><span class="o">=</span><span class="s2">&quot;log&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">n_iter</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">fit_intercept</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">SGDclfH</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">XH</span><span class="p">,</span> <span class="n">yh</span><span class="p">);</span>
 
-GXB = SGDclfB.decision_function(XB); GXBNor=MYD.ZoomIn(GXB,1);
-GXR = SGDclfB.decision_function(XR); GXRNor=MYD.ZoomIn(GXR,1);
-GXC = SGDclfB.decision_function(XC); GXCNor=MYD.ZoomIn(GXC,1);
-GXH = SGDclfB.decision_function(XH); GXHNor=MYD.ZoomIn(GXH,1);
+<span class="n">GXB</span> <span class="o">=</span> <span class="n">SGDclfB</span><span class="o">.</span><span class="n">decision_function</span><span class="p">(</span><span class="n">XB</span><span class="p">);</span> <span class="n">GXBNor</span><span class="o">=</span><span class="n">MYD</span><span class="o">.</span><span class="n">ZoomIn</span><span class="p">(</span><span class="n">GXB</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span>
+<span class="n">GXR</span> <span class="o">=</span> <span class="n">SGDclfB</span><span class="o">.</span><span class="n">decision_function</span><span class="p">(</span><span class="n">XR</span><span class="p">);</span> <span class="n">GXRNor</span><span class="o">=</span><span class="n">MYD</span><span class="o">.</span><span class="n">ZoomIn</span><span class="p">(</span><span class="n">GXR</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span>
+<span class="n">GXC</span> <span class="o">=</span> <span class="n">SGDclfB</span><span class="o">.</span><span class="n">decision_function</span><span class="p">(</span><span class="n">XC</span><span class="p">);</span> <span class="n">GXCNor</span><span class="o">=</span><span class="n">MYD</span><span class="o">.</span><span class="n">ZoomIn</span><span class="p">(</span><span class="n">GXC</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span>
+<span class="n">GXH</span> <span class="o">=</span> <span class="n">SGDclfB</span><span class="o">.</span><span class="n">decision_function</span><span class="p">(</span><span class="n">XH</span><span class="p">);</span> <span class="n">GXHNor</span><span class="o">=</span><span class="n">MYD</span><span class="o">.</span><span class="n">ZoomIn</span><span class="p">(</span><span class="n">GXH</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span>
 
-HXB=np.array(MYD.MultiplyDW(GXBNor,yb)); HXR=np.array(MYD.MultiplyDW(GXRNor,yr));
-HXC=np.array(MYD.MultiplyDW(GXCNor,yc)); HXH=np.array(MYD.MultiplyDW(GXHNor,yh));
+<span class="n">HXB</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">MYD</span><span class="o">.</span><span class="n">MultiplyDW</span><span class="p">(</span><span class="n">GXBNor</span><span class="p">,</span><span class="n">yb</span><span class="p">));</span> <span class="n">HXR</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">MYD</span><span class="o">.</span><span class="n">MultiplyDW</span><span class="p">(</span><span class="n">GXRNor</span><span class="p">,</span><span class="n">yr</span><span class="p">));</span>
+<span class="n">HXC</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">MYD</span><span class="o">.</span><span class="n">MultiplyDW</span><span class="p">(</span><span class="n">GXCNor</span><span class="p">,</span><span class="n">yc</span><span class="p">));</span> <span class="n">HXH</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">MYD</span><span class="o">.</span><span class="n">MultiplyDW</span><span class="p">(</span><span class="n">GXHNor</span><span class="p">,</span><span class="n">yh</span><span class="p">));</span>
 
-ZeroonelossB,HingelossB,PerceptronlossB,LoglossB,SquaredhingelossB,ModifiedHuberlossB=MYD.lossfunction(HXB)
-ZeroonelossR,HingelossR,PerceptronlossR,LoglossR,SquaredhingelossR,ModifiedHuberlossR=MYD.lossfunction(HXR)
-ZeroonelossC,HingelossC,PerceptronlossC,LoglossC,SquaredhingelossC,ModifiedHuberlossC=MYD.lossfunction(HXC)
-ZeroonelossH,HingelossH,PerceptronlossH,LoglossH,SquaredhingelossH,ModifiedHuberlossH=MYD.lossfunction(HXH)
+<span class="n">ZeroonelossB</span><span class="p">,</span><span class="n">HingelossB</span><span class="p">,</span><span class="n">PerceptronlossB</span><span class="p">,</span><span class="n">LoglossB</span><span class="p">,</span><span class="n">SquaredhingelossB</span><span class="p">,</span><span class="n">ModifiedHuberlossB</span><span class="o">=</span><span class="n">MYD</span><span class="o">.</span><span class="n">lossfunction</span><span class="p">(</span><span class="n">HXB</span><span class="p">)</span>
+<span class="n">ZeroonelossR</span><span class="p">,</span><span class="n">HingelossR</span><span class="p">,</span><span class="n">PerceptronlossR</span><span class="p">,</span><span class="n">LoglossR</span><span class="p">,</span><span class="n">SquaredhingelossR</span><span class="p">,</span><span class="n">ModifiedHuberlossR</span><span class="o">=</span><span class="n">MYD</span><span class="o">.</span><span class="n">lossfunction</span><span class="p">(</span><span class="n">HXR</span><span class="p">)</span>
+<span class="n">ZeroonelossC</span><span class="p">,</span><span class="n">HingelossC</span><span class="p">,</span><span class="n">PerceptronlossC</span><span class="p">,</span><span class="n">LoglossC</span><span class="p">,</span><span class="n">SquaredhingelossC</span><span class="p">,</span><span class="n">ModifiedHuberlossC</span><span class="o">=</span><span class="n">MYD</span><span class="o">.</span><span class="n">lossfunction</span><span class="p">(</span><span class="n">HXC</span><span class="p">)</span>
+<span class="n">ZeroonelossH</span><span class="p">,</span><span class="n">HingelossH</span><span class="p">,</span><span class="n">PerceptronlossH</span><span class="p">,</span><span class="n">LoglossH</span><span class="p">,</span><span class="n">SquaredhingelossH</span><span class="p">,</span><span class="n">ModifiedHuberlossH</span><span class="o">=</span><span class="n">MYD</span><span class="o">.</span><span class="n">lossfunction</span><span class="p">(</span><span class="n">HXH</span><span class="p">)</span>
 
-cor=plt.cm.get_cmap(&#39;Reds_r&#39;);
-XBB=[XB,XB,XB,XB,XB,XB];  XRR=[XR,XR,XR,XR,XR,XR];
-XCC=[XC,XC,XC,XC,XC,XC];  XHH=[XH,XH,XH,XH,XH,XH];
-YBB=[ZeroonelossB,HingelossB,PerceptronlossB,LoglossB,SquaredhingelossB,ModifiedHuberlossB];
-YRR=[ZeroonelossR,HingelossR,PerceptronlossR,LoglossR,SquaredhingelossR,ModifiedHuberlossR];
-YCC=[ZeroonelossC,HingelossC,PerceptronlossC,LoglossC,SquaredhingelossC,ModifiedHuberlossC];
-YHH=[ZeroonelossH,HingelossH,PerceptronlossH,LoglossH,SquaredhingelossH,ModifiedHuberlossH];
-titlenameB=[&#39;ZeroonelossB&#39;,&#39;HingelossB&#39;,&#39;PerceptronlossB&#39;,&#39;LoglossB&#39;,&#39;SquaredhingelossB&#39;,&#39;ModifiedHuberlossB&#39;]
-titlenameR=[&#39;ZeroonelossR&#39;,&#39;HingelossR&#39;,&#39;PerceptronlossR&#39;,&#39;LoglossR&#39;,&#39;SquaredhingelossR&#39;,&#39;ModifiedHuberlossR&#39;]
-titlenameC=[&#39;ZeroonelossC&#39;,&#39;HingelossC&#39;,&#39;PerceptronlossC&#39;,&#39;LoglossC&#39;,&#39;SquaredhingelossC&#39;,&#39;ModifiedHuberlossC&#39;]
-titlenameH=[&#39;ZeroonelossH&#39;,&#39;HingelossH&#39;,&#39;PerceptronlossH&#39;,&#39;LoglossH&#39;,&#39;SquaredhingelossH&#39;,&#39;ModifiedHuberlossH&#39;]
-corbar=[cor,cor,cor,cor,cor,cor]
-MYD.DrawManyChart(XBB,YBB,corbar,24,4,titlenameB,10,1,6)
-MYD.DrawManyChart(XRR,YRR,corbar,24,4,titlenameR,10,1,6)
-MYD.DrawManyChart(XCC,YCC,corbar,24,4,titlenameC,10,1,6)
-MYD.DrawManyChart(XHH,YHH,corbar,24,4,titlenameH,10,1,6)
+<span class="n">cor</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">get_cmap</span><span class="p">(</span><span class="s1">&#39;Reds_r&#39;</span><span class="p">);</span>
+<span class="n">XBB</span><span class="o">=</span><span class="p">[</span><span class="n">XB</span><span class="p">,</span><span class="n">XB</span><span class="p">,</span><span class="n">XB</span><span class="p">,</span><span class="n">XB</span><span class="p">,</span><span class="n">XB</span><span class="p">,</span><span class="n">XB</span><span class="p">];</span>  <span class="n">XRR</span><span class="o">=</span><span class="p">[</span><span class="n">XR</span><span class="p">,</span><span class="n">XR</span><span class="p">,</span><span class="n">XR</span><span class="p">,</span><span class="n">XR</span><span class="p">,</span><span class="n">XR</span><span class="p">,</span><span class="n">XR</span><span class="p">];</span>
+<span class="n">XCC</span><span class="o">=</span><span class="p">[</span><span class="n">XC</span><span class="p">,</span><span class="n">XC</span><span class="p">,</span><span class="n">XC</span><span class="p">,</span><span class="n">XC</span><span class="p">,</span><span class="n">XC</span><span class="p">,</span><span class="n">XC</span><span class="p">];</span>  <span class="n">XHH</span><span class="o">=</span><span class="p">[</span><span class="n">XH</span><span class="p">,</span><span class="n">XH</span><span class="p">,</span><span class="n">XH</span><span class="p">,</span><span class="n">XH</span><span class="p">,</span><span class="n">XH</span><span class="p">,</span><span class="n">XH</span><span class="p">];</span>
+<span class="n">YBB</span><span class="o">=</span><span class="p">[</span><span class="n">ZeroonelossB</span><span class="p">,</span><span class="n">HingelossB</span><span class="p">,</span><span class="n">PerceptronlossB</span><span class="p">,</span><span class="n">LoglossB</span><span class="p">,</span><span class="n">SquaredhingelossB</span><span class="p">,</span><span class="n">ModifiedHuberlossB</span><span class="p">];</span>
+<span class="n">YRR</span><span class="o">=</span><span class="p">[</span><span class="n">ZeroonelossR</span><span class="p">,</span><span class="n">HingelossR</span><span class="p">,</span><span class="n">PerceptronlossR</span><span class="p">,</span><span class="n">LoglossR</span><span class="p">,</span><span class="n">SquaredhingelossR</span><span class="p">,</span><span class="n">ModifiedHuberlossR</span><span class="p">];</span>
+<span class="n">YCC</span><span class="o">=</span><span class="p">[</span><span class="n">ZeroonelossC</span><span class="p">,</span><span class="n">HingelossC</span><span class="p">,</span><span class="n">PerceptronlossC</span><span class="p">,</span><span class="n">LoglossC</span><span class="p">,</span><span class="n">SquaredhingelossC</span><span class="p">,</span><span class="n">ModifiedHuberlossC</span><span class="p">];</span>
+<span class="n">YHH</span><span class="o">=</span><span class="p">[</span><span class="n">ZeroonelossH</span><span class="p">,</span><span class="n">HingelossH</span><span class="p">,</span><span class="n">PerceptronlossH</span><span class="p">,</span><span class="n">LoglossH</span><span class="p">,</span><span class="n">SquaredhingelossH</span><span class="p">,</span><span class="n">ModifiedHuberlossH</span><span class="p">];</span>
+<span class="n">titlenameB</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;ZeroonelossB&#39;</span><span class="p">,</span><span class="s1">&#39;HingelossB&#39;</span><span class="p">,</span><span class="s1">&#39;PerceptronlossB&#39;</span><span class="p">,</span><span class="s1">&#39;LoglossB&#39;</span><span class="p">,</span><span class="s1">&#39;SquaredhingelossB&#39;</span><span class="p">,</span><span class="s1">&#39;ModifiedHuberlossB&#39;</span><span class="p">]</span>
+<span class="n">titlenameR</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;ZeroonelossR&#39;</span><span class="p">,</span><span class="s1">&#39;HingelossR&#39;</span><span class="p">,</span><span class="s1">&#39;PerceptronlossR&#39;</span><span class="p">,</span><span class="s1">&#39;LoglossR&#39;</span><span class="p">,</span><span class="s1">&#39;SquaredhingelossR&#39;</span><span class="p">,</span><span class="s1">&#39;ModifiedHuberlossR&#39;</span><span class="p">]</span>
+<span class="n">titlenameC</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;ZeroonelossC&#39;</span><span class="p">,</span><span class="s1">&#39;HingelossC&#39;</span><span class="p">,</span><span class="s1">&#39;PerceptronlossC&#39;</span><span class="p">,</span><span class="s1">&#39;LoglossC&#39;</span><span class="p">,</span><span class="s1">&#39;SquaredhingelossC&#39;</span><span class="p">,</span><span class="s1">&#39;ModifiedHuberlossC&#39;</span><span class="p">]</span>
+<span class="n">titlenameH</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;ZeroonelossH&#39;</span><span class="p">,</span><span class="s1">&#39;HingelossH&#39;</span><span class="p">,</span><span class="s1">&#39;PerceptronlossH&#39;</span><span class="p">,</span><span class="s1">&#39;LoglossH&#39;</span><span class="p">,</span><span class="s1">&#39;SquaredhingelossH&#39;</span><span class="p">,</span><span class="s1">&#39;ModifiedHuberlossH&#39;</span><span class="p">]</span>
+<span class="n">corbar</span><span class="o">=</span><span class="p">[</span><span class="n">cor</span><span class="p">,</span><span class="n">cor</span><span class="p">,</span><span class="n">cor</span><span class="p">,</span><span class="n">cor</span><span class="p">,</span><span class="n">cor</span><span class="p">,</span><span class="n">cor</span><span class="p">]</span>
+<span class="n">MYD</span><span class="o">.</span><span class="n">DrawManyChart</span><span class="p">(</span><span class="n">XBB</span><span class="p">,</span><span class="n">YBB</span><span class="p">,</span><span class="n">corbar</span><span class="p">,</span><span class="mi">24</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="n">titlenameB</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">6</span><span class="p">)</span>
+<span class="n">MYD</span><span class="o">.</span><span class="n">DrawManyChart</span><span class="p">(</span><span class="n">XRR</span><span class="p">,</span><span class="n">YRR</span><span class="p">,</span><span class="n">corbar</span><span class="p">,</span><span class="mi">24</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="n">titlenameR</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">6</span><span class="p">)</span>
+<span class="n">MYD</span><span class="o">.</span><span class="n">DrawManyChart</span><span class="p">(</span><span class="n">XCC</span><span class="p">,</span><span class="n">YCC</span><span class="p">,</span><span class="n">corbar</span><span class="p">,</span><span class="mi">24</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="n">titlenameC</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">6</span><span class="p">)</span>
+<span class="n">MYD</span><span class="o">.</span><span class="n">DrawManyChart</span><span class="p">(</span><span class="n">XHH</span><span class="p">,</span><span class="n">YHH</span><span class="p">,</span><span class="n">corbar</span><span class="p">,</span><span class="mi">24</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="n">titlenameH</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">6</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -654,38 +656,38 @@ C:\Users\zhang\Desktop\exeserise\FirstSectionPixcel\mymodule.py:21: RuntimeWarni
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3"><div class="highlight"><pre>
-<span></span>TestGXB= SGDclfB.decision_function(points)
-TestGXNorB=MYD.ZoomIn(TestGXB,1);
-TestGXNorarrayB=np.array(TestGXNorB)
+<span></span><span class="n">TestGXB</span><span class="o">=</span> <span class="n">SGDclfB</span><span class="o">.</span><span class="n">decision_function</span><span class="p">(</span><span class="n">points</span><span class="p">)</span>
+<span class="n">TestGXNorB</span><span class="o">=</span><span class="n">MYD</span><span class="o">.</span><span class="n">ZoomIn</span><span class="p">(</span><span class="n">TestGXB</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span>
+<span class="n">TestGXNorarrayB</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">TestGXNorB</span><span class="p">)</span>
 
-TestGXR= SGDclfR.decision_function(points)
-TestGXNorR=MYD.ZoomIn(TestGXR,1);
-TestGXNorarrayR=np.array(TestGXNorR)
+<span class="n">TestGXR</span><span class="o">=</span> <span class="n">SGDclfR</span><span class="o">.</span><span class="n">decision_function</span><span class="p">(</span><span class="n">points</span><span class="p">)</span>
+<span class="n">TestGXNorR</span><span class="o">=</span><span class="n">MYD</span><span class="o">.</span><span class="n">ZoomIn</span><span class="p">(</span><span class="n">TestGXR</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span>
+<span class="n">TestGXNorarrayR</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">TestGXNorR</span><span class="p">)</span>
 
-TestGXC= SGDclfC.decision_function(points)
-TestGXNorC=MYD.ZoomIn(TestGXC,1);
-TestGXNorarrayC=np.array(TestGXNorC)
+<span class="n">TestGXC</span><span class="o">=</span> <span class="n">SGDclfC</span><span class="o">.</span><span class="n">decision_function</span><span class="p">(</span><span class="n">points</span><span class="p">)</span>
+<span class="n">TestGXNorC</span><span class="o">=</span><span class="n">MYD</span><span class="o">.</span><span class="n">ZoomIn</span><span class="p">(</span><span class="n">TestGXC</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span>
+<span class="n">TestGXNorarrayC</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">TestGXNorC</span><span class="p">)</span>
 
-TestGXH= SGDclfH.decision_function(points)
-TestGXNorH=MYD.ZoomIn(TestGXH,1);
-TestGXNorarrayH=np.array(TestGXNorH)
+<span class="n">TestGXH</span><span class="o">=</span> <span class="n">SGDclfH</span><span class="o">.</span><span class="n">decision_function</span><span class="p">(</span><span class="n">points</span><span class="p">)</span>
+<span class="n">TestGXNorH</span><span class="o">=</span><span class="n">MYD</span><span class="o">.</span><span class="n">ZoomIn</span><span class="p">(</span><span class="n">TestGXH</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span>
+<span class="n">TestGXNorarrayH</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">TestGXNorH</span><span class="p">)</span>
 
-ZeroonelossB,HingelossB,PerceptronlossB,LoglossB,SquaredhingelossB,ModifiedHuberlossB=MYD.lossfunction(TestGXNorarrayB)
-ZeroonelossR,HingelossR,PerceptronlossR,LoglossR,SquaredhingelossR,ModifiedHuberlossR=MYD.lossfunction(TestGXNorarrayR)
-ZeroonelossC,HingelossC,PerceptronlossC,LoglossC,SquaredhingelossC,ModifiedHuberlossC=MYD.lossfunction(TestGXNorarrayC)
-ZeroonelossH,HingelossH,PerceptronlossH,LoglossH,SquaredhingelossH,ModifiedHuberlossH=MYD.lossfunction(TestGXNorarrayH)
+<span class="n">ZeroonelossB</span><span class="p">,</span><span class="n">HingelossB</span><span class="p">,</span><span class="n">PerceptronlossB</span><span class="p">,</span><span class="n">LoglossB</span><span class="p">,</span><span class="n">SquaredhingelossB</span><span class="p">,</span><span class="n">ModifiedHuberlossB</span><span class="o">=</span><span class="n">MYD</span><span class="o">.</span><span class="n">lossfunction</span><span class="p">(</span><span class="n">TestGXNorarrayB</span><span class="p">)</span>
+<span class="n">ZeroonelossR</span><span class="p">,</span><span class="n">HingelossR</span><span class="p">,</span><span class="n">PerceptronlossR</span><span class="p">,</span><span class="n">LoglossR</span><span class="p">,</span><span class="n">SquaredhingelossR</span><span class="p">,</span><span class="n">ModifiedHuberlossR</span><span class="o">=</span><span class="n">MYD</span><span class="o">.</span><span class="n">lossfunction</span><span class="p">(</span><span class="n">TestGXNorarrayR</span><span class="p">)</span>
+<span class="n">ZeroonelossC</span><span class="p">,</span><span class="n">HingelossC</span><span class="p">,</span><span class="n">PerceptronlossC</span><span class="p">,</span><span class="n">LoglossC</span><span class="p">,</span><span class="n">SquaredhingelossC</span><span class="p">,</span><span class="n">ModifiedHuberlossC</span><span class="o">=</span><span class="n">MYD</span><span class="o">.</span><span class="n">lossfunction</span><span class="p">(</span><span class="n">TestGXNorarrayC</span><span class="p">)</span>
+<span class="n">ZeroonelossH</span><span class="p">,</span><span class="n">HingelossH</span><span class="p">,</span><span class="n">PerceptronlossH</span><span class="p">,</span><span class="n">LoglossH</span><span class="p">,</span><span class="n">SquaredhingelossH</span><span class="p">,</span><span class="n">ModifiedHuberlossH</span><span class="o">=</span><span class="n">MYD</span><span class="o">.</span><span class="n">lossfunction</span><span class="p">(</span><span class="n">TestGXNorarrayH</span><span class="p">)</span>
 
-cor=plt.cm.get_cmap(&#39;Reds_r&#39;);
-X=[points,points,points,points,points,points];
-YBB=[ZeroonelossB,HingelossB,PerceptronlossB,LoglossB,SquaredhingelossB,ModifiedHuberlossB];
-YRR=[ZeroonelossR,HingelossR,PerceptronlossR,LoglossR,SquaredhingelossR,ModifiedHuberlossR];
-YCC=[ZeroonelossC,HingelossC,PerceptronlossC,LoglossC,SquaredhingelossC,ModifiedHuberlossC];
-YHH=[ZeroonelossH,HingelossH,PerceptronlossH,LoglossH,SquaredhingelossH,ModifiedHuberlossH];
+<span class="n">cor</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">get_cmap</span><span class="p">(</span><span class="s1">&#39;Reds_r&#39;</span><span class="p">);</span>
+<span class="n">X</span><span class="o">=</span><span class="p">[</span><span class="n">points</span><span class="p">,</span><span class="n">points</span><span class="p">,</span><span class="n">points</span><span class="p">,</span><span class="n">points</span><span class="p">,</span><span class="n">points</span><span class="p">,</span><span class="n">points</span><span class="p">];</span>
+<span class="n">YBB</span><span class="o">=</span><span class="p">[</span><span class="n">ZeroonelossB</span><span class="p">,</span><span class="n">HingelossB</span><span class="p">,</span><span class="n">PerceptronlossB</span><span class="p">,</span><span class="n">LoglossB</span><span class="p">,</span><span class="n">SquaredhingelossB</span><span class="p">,</span><span class="n">ModifiedHuberlossB</span><span class="p">];</span>
+<span class="n">YRR</span><span class="o">=</span><span class="p">[</span><span class="n">ZeroonelossR</span><span class="p">,</span><span class="n">HingelossR</span><span class="p">,</span><span class="n">PerceptronlossR</span><span class="p">,</span><span class="n">LoglossR</span><span class="p">,</span><span class="n">SquaredhingelossR</span><span class="p">,</span><span class="n">ModifiedHuberlossR</span><span class="p">];</span>
+<span class="n">YCC</span><span class="o">=</span><span class="p">[</span><span class="n">ZeroonelossC</span><span class="p">,</span><span class="n">HingelossC</span><span class="p">,</span><span class="n">PerceptronlossC</span><span class="p">,</span><span class="n">LoglossC</span><span class="p">,</span><span class="n">SquaredhingelossC</span><span class="p">,</span><span class="n">ModifiedHuberlossC</span><span class="p">];</span>
+<span class="n">YHH</span><span class="o">=</span><span class="p">[</span><span class="n">ZeroonelossH</span><span class="p">,</span><span class="n">HingelossH</span><span class="p">,</span><span class="n">PerceptronlossH</span><span class="p">,</span><span class="n">LoglossH</span><span class="p">,</span><span class="n">SquaredhingelossH</span><span class="p">,</span><span class="n">ModifiedHuberlossH</span><span class="p">];</span>
 
-MYD.DrawManyChart(X,YBB,corbar,24,4,titlenameB,10,1,6)
-MYD.DrawManyChart(X,YRR,corbar,24,4,titlenameR,10,1,6)
-MYD.DrawManyChart(X,YCC,corbar,24,4,titlenameC,10,1,6)
-MYD.DrawManyChart(X,YHH,corbar,24,4,titlenameH,10,1,6)
+<span class="n">MYD</span><span class="o">.</span><span class="n">DrawManyChart</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">YBB</span><span class="p">,</span><span class="n">corbar</span><span class="p">,</span><span class="mi">24</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="n">titlenameB</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">6</span><span class="p">)</span>
+<span class="n">MYD</span><span class="o">.</span><span class="n">DrawManyChart</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">YRR</span><span class="p">,</span><span class="n">corbar</span><span class="p">,</span><span class="mi">24</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="n">titlenameR</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">6</span><span class="p">)</span>
+<span class="n">MYD</span><span class="o">.</span><span class="n">DrawManyChart</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">YCC</span><span class="p">,</span><span class="n">corbar</span><span class="p">,</span><span class="mi">24</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="n">titlenameC</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">6</span><span class="p">)</span>
+<span class="n">MYD</span><span class="o">.</span><span class="n">DrawManyChart</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">YHH</span><span class="p">,</span><span class="n">corbar</span><span class="p">,</span><span class="mi">24</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="n">titlenameH</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">6</span><span class="p">)</span>
 
 </pre></div>
 </div>
@@ -727,25 +729,25 @@ MYD.DrawManyChart(X,YHH,corbar,24,4,titlenameH,10,1,6)
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3"><div class="highlight"><pre>
-<span></span>lossname=[&quot;hinge&quot;,&quot;perceptron&quot;,&quot;log&quot;,&quot;squared_hinge&quot;,&quot;modified_huber&quot;]
-TestclassB=[]; TestclassR=[]; TestclassC=[]; TestclassH=[];
-TextClass=[TestclassB,TestclassR,TestclassC,TestclassH];
+<span></span><span class="n">lossname</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;hinge&quot;</span><span class="p">,</span><span class="s2">&quot;perceptron&quot;</span><span class="p">,</span><span class="s2">&quot;log&quot;</span><span class="p">,</span><span class="s2">&quot;squared_hinge&quot;</span><span class="p">,</span><span class="s2">&quot;modified_huber&quot;</span><span class="p">]</span>
+<span class="n">TestclassB</span><span class="o">=</span><span class="p">[];</span> <span class="n">TestclassR</span><span class="o">=</span><span class="p">[];</span> <span class="n">TestclassC</span><span class="o">=</span><span class="p">[];</span> <span class="n">TestclassH</span><span class="o">=</span><span class="p">[];</span>
+<span class="n">TextClass</span><span class="o">=</span><span class="p">[</span><span class="n">TestclassB</span><span class="p">,</span><span class="n">TestclassR</span><span class="p">,</span><span class="n">TestclassC</span><span class="p">,</span><span class="n">TestclassH</span><span class="p">];</span>
 
-for k in range(0,len(TextClass)):
-    for i in range(0,len(lossname)):
-        SGDclf = SGDClassifier(loss=lossname[i], alpha=0.01, n_iter=200, fit_intercept=True)
-        SGDclf.fit(XAS[k], YAS[k]); Testclass=SGDclf.predict(points); TextClass[k].append(Testclass);
+<span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">TextClass</span><span class="p">)):</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">lossname</span><span class="p">)):</span>
+        <span class="n">SGDclf</span> <span class="o">=</span> <span class="n">SGDClassifier</span><span class="p">(</span><span class="n">loss</span><span class="o">=</span><span class="n">lossname</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">n_iter</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">fit_intercept</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+        <span class="n">SGDclf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">XAS</span><span class="p">[</span><span class="n">k</span><span class="p">],</span> <span class="n">YAS</span><span class="p">[</span><span class="n">k</span><span class="p">]);</span> <span class="n">Testclass</span><span class="o">=</span><span class="n">SGDclf</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">points</span><span class="p">);</span> <span class="n">TextClass</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Testclass</span><span class="p">);</span>
 
-corm = ListedColormap([&#39;Blue&#39;, &#39;Orange&#39;])
-cormap=[corm,corm,corm,corm,corm]
-X=[points,points,points,points,points]
-Bname=[&#39;hingeB&#39;,&#39;perceptronB&#39;,&#39;logB&#39;,&#39;squared_hingeB&#39;,&#39;modified_huberB&#39;]
-Rname=[&#39;hingeR&#39;,&#39;perceptronR&#39;,&#39;logR&#39;,&#39;squared_hingeR&#39;,&#39;modified_huberR&#39;]
-Cname=[&#39;hingeC&#39;,&#39;perceptronC&#39;,&#39;logC&#39;,&#39;squared_hingeC&#39;,&#39;modified_huberC&#39;]
-Hname=[&#39;hingeH&#39;,&#39;perceptronH&#39;,&#39;logH&#39;,&#39;squared_hingeH&#39;,&#39;modified_huberH&#39;]
-name=[Bname,Rname,Cname,Hname]
-for k in range(0,len(TextClass)):
-    MYD.DrawManyChart(X,TextClass[k],cormap,24,4,name[k],10,1,5)
+<span class="n">corm</span> <span class="o">=</span> <span class="n">ListedColormap</span><span class="p">([</span><span class="s1">&#39;Blue&#39;</span><span class="p">,</span> <span class="s1">&#39;Orange&#39;</span><span class="p">])</span>
+<span class="n">cormap</span><span class="o">=</span><span class="p">[</span><span class="n">corm</span><span class="p">,</span><span class="n">corm</span><span class="p">,</span><span class="n">corm</span><span class="p">,</span><span class="n">corm</span><span class="p">,</span><span class="n">corm</span><span class="p">]</span>
+<span class="n">X</span><span class="o">=</span><span class="p">[</span><span class="n">points</span><span class="p">,</span><span class="n">points</span><span class="p">,</span><span class="n">points</span><span class="p">,</span><span class="n">points</span><span class="p">,</span><span class="n">points</span><span class="p">]</span>
+<span class="n">Bname</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;hingeB&#39;</span><span class="p">,</span><span class="s1">&#39;perceptronB&#39;</span><span class="p">,</span><span class="s1">&#39;logB&#39;</span><span class="p">,</span><span class="s1">&#39;squared_hingeB&#39;</span><span class="p">,</span><span class="s1">&#39;modified_huberB&#39;</span><span class="p">]</span>
+<span class="n">Rname</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;hingeR&#39;</span><span class="p">,</span><span class="s1">&#39;perceptronR&#39;</span><span class="p">,</span><span class="s1">&#39;logR&#39;</span><span class="p">,</span><span class="s1">&#39;squared_hingeR&#39;</span><span class="p">,</span><span class="s1">&#39;modified_huberR&#39;</span><span class="p">]</span>
+<span class="n">Cname</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;hingeC&#39;</span><span class="p">,</span><span class="s1">&#39;perceptronC&#39;</span><span class="p">,</span><span class="s1">&#39;logC&#39;</span><span class="p">,</span><span class="s1">&#39;squared_hingeC&#39;</span><span class="p">,</span><span class="s1">&#39;modified_huberC&#39;</span><span class="p">]</span>
+<span class="n">Hname</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;hingeH&#39;</span><span class="p">,</span><span class="s1">&#39;perceptronH&#39;</span><span class="p">,</span><span class="s1">&#39;logH&#39;</span><span class="p">,</span><span class="s1">&#39;squared_hingeH&#39;</span><span class="p">,</span><span class="s1">&#39;modified_huberH&#39;</span><span class="p">]</span>
+<span class="n">name</span><span class="o">=</span><span class="p">[</span><span class="n">Bname</span><span class="p">,</span><span class="n">Rname</span><span class="p">,</span><span class="n">Cname</span><span class="p">,</span><span class="n">Hname</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">TextClass</span><span class="p">)):</span>
+    <span class="n">MYD</span><span class="o">.</span><span class="n">DrawManyChart</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">TextClass</span><span class="p">[</span><span class="n">k</span><span class="p">],</span><span class="n">cormap</span><span class="p">,</span><span class="mi">24</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="n">name</span><span class="p">[</span><span class="n">k</span><span class="p">],</span><span class="mi">10</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span>
 
 </pre></div>
 </div>

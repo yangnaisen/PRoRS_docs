@@ -128,11 +128,13 @@
 </ul>
 <p class="caption"><span class="caption-text">第二部分:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../2ndPart/index.html">1. 图像平面分类</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../2ndPart/index.html">图像模式识别</a></li>
 </ul>
 <p class="caption"><span class="caption-text">第三部分:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../3rdPart/index.html">地表覆盖制图</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../TestContent.html">目录测试</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../TestContent.html#第二层">第二层</a></li>
 </ul>
 
             
@@ -398,20 +400,20 @@ div.nboutput div.output_area.stderr {
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3"><div class="highlight"><pre>
-<span></span># -*- coding:UTF-8 -*- ＃
-#导入模块
-import time
-import random
-import numpy as np
-import matplotlib.pyplot as plt
+<span></span><span class="c1"># -*- coding:UTF-8 -*- ＃</span>
+<span class="c1">#导入模块</span>
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">import</span> <span class="nn">random</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
 
-from sklearn import cluster,datasets
-from matplotlib.colors import ListedColormap
+<span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">cluster</span><span class="p">,</span><span class="n">datasets</span>
+<span class="kn">from</span> <span class="nn">matplotlib.colors</span> <span class="kn">import</span> <span class="n">ListedColormap</span>
 
-from sklearn.preprocessing import StandardScaler
+<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">StandardScaler</span>
 
-from sklearn.model_selection import train_test_split
-from sklearn.linear_model import SGDClassifier, Perceptron
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">SGDClassifier</span><span class="p">,</span> <span class="n">Perceptron</span>
 
 </pre></div>
 </div>
@@ -422,26 +424,26 @@ from sklearn.linear_model import SGDClassifier, Perceptron
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3"><div class="highlight"><pre>
-<span></span># 拉伸至0-255
-def guiyihua(x):
-    minx=np.min(x)
-    maxX=np.max(x)
-    x=(x-minx)/(maxX-minx)
-    return x;
+<span></span><span class="c1"># 拉伸至0-255</span>
+<span class="k">def</span> <span class="nf">guiyihua</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="n">minx</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">maxX</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">x</span><span class="o">=</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="n">minx</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">maxX</span><span class="o">-</span><span class="n">minx</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">x</span><span class="p">;</span>
 
-def classtransform(x):
-    for i in range(0,len(x)):
-        if(x[i]&gt;0):
-            x[i]=1
-        else:
-            x[i]=-1
-    return x;
+<span class="k">def</span> <span class="nf">classtransform</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)):</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">):</span>
+            <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="mi">1</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">=-</span><span class="mi">1</span>
+    <span class="k">return</span> <span class="n">x</span><span class="p">;</span>
 
 
-def MultiplyDW(D,W):
-    for i in range(0,len(D)):
-       D[i]=D[i]*W[i]
-    return D;
+<span class="k">def</span> <span class="nf">MultiplyDW</span><span class="p">(</span><span class="n">D</span><span class="p">,</span><span class="n">W</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">D</span><span class="p">)):</span>
+       <span class="n">D</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="n">D</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="n">W</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">D</span><span class="p">;</span>
 </pre></div>
 </div>
 </div>
@@ -451,30 +453,30 @@ def MultiplyDW(D,W):
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3"><div class="highlight"><pre>
-<span></span># picture 1  two blobs
-n_samples = 50000
+<span></span><span class="c1"># picture 1  two blobs</span>
+<span class="n">n_samples</span> <span class="o">=</span> <span class="mi">50000</span>
 
-X,m = datasets.make_blobs(n_samples=n_samples, centers=2, n_features=2, cluster_std=2, random_state=2)
-xa=X[:, 0]
-xb=X[:, 1]
+<span class="n">X</span><span class="p">,</span><span class="n">m</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">make_blobs</span><span class="p">(</span><span class="n">n_samples</span><span class="o">=</span><span class="n">n_samples</span><span class="p">,</span> <span class="n">centers</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">n_features</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">cluster_std</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">xa</span><span class="o">=</span><span class="n">X</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span>
+<span class="n">xb</span><span class="o">=</span><span class="n">X</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span>
 
-marray = np.array(m).ravel()
+<span class="n">marray</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">m</span><span class="p">)</span><span class="o">.</span><span class="n">ravel</span><span class="p">()</span>
 
-marraytr=classtransform(marray)
+<span class="n">marraytr</span><span class="o">=</span><span class="n">classtransform</span><span class="p">(</span><span class="n">marray</span><span class="p">)</span>
 
-x1=255*guiyihua(xa)
-x2=255*guiyihua(xb)
+<span class="n">x1</span><span class="o">=</span><span class="mi">255</span><span class="o">*</span><span class="n">guiyihua</span><span class="p">(</span><span class="n">xa</span><span class="p">)</span>
+<span class="n">x2</span><span class="o">=</span><span class="mi">255</span><span class="o">*</span><span class="n">guiyihua</span><span class="p">(</span><span class="n">xb</span><span class="p">)</span>
 
-cm_bright = ListedColormap([&#39;Blue&#39;, &#39;Orange&#39;])
+<span class="n">cm_bright</span> <span class="o">=</span> <span class="n">ListedColormap</span><span class="p">([</span><span class="s1">&#39;Blue&#39;</span><span class="p">,</span> <span class="s1">&#39;Orange&#39;</span><span class="p">])</span>
 
-rand_X =list(zip(x1,x2))
+<span class="n">rand_X</span> <span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span><span class="n">x2</span><span class="p">))</span>
 
-plt.figure()
-plt.scatter(x1, x2, c=marraytr, cmap=cm_bright,label=&#39;mydata&#39;)
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="n">marraytr</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">cm_bright</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;mydata&#39;</span><span class="p">)</span>
 
 
-plt.title(&#39;two blods&#39;)
-plt.show()
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;two blods&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 
 </pre></div>
 </div>
@@ -492,17 +494,17 @@ plt.show()
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3"><div class="highlight"><pre>
-<span></span>x = np.linspace(0,255,256)
-y = np.linspace(0,255,256)
-X,Y = np.meshgrid(x,y)
-points = [point for point in zip(X.flat,Y.flat)]
+<span></span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">255</span><span class="p">,</span><span class="mi">256</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">255</span><span class="p">,</span><span class="mi">256</span><span class="p">)</span>
+<span class="n">X</span><span class="p">,</span><span class="n">Y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+<span class="n">points</span> <span class="o">=</span> <span class="p">[</span><span class="n">point</span> <span class="k">for</span> <span class="n">point</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">flat</span><span class="p">,</span><span class="n">Y</span><span class="o">.</span><span class="n">flat</span><span class="p">)]</span>
 
-plt.figure()
-plt.scatter(X.flat,Y.flat,s=0.009)
-plt.show()
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">flat</span><span class="p">,</span><span class="n">Y</span><span class="o">.</span><span class="n">flat</span><span class="p">,</span><span class="n">s</span><span class="o">=</span><span class="mf">0.009</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 
-#np.random.shuffle(points)
-parray = np.array(points)
+<span class="c1">#np.random.shuffle(points)</span>
+<span class="n">parray</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">points</span><span class="p">)</span>
 
 </pre></div>
 </div>
@@ -523,54 +525,54 @@ parray = np.array(points)
 </div>
 <div class="input_area highlight-ipython3"><div class="highlight"><pre>
 
-<span></span>SGDclf = SGDClassifier(loss=&quot;log&quot;, alpha=0.01, n_iter=200, fit_intercept=True)
-SGDclf.fit(rand_X, marraytr)
+<span></span><span class="n">SGDclf</span> <span class="o">=</span> <span class="n">SGDClassifier</span><span class="p">(</span><span class="n">loss</span><span class="o">=</span><span class="s2">&quot;log&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">n_iter</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">fit_intercept</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">SGDclf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">rand_X</span><span class="p">,</span> <span class="n">marraytr</span><span class="p">)</span>
 
-GX = SGDclf.decision_function(rand_X)
+<span class="n">GX</span> <span class="o">=</span> <span class="n">SGDclf</span><span class="o">.</span><span class="n">decision_function</span><span class="p">(</span><span class="n">rand_X</span><span class="p">)</span>
 
-# 收缩至-1-1
-def ZoomIN(x):
-    minx=np.min(x)
-    maxX=np.max(x)
-    x=(2*(x-minx)/(maxX-minx))-1
-    return x;
+<span class="c1"># 收缩至-1-1</span>
+<span class="k">def</span> <span class="nf">ZoomIN</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="n">minx</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">maxX</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">x</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="n">minx</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">maxX</span><span class="o">-</span><span class="n">minx</span><span class="p">))</span><span class="o">-</span><span class="mi">1</span>
+    <span class="k">return</span> <span class="n">x</span><span class="p">;</span>
 
-GXNor=ZoomIN(GX)
-print(GX)
-HX=[]
-for i in range(0,len(GXNor)):
-    if(marray[i]&gt;0):
-        HX.append(GXNor[i]*1)
-    else:
-        HX.append(GXNor[i]*(-1))
+<span class="n">GXNor</span><span class="o">=</span><span class="n">ZoomIN</span><span class="p">(</span><span class="n">GX</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">GX</span><span class="p">)</span>
+<span class="n">HX</span><span class="o">=</span><span class="p">[]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">GXNor</span><span class="p">)):</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">marray</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">):</span>
+        <span class="n">HX</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">GXNor</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">HX</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">GXNor</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
 
-plt.figure()
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
 
-def modified_huber_loss(y_true, y_pred):
-    z = y_pred * y_true
-    loss = -4 * z
-    loss[z &gt;= -1] = (1 - z[z &gt;= -1]) ** 2
-    loss[z &gt;= 1.] = 0
-    return loss
+<span class="k">def</span> <span class="nf">modified_huber_loss</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">):</span>
+    <span class="n">z</span> <span class="o">=</span> <span class="n">y_pred</span> <span class="o">*</span> <span class="n">y_true</span>
+    <span class="n">loss</span> <span class="o">=</span> <span class="o">-</span><span class="mi">4</span> <span class="o">*</span> <span class="n">z</span>
+    <span class="n">loss</span><span class="p">[</span><span class="n">z</span> <span class="o">&gt;=</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">z</span><span class="p">[</span><span class="n">z</span> <span class="o">&gt;=</span> <span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="o">**</span> <span class="mi">2</span>
+    <span class="n">loss</span><span class="p">[</span><span class="n">z</span> <span class="o">&gt;=</span> <span class="mf">1.</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">return</span> <span class="n">loss</span>
 
-xmin, xmax = -4, 4
-xx = np.linspace(xmin, xmax, 100)
-lw = 2
-plt.plot([xmin, 0, 0, xmax], [1, 1, 0, 0], color=&#39;gold&#39;, lw=lw,label=&quot;Zero-one loss&quot;)
-plt.plot(xx, np.where(xx &lt; 1, 1 - xx, 0), color=&#39;teal&#39;, lw=lw,label=&quot;Hinge loss&quot;)
-plt.plot(xx, -np.minimum(xx, 0), color=&#39;yellowgreen&#39;, lw=lw,label=&quot;Perceptron loss&quot;)
-plt.plot(xx, np.log2(1 + np.exp(-xx)), color=&#39;cornflowerblue&#39;, lw=lw,label=&quot;Log loss&quot;)
-plt.plot(xx, np.where(xx &lt; 1, 1 - xx, 0) ** 2, color=&#39;orange&#39;, lw=lw,label=&quot;Squared hinge loss&quot;)
-plt.plot(xx, modified_huber_loss(xx, 1), color=&#39;darkorchid&#39;, lw=lw,linestyle=&#39;--&#39;, label=&quot;Modified Huber loss&quot;)
-plt.ylim((0, 8))
-plt.legend(loc=&quot;upper right&quot;)
-plt.xlabel(r&quot;Decision function $f(x)$&quot;)
-plt.ylabel(&quot;$L(y, f(x))$&quot;)
-plt.show()
+<span class="n">xmin</span><span class="p">,</span> <span class="n">xmax</span> <span class="o">=</span> <span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span>
+<span class="n">xx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">xmin</span><span class="p">,</span> <span class="n">xmax</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">lw</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">xmin</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">xmax</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;gold&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="n">lw</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;Zero-one loss&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xx</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">xx</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">xx</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;teal&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="n">lw</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;Hinge loss&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xx</span><span class="p">,</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">minimum</span><span class="p">(</span><span class="n">xx</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;yellowgreen&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="n">lw</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;Perceptron loss&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xx</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">log2</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">xx</span><span class="p">)),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;cornflowerblue&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="n">lw</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;Log loss&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xx</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">xx</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">xx</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;orange&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="n">lw</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;Squared hinge loss&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xx</span><span class="p">,</span> <span class="n">modified_huber_loss</span><span class="p">(</span><span class="n">xx</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;darkorchid&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="n">lw</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Modified Huber loss&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s2">&quot;upper right&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">r&quot;Decision function $f(x)$&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;$L(y, f(x))$&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 
-#print(HX)
-GXNorZI=np.array(GXNor)
-print(GXNorZI)
+<span class="c1">#print(HX)</span>
+<span class="n">GXNorZI</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">GXNor</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">GXNorZI</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -608,21 +610,21 @@ print(GXNorZI)
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3"><div class="highlight"><pre>
-<span></span>Hingeloss=np.where(GXNorZI &lt; 1, 1 - GXNorZI, 0)
-Perceptronloss=-np.minimum(GXNorZI, 0)
-Logloss=np.log2(1 + np.exp(-GXNorZI))
-Squaredhingeloss=np.where(GXNorZI &lt; 1, 1 - GXNorZI, 0)**2
-ModifiedHuberloss=modified_huber_loss(GXNorZI, 1)
+<span></span><span class="n">Hingeloss</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">GXNorZI</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">GXNorZI</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">Perceptronloss</span><span class="o">=-</span><span class="n">np</span><span class="o">.</span><span class="n">minimum</span><span class="p">(</span><span class="n">GXNorZI</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">Logloss</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">log2</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">GXNorZI</span><span class="p">))</span>
+<span class="n">Squaredhingeloss</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">GXNorZI</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">GXNorZI</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span>
+<span class="n">ModifiedHuberloss</span><span class="o">=</span><span class="n">modified_huber_loss</span><span class="p">(</span><span class="n">GXNorZI</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
 
-plt.figure(figsize=(8,5))
-cor=plt.cm.get_cmap(&#39;RdBu&#39;)
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+<span class="n">cor</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">get_cmap</span><span class="p">(</span><span class="s1">&#39;RdBu&#39;</span><span class="p">)</span>
 
-lossvalue=MultiplyDW(ZoomIN(Logloss),marraytr)
-print(lossvalue);print(np.max(lossvalue));print(np.min(lossvalue))
+<span class="n">lossvalue</span><span class="o">=</span><span class="n">MultiplyDW</span><span class="p">(</span><span class="n">ZoomIN</span><span class="p">(</span><span class="n">Logloss</span><span class="p">),</span><span class="n">marraytr</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">lossvalue</span><span class="p">);</span><span class="k">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">lossvalue</span><span class="p">));</span><span class="k">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">lossvalue</span><span class="p">))</span>
 
-sct=plt.scatter(x1, x2,c=lossvalue,cmap=cor,s=2)
-plt.colorbar(sct,label=&#39;lossvalue&#39;)
-plt.show()
+<span class="n">sct</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span><span class="n">c</span><span class="o">=</span><span class="n">lossvalue</span><span class="p">,</span><span class="n">cmap</span><span class="o">=</span><span class="n">cor</span><span class="p">,</span><span class="n">s</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">sct</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;lossvalue&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -653,47 +655,47 @@ plt.show()
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3"><div class="highlight"><pre>
-<span></span>TestHX= SGDclf.decision_function(parray)
+<span></span><span class="n">TestHX</span><span class="o">=</span> <span class="n">SGDclf</span><span class="o">.</span><span class="n">decision_function</span><span class="p">(</span><span class="n">parray</span><span class="p">)</span>
 
-TestGXNor=ZoomIN(TestHX)
-TestGXNorZI=np.array(TestGXNor)
+<span class="n">TestGXNor</span><span class="o">=</span><span class="n">ZoomIN</span><span class="p">(</span><span class="n">TestHX</span><span class="p">)</span>
+<span class="n">TestGXNorZI</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">TestGXNor</span><span class="p">)</span>
 
-#print(TestGXNorZI)
-#print(len(TestGXNorZI))
-HingelossTest=np.where(TestGXNorZI &lt; 1, 1 - TestGXNorZI, 0)
-PerceptronlossTest=-np.minimum(TestGXNorZI, 0)
-LoglossTest=np.log2(1 + np.exp(-TestGXNorZI))
-SquaredhingelossTest=np.where(TestGXNorZI &lt; 1, 1 - TestGXNorZI, 0)**2
-ModifiedHuberlossTest=modified_huber_loss(TestGXNorZI, 1)
+<span class="c1">#print(TestGXNorZI)</span>
+<span class="c1">#print(len(TestGXNorZI))</span>
+<span class="n">HingelossTest</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">TestGXNorZI</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">TestGXNorZI</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">PerceptronlossTest</span><span class="o">=-</span><span class="n">np</span><span class="o">.</span><span class="n">minimum</span><span class="p">(</span><span class="n">TestGXNorZI</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">LoglossTest</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">log2</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">TestGXNorZI</span><span class="p">))</span>
+<span class="n">SquaredhingelossTest</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">TestGXNorZI</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">TestGXNorZI</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span>
+<span class="n">ModifiedHuberlossTest</span><span class="o">=</span><span class="n">modified_huber_loss</span><span class="p">(</span><span class="n">TestGXNorZI</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
 
-cor=plt.cm.get_cmap(&#39;RdBu&#39;)
-plt.figure(figsize=(23,5))
+<span class="n">cor</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">get_cmap</span><span class="p">(</span><span class="s1">&#39;RdBu&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">23</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
 
-plt.subplot(141)
-lossvalue=ZoomIN(HingelossTest)
-plt.scatter(parray[:,0], parray[:,1],c=lossvalue,cmap=cor,s=2)
-plt.title(&#39;test data-Hinge loss&#39;)
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">141</span><span class="p">)</span>
+<span class="n">lossvalue</span><span class="o">=</span><span class="n">ZoomIN</span><span class="p">(</span><span class="n">HingelossTest</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">parray</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span> <span class="n">parray</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span><span class="n">c</span><span class="o">=</span><span class="n">lossvalue</span><span class="p">,</span><span class="n">cmap</span><span class="o">=</span><span class="n">cor</span><span class="p">,</span><span class="n">s</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;test data-Hinge loss&#39;</span><span class="p">)</span>
 
-ax=plt.subplot(142)
-#lossTest=1/LoglossTest
-lossvalue=ZoomIN(LoglossTest)
-ax.scatter(parray[:,0], parray[:,1],c=lossvalue,cmap=cor,s=2)
-ax.set_xlabel(&#39;function(x)&#39;)
-ax.set_ylabel(&#39;lossvalue&#39;)
-ax.set_title(&#39;test data-Log loss&#39;)
+<span class="n">ax</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">142</span><span class="p">)</span>
+<span class="c1">#lossTest=1/LoglossTest</span>
+<span class="n">lossvalue</span><span class="o">=</span><span class="n">ZoomIN</span><span class="p">(</span><span class="n">LoglossTest</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">parray</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span> <span class="n">parray</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span><span class="n">c</span><span class="o">=</span><span class="n">lossvalue</span><span class="p">,</span><span class="n">cmap</span><span class="o">=</span><span class="n">cor</span><span class="p">,</span><span class="n">s</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;function(x)&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;lossvalue&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;test data-Log loss&#39;</span><span class="p">)</span>
 
-plt.subplot(143)
-lossvalue=ZoomIN(SquaredhingelossTest)
-plt.scatter(parray[:,0], parray[:,1],c=lossvalue,cmap=cor,s=2)
-plt.title(&#39;test data-Squaredhinge loss&#39;)
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">143</span><span class="p">)</span>
+<span class="n">lossvalue</span><span class="o">=</span><span class="n">ZoomIN</span><span class="p">(</span><span class="n">SquaredhingelossTest</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">parray</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span> <span class="n">parray</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span><span class="n">c</span><span class="o">=</span><span class="n">lossvalue</span><span class="p">,</span><span class="n">cmap</span><span class="o">=</span><span class="n">cor</span><span class="p">,</span><span class="n">s</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;test data-Squaredhinge loss&#39;</span><span class="p">)</span>
 
-plt.subplot(144)
-lossvalue=ZoomIN(ModifiedHuberlossTest)
-plt.scatter(parray[:,0], parray[:,1],c=lossvalue,cmap=cor,s=2)
-plt.title(&#39;test data-ModifiedHuber loss&#39;)
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">144</span><span class="p">)</span>
+<span class="n">lossvalue</span><span class="o">=</span><span class="n">ZoomIN</span><span class="p">(</span><span class="n">ModifiedHuberlossTest</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">parray</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span> <span class="n">parray</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span><span class="n">c</span><span class="o">=</span><span class="n">lossvalue</span><span class="p">,</span><span class="n">cmap</span><span class="o">=</span><span class="n">cor</span><span class="p">,</span><span class="n">s</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;test data-ModifiedHuber loss&#39;</span><span class="p">)</span>
 
-# plt.legend(loc=&#39;upper right&#39;)
-plt.show()
+<span class="c1"># plt.legend(loc=&#39;upper right&#39;)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>

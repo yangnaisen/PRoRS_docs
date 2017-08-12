@@ -97,11 +97,13 @@
 </ul>
 <p class="caption"><span class="caption-text">第二部分:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../2ndPart/index.html">1. 图像平面分类</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../2ndPart/index.html">图像模式识别</a></li>
 </ul>
 <p class="caption"><span class="caption-text">第三部分:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../3rdPart/index.html">地表覆盖制图</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../TestContent.html">目录测试</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../TestContent.html#第二层">第二层</a></li>
 </ul>
 
             
@@ -367,22 +369,22 @@ div.nboutput div.output_area.stderr {
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3"><div class="highlight"><pre>
-<span></span># -*- coding:UTF-8 -*- ＃
-#导入模块
-import sys
-import time
-import random
-import numpy as np
-import matplotlib.pyplot as plt
-import math
+<span></span><span class="c1"># -*- coding:UTF-8 -*- ＃</span>
+<span class="c1">#导入模块</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">import</span> <span class="nn">random</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">math</span>
 
-from matplotlib.colors import ListedColormap
-from sklearn.svm import SVC
-from sklearn.preprocessing import StandardScaler
-from ipywidgets import interactive,FloatSlider
+<span class="kn">from</span> <span class="nn">matplotlib.colors</span> <span class="kn">import</span> <span class="n">ListedColormap</span>
+<span class="kn">from</span> <span class="nn">sklearn.svm</span> <span class="kn">import</span> <span class="n">SVC</span>
+<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">StandardScaler</span>
+<span class="kn">from</span> <span class="nn">ipywidgets</span> <span class="kn">import</span> <span class="n">interactive</span><span class="p">,</span><span class="n">FloatSlider</span>
 
-sys.path.append(r&quot;C:\Users\zhang\Desktop\exeserise&quot;)
-import mymodule as MYD
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">r&quot;C:\Users\zhang\Desktop\exeserise&quot;</span><span class="p">)</span>
+<span class="kn">import</span> <span class="nn">mymodule</span> <span class="kn">as</span> <span class="nn">MYD</span>
 </pre></div>
 </div>
 </div>
@@ -392,21 +394,21 @@ import mymodule as MYD
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3"><div class="highlight"><pre>
-<span></span>n_samples=1000
-XB,yb=MYD.makeblods(n_samples)
-XR,yr=MYD.makerandoms(n_samples)
-XC,yc=MYD.makecircles(n_samples)
-XH,yh=MYD.makeHelixs(n_samples)
-XAS = [XB, XR, XC,XH]
-YAS=[yb,yr,yc,yh]
+<span></span><span class="n">n_samples</span><span class="o">=</span><span class="mi">1000</span>
+<span class="n">XB</span><span class="p">,</span><span class="n">yb</span><span class="o">=</span><span class="n">MYD</span><span class="o">.</span><span class="n">makeblods</span><span class="p">(</span><span class="n">n_samples</span><span class="p">)</span>
+<span class="n">XR</span><span class="p">,</span><span class="n">yr</span><span class="o">=</span><span class="n">MYD</span><span class="o">.</span><span class="n">makerandoms</span><span class="p">(</span><span class="n">n_samples</span><span class="p">)</span>
+<span class="n">XC</span><span class="p">,</span><span class="n">yc</span><span class="o">=</span><span class="n">MYD</span><span class="o">.</span><span class="n">makecircles</span><span class="p">(</span><span class="n">n_samples</span><span class="p">)</span>
+<span class="n">XH</span><span class="p">,</span><span class="n">yh</span><span class="o">=</span><span class="n">MYD</span><span class="o">.</span><span class="n">makeHelixs</span><span class="p">(</span><span class="n">n_samples</span><span class="p">)</span>
+<span class="n">XAS</span> <span class="o">=</span> <span class="p">[</span><span class="n">XB</span><span class="p">,</span> <span class="n">XR</span><span class="p">,</span> <span class="n">XC</span><span class="p">,</span><span class="n">XH</span><span class="p">]</span>
+<span class="n">YAS</span><span class="o">=</span><span class="p">[</span><span class="n">yb</span><span class="p">,</span><span class="n">yr</span><span class="p">,</span><span class="n">yc</span><span class="p">,</span><span class="n">yh</span><span class="p">]</span>
 
-XBzoom=MYD.ZoomIn(XB,1); XRzoom=MYD.ZoomIn(XR,1); XCzoom=MYD.ZoomIn(XC,1); XHzoom=MYD.ZoomIn(XH,1);
-XASzoom=[XBzoom,XRzoom,XCzoom,XHzoom];
+<span class="n">XBzoom</span><span class="o">=</span><span class="n">MYD</span><span class="o">.</span><span class="n">ZoomIn</span><span class="p">(</span><span class="n">XB</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span> <span class="n">XRzoom</span><span class="o">=</span><span class="n">MYD</span><span class="o">.</span><span class="n">ZoomIn</span><span class="p">(</span><span class="n">XR</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span> <span class="n">XCzoom</span><span class="o">=</span><span class="n">MYD</span><span class="o">.</span><span class="n">ZoomIn</span><span class="p">(</span><span class="n">XC</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span> <span class="n">XHzoom</span><span class="o">=</span><span class="n">MYD</span><span class="o">.</span><span class="n">ZoomIn</span><span class="p">(</span><span class="n">XH</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span>
+<span class="n">XASzoom</span><span class="o">=</span><span class="p">[</span><span class="n">XBzoom</span><span class="p">,</span><span class="n">XRzoom</span><span class="p">,</span><span class="n">XCzoom</span><span class="p">,</span><span class="n">XHzoom</span><span class="p">];</span>
 
-cor = ListedColormap([&#39;Blue&#39;, &#39;Orange&#39;])
-titlename=[&#39;two blob&#39;,&#39;two random&#39;,&#39;two circle&#39;,&#39;two heixl&#39;]
-cmap=[cor,cor,cor,cor]
-MYD.DrawManyChart(XAS,YAS,cmap,24,4,titlename,10,1,4)
+<span class="n">cor</span> <span class="o">=</span> <span class="n">ListedColormap</span><span class="p">([</span><span class="s1">&#39;Blue&#39;</span><span class="p">,</span> <span class="s1">&#39;Orange&#39;</span><span class="p">])</span>
+<span class="n">titlename</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;two blob&#39;</span><span class="p">,</span><span class="s1">&#39;two random&#39;</span><span class="p">,</span><span class="s1">&#39;two circle&#39;</span><span class="p">,</span><span class="s1">&#39;two heixl&#39;</span><span class="p">]</span>
+<span class="n">cmap</span><span class="o">=</span><span class="p">[</span><span class="n">cor</span><span class="p">,</span><span class="n">cor</span><span class="p">,</span><span class="n">cor</span><span class="p">,</span><span class="n">cor</span><span class="p">]</span>
+<span class="n">MYD</span><span class="o">.</span><span class="n">DrawManyChart</span><span class="p">(</span><span class="n">XAS</span><span class="p">,</span><span class="n">YAS</span><span class="p">,</span><span class="n">cmap</span><span class="p">,</span><span class="mi">24</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="n">titlename</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span>
 
 </pre></div>
 </div>
@@ -424,12 +426,12 @@ MYD.DrawManyChart(XAS,YAS,cmap,24,4,titlename,10,1,4)
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3"><div class="highlight"><pre>
-<span></span>Xzip,points=MYD.makeGrids()
-plt.figure()
-plt.scatter(points[:,0],points[:,1],s=0.009)
-plt.show()
+<span></span><span class="n">Xzip</span><span class="p">,</span><span class="n">points</span><span class="o">=</span><span class="n">MYD</span><span class="o">.</span><span class="n">makeGrids</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">points</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span><span class="n">points</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span><span class="n">s</span><span class="o">=</span><span class="mf">0.009</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 
-np.random.shuffle(points)
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">points</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -446,31 +448,31 @@ np.random.shuffle(points)
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3"><div class="highlight"><pre>
-<span></span>cor = ListedColormap([&#39;Blue&#39;, &#39;Orange&#39;])
-lableSVM=[]; scoreSVM=[];
-Kernelfunction=[&#39;linear&#39;,&#39;poly&#39;,&#39;rbf&#39;,&#39;sigmoid&#39;,&#39;precomputed&#39;];
+<span></span><span class="n">cor</span> <span class="o">=</span> <span class="n">ListedColormap</span><span class="p">([</span><span class="s1">&#39;Blue&#39;</span><span class="p">,</span> <span class="s1">&#39;Orange&#39;</span><span class="p">])</span>
+<span class="n">lableSVM</span><span class="o">=</span><span class="p">[];</span> <span class="n">scoreSVM</span><span class="o">=</span><span class="p">[];</span>
+<span class="n">Kernelfunction</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;linear&#39;</span><span class="p">,</span><span class="s1">&#39;poly&#39;</span><span class="p">,</span><span class="s1">&#39;rbf&#39;</span><span class="p">,</span><span class="s1">&#39;sigmoid&#39;</span><span class="p">,</span><span class="s1">&#39;precomputed&#39;</span><span class="p">];</span>
 
-L=len(points); a=1
-number_of_points = int(a*L)
-p = points[0:number_of_points]
+<span class="n">L</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">points</span><span class="p">);</span> <span class="n">a</span><span class="o">=</span><span class="mi">1</span>
+<span class="n">number_of_points</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">a</span><span class="o">*</span><span class="n">L</span><span class="p">)</span>
+<span class="n">p</span> <span class="o">=</span> <span class="n">points</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">number_of_points</span><span class="p">]</span>
 
-DI=0
-modelSVM=SVC(C=1, kernel=Kernelfunction[2],gamma=0.0001)
-tempmodule=modelSVM.fit(XAS[DI],YAS[DI])
-lableSVM.append(tempmodule.predict(p))
-scoreSVM.append(tempmodule.score(XAS[DI],YAS[DI]))
-allSV=tempmodule.support_vectors_
-intercept=tempmodule.intercept_
-axishu=tempmodule.dual_coef_
+<span class="n">DI</span><span class="o">=</span><span class="mi">0</span>
+<span class="n">modelSVM</span><span class="o">=</span><span class="n">SVC</span><span class="p">(</span><span class="n">C</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">kernel</span><span class="o">=</span><span class="n">Kernelfunction</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span><span class="n">gamma</span><span class="o">=</span><span class="mf">0.0001</span><span class="p">)</span>
+<span class="n">tempmodule</span><span class="o">=</span><span class="n">modelSVM</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">XAS</span><span class="p">[</span><span class="n">DI</span><span class="p">],</span><span class="n">YAS</span><span class="p">[</span><span class="n">DI</span><span class="p">])</span>
+<span class="n">lableSVM</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">tempmodule</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">p</span><span class="p">))</span>
+<span class="n">scoreSVM</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">tempmodule</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">XAS</span><span class="p">[</span><span class="n">DI</span><span class="p">],</span><span class="n">YAS</span><span class="p">[</span><span class="n">DI</span><span class="p">]))</span>
+<span class="n">allSV</span><span class="o">=</span><span class="n">tempmodule</span><span class="o">.</span><span class="n">support_vectors_</span>
+<span class="n">intercept</span><span class="o">=</span><span class="n">tempmodule</span><span class="o">.</span><span class="n">intercept_</span>
+<span class="n">axishu</span><span class="o">=</span><span class="n">tempmodule</span><span class="o">.</span><span class="n">dual_coef_</span>
 
-print(axishu)
-MYD.DrawChartColorBar(p,lableSVM,cor,5,4,&#39;rbfCsvm&#39;,&#39;rbfCsvm&#39;)
+<span class="k">print</span><span class="p">(</span><span class="n">axishu</span><span class="p">)</span>
+<span class="n">MYD</span><span class="o">.</span><span class="n">DrawChartColorBar</span><span class="p">(</span><span class="n">p</span><span class="p">,</span><span class="n">lableSVM</span><span class="p">,</span><span class="n">cor</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="s1">&#39;rbfCsvm&#39;</span><span class="p">,</span><span class="s1">&#39;rbfCsvm&#39;</span><span class="p">)</span>
 
-labeiSVC=tempmodule.predict(allSV)
+<span class="n">labeiSVC</span><span class="o">=</span><span class="n">tempmodule</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">allSV</span><span class="p">)</span>
 
-plt.figure(figsize=(4,3))
-plt.scatter(allSV[:,0],allSV[:,1],c=labeiSVC,s=20,cmap=cor)
-plt.show()
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">allSV</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span><span class="n">allSV</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span><span class="n">c</span><span class="o">=</span><span class="n">labeiSVC</span><span class="p">,</span><span class="n">s</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span><span class="n">cmap</span><span class="o">=</span><span class="n">cor</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 
 </pre></div>
 </div>
@@ -504,47 +506,47 @@ plt.show()
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3"><div class="highlight"><pre>
-<span></span>SVMallabelrbf=[];
-for l in range(0,len(allSV)):
-    SVMallabelrbf.append(MYD.rbfK(p,allSV[l],40));
+<span></span><span class="n">SVMallabelrbf</span><span class="o">=</span><span class="p">[];</span>
+<span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">allSV</span><span class="p">)):</span>
+    <span class="n">SVMallabelrbf</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">MYD</span><span class="o">.</span><span class="n">rbfK</span><span class="p">(</span><span class="n">p</span><span class="p">,</span><span class="n">allSV</span><span class="p">[</span><span class="n">l</span><span class="p">],</span><span class="mi">40</span><span class="p">));</span>
 
-SVMallabelploy=[];
-for M in range(0,len(allSV)):
-    SVMallabelploy.append(MYD.polyD(p,allSV[M],2));
+<span class="n">SVMallabelploy</span><span class="o">=</span><span class="p">[];</span>
+<span class="k">for</span> <span class="n">M</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">allSV</span><span class="p">)):</span>
+    <span class="n">SVMallabelploy</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">MYD</span><span class="o">.</span><span class="n">polyD</span><span class="p">(</span><span class="n">p</span><span class="p">,</span><span class="n">allSV</span><span class="p">[</span><span class="n">M</span><span class="p">],</span><span class="mi">2</span><span class="p">));</span>
 
-SVMallabelSigmid=[];
-for N in range(0,len(allSV)):
-    SVMallabelSigmid.append(MYD.precomputedK(p,allSV[N],40));
+<span class="n">SVMallabelSigmid</span><span class="o">=</span><span class="p">[];</span>
+<span class="k">for</span> <span class="n">N</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">allSV</span><span class="p">)):</span>
+    <span class="n">SVMallabelSigmid</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">MYD</span><span class="o">.</span><span class="n">precomputedK</span><span class="p">(</span><span class="n">p</span><span class="p">,</span><span class="n">allSV</span><span class="p">[</span><span class="n">N</span><span class="p">],</span><span class="mi">40</span><span class="p">));</span>
 
-corSVM=plt.cm.get_cmap(&#39;RdBu&#39;)
-PP=[p,p,p,p,p,p];  alllaebl=[SVMallabelrbf[2],SVMallabelrbf[5],SVMallabelploy[2],SVMallabelploy[5],SVMallabelSigmid[2],SVMallabelSigmid[5]];
-titlename=[&#39;rbfsvc2&#39;,&#39;rbfsvc5&#39;,&#39;polysvc2&#39;,&#39;polysvc5&#39;,&#39;precomputedSVC2&#39;,&#39;precomputedSVC5&#39;]
-cmap=[corSVM,corSVM,corSVM,corSVM,corSVM,corSVM]
-MYD.DrawManyChart(PP,alllaebl,cmap,30,4,titlename,2,1,6)
+<span class="n">corSVM</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">get_cmap</span><span class="p">(</span><span class="s1">&#39;RdBu&#39;</span><span class="p">)</span>
+<span class="n">PP</span><span class="o">=</span><span class="p">[</span><span class="n">p</span><span class="p">,</span><span class="n">p</span><span class="p">,</span><span class="n">p</span><span class="p">,</span><span class="n">p</span><span class="p">,</span><span class="n">p</span><span class="p">,</span><span class="n">p</span><span class="p">];</span>  <span class="n">alllaebl</span><span class="o">=</span><span class="p">[</span><span class="n">SVMallabelrbf</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span><span class="n">SVMallabelrbf</span><span class="p">[</span><span class="mi">5</span><span class="p">],</span><span class="n">SVMallabelploy</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span><span class="n">SVMallabelploy</span><span class="p">[</span><span class="mi">5</span><span class="p">],</span><span class="n">SVMallabelSigmid</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span><span class="n">SVMallabelSigmid</span><span class="p">[</span><span class="mi">5</span><span class="p">]];</span>
+<span class="n">titlename</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;rbfsvc2&#39;</span><span class="p">,</span><span class="s1">&#39;rbfsvc5&#39;</span><span class="p">,</span><span class="s1">&#39;polysvc2&#39;</span><span class="p">,</span><span class="s1">&#39;polysvc5&#39;</span><span class="p">,</span><span class="s1">&#39;precomputedSVC2&#39;</span><span class="p">,</span><span class="s1">&#39;precomputedSVC5&#39;</span><span class="p">]</span>
+<span class="n">cmap</span><span class="o">=</span><span class="p">[</span><span class="n">corSVM</span><span class="p">,</span><span class="n">corSVM</span><span class="p">,</span><span class="n">corSVM</span><span class="p">,</span><span class="n">corSVM</span><span class="p">,</span><span class="n">corSVM</span><span class="p">,</span><span class="n">corSVM</span><span class="p">]</span>
+<span class="n">MYD</span><span class="o">.</span><span class="n">DrawManyChart</span><span class="p">(</span><span class="n">PP</span><span class="p">,</span><span class="n">alllaebl</span><span class="p">,</span><span class="n">cmap</span><span class="p">,</span><span class="mi">30</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="n">titlename</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">6</span><span class="p">)</span>
 
-plt.figure(figsize=(6,6))
-labelHE=[];
-for j in range(0,len(SVMallabelrbf[0])):
-    for i in range(0,len(SVMallabelrbf)):
-        maxIndex=0
-        if(SVMallabelrbf[i][j]&gt;=maxIndex):
-            maxIndex=SVMallabelrbf[i][j]
-    labelHE.append(maxIndex);
-plt.scatter(p[:,0],p[:,1],c=labelHE,s=1,cmap=corSVM);
-plt.title(&quot;AllSVC-rbf&quot;)
-plt.show();
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+<span class="n">labelHE</span><span class="o">=</span><span class="p">[];</span>
+<span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">SVMallabelrbf</span><span class="p">[</span><span class="mi">0</span><span class="p">])):</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">SVMallabelrbf</span><span class="p">)):</span>
+        <span class="n">maxIndex</span><span class="o">=</span><span class="mi">0</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">SVMallabelrbf</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span><span class="o">&gt;=</span><span class="n">maxIndex</span><span class="p">):</span>
+            <span class="n">maxIndex</span><span class="o">=</span><span class="n">SVMallabelrbf</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span>
+    <span class="n">labelHE</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">maxIndex</span><span class="p">);</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">p</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span><span class="n">p</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span><span class="n">c</span><span class="o">=</span><span class="n">labelHE</span><span class="p">,</span><span class="n">s</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">cmap</span><span class="o">=</span><span class="n">corSVM</span><span class="p">);</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;AllSVC-rbf&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">();</span>
 
-plt.figure(figsize=(6,6))
-for i in range(0,len(SVMallabelploy)):
-    plt.scatter(p[:,0],p[:,1],c=SVMallabelploy[i],s=1,cmap=corSVM);
-plt.title(&quot;AllSVC-PLOY&quot;)
-plt.show();
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">SVMallabelploy</span><span class="p">)):</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">p</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span><span class="n">p</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span><span class="n">c</span><span class="o">=</span><span class="n">SVMallabelploy</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">s</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">cmap</span><span class="o">=</span><span class="n">corSVM</span><span class="p">);</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;AllSVC-PLOY&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">();</span>
 
-plt.figure(figsize=(6,6))
-for i in range(0,len(SVMallabelSigmid)):
-    plt.scatter(p[:,0],p[:,1],c=SVMallabelSigmid[i],s=1,cmap=corSVM);
-plt.title(&quot;AllSVC-Sig&quot;)
-plt.show();
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">SVMallabelSigmid</span><span class="p">)):</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">p</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span><span class="n">p</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span><span class="n">c</span><span class="o">=</span><span class="n">SVMallabelSigmid</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">s</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">cmap</span><span class="o">=</span><span class="n">corSVM</span><span class="p">);</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;AllSVC-Sig&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">();</span>
 
 </pre></div>
 </div>
@@ -583,26 +585,26 @@ plt.show();
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3"><div class="highlight"><pre>
-<span></span>axishu=np.array(axishu[0])
-sumYKA=MYD.Multiplyonedata(SVMallabelrbf[0],axishu[0])
+<span></span><span class="n">axishu</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">axishu</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">sumYKA</span><span class="o">=</span><span class="n">MYD</span><span class="o">.</span><span class="n">Multiplyonedata</span><span class="p">(</span><span class="n">SVMallabelrbf</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">axishu</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
 
-for fi in range(1,len(allSV)):
-    tempYK=MYD.Multiplyonedata(SVMallabelrbf[fi],axishu[fi])
-    sumYKA=MYD.addarray(sumYKA,tempYK)
+<span class="k">for</span> <span class="n">fi</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">allSV</span><span class="p">)):</span>
+    <span class="n">tempYK</span><span class="o">=</span><span class="n">MYD</span><span class="o">.</span><span class="n">Multiplyonedata</span><span class="p">(</span><span class="n">SVMallabelrbf</span><span class="p">[</span><span class="n">fi</span><span class="p">],</span><span class="n">axishu</span><span class="p">[</span><span class="n">fi</span><span class="p">])</span>
+    <span class="n">sumYKA</span><span class="o">=</span><span class="n">MYD</span><span class="o">.</span><span class="n">addarray</span><span class="p">(</span><span class="n">sumYKA</span><span class="p">,</span><span class="n">tempYK</span><span class="p">)</span>
 
-sumYKA=MYD.MatrixAddoneData(sumYKA,intercept)
-sumYKA=np.array(sumYKA);
+<span class="n">sumYKA</span><span class="o">=</span><span class="n">MYD</span><span class="o">.</span><span class="n">MatrixAddoneData</span><span class="p">(</span><span class="n">sumYKA</span><span class="p">,</span><span class="n">intercept</span><span class="p">)</span>
+<span class="n">sumYKA</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">sumYKA</span><span class="p">);</span>
 
-finalLabel=[];
-for LI in range(0,len(sumYKA)):
-    if(sumYKA[LI]&gt;0):
-        finalLabel.append(1)
-    else:
-        finalLabel.append(-1)
+<span class="n">finalLabel</span><span class="o">=</span><span class="p">[];</span>
+<span class="k">for</span> <span class="n">LI</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">sumYKA</span><span class="p">)):</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">sumYKA</span><span class="p">[</span><span class="n">LI</span><span class="p">]</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">):</span>
+        <span class="n">finalLabel</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">finalLabel</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
 
-corfinal=plt.cm.get_cmap(&#39;RdBu_r&#39;)
-MYD.DrawChartColorBar(p,sumYKA,corfinal,5,4,&#39;rbfCallsvm&#39;,&#39;rbfCallsvm&#39;)
-MYD.DrawChartColorBar(p,finalLabel,cor,5,4,&#39;KfLABEL&#39;,&#39;+1-1&#39;)
+<span class="n">corfinal</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">get_cmap</span><span class="p">(</span><span class="s1">&#39;RdBu_r&#39;</span><span class="p">)</span>
+<span class="n">MYD</span><span class="o">.</span><span class="n">DrawChartColorBar</span><span class="p">(</span><span class="n">p</span><span class="p">,</span><span class="n">sumYKA</span><span class="p">,</span><span class="n">corfinal</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="s1">&#39;rbfCallsvm&#39;</span><span class="p">,</span><span class="s1">&#39;rbfCallsvm&#39;</span><span class="p">)</span>
+<span class="n">MYD</span><span class="o">.</span><span class="n">DrawChartColorBar</span><span class="p">(</span><span class="n">p</span><span class="p">,</span><span class="n">finalLabel</span><span class="p">,</span><span class="n">cor</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="s1">&#39;KfLABEL&#39;</span><span class="p">,</span><span class="s1">&#39;+1-1&#39;</span><span class="p">)</span>
 
 </pre></div>
 </div>
@@ -627,26 +629,26 @@ MYD.DrawChartColorBar(p,finalLabel,cor,5,4,&#39;KfLABEL&#39;,&#39;+1-1&#39;)
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3"><div class="highlight"><pre>
-<span></span>axishu=np.array(axishu[0])
-sumYKA=MYD.Multiplyonedata(SVMallabelploy[0],axishu[0])
+<span></span><span class="n">axishu</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">axishu</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">sumYKA</span><span class="o">=</span><span class="n">MYD</span><span class="o">.</span><span class="n">Multiplyonedata</span><span class="p">(</span><span class="n">SVMallabelploy</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">axishu</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
 
-for fi in range(1,len(allSV)):
-    tempYK=MYD.Multiplyonedata(SVMallabelploy[fi],axishu[fi])
-    sumYKA=MYD.addarray(sumYKA,tempYK)
+<span class="k">for</span> <span class="n">fi</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">allSV</span><span class="p">)):</span>
+    <span class="n">tempYK</span><span class="o">=</span><span class="n">MYD</span><span class="o">.</span><span class="n">Multiplyonedata</span><span class="p">(</span><span class="n">SVMallabelploy</span><span class="p">[</span><span class="n">fi</span><span class="p">],</span><span class="n">axishu</span><span class="p">[</span><span class="n">fi</span><span class="p">])</span>
+    <span class="n">sumYKA</span><span class="o">=</span><span class="n">MYD</span><span class="o">.</span><span class="n">addarray</span><span class="p">(</span><span class="n">sumYKA</span><span class="p">,</span><span class="n">tempYK</span><span class="p">)</span>
 
-sumYKA=MYD.MatrixAddoneData(sumYKA,intercept)
-sumYKA=np.array(sumYKA);
+<span class="n">sumYKA</span><span class="o">=</span><span class="n">MYD</span><span class="o">.</span><span class="n">MatrixAddoneData</span><span class="p">(</span><span class="n">sumYKA</span><span class="p">,</span><span class="n">intercept</span><span class="p">)</span>
+<span class="n">sumYKA</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">sumYKA</span><span class="p">);</span>
 
-finalLabel=[];
-for LI in range(0,len(sumYKA)):
-    if(sumYKA[LI]&gt;0):
-        finalLabel.append(1)
-    else:
-        finalLabel.append(-1)
+<span class="n">finalLabel</span><span class="o">=</span><span class="p">[];</span>
+<span class="k">for</span> <span class="n">LI</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">sumYKA</span><span class="p">)):</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">sumYKA</span><span class="p">[</span><span class="n">LI</span><span class="p">]</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">):</span>
+        <span class="n">finalLabel</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">finalLabel</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
 
-corfinal=plt.cm.get_cmap(&#39;RdBu&#39;)
-MYD.DrawChartColorBar(p,sumYKA,corfinal,5,4,&#39;rbfCallsvm&#39;,&#39;rbfCallsvm&#39;)
-MYD.DrawChartColorBar(p,finalLabel,cor,5,4,&#39;KfLABEL&#39;,&#39;+1-1&#39;)
+<span class="n">corfinal</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">get_cmap</span><span class="p">(</span><span class="s1">&#39;RdBu&#39;</span><span class="p">)</span>
+<span class="n">MYD</span><span class="o">.</span><span class="n">DrawChartColorBar</span><span class="p">(</span><span class="n">p</span><span class="p">,</span><span class="n">sumYKA</span><span class="p">,</span><span class="n">corfinal</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="s1">&#39;rbfCallsvm&#39;</span><span class="p">,</span><span class="s1">&#39;rbfCallsvm&#39;</span><span class="p">)</span>
+<span class="n">MYD</span><span class="o">.</span><span class="n">DrawChartColorBar</span><span class="p">(</span><span class="n">p</span><span class="p">,</span><span class="n">finalLabel</span><span class="p">,</span><span class="n">cor</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="s1">&#39;KfLABEL&#39;</span><span class="p">,</span><span class="s1">&#39;+1-1&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>

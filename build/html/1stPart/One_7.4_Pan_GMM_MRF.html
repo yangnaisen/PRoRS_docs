@@ -37,7 +37,7 @@
         <link rel="search" title="搜索" href="../search.html"/>
     <link rel="top" title="PRoRS 0.0.1 文档" href="../index.html"/>
         <link rel="up" title="像元特征分类" href="index.html"/>
-        <link rel="next" title="1. 图像平面分类" href="../2ndPart/index.html"/>
+        <link rel="next" title="图像模式识别" href="../2ndPart/index.html"/>
         <link rel="prev" title="&lt;no title&gt;" href="One_7.3_Mul_Kmeans.html"/> 
 
   
@@ -128,11 +128,13 @@
 </ul>
 <p class="caption"><span class="caption-text">第二部分:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../2ndPart/index.html">1. 图像平面分类</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../2ndPart/index.html">图像模式识别</a></li>
 </ul>
 <p class="caption"><span class="caption-text">第三部分:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../3rdPart/index.html">地表覆盖制图</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../TestContent.html">目录测试</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../TestContent.html#第二层">第二层</a></li>
 </ul>
 
             
@@ -398,19 +400,19 @@ div.nboutput div.output_area.stderr {
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3"><div class="highlight"><pre>
-<span></span>import sklearn
-from PIL import Image
-import matplotlib.pyplot as plt
-from sklearn import mixture
-import numpy as np
-import pylab as pl
-import skimage.io as SKimg
-import scipy.io as sio
+<span></span><span class="kn">import</span> <span class="nn">sklearn</span>
+<span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">mixture</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pylab</span> <span class="kn">as</span> <span class="nn">pl</span>
+<span class="kn">import</span> <span class="nn">skimage.io</span> <span class="kn">as</span> <span class="nn">SKimg</span>
+<span class="kn">import</span> <span class="nn">scipy.io</span> <span class="kn">as</span> <span class="nn">sio</span>
 
-import math
-import sys
-import ALLNeighborhoodrelationship as ABL
-import MatrixNeighborhood  as MNB
+<span class="kn">import</span> <span class="nn">math</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">ALLNeighborhoodrelationship</span> <span class="kn">as</span> <span class="nn">ABL</span>
+<span class="kn">import</span> <span class="nn">MatrixNeighborhood</span>  <span class="kn">as</span> <span class="nn">MNB</span>
 </pre></div>
 </div>
 </div>
@@ -420,16 +422,16 @@ import MatrixNeighborhood  as MNB
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3"><div class="highlight"><pre>
-<span></span>#读取tiff影像
-Tpan =SKimg.imread(&quot;F:/pythontestdata/MyTiff/tianhui1200pan.tif&quot;)
-SKimg.imshow(Tpan)
-SKimg.show()
-Tpan.shape
+<span></span><span class="c1">#读取tiff影像</span>
+<span class="n">Tpan</span> <span class="o">=</span><span class="n">SKimg</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="s2">&quot;F:/pythontestdata/MyTiff/tianhui1200pan.tif&quot;</span><span class="p">)</span>
+<span class="n">SKimg</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">Tpan</span><span class="p">)</span>
+<span class="n">SKimg</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="n">Tpan</span><span class="o">.</span><span class="n">shape</span>
 
-Rows=Tpan.shape[0]; Cols=Tpan.shape[1];
-NewTpan=np.array(Tpan.reshape(Rows*Cols,1));
+<span class="n">Rows</span><span class="o">=</span><span class="n">Tpan</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span> <span class="n">Cols</span><span class="o">=</span><span class="n">Tpan</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span>
+<span class="n">NewTpan</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">Tpan</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">Rows</span><span class="o">*</span><span class="n">Cols</span><span class="p">,</span><span class="mi">1</span><span class="p">));</span>
 
-TpanOne=Tpan.flatten();
+<span class="n">TpanOne</span><span class="o">=</span><span class="n">Tpan</span><span class="o">.</span><span class="n">flatten</span><span class="p">();</span>
 </pre></div>
 </div>
 </div>
@@ -446,11 +448,11 @@ TpanOne=Tpan.flatten();
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3"><div class="highlight"><pre>
-<span></span>#matlab文件名
-matfn=&#39;gt_tianhui1200.mat&#39;;
-data=sio.loadmat(matfn);
-mk = data[&#39;gt&#39;]
-print(mk)
+<span></span><span class="c1">#matlab文件名</span>
+<span class="n">matfn</span><span class="o">=</span><span class="s1">&#39;gt_tianhui1200.mat&#39;</span><span class="p">;</span>
+<span class="n">data</span><span class="o">=</span><span class="n">sio</span><span class="o">.</span><span class="n">loadmat</span><span class="p">(</span><span class="n">matfn</span><span class="p">);</span>
+<span class="n">mk</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;gt&#39;</span><span class="p">]</span>
+<span class="k">print</span><span class="p">(</span><span class="n">mk</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -474,17 +476,17 @@ print(mk)
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3"><div class="highlight"><pre>
-<span></span>GMMmy = mixture.GaussianMixture(n_components=7,covariance_type=&#39;full&#39;,max_iter=500).fit(NewTpan);
-Labels=GMMmy.predict(NewTpan);  Clus_Centers=GMMmy.means_;  weights_=GMMmy.weights_;
-covariances_ =GMMmy.covariances_;        precisions_ =GMMmy.precisions_;
-Score=GMMmy.score(NewTpan);
+<span></span><span class="n">GMMmy</span> <span class="o">=</span> <span class="n">mixture</span><span class="o">.</span><span class="n">GaussianMixture</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span><span class="n">covariance_type</span><span class="o">=</span><span class="s1">&#39;full&#39;</span><span class="p">,</span><span class="n">max_iter</span><span class="o">=</span><span class="mi">500</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">NewTpan</span><span class="p">);</span>
+<span class="n">Labels</span><span class="o">=</span><span class="n">GMMmy</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">NewTpan</span><span class="p">);</span>  <span class="n">Clus_Centers</span><span class="o">=</span><span class="n">GMMmy</span><span class="o">.</span><span class="n">means_</span><span class="p">;</span>  <span class="n">weights_</span><span class="o">=</span><span class="n">GMMmy</span><span class="o">.</span><span class="n">weights_</span><span class="p">;</span>
+<span class="n">covariances_</span> <span class="o">=</span><span class="n">GMMmy</span><span class="o">.</span><span class="n">covariances_</span><span class="p">;</span>        <span class="n">precisions_</span> <span class="o">=</span><span class="n">GMMmy</span><span class="o">.</span><span class="n">precisions_</span><span class="p">;</span>
+<span class="n">Score</span><span class="o">=</span><span class="n">GMMmy</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">NewTpan</span><span class="p">);</span>
 
-#一维高斯概率密度函数
-def OneDimentionGB(X,u,s):
-    ALLF=[];
-    for IX in range(0,len(X)):
-        f=math.exp(-math.pow((X[IX]-u),2)/2*s)/math.sqrt(2*math.pi*s); ALLF.append(f);
-    return ALLF;
+<span class="c1">#一维高斯概率密度函数</span>
+<span class="k">def</span> <span class="nf">OneDimentionGB</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">u</span><span class="p">,</span><span class="n">s</span><span class="p">):</span>
+    <span class="n">ALLF</span><span class="o">=</span><span class="p">[];</span>
+    <span class="k">for</span> <span class="n">IX</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">X</span><span class="p">)):</span>
+        <span class="n">f</span><span class="o">=</span><span class="n">math</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">math</span><span class="o">.</span><span class="n">pow</span><span class="p">((</span><span class="n">X</span><span class="p">[</span><span class="n">IX</span><span class="p">]</span><span class="o">-</span><span class="n">u</span><span class="p">),</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="o">*</span><span class="n">s</span><span class="p">)</span><span class="o">/</span><span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">math</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">s</span><span class="p">);</span> <span class="n">ALLF</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">f</span><span class="p">);</span>
+    <span class="k">return</span> <span class="n">ALLF</span><span class="p">;</span>
 </pre></div>
 </div>
 </div>
@@ -494,22 +496,22 @@ def OneDimentionGB(X,u,s):
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3"><div class="highlight"><pre>
-<span></span>finaLabel=mk-2;
-for HL in range(0,len(Labels)):
-    h=math.floor(HL/1200); l=HL%1200;
-    finaLabel[h][l]=Labels[HL];
-# 成图展示
-mylabel=finaLabel;
-print(mylabel)
-plt.figure(figsize=(6,6))
-im2 = Image.fromarray(mylabel);
-plt.imshow(im2,cmap=plt.cm.get_cmap(&#39;cubehelix_r&#39;,8));
-cbar=plt.colorbar()
-cbar.set_ticks(np.linspace(0,7,8))
-#cbar.set_ticklabels()
-plt.clim(-0.5,8)
-plt.title(&#39;Eight-Xianyan-GMM&#39;);
-plt.show();
+<span></span><span class="n">finaLabel</span><span class="o">=</span><span class="n">mk</span><span class="o">-</span><span class="mi">2</span><span class="p">;</span>
+<span class="k">for</span> <span class="n">HL</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">Labels</span><span class="p">)):</span>
+    <span class="n">h</span><span class="o">=</span><span class="n">math</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="n">HL</span><span class="o">/</span><span class="mi">1200</span><span class="p">);</span> <span class="n">l</span><span class="o">=</span><span class="n">HL</span><span class="o">%</span><span class="k">1200</span>;
+    <span class="n">finaLabel</span><span class="p">[</span><span class="n">h</span><span class="p">][</span><span class="n">l</span><span class="p">]</span><span class="o">=</span><span class="n">Labels</span><span class="p">[</span><span class="n">HL</span><span class="p">];</span>
+<span class="c1"># 成图展示</span>
+<span class="n">mylabel</span><span class="o">=</span><span class="n">finaLabel</span><span class="p">;</span>
+<span class="k">print</span><span class="p">(</span><span class="n">mylabel</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+<span class="n">im2</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">fromarray</span><span class="p">(</span><span class="n">mylabel</span><span class="p">);</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">im2</span><span class="p">,</span><span class="n">cmap</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">get_cmap</span><span class="p">(</span><span class="s1">&#39;cubehelix_r&#39;</span><span class="p">,</span><span class="mi">8</span><span class="p">));</span>
+<span class="n">cbar</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">()</span>
+<span class="n">cbar</span><span class="o">.</span><span class="n">set_ticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">))</span>
+<span class="c1">#cbar.set_ticklabels()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">clim</span><span class="p">(</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span><span class="mi">8</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Eight-Xianyan-GMM&#39;</span><span class="p">);</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">();</span>
 </pre></div>
 </div>
 </div>
@@ -540,18 +542,18 @@ plt.show();
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3"><div class="highlight"><pre>
-<span></span>X=np.arange(0,255);    ALLGBfrency=[];
-cor=[&#39;r&#39;,&#39;g&#39;,&#39;b&#39;,&#39;y&#39;,&#39;k&#39;,&#39;c&#39;,&#39;m&#39;];
-plt.figure(figsize=(6,5));
-for i in range(0,len(Clus_Centers)):
-    Uvalue=np.unique(TpanOne,return_index=True,return_inverse=True,return_counts = True)[0];
-    Uinverse=np.unique(TpanOne,return_index=True,return_inverse=True,return_counts = True)[2];
-    f=OneDimentionGB(Uvalue,Clus_Centers[i],covariances_[i]);  f=np.array(f);
-    frency=f[Uinverse];     ALLGBfrency.append(frency);
-    plt.plot(Uvalue,f,label=Clus_Centers[i],color=cor[i],linewidth=2);
-plt.xlabel(&quot;Pixcel-Value&quot;);  plt.ylabel(&quot;Probability&quot;);   plt.xlim(0,150);  plt.ylim(0,0.05);
-plt.title(&quot;P of each GB&quot;);
-plt.legend(); plt.show();
+<span></span><span class="n">X</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">255</span><span class="p">);</span>    <span class="n">ALLGBfrency</span><span class="o">=</span><span class="p">[];</span>
+<span class="n">cor</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;r&#39;</span><span class="p">,</span><span class="s1">&#39;g&#39;</span><span class="p">,</span><span class="s1">&#39;b&#39;</span><span class="p">,</span><span class="s1">&#39;y&#39;</span><span class="p">,</span><span class="s1">&#39;k&#39;</span><span class="p">,</span><span class="s1">&#39;c&#39;</span><span class="p">,</span><span class="s1">&#39;m&#39;</span><span class="p">];</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">5</span><span class="p">));</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">Clus_Centers</span><span class="p">)):</span>
+    <span class="n">Uvalue</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">TpanOne</span><span class="p">,</span><span class="n">return_index</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span><span class="n">return_inverse</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span><span class="n">return_counts</span> <span class="o">=</span> <span class="bp">True</span><span class="p">)[</span><span class="mi">0</span><span class="p">];</span>
+    <span class="n">Uinverse</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">TpanOne</span><span class="p">,</span><span class="n">return_index</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span><span class="n">return_inverse</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span><span class="n">return_counts</span> <span class="o">=</span> <span class="bp">True</span><span class="p">)[</span><span class="mi">2</span><span class="p">];</span>
+    <span class="n">f</span><span class="o">=</span><span class="n">OneDimentionGB</span><span class="p">(</span><span class="n">Uvalue</span><span class="p">,</span><span class="n">Clus_Centers</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">covariances_</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>  <span class="n">f</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">f</span><span class="p">);</span>
+    <span class="n">frency</span><span class="o">=</span><span class="n">f</span><span class="p">[</span><span class="n">Uinverse</span><span class="p">];</span>     <span class="n">ALLGBfrency</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">frency</span><span class="p">);</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">Uvalue</span><span class="p">,</span><span class="n">f</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="n">Clus_Centers</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">color</span><span class="o">=</span><span class="n">cor</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">);</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Pixcel-Value&quot;</span><span class="p">);</span>  <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Probability&quot;</span><span class="p">);</span>   <span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">150</span><span class="p">);</span>  <span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mf">0.05</span><span class="p">);</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;P of each GB&quot;</span><span class="p">);</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">();</span> <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">();</span>
 </pre></div>
 </div>
 </div>
@@ -570,50 +572,50 @@ plt.legend(); plt.show();
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3"><div class="highlight"><pre>
-<span></span>PPB=MNB.PPBeight(finaLabel);
-L0F=np.sum((PPB==0),axis=0)/8;
-L1F=np.sum((PPB==1),axis=0)/8;
-L2F=np.sum((PPB==2),axis=0)/8;
-L3F=np.sum((PPB==3),axis=0)/8;
-L4F=np.sum((PPB==4),axis=0)/8;
-L5F=np.sum((PPB==5),axis=0)/8;
-L6F=np.sum((PPB==6),axis=0)/8;
+<span></span><span class="n">PPB</span><span class="o">=</span><span class="n">MNB</span><span class="o">.</span><span class="n">PPBeight</span><span class="p">(</span><span class="n">finaLabel</span><span class="p">);</span>
+<span class="n">L0F</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">PPB</span><span class="o">==</span><span class="mi">0</span><span class="p">),</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">/</span><span class="mi">8</span><span class="p">;</span>
+<span class="n">L1F</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">PPB</span><span class="o">==</span><span class="mi">1</span><span class="p">),</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">/</span><span class="mi">8</span><span class="p">;</span>
+<span class="n">L2F</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">PPB</span><span class="o">==</span><span class="mi">2</span><span class="p">),</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">/</span><span class="mi">8</span><span class="p">;</span>
+<span class="n">L3F</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">PPB</span><span class="o">==</span><span class="mi">3</span><span class="p">),</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">/</span><span class="mi">8</span><span class="p">;</span>
+<span class="n">L4F</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">PPB</span><span class="o">==</span><span class="mi">4</span><span class="p">),</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">/</span><span class="mi">8</span><span class="p">;</span>
+<span class="n">L5F</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">PPB</span><span class="o">==</span><span class="mi">5</span><span class="p">),</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">/</span><span class="mi">8</span><span class="p">;</span>
+<span class="n">L6F</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">PPB</span><span class="o">==</span><span class="mi">6</span><span class="p">),</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">/</span><span class="mi">8</span><span class="p">;</span>
 
-ALLPP=[L0F,L1F,L2F,L3F,L4F,L5F,L6F];
+<span class="n">ALLPP</span><span class="o">=</span><span class="p">[</span><span class="n">L0F</span><span class="p">,</span><span class="n">L1F</span><span class="p">,</span><span class="n">L2F</span><span class="p">,</span><span class="n">L3F</span><span class="p">,</span><span class="n">L4F</span><span class="p">,</span><span class="n">L5F</span><span class="p">,</span><span class="n">L6F</span><span class="p">];</span>
 
-ALLpost=[];
-for j in range(0,len(ALLPP)):
-    TEMPpost=(ALLGBfrency[j]+0)*ALLPP[j];
-    ALLpost.append(TEMPpost);
+<span class="n">ALLpost</span><span class="o">=</span><span class="p">[];</span>
+<span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">ALLPP</span><span class="p">)):</span>
+    <span class="n">TEMPpost</span><span class="o">=</span><span class="p">(</span><span class="n">ALLGBfrency</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">+</span><span class="mi">0</span><span class="p">)</span><span class="o">*</span><span class="n">ALLPP</span><span class="p">[</span><span class="n">j</span><span class="p">];</span>
+    <span class="n">ALLpost</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">TEMPpost</span><span class="p">);</span>
 
-LastLabel=np.zeros(mk.shape[0]*mk.shape[1]);
-for n in range(0,mk.shape[0]*mk.shape[1]):
-    MAXP=0;   maxindex=0;      tempF=[];
-    for a in range(0,len(ALLpost)):
-        tempF.append(ALLpost[a][n]);
-    for k in range(0,len(tempF)):
-        if(tempF[k]&gt;MAXP):
-            MAXP=tempF[k];
-            maxindex=k;
-    LastLabel[n]=maxindex;
+<span class="n">LastLabel</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">mk</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">mk</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">mk</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">mk</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
+    <span class="n">MAXP</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>   <span class="n">maxindex</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>      <span class="n">tempF</span><span class="o">=</span><span class="p">[];</span>
+    <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">ALLpost</span><span class="p">)):</span>
+        <span class="n">tempF</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ALLpost</span><span class="p">[</span><span class="n">a</span><span class="p">][</span><span class="n">n</span><span class="p">]);</span>
+    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">tempF</span><span class="p">)):</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">tempF</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">&gt;</span><span class="n">MAXP</span><span class="p">):</span>
+            <span class="n">MAXP</span><span class="o">=</span><span class="n">tempF</span><span class="p">[</span><span class="n">k</span><span class="p">];</span>
+            <span class="n">maxindex</span><span class="o">=</span><span class="n">k</span><span class="p">;</span>
+    <span class="n">LastLabel</span><span class="p">[</span><span class="n">n</span><span class="p">]</span><span class="o">=</span><span class="n">maxindex</span><span class="p">;</span>
 
-FirstMRF=mk-2;
-for HL in range(0,len(LastLabel)):
-    h=math.floor(HL/1200); l=HL%1200;
-    FirstMRF[h][l]=LastLabel[HL];
+<span class="n">FirstMRF</span><span class="o">=</span><span class="n">mk</span><span class="o">-</span><span class="mi">2</span><span class="p">;</span>
+<span class="k">for</span> <span class="n">HL</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">LastLabel</span><span class="p">)):</span>
+    <span class="n">h</span><span class="o">=</span><span class="n">math</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="n">HL</span><span class="o">/</span><span class="mi">1200</span><span class="p">);</span> <span class="n">l</span><span class="o">=</span><span class="n">HL</span><span class="o">%</span><span class="k">1200</span>;
+    <span class="n">FirstMRF</span><span class="p">[</span><span class="n">h</span><span class="p">][</span><span class="n">l</span><span class="p">]</span><span class="o">=</span><span class="n">LastLabel</span><span class="p">[</span><span class="n">HL</span><span class="p">];</span>
 
-# 成图展示
-mylabel=FirstMRF;
-print(mylabel)
-plt.figure(figsize=(6,6))
-im2 = Image.fromarray(mylabel);
-plt.imshow(im2,cmap=plt.cm.get_cmap(&#39;cubehelix_r&#39;,8));
-cbar=plt.colorbar()
-cbar.set_ticks(np.linspace(0,7,8))
-#cbar.set_ticklabels()
-plt.clim(-0.5,8)
-plt.title(&#39;Eight-Xianyan-FirstMRF&#39;);
-plt.show();
+<span class="c1"># 成图展示</span>
+<span class="n">mylabel</span><span class="o">=</span><span class="n">FirstMRF</span><span class="p">;</span>
+<span class="k">print</span><span class="p">(</span><span class="n">mylabel</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+<span class="n">im2</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">fromarray</span><span class="p">(</span><span class="n">mylabel</span><span class="p">);</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">im2</span><span class="p">,</span><span class="n">cmap</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">get_cmap</span><span class="p">(</span><span class="s1">&#39;cubehelix_r&#39;</span><span class="p">,</span><span class="mi">8</span><span class="p">));</span>
+<span class="n">cbar</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">()</span>
+<span class="n">cbar</span><span class="o">.</span><span class="n">set_ticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">))</span>
+<span class="c1">#cbar.set_ticklabels()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">clim</span><span class="p">(</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span><span class="mi">8</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Eight-Xianyan-FirstMRF&#39;</span><span class="p">);</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">();</span>
 </pre></div>
 </div>
 </div>
@@ -647,50 +649,50 @@ plt.show();
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3"><div class="highlight"><pre>
-<span></span>PPB=MNB.PPBeight(FirstMRF);
-L0F=np.sum((PPB==0),axis=0)/8;
-L1F=np.sum((PPB==1),axis=0)/8;
-L2F=np.sum((PPB==2),axis=0)/8;
-L3F=np.sum((PPB==3),axis=0)/8;
-L4F=np.sum((PPB==4),axis=0)/8;
-L5F=np.sum((PPB==5),axis=0)/8;
-L6F=np.sum((PPB==6),axis=0)/8;
+<span></span><span class="n">PPB</span><span class="o">=</span><span class="n">MNB</span><span class="o">.</span><span class="n">PPBeight</span><span class="p">(</span><span class="n">FirstMRF</span><span class="p">);</span>
+<span class="n">L0F</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">PPB</span><span class="o">==</span><span class="mi">0</span><span class="p">),</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">/</span><span class="mi">8</span><span class="p">;</span>
+<span class="n">L1F</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">PPB</span><span class="o">==</span><span class="mi">1</span><span class="p">),</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">/</span><span class="mi">8</span><span class="p">;</span>
+<span class="n">L2F</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">PPB</span><span class="o">==</span><span class="mi">2</span><span class="p">),</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">/</span><span class="mi">8</span><span class="p">;</span>
+<span class="n">L3F</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">PPB</span><span class="o">==</span><span class="mi">3</span><span class="p">),</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">/</span><span class="mi">8</span><span class="p">;</span>
+<span class="n">L4F</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">PPB</span><span class="o">==</span><span class="mi">4</span><span class="p">),</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">/</span><span class="mi">8</span><span class="p">;</span>
+<span class="n">L5F</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">PPB</span><span class="o">==</span><span class="mi">5</span><span class="p">),</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">/</span><span class="mi">8</span><span class="p">;</span>
+<span class="n">L6F</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">PPB</span><span class="o">==</span><span class="mi">6</span><span class="p">),</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">/</span><span class="mi">8</span><span class="p">;</span>
 
-ALLPP=[L0F,L1F,L2F,L3F,L4F,L5F,L6F];
+<span class="n">ALLPP</span><span class="o">=</span><span class="p">[</span><span class="n">L0F</span><span class="p">,</span><span class="n">L1F</span><span class="p">,</span><span class="n">L2F</span><span class="p">,</span><span class="n">L3F</span><span class="p">,</span><span class="n">L4F</span><span class="p">,</span><span class="n">L5F</span><span class="p">,</span><span class="n">L6F</span><span class="p">];</span>
 
-ALLpost=[];
-for j in range(0,len(ALLPP)):
-    TEMPpost=(ALLGBfrency[j]+0)*ALLPP[j];
-    ALLpost.append(TEMPpost);
+<span class="n">ALLpost</span><span class="o">=</span><span class="p">[];</span>
+<span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">ALLPP</span><span class="p">)):</span>
+    <span class="n">TEMPpost</span><span class="o">=</span><span class="p">(</span><span class="n">ALLGBfrency</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">+</span><span class="mi">0</span><span class="p">)</span><span class="o">*</span><span class="n">ALLPP</span><span class="p">[</span><span class="n">j</span><span class="p">];</span>
+    <span class="n">ALLpost</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">TEMPpost</span><span class="p">);</span>
 
-LastLabel=np.zeros(mk.shape[0]*mk.shape[1]);
-for n in range(0,mk.shape[0]*mk.shape[1]):
-    MAXP=0;   maxindex=0;      tempF=[];
-    for a in range(0,len(ALLpost)):
-        tempF.append(ALLpost[a][n]);
-    for k in range(0,len(tempF)):
-        if(tempF[k]&gt;MAXP):
-            MAXP=tempF[k];
-            maxindex=k;
-    LastLabel[n]=maxindex;
+<span class="n">LastLabel</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">mk</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">mk</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">mk</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">mk</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
+    <span class="n">MAXP</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>   <span class="n">maxindex</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>      <span class="n">tempF</span><span class="o">=</span><span class="p">[];</span>
+    <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">ALLpost</span><span class="p">)):</span>
+        <span class="n">tempF</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ALLpost</span><span class="p">[</span><span class="n">a</span><span class="p">][</span><span class="n">n</span><span class="p">]);</span>
+    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">tempF</span><span class="p">)):</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">tempF</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">&gt;</span><span class="n">MAXP</span><span class="p">):</span>
+            <span class="n">MAXP</span><span class="o">=</span><span class="n">tempF</span><span class="p">[</span><span class="n">k</span><span class="p">];</span>
+            <span class="n">maxindex</span><span class="o">=</span><span class="n">k</span><span class="p">;</span>
+    <span class="n">LastLabel</span><span class="p">[</span><span class="n">n</span><span class="p">]</span><span class="o">=</span><span class="n">maxindex</span><span class="p">;</span>
 
-SecondMRF=mk-2;
-for HL in range(0,len(LastLabel)):
-    h=math.floor(HL/1200); l=HL%1200;
-    SecondMRF[h][l]=LastLabel[HL];
+<span class="n">SecondMRF</span><span class="o">=</span><span class="n">mk</span><span class="o">-</span><span class="mi">2</span><span class="p">;</span>
+<span class="k">for</span> <span class="n">HL</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">LastLabel</span><span class="p">)):</span>
+    <span class="n">h</span><span class="o">=</span><span class="n">math</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="n">HL</span><span class="o">/</span><span class="mi">1200</span><span class="p">);</span> <span class="n">l</span><span class="o">=</span><span class="n">HL</span><span class="o">%</span><span class="k">1200</span>;
+    <span class="n">SecondMRF</span><span class="p">[</span><span class="n">h</span><span class="p">][</span><span class="n">l</span><span class="p">]</span><span class="o">=</span><span class="n">LastLabel</span><span class="p">[</span><span class="n">HL</span><span class="p">];</span>
 
-# 成图展示
-mylabel=SecondMRF;
-print(mylabel)
-plt.figure(figsize=(6,6))
-im2 = Image.fromarray(mylabel);
-plt.imshow(im2,cmap=plt.cm.get_cmap(&#39;cubehelix_r&#39;,8));
-cbar=plt.colorbar()
-cbar.set_ticks(np.linspace(0,7,8))
-#cbar.set_ticklabels()
-plt.clim(-0.5,8)
-plt.title(&#39;Eight-Xianyan-SecondMRF&#39;);
-plt.show();
+<span class="c1"># 成图展示</span>
+<span class="n">mylabel</span><span class="o">=</span><span class="n">SecondMRF</span><span class="p">;</span>
+<span class="k">print</span><span class="p">(</span><span class="n">mylabel</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+<span class="n">im2</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">fromarray</span><span class="p">(</span><span class="n">mylabel</span><span class="p">);</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">im2</span><span class="p">,</span><span class="n">cmap</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">get_cmap</span><span class="p">(</span><span class="s1">&#39;cubehelix_r&#39;</span><span class="p">,</span><span class="mi">8</span><span class="p">));</span>
+<span class="n">cbar</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">()</span>
+<span class="n">cbar</span><span class="o">.</span><span class="n">set_ticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">))</span>
+<span class="c1">#cbar.set_ticklabels()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">clim</span><span class="p">(</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span><span class="mi">8</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Eight-Xianyan-SecondMRF&#39;</span><span class="p">);</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">();</span>
 </pre></div>
 </div>
 </div>
@@ -724,50 +726,50 @@ plt.show();
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3"><div class="highlight"><pre>
-<span></span>PPB=MNB.PPBeight(SecondMRF);
-L0F=np.sum((PPB==0),axis=0)/8;
-L1F=np.sum((PPB==1),axis=0)/8;
-L2F=np.sum((PPB==2),axis=0)/8;
-L3F=np.sum((PPB==3),axis=0)/8;
-L4F=np.sum((PPB==4),axis=0)/8;
-L5F=np.sum((PPB==5),axis=0)/8;
-L6F=np.sum((PPB==6),axis=0)/8;
+<span></span><span class="n">PPB</span><span class="o">=</span><span class="n">MNB</span><span class="o">.</span><span class="n">PPBeight</span><span class="p">(</span><span class="n">SecondMRF</span><span class="p">);</span>
+<span class="n">L0F</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">PPB</span><span class="o">==</span><span class="mi">0</span><span class="p">),</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">/</span><span class="mi">8</span><span class="p">;</span>
+<span class="n">L1F</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">PPB</span><span class="o">==</span><span class="mi">1</span><span class="p">),</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">/</span><span class="mi">8</span><span class="p">;</span>
+<span class="n">L2F</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">PPB</span><span class="o">==</span><span class="mi">2</span><span class="p">),</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">/</span><span class="mi">8</span><span class="p">;</span>
+<span class="n">L3F</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">PPB</span><span class="o">==</span><span class="mi">3</span><span class="p">),</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">/</span><span class="mi">8</span><span class="p">;</span>
+<span class="n">L4F</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">PPB</span><span class="o">==</span><span class="mi">4</span><span class="p">),</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">/</span><span class="mi">8</span><span class="p">;</span>
+<span class="n">L5F</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">PPB</span><span class="o">==</span><span class="mi">5</span><span class="p">),</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">/</span><span class="mi">8</span><span class="p">;</span>
+<span class="n">L6F</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">PPB</span><span class="o">==</span><span class="mi">6</span><span class="p">),</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">/</span><span class="mi">8</span><span class="p">;</span>
 
-ALLPP=[L0F,L1F,L2F,L3F,L4F,L5F,L6F];
+<span class="n">ALLPP</span><span class="o">=</span><span class="p">[</span><span class="n">L0F</span><span class="p">,</span><span class="n">L1F</span><span class="p">,</span><span class="n">L2F</span><span class="p">,</span><span class="n">L3F</span><span class="p">,</span><span class="n">L4F</span><span class="p">,</span><span class="n">L5F</span><span class="p">,</span><span class="n">L6F</span><span class="p">];</span>
 
-ALLpost=[];
-for j in range(0,len(ALLPP)):
-    TEMPpost=(ALLGBfrency[j]+0)*ALLPP[j];
-    ALLpost.append(TEMPpost);
+<span class="n">ALLpost</span><span class="o">=</span><span class="p">[];</span>
+<span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">ALLPP</span><span class="p">)):</span>
+    <span class="n">TEMPpost</span><span class="o">=</span><span class="p">(</span><span class="n">ALLGBfrency</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">+</span><span class="mi">0</span><span class="p">)</span><span class="o">*</span><span class="n">ALLPP</span><span class="p">[</span><span class="n">j</span><span class="p">];</span>
+    <span class="n">ALLpost</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">TEMPpost</span><span class="p">);</span>
 
-LastLabel=np.zeros(mk.shape[0]*mk.shape[1]);
-for n in range(0,mk.shape[0]*mk.shape[1]):
-    MAXP=0;   maxindex=0;      tempF=[];
-    for a in range(0,len(ALLpost)):
-        tempF.append(ALLpost[a][n]);
-    for k in range(0,len(tempF)):
-        if(tempF[k]&gt;MAXP):
-            MAXP=tempF[k];
-            maxindex=k;
-    LastLabel[n]=maxindex;
+<span class="n">LastLabel</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">mk</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">mk</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">mk</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">mk</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
+    <span class="n">MAXP</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>   <span class="n">maxindex</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>      <span class="n">tempF</span><span class="o">=</span><span class="p">[];</span>
+    <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">ALLpost</span><span class="p">)):</span>
+        <span class="n">tempF</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ALLpost</span><span class="p">[</span><span class="n">a</span><span class="p">][</span><span class="n">n</span><span class="p">]);</span>
+    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">tempF</span><span class="p">)):</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">tempF</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">&gt;</span><span class="n">MAXP</span><span class="p">):</span>
+            <span class="n">MAXP</span><span class="o">=</span><span class="n">tempF</span><span class="p">[</span><span class="n">k</span><span class="p">];</span>
+            <span class="n">maxindex</span><span class="o">=</span><span class="n">k</span><span class="p">;</span>
+    <span class="n">LastLabel</span><span class="p">[</span><span class="n">n</span><span class="p">]</span><span class="o">=</span><span class="n">maxindex</span><span class="p">;</span>
 
-ThridMRF=mk-2;
-for HL in range(0,len(LastLabel)):
-    h=math.floor(HL/1200); l=HL%1200;
-    ThridMRF[h][l]=LastLabel[HL];
+<span class="n">ThridMRF</span><span class="o">=</span><span class="n">mk</span><span class="o">-</span><span class="mi">2</span><span class="p">;</span>
+<span class="k">for</span> <span class="n">HL</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">LastLabel</span><span class="p">)):</span>
+    <span class="n">h</span><span class="o">=</span><span class="n">math</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="n">HL</span><span class="o">/</span><span class="mi">1200</span><span class="p">);</span> <span class="n">l</span><span class="o">=</span><span class="n">HL</span><span class="o">%</span><span class="k">1200</span>;
+    <span class="n">ThridMRF</span><span class="p">[</span><span class="n">h</span><span class="p">][</span><span class="n">l</span><span class="p">]</span><span class="o">=</span><span class="n">LastLabel</span><span class="p">[</span><span class="n">HL</span><span class="p">];</span>
 
-# 成图展示
-mylabel=ThridMRF;
-print(mylabel)
-plt.figure(figsize=(6,6))
-im2 = Image.fromarray(mylabel);
-plt.imshow(im2,cmap=plt.cm.get_cmap(&#39;cubehelix_r&#39;,8));
-cbar=plt.colorbar()
-cbar.set_ticks(np.linspace(0,7,8))
-#cbar.set_ticklabels()
-plt.clim(-0.5,8)
-plt.title(&#39;Eight-Xianyan-ThridMRF&#39;);
-plt.show();
+<span class="c1"># 成图展示</span>
+<span class="n">mylabel</span><span class="o">=</span><span class="n">ThridMRF</span><span class="p">;</span>
+<span class="k">print</span><span class="p">(</span><span class="n">mylabel</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+<span class="n">im2</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">fromarray</span><span class="p">(</span><span class="n">mylabel</span><span class="p">);</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">im2</span><span class="p">,</span><span class="n">cmap</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">get_cmap</span><span class="p">(</span><span class="s1">&#39;cubehelix_r&#39;</span><span class="p">,</span><span class="mi">8</span><span class="p">));</span>
+<span class="n">cbar</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">()</span>
+<span class="n">cbar</span><span class="o">.</span><span class="n">set_ticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">))</span>
+<span class="c1">#cbar.set_ticklabels()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">clim</span><span class="p">(</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span><span class="mi">8</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Eight-Xianyan-ThridMRF&#39;</span><span class="p">);</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">();</span>
 </pre></div>
 </div>
 </div>
@@ -801,50 +803,50 @@ plt.show();
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3"><div class="highlight"><pre>
-<span></span>PPB=MNB.PPBeight(ThridMRF);
-L0F=np.sum((PPB==0),axis=0)/8;
-L1F=np.sum((PPB==1),axis=0)/8;
-L2F=np.sum((PPB==2),axis=0)/8;
-L3F=np.sum((PPB==3),axis=0)/8;
-L4F=np.sum((PPB==4),axis=0)/8;
-L5F=np.sum((PPB==5),axis=0)/8;
-L6F=np.sum((PPB==6),axis=0)/8;
+<span></span><span class="n">PPB</span><span class="o">=</span><span class="n">MNB</span><span class="o">.</span><span class="n">PPBeight</span><span class="p">(</span><span class="n">ThridMRF</span><span class="p">);</span>
+<span class="n">L0F</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">PPB</span><span class="o">==</span><span class="mi">0</span><span class="p">),</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">/</span><span class="mi">8</span><span class="p">;</span>
+<span class="n">L1F</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">PPB</span><span class="o">==</span><span class="mi">1</span><span class="p">),</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">/</span><span class="mi">8</span><span class="p">;</span>
+<span class="n">L2F</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">PPB</span><span class="o">==</span><span class="mi">2</span><span class="p">),</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">/</span><span class="mi">8</span><span class="p">;</span>
+<span class="n">L3F</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">PPB</span><span class="o">==</span><span class="mi">3</span><span class="p">),</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">/</span><span class="mi">8</span><span class="p">;</span>
+<span class="n">L4F</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">PPB</span><span class="o">==</span><span class="mi">4</span><span class="p">),</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">/</span><span class="mi">8</span><span class="p">;</span>
+<span class="n">L5F</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">PPB</span><span class="o">==</span><span class="mi">5</span><span class="p">),</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">/</span><span class="mi">8</span><span class="p">;</span>
+<span class="n">L6F</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">PPB</span><span class="o">==</span><span class="mi">6</span><span class="p">),</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">/</span><span class="mi">8</span><span class="p">;</span>
 
-ALLPP=[L0F,L1F,L2F,L3F,L4F,L5F,L6F];
+<span class="n">ALLPP</span><span class="o">=</span><span class="p">[</span><span class="n">L0F</span><span class="p">,</span><span class="n">L1F</span><span class="p">,</span><span class="n">L2F</span><span class="p">,</span><span class="n">L3F</span><span class="p">,</span><span class="n">L4F</span><span class="p">,</span><span class="n">L5F</span><span class="p">,</span><span class="n">L6F</span><span class="p">];</span>
 
-ALLpost=[];
-for j in range(0,len(ALLPP)):
-    TEMPpost=(ALLGBfrency[j]+0)*ALLPP[j];
-    ALLpost.append(TEMPpost);
+<span class="n">ALLpost</span><span class="o">=</span><span class="p">[];</span>
+<span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">ALLPP</span><span class="p">)):</span>
+    <span class="n">TEMPpost</span><span class="o">=</span><span class="p">(</span><span class="n">ALLGBfrency</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">+</span><span class="mi">0</span><span class="p">)</span><span class="o">*</span><span class="n">ALLPP</span><span class="p">[</span><span class="n">j</span><span class="p">];</span>
+    <span class="n">ALLpost</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">TEMPpost</span><span class="p">);</span>
 
-LastLabel=np.zeros(mk.shape[0]*mk.shape[1]);
-for n in range(0,mk.shape[0]*mk.shape[1]):
-    MAXP=0;   maxindex=0;      tempF=[];
-    for a in range(0,len(ALLpost)):
-        tempF.append(ALLpost[a][n]);
-    for k in range(0,len(tempF)):
-        if(tempF[k]&gt;MAXP):
-            MAXP=tempF[k];
-            maxindex=k;
-    LastLabel[n]=maxindex;
+<span class="n">LastLabel</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">mk</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">mk</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">mk</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">mk</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
+    <span class="n">MAXP</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>   <span class="n">maxindex</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>      <span class="n">tempF</span><span class="o">=</span><span class="p">[];</span>
+    <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">ALLpost</span><span class="p">)):</span>
+        <span class="n">tempF</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ALLpost</span><span class="p">[</span><span class="n">a</span><span class="p">][</span><span class="n">n</span><span class="p">]);</span>
+    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">tempF</span><span class="p">)):</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">tempF</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">&gt;</span><span class="n">MAXP</span><span class="p">):</span>
+            <span class="n">MAXP</span><span class="o">=</span><span class="n">tempF</span><span class="p">[</span><span class="n">k</span><span class="p">];</span>
+            <span class="n">maxindex</span><span class="o">=</span><span class="n">k</span><span class="p">;</span>
+    <span class="n">LastLabel</span><span class="p">[</span><span class="n">n</span><span class="p">]</span><span class="o">=</span><span class="n">maxindex</span><span class="p">;</span>
 
-FourthMRF=mk-2;
-for HL in range(0,len(LastLabel)):
-    h=math.floor(HL/1200); l=HL%1200;
-    FourthMRF[h][l]=LastLabel[HL];
+<span class="n">FourthMRF</span><span class="o">=</span><span class="n">mk</span><span class="o">-</span><span class="mi">2</span><span class="p">;</span>
+<span class="k">for</span> <span class="n">HL</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">LastLabel</span><span class="p">)):</span>
+    <span class="n">h</span><span class="o">=</span><span class="n">math</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="n">HL</span><span class="o">/</span><span class="mi">1200</span><span class="p">);</span> <span class="n">l</span><span class="o">=</span><span class="n">HL</span><span class="o">%</span><span class="k">1200</span>;
+    <span class="n">FourthMRF</span><span class="p">[</span><span class="n">h</span><span class="p">][</span><span class="n">l</span><span class="p">]</span><span class="o">=</span><span class="n">LastLabel</span><span class="p">[</span><span class="n">HL</span><span class="p">];</span>
 
-# 成图展示
-mylabel=FourthMRF;
-print(mylabel)
-plt.figure(figsize=(6,6))
-im2 = Image.fromarray(mylabel);
-plt.imshow(im2,cmap=plt.cm.get_cmap(&#39;cubehelix_r&#39;,8));
-cbar=plt.colorbar()
-cbar.set_ticks(np.linspace(0,7,8))
-#cbar.set_ticklabels()
-plt.clim(-0.5,8)
-plt.title(&#39;Eight-Xianyan-FourthMRF&#39;);
-plt.show();
+<span class="c1"># 成图展示</span>
+<span class="n">mylabel</span><span class="o">=</span><span class="n">FourthMRF</span><span class="p">;</span>
+<span class="k">print</span><span class="p">(</span><span class="n">mylabel</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+<span class="n">im2</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">fromarray</span><span class="p">(</span><span class="n">mylabel</span><span class="p">);</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">im2</span><span class="p">,</span><span class="n">cmap</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">get_cmap</span><span class="p">(</span><span class="s1">&#39;cubehelix_r&#39;</span><span class="p">,</span><span class="mi">8</span><span class="p">));</span>
+<span class="n">cbar</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">()</span>
+<span class="n">cbar</span><span class="o">.</span><span class="n">set_ticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">))</span>
+<span class="c1">#cbar.set_ticklabels()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">clim</span><span class="p">(</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span><span class="mi">8</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Eight-Xianyan-FourthMRF&#39;</span><span class="p">);</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">();</span>
 </pre></div>
 </div>
 </div>
@@ -878,50 +880,50 @@ plt.show();
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3"><div class="highlight"><pre>
-<span></span>PPB=MNB.PPBeight(FourthMRF);
-L0F=np.sum((PPB==0),axis=0)/8;
-L1F=np.sum((PPB==1),axis=0)/8;
-L2F=np.sum((PPB==2),axis=0)/8;
-L3F=np.sum((PPB==3),axis=0)/8;
-L4F=np.sum((PPB==4),axis=0)/8;
-L5F=np.sum((PPB==5),axis=0)/8;
-L6F=np.sum((PPB==6),axis=0)/8;
+<span></span><span class="n">PPB</span><span class="o">=</span><span class="n">MNB</span><span class="o">.</span><span class="n">PPBeight</span><span class="p">(</span><span class="n">FourthMRF</span><span class="p">);</span>
+<span class="n">L0F</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">PPB</span><span class="o">==</span><span class="mi">0</span><span class="p">),</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">/</span><span class="mi">8</span><span class="p">;</span>
+<span class="n">L1F</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">PPB</span><span class="o">==</span><span class="mi">1</span><span class="p">),</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">/</span><span class="mi">8</span><span class="p">;</span>
+<span class="n">L2F</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">PPB</span><span class="o">==</span><span class="mi">2</span><span class="p">),</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">/</span><span class="mi">8</span><span class="p">;</span>
+<span class="n">L3F</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">PPB</span><span class="o">==</span><span class="mi">3</span><span class="p">),</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">/</span><span class="mi">8</span><span class="p">;</span>
+<span class="n">L4F</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">PPB</span><span class="o">==</span><span class="mi">4</span><span class="p">),</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">/</span><span class="mi">8</span><span class="p">;</span>
+<span class="n">L5F</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">PPB</span><span class="o">==</span><span class="mi">5</span><span class="p">),</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">/</span><span class="mi">8</span><span class="p">;</span>
+<span class="n">L6F</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">PPB</span><span class="o">==</span><span class="mi">6</span><span class="p">),</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">/</span><span class="mi">8</span><span class="p">;</span>
 
-ALLPP=[L0F,L1F,L2F,L3F,L4F,L5F,L6F];
+<span class="n">ALLPP</span><span class="o">=</span><span class="p">[</span><span class="n">L0F</span><span class="p">,</span><span class="n">L1F</span><span class="p">,</span><span class="n">L2F</span><span class="p">,</span><span class="n">L3F</span><span class="p">,</span><span class="n">L4F</span><span class="p">,</span><span class="n">L5F</span><span class="p">,</span><span class="n">L6F</span><span class="p">];</span>
 
-ALLpost=[];
-for j in range(0,len(ALLPP)):
-    TEMPpost=(ALLGBfrency[j]+0)*ALLPP[j];
-    ALLpost.append(TEMPpost);
+<span class="n">ALLpost</span><span class="o">=</span><span class="p">[];</span>
+<span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">ALLPP</span><span class="p">)):</span>
+    <span class="n">TEMPpost</span><span class="o">=</span><span class="p">(</span><span class="n">ALLGBfrency</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">+</span><span class="mi">0</span><span class="p">)</span><span class="o">*</span><span class="n">ALLPP</span><span class="p">[</span><span class="n">j</span><span class="p">];</span>
+    <span class="n">ALLpost</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">TEMPpost</span><span class="p">);</span>
 
-LastLabel=np.zeros(mk.shape[0]*mk.shape[1]);
-for n in range(0,mk.shape[0]*mk.shape[1]):
-    MAXP=0;   maxindex=0;      tempF=[];
-    for a in range(0,len(ALLpost)):
-        tempF.append(ALLpost[a][n]);
-    for k in range(0,len(tempF)):
-        if(tempF[k]&gt;MAXP):
-            MAXP=tempF[k];
-            maxindex=k;
-    LastLabel[n]=maxindex;
+<span class="n">LastLabel</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">mk</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">mk</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">mk</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">mk</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
+    <span class="n">MAXP</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>   <span class="n">maxindex</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>      <span class="n">tempF</span><span class="o">=</span><span class="p">[];</span>
+    <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">ALLpost</span><span class="p">)):</span>
+        <span class="n">tempF</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ALLpost</span><span class="p">[</span><span class="n">a</span><span class="p">][</span><span class="n">n</span><span class="p">]);</span>
+    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">tempF</span><span class="p">)):</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">tempF</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">&gt;</span><span class="n">MAXP</span><span class="p">):</span>
+            <span class="n">MAXP</span><span class="o">=</span><span class="n">tempF</span><span class="p">[</span><span class="n">k</span><span class="p">];</span>
+            <span class="n">maxindex</span><span class="o">=</span><span class="n">k</span><span class="p">;</span>
+    <span class="n">LastLabel</span><span class="p">[</span><span class="n">n</span><span class="p">]</span><span class="o">=</span><span class="n">maxindex</span><span class="p">;</span>
 
-FivthMRF=mk-2;
-for HL in range(0,len(LastLabel)):
-    h=math.floor(HL/1200); l=HL%1200;
-    FivthMRF[h][l]=LastLabel[HL];
+<span class="n">FivthMRF</span><span class="o">=</span><span class="n">mk</span><span class="o">-</span><span class="mi">2</span><span class="p">;</span>
+<span class="k">for</span> <span class="n">HL</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">LastLabel</span><span class="p">)):</span>
+    <span class="n">h</span><span class="o">=</span><span class="n">math</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="n">HL</span><span class="o">/</span><span class="mi">1200</span><span class="p">);</span> <span class="n">l</span><span class="o">=</span><span class="n">HL</span><span class="o">%</span><span class="k">1200</span>;
+    <span class="n">FivthMRF</span><span class="p">[</span><span class="n">h</span><span class="p">][</span><span class="n">l</span><span class="p">]</span><span class="o">=</span><span class="n">LastLabel</span><span class="p">[</span><span class="n">HL</span><span class="p">];</span>
 
-# 成图展示
-mylabel=FivthMRF;
-print(mylabel)
-plt.figure(figsize=(6,6))
-im2 = Image.fromarray(mylabel);
-plt.imshow(im2,cmap=plt.cm.get_cmap(&#39;cubehelix_r&#39;,8));
-cbar=plt.colorbar()
-cbar.set_ticks(np.linspace(0,7,8))
-#cbar.set_ticklabels()
-plt.clim(-0.5,8)
-plt.title(&#39;Eight-Xianyan-FivthMRF&#39;);
-plt.show();
+<span class="c1"># 成图展示</span>
+<span class="n">mylabel</span><span class="o">=</span><span class="n">FivthMRF</span><span class="p">;</span>
+<span class="k">print</span><span class="p">(</span><span class="n">mylabel</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+<span class="n">im2</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">fromarray</span><span class="p">(</span><span class="n">mylabel</span><span class="p">);</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">im2</span><span class="p">,</span><span class="n">cmap</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">get_cmap</span><span class="p">(</span><span class="s1">&#39;cubehelix_r&#39;</span><span class="p">,</span><span class="mi">8</span><span class="p">));</span>
+<span class="n">cbar</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">()</span>
+<span class="n">cbar</span><span class="o">.</span><span class="n">set_ticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">))</span>
+<span class="c1">#cbar.set_ticklabels()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">clim</span><span class="p">(</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span><span class="mi">8</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Eight-Xianyan-FivthMRF&#39;</span><span class="p">);</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">();</span>
 </pre></div>
 </div>
 </div>
@@ -955,50 +957,50 @@ plt.show();
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3"><div class="highlight"><pre>
-<span></span>PPB=MNB.PPBeight(FivthMRF);
-L0F=np.sum((PPB==0),axis=0)/8;
-L1F=np.sum((PPB==1),axis=0)/8;
-L2F=np.sum((PPB==2),axis=0)/8;
-L3F=np.sum((PPB==3),axis=0)/8;
-L4F=np.sum((PPB==4),axis=0)/8;
-L5F=np.sum((PPB==5),axis=0)/8;
-L6F=np.sum((PPB==6),axis=0)/8;
+<span></span><span class="n">PPB</span><span class="o">=</span><span class="n">MNB</span><span class="o">.</span><span class="n">PPBeight</span><span class="p">(</span><span class="n">FivthMRF</span><span class="p">);</span>
+<span class="n">L0F</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">PPB</span><span class="o">==</span><span class="mi">0</span><span class="p">),</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">/</span><span class="mi">8</span><span class="p">;</span>
+<span class="n">L1F</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">PPB</span><span class="o">==</span><span class="mi">1</span><span class="p">),</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">/</span><span class="mi">8</span><span class="p">;</span>
+<span class="n">L2F</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">PPB</span><span class="o">==</span><span class="mi">2</span><span class="p">),</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">/</span><span class="mi">8</span><span class="p">;</span>
+<span class="n">L3F</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">PPB</span><span class="o">==</span><span class="mi">3</span><span class="p">),</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">/</span><span class="mi">8</span><span class="p">;</span>
+<span class="n">L4F</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">PPB</span><span class="o">==</span><span class="mi">4</span><span class="p">),</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">/</span><span class="mi">8</span><span class="p">;</span>
+<span class="n">L5F</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">PPB</span><span class="o">==</span><span class="mi">5</span><span class="p">),</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">/</span><span class="mi">8</span><span class="p">;</span>
+<span class="n">L6F</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">PPB</span><span class="o">==</span><span class="mi">6</span><span class="p">),</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">/</span><span class="mi">8</span><span class="p">;</span>
 
-ALLPP=[L0F,L1F,L2F,L3F,L4F,L5F,L6F];
+<span class="n">ALLPP</span><span class="o">=</span><span class="p">[</span><span class="n">L0F</span><span class="p">,</span><span class="n">L1F</span><span class="p">,</span><span class="n">L2F</span><span class="p">,</span><span class="n">L3F</span><span class="p">,</span><span class="n">L4F</span><span class="p">,</span><span class="n">L5F</span><span class="p">,</span><span class="n">L6F</span><span class="p">];</span>
 
-ALLpost=[];
-for j in range(0,len(ALLPP)):
-    TEMPpost=(ALLGBfrency[j]+0)*ALLPP[j];
-    ALLpost.append(TEMPpost);
+<span class="n">ALLpost</span><span class="o">=</span><span class="p">[];</span>
+<span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">ALLPP</span><span class="p">)):</span>
+    <span class="n">TEMPpost</span><span class="o">=</span><span class="p">(</span><span class="n">ALLGBfrency</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">+</span><span class="mi">0</span><span class="p">)</span><span class="o">*</span><span class="n">ALLPP</span><span class="p">[</span><span class="n">j</span><span class="p">];</span>
+    <span class="n">ALLpost</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">TEMPpost</span><span class="p">);</span>
 
-LastLabel=np.zeros(mk.shape[0]*mk.shape[1]);
-for n in range(0,mk.shape[0]*mk.shape[1]):
-    MAXP=0;   maxindex=0;      tempF=[];
-    for a in range(0,len(ALLpost)):
-        tempF.append(ALLpost[a][n]);
-    for k in range(0,len(tempF)):
-        if(tempF[k]&gt;MAXP):
-            MAXP=tempF[k];
-            maxindex=k;
-    LastLabel[n]=maxindex;
+<span class="n">LastLabel</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">mk</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">mk</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">mk</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">mk</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
+    <span class="n">MAXP</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>   <span class="n">maxindex</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>      <span class="n">tempF</span><span class="o">=</span><span class="p">[];</span>
+    <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">ALLpost</span><span class="p">)):</span>
+        <span class="n">tempF</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ALLpost</span><span class="p">[</span><span class="n">a</span><span class="p">][</span><span class="n">n</span><span class="p">]);</span>
+    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">tempF</span><span class="p">)):</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">tempF</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">&gt;</span><span class="n">MAXP</span><span class="p">):</span>
+            <span class="n">MAXP</span><span class="o">=</span><span class="n">tempF</span><span class="p">[</span><span class="n">k</span><span class="p">];</span>
+            <span class="n">maxindex</span><span class="o">=</span><span class="n">k</span><span class="p">;</span>
+    <span class="n">LastLabel</span><span class="p">[</span><span class="n">n</span><span class="p">]</span><span class="o">=</span><span class="n">maxindex</span><span class="p">;</span>
 
-SixthMRF=mk-2;
-for HL in range(0,len(LastLabel)):
-    h=math.floor(HL/1200); l=HL%1200;
-    SixthMRF[h][l]=LastLabel[HL];
+<span class="n">SixthMRF</span><span class="o">=</span><span class="n">mk</span><span class="o">-</span><span class="mi">2</span><span class="p">;</span>
+<span class="k">for</span> <span class="n">HL</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">LastLabel</span><span class="p">)):</span>
+    <span class="n">h</span><span class="o">=</span><span class="n">math</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="n">HL</span><span class="o">/</span><span class="mi">1200</span><span class="p">);</span> <span class="n">l</span><span class="o">=</span><span class="n">HL</span><span class="o">%</span><span class="k">1200</span>;
+    <span class="n">SixthMRF</span><span class="p">[</span><span class="n">h</span><span class="p">][</span><span class="n">l</span><span class="p">]</span><span class="o">=</span><span class="n">LastLabel</span><span class="p">[</span><span class="n">HL</span><span class="p">];</span>
 
-# 成图展示
-mylabel=SixthMRF;
-print(mylabel)
-plt.figure(figsize=(6,6))
-im2 = Image.fromarray(mylabel);
-plt.imshow(im2,cmap=plt.cm.get_cmap(&#39;cubehelix_r&#39;,8));
-cbar=plt.colorbar()
-cbar.set_ticks(np.linspace(0,7,8))
-#cbar.set_ticklabels()
-plt.clim(-0.5,8)
-plt.title(&#39;Eight-Xianyan-SixthMRF&#39;);
-plt.show();
+<span class="c1"># 成图展示</span>
+<span class="n">mylabel</span><span class="o">=</span><span class="n">SixthMRF</span><span class="p">;</span>
+<span class="k">print</span><span class="p">(</span><span class="n">mylabel</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+<span class="n">im2</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">fromarray</span><span class="p">(</span><span class="n">mylabel</span><span class="p">);</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">im2</span><span class="p">,</span><span class="n">cmap</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">get_cmap</span><span class="p">(</span><span class="s1">&#39;cubehelix_r&#39;</span><span class="p">,</span><span class="mi">8</span><span class="p">));</span>
+<span class="n">cbar</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">()</span>
+<span class="n">cbar</span><span class="o">.</span><span class="n">set_ticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">))</span>
+<span class="c1">#cbar.set_ticklabels()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">clim</span><span class="p">(</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span><span class="mi">8</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Eight-Xianyan-SixthMRF&#39;</span><span class="p">);</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">();</span>
 </pre></div>
 </div>
 </div>
@@ -1032,50 +1034,50 @@ plt.show();
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3"><div class="highlight"><pre>
-<span></span>PPB=MNB.PPBeight(SixthMRF);
-L0F=np.sum((PPB==0),axis=0)/8;
-L1F=np.sum((PPB==1),axis=0)/8;
-L2F=np.sum((PPB==2),axis=0)/8;
-L3F=np.sum((PPB==3),axis=0)/8;
-L4F=np.sum((PPB==4),axis=0)/8;
-L5F=np.sum((PPB==5),axis=0)/8;
-L6F=np.sum((PPB==6),axis=0)/8;
+<span></span><span class="n">PPB</span><span class="o">=</span><span class="n">MNB</span><span class="o">.</span><span class="n">PPBeight</span><span class="p">(</span><span class="n">SixthMRF</span><span class="p">);</span>
+<span class="n">L0F</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">PPB</span><span class="o">==</span><span class="mi">0</span><span class="p">),</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">/</span><span class="mi">8</span><span class="p">;</span>
+<span class="n">L1F</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">PPB</span><span class="o">==</span><span class="mi">1</span><span class="p">),</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">/</span><span class="mi">8</span><span class="p">;</span>
+<span class="n">L2F</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">PPB</span><span class="o">==</span><span class="mi">2</span><span class="p">),</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">/</span><span class="mi">8</span><span class="p">;</span>
+<span class="n">L3F</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">PPB</span><span class="o">==</span><span class="mi">3</span><span class="p">),</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">/</span><span class="mi">8</span><span class="p">;</span>
+<span class="n">L4F</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">PPB</span><span class="o">==</span><span class="mi">4</span><span class="p">),</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">/</span><span class="mi">8</span><span class="p">;</span>
+<span class="n">L5F</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">PPB</span><span class="o">==</span><span class="mi">5</span><span class="p">),</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">/</span><span class="mi">8</span><span class="p">;</span>
+<span class="n">L6F</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">PPB</span><span class="o">==</span><span class="mi">6</span><span class="p">),</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">/</span><span class="mi">8</span><span class="p">;</span>
 
-ALLPP=[L0F,L1F,L2F,L3F,L4F,L5F,L6F];
+<span class="n">ALLPP</span><span class="o">=</span><span class="p">[</span><span class="n">L0F</span><span class="p">,</span><span class="n">L1F</span><span class="p">,</span><span class="n">L2F</span><span class="p">,</span><span class="n">L3F</span><span class="p">,</span><span class="n">L4F</span><span class="p">,</span><span class="n">L5F</span><span class="p">,</span><span class="n">L6F</span><span class="p">];</span>
 
-ALLpost=[];
-for j in range(0,len(ALLPP)):
-    TEMPpost=(ALLGBfrency[j]+0)*ALLPP[j];
-    ALLpost.append(TEMPpost);
+<span class="n">ALLpost</span><span class="o">=</span><span class="p">[];</span>
+<span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">ALLPP</span><span class="p">)):</span>
+    <span class="n">TEMPpost</span><span class="o">=</span><span class="p">(</span><span class="n">ALLGBfrency</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">+</span><span class="mi">0</span><span class="p">)</span><span class="o">*</span><span class="n">ALLPP</span><span class="p">[</span><span class="n">j</span><span class="p">];</span>
+    <span class="n">ALLpost</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">TEMPpost</span><span class="p">);</span>
 
-LastLabel=np.zeros(mk.shape[0]*mk.shape[1]);
-for n in range(0,mk.shape[0]*mk.shape[1]):
-    MAXP=0;   maxindex=0;      tempF=[];
-    for a in range(0,len(ALLpost)):
-        tempF.append(ALLpost[a][n]);
-    for k in range(0,len(tempF)):
-        if(tempF[k]&gt;MAXP):
-            MAXP=tempF[k];
-            maxindex=k;
-    LastLabel[n]=maxindex;
+<span class="n">LastLabel</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">mk</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">mk</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">mk</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">mk</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
+    <span class="n">MAXP</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>   <span class="n">maxindex</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>      <span class="n">tempF</span><span class="o">=</span><span class="p">[];</span>
+    <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">ALLpost</span><span class="p">)):</span>
+        <span class="n">tempF</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ALLpost</span><span class="p">[</span><span class="n">a</span><span class="p">][</span><span class="n">n</span><span class="p">]);</span>
+    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">tempF</span><span class="p">)):</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">tempF</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">&gt;</span><span class="n">MAXP</span><span class="p">):</span>
+            <span class="n">MAXP</span><span class="o">=</span><span class="n">tempF</span><span class="p">[</span><span class="n">k</span><span class="p">];</span>
+            <span class="n">maxindex</span><span class="o">=</span><span class="n">k</span><span class="p">;</span>
+    <span class="n">LastLabel</span><span class="p">[</span><span class="n">n</span><span class="p">]</span><span class="o">=</span><span class="n">maxindex</span><span class="p">;</span>
 
-SeventhMRF=mk-2;
-for HL in range(0,len(LastLabel)):
-    h=math.floor(HL/1200); l=HL%1200;
-    SeventhMRF[h][l]=LastLabel[HL];
+<span class="n">SeventhMRF</span><span class="o">=</span><span class="n">mk</span><span class="o">-</span><span class="mi">2</span><span class="p">;</span>
+<span class="k">for</span> <span class="n">HL</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">LastLabel</span><span class="p">)):</span>
+    <span class="n">h</span><span class="o">=</span><span class="n">math</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="n">HL</span><span class="o">/</span><span class="mi">1200</span><span class="p">);</span> <span class="n">l</span><span class="o">=</span><span class="n">HL</span><span class="o">%</span><span class="k">1200</span>;
+    <span class="n">SeventhMRF</span><span class="p">[</span><span class="n">h</span><span class="p">][</span><span class="n">l</span><span class="p">]</span><span class="o">=</span><span class="n">LastLabel</span><span class="p">[</span><span class="n">HL</span><span class="p">];</span>
 
-# 成图展示
-mylabel=SeventhMRF;
-print(mylabel)
-plt.figure(figsize=(6,6))
-im2 = Image.fromarray(mylabel);
-plt.imshow(im2,cmap=plt.cm.get_cmap(&#39;cubehelix_r&#39;,8));
-cbar=plt.colorbar()
-cbar.set_ticks(np.linspace(0,7,8))
-#cbar.set_ticklabels()
-plt.clim(-0.5,8)
-plt.title(&#39;Eight-Xianyan-SeventhMRF&#39;);
-plt.show();
+<span class="c1"># 成图展示</span>
+<span class="n">mylabel</span><span class="o">=</span><span class="n">SeventhMRF</span><span class="p">;</span>
+<span class="k">print</span><span class="p">(</span><span class="n">mylabel</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+<span class="n">im2</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">fromarray</span><span class="p">(</span><span class="n">mylabel</span><span class="p">);</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">im2</span><span class="p">,</span><span class="n">cmap</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">get_cmap</span><span class="p">(</span><span class="s1">&#39;cubehelix_r&#39;</span><span class="p">,</span><span class="mi">8</span><span class="p">));</span>
+<span class="n">cbar</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">()</span>
+<span class="n">cbar</span><span class="o">.</span><span class="n">set_ticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">))</span>
+<span class="c1">#cbar.set_ticklabels()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">clim</span><span class="p">(</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span><span class="mi">8</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Eight-Xianyan-SeventhMRF&#39;</span><span class="p">);</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">();</span>
 </pre></div>
 </div>
 </div>
@@ -1109,50 +1111,50 @@ plt.show();
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3"><div class="highlight"><pre>
-<span></span>PPB=MNB.PPBeight(SeventhMRF);
-L0F=np.sum((PPB==0),axis=0)/8;
-L1F=np.sum((PPB==1),axis=0)/8;
-L2F=np.sum((PPB==2),axis=0)/8;
-L3F=np.sum((PPB==3),axis=0)/8;
-L4F=np.sum((PPB==4),axis=0)/8;
-L5F=np.sum((PPB==5),axis=0)/8;
-L6F=np.sum((PPB==6),axis=0)/8;
+<span></span><span class="n">PPB</span><span class="o">=</span><span class="n">MNB</span><span class="o">.</span><span class="n">PPBeight</span><span class="p">(</span><span class="n">SeventhMRF</span><span class="p">);</span>
+<span class="n">L0F</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">PPB</span><span class="o">==</span><span class="mi">0</span><span class="p">),</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">/</span><span class="mi">8</span><span class="p">;</span>
+<span class="n">L1F</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">PPB</span><span class="o">==</span><span class="mi">1</span><span class="p">),</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">/</span><span class="mi">8</span><span class="p">;</span>
+<span class="n">L2F</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">PPB</span><span class="o">==</span><span class="mi">2</span><span class="p">),</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">/</span><span class="mi">8</span><span class="p">;</span>
+<span class="n">L3F</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">PPB</span><span class="o">==</span><span class="mi">3</span><span class="p">),</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">/</span><span class="mi">8</span><span class="p">;</span>
+<span class="n">L4F</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">PPB</span><span class="o">==</span><span class="mi">4</span><span class="p">),</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">/</span><span class="mi">8</span><span class="p">;</span>
+<span class="n">L5F</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">PPB</span><span class="o">==</span><span class="mi">5</span><span class="p">),</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">/</span><span class="mi">8</span><span class="p">;</span>
+<span class="n">L6F</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">PPB</span><span class="o">==</span><span class="mi">6</span><span class="p">),</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">/</span><span class="mi">8</span><span class="p">;</span>
 
-ALLPP=[L0F,L1F,L2F,L3F,L4F,L5F,L6F];
+<span class="n">ALLPP</span><span class="o">=</span><span class="p">[</span><span class="n">L0F</span><span class="p">,</span><span class="n">L1F</span><span class="p">,</span><span class="n">L2F</span><span class="p">,</span><span class="n">L3F</span><span class="p">,</span><span class="n">L4F</span><span class="p">,</span><span class="n">L5F</span><span class="p">,</span><span class="n">L6F</span><span class="p">];</span>
 
-ALLpost=[];
-for j in range(0,len(ALLPP)):
-    TEMPpost=(ALLGBfrency[j]+0)*ALLPP[j];
-    ALLpost.append(TEMPpost);
+<span class="n">ALLpost</span><span class="o">=</span><span class="p">[];</span>
+<span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">ALLPP</span><span class="p">)):</span>
+    <span class="n">TEMPpost</span><span class="o">=</span><span class="p">(</span><span class="n">ALLGBfrency</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">+</span><span class="mi">0</span><span class="p">)</span><span class="o">*</span><span class="n">ALLPP</span><span class="p">[</span><span class="n">j</span><span class="p">];</span>
+    <span class="n">ALLpost</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">TEMPpost</span><span class="p">);</span>
 
-LastLabel=np.zeros(mk.shape[0]*mk.shape[1]);
-for n in range(0,mk.shape[0]*mk.shape[1]):
-    MAXP=0;   maxindex=0;      tempF=[];
-    for a in range(0,len(ALLpost)):
-        tempF.append(ALLpost[a][n]);
-    for k in range(0,len(tempF)):
-        if(tempF[k]&gt;MAXP):
-            MAXP=tempF[k];
-            maxindex=k;
-    LastLabel[n]=maxindex;
+<span class="n">LastLabel</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">mk</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">mk</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">mk</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">mk</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
+    <span class="n">MAXP</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>   <span class="n">maxindex</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>      <span class="n">tempF</span><span class="o">=</span><span class="p">[];</span>
+    <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">ALLpost</span><span class="p">)):</span>
+        <span class="n">tempF</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ALLpost</span><span class="p">[</span><span class="n">a</span><span class="p">][</span><span class="n">n</span><span class="p">]);</span>
+    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">tempF</span><span class="p">)):</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">tempF</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">&gt;</span><span class="n">MAXP</span><span class="p">):</span>
+            <span class="n">MAXP</span><span class="o">=</span><span class="n">tempF</span><span class="p">[</span><span class="n">k</span><span class="p">];</span>
+            <span class="n">maxindex</span><span class="o">=</span><span class="n">k</span><span class="p">;</span>
+    <span class="n">LastLabel</span><span class="p">[</span><span class="n">n</span><span class="p">]</span><span class="o">=</span><span class="n">maxindex</span><span class="p">;</span>
 
-EighthMRF=mk-2;
-for HL in range(0,len(LastLabel)):
-    h=math.floor(HL/1200); l=HL%1200;
-    EighthMRF[h][l]=LastLabel[HL];
+<span class="n">EighthMRF</span><span class="o">=</span><span class="n">mk</span><span class="o">-</span><span class="mi">2</span><span class="p">;</span>
+<span class="k">for</span> <span class="n">HL</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">LastLabel</span><span class="p">)):</span>
+    <span class="n">h</span><span class="o">=</span><span class="n">math</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="n">HL</span><span class="o">/</span><span class="mi">1200</span><span class="p">);</span> <span class="n">l</span><span class="o">=</span><span class="n">HL</span><span class="o">%</span><span class="k">1200</span>;
+    <span class="n">EighthMRF</span><span class="p">[</span><span class="n">h</span><span class="p">][</span><span class="n">l</span><span class="p">]</span><span class="o">=</span><span class="n">LastLabel</span><span class="p">[</span><span class="n">HL</span><span class="p">];</span>
 
-# 成图展示
-mylabel=EighthMRF;
-print(mylabel)
-plt.figure(figsize=(6,6))
-im2 = Image.fromarray(mylabel);
-plt.imshow(im2,cmap=plt.cm.get_cmap(&#39;cubehelix_r&#39;,8));
-cbar=plt.colorbar()
-cbar.set_ticks(np.linspace(0,7,8))
-#cbar.set_ticklabels()
-plt.clim(-0.5,8)
-plt.title(&#39;Eight-Xianyan-EighthMRF&#39;);
-plt.show();
+<span class="c1"># 成图展示</span>
+<span class="n">mylabel</span><span class="o">=</span><span class="n">EighthMRF</span><span class="p">;</span>
+<span class="k">print</span><span class="p">(</span><span class="n">mylabel</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+<span class="n">im2</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">fromarray</span><span class="p">(</span><span class="n">mylabel</span><span class="p">);</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">im2</span><span class="p">,</span><span class="n">cmap</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">get_cmap</span><span class="p">(</span><span class="s1">&#39;cubehelix_r&#39;</span><span class="p">,</span><span class="mi">8</span><span class="p">));</span>
+<span class="n">cbar</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">()</span>
+<span class="n">cbar</span><span class="o">.</span><span class="n">set_ticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">))</span>
+<span class="c1">#cbar.set_ticklabels()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">clim</span><span class="p">(</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span><span class="mi">8</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Eight-Xianyan-EighthMRF&#39;</span><span class="p">);</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">();</span>
 </pre></div>
 </div>
 </div>
@@ -1186,50 +1188,50 @@ plt.show();
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3"><div class="highlight"><pre>
-<span></span>PPB=MNB.PPBeight(EighthMRF);
-L0F=np.sum((PPB==0),axis=0)/8;
-L1F=np.sum((PPB==1),axis=0)/8;
-L2F=np.sum((PPB==2),axis=0)/8;
-L3F=np.sum((PPB==3),axis=0)/8;
-L4F=np.sum((PPB==4),axis=0)/8;
-L5F=np.sum((PPB==5),axis=0)/8;
-L6F=np.sum((PPB==6),axis=0)/8;
+<span></span><span class="n">PPB</span><span class="o">=</span><span class="n">MNB</span><span class="o">.</span><span class="n">PPBeight</span><span class="p">(</span><span class="n">EighthMRF</span><span class="p">);</span>
+<span class="n">L0F</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">PPB</span><span class="o">==</span><span class="mi">0</span><span class="p">),</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">/</span><span class="mi">8</span><span class="p">;</span>
+<span class="n">L1F</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">PPB</span><span class="o">==</span><span class="mi">1</span><span class="p">),</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">/</span><span class="mi">8</span><span class="p">;</span>
+<span class="n">L2F</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">PPB</span><span class="o">==</span><span class="mi">2</span><span class="p">),</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">/</span><span class="mi">8</span><span class="p">;</span>
+<span class="n">L3F</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">PPB</span><span class="o">==</span><span class="mi">3</span><span class="p">),</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">/</span><span class="mi">8</span><span class="p">;</span>
+<span class="n">L4F</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">PPB</span><span class="o">==</span><span class="mi">4</span><span class="p">),</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">/</span><span class="mi">8</span><span class="p">;</span>
+<span class="n">L5F</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">PPB</span><span class="o">==</span><span class="mi">5</span><span class="p">),</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">/</span><span class="mi">8</span><span class="p">;</span>
+<span class="n">L6F</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">PPB</span><span class="o">==</span><span class="mi">6</span><span class="p">),</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">/</span><span class="mi">8</span><span class="p">;</span>
 
-ALLPP=[L0F,L1F,L2F,L3F,L4F,L5F,L6F];
+<span class="n">ALLPP</span><span class="o">=</span><span class="p">[</span><span class="n">L0F</span><span class="p">,</span><span class="n">L1F</span><span class="p">,</span><span class="n">L2F</span><span class="p">,</span><span class="n">L3F</span><span class="p">,</span><span class="n">L4F</span><span class="p">,</span><span class="n">L5F</span><span class="p">,</span><span class="n">L6F</span><span class="p">];</span>
 
-ALLpost=[];
-for j in range(0,len(ALLPP)):
-    TEMPpost=(ALLGBfrency[j]+0)*ALLPP[j];
-    ALLpost.append(TEMPpost);
+<span class="n">ALLpost</span><span class="o">=</span><span class="p">[];</span>
+<span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">ALLPP</span><span class="p">)):</span>
+    <span class="n">TEMPpost</span><span class="o">=</span><span class="p">(</span><span class="n">ALLGBfrency</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">+</span><span class="mi">0</span><span class="p">)</span><span class="o">*</span><span class="n">ALLPP</span><span class="p">[</span><span class="n">j</span><span class="p">];</span>
+    <span class="n">ALLpost</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">TEMPpost</span><span class="p">);</span>
 
-LastLabel=np.zeros(mk.shape[0]*mk.shape[1]);
-for n in range(0,mk.shape[0]*mk.shape[1]):
-    MAXP=0;   maxindex=0;      tempF=[];
-    for a in range(0,len(ALLpost)):
-        tempF.append(ALLpost[a][n]);
-    for k in range(0,len(tempF)):
-        if(tempF[k]&gt;MAXP):
-            MAXP=tempF[k];
-            maxindex=k;
-    LastLabel[n]=maxindex;
+<span class="n">LastLabel</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">mk</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">mk</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">mk</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">mk</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
+    <span class="n">MAXP</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>   <span class="n">maxindex</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>      <span class="n">tempF</span><span class="o">=</span><span class="p">[];</span>
+    <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">ALLpost</span><span class="p">)):</span>
+        <span class="n">tempF</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ALLpost</span><span class="p">[</span><span class="n">a</span><span class="p">][</span><span class="n">n</span><span class="p">]);</span>
+    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">tempF</span><span class="p">)):</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">tempF</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">&gt;</span><span class="n">MAXP</span><span class="p">):</span>
+            <span class="n">MAXP</span><span class="o">=</span><span class="n">tempF</span><span class="p">[</span><span class="n">k</span><span class="p">];</span>
+            <span class="n">maxindex</span><span class="o">=</span><span class="n">k</span><span class="p">;</span>
+    <span class="n">LastLabel</span><span class="p">[</span><span class="n">n</span><span class="p">]</span><span class="o">=</span><span class="n">maxindex</span><span class="p">;</span>
 
-NinethMRF=mk-2;
-for HL in range(0,len(LastLabel)):
-    h=math.floor(HL/1200); l=HL%1200;
-    NinethMRF[h][l]=LastLabel[HL];
+<span class="n">NinethMRF</span><span class="o">=</span><span class="n">mk</span><span class="o">-</span><span class="mi">2</span><span class="p">;</span>
+<span class="k">for</span> <span class="n">HL</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">LastLabel</span><span class="p">)):</span>
+    <span class="n">h</span><span class="o">=</span><span class="n">math</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="n">HL</span><span class="o">/</span><span class="mi">1200</span><span class="p">);</span> <span class="n">l</span><span class="o">=</span><span class="n">HL</span><span class="o">%</span><span class="k">1200</span>;
+    <span class="n">NinethMRF</span><span class="p">[</span><span class="n">h</span><span class="p">][</span><span class="n">l</span><span class="p">]</span><span class="o">=</span><span class="n">LastLabel</span><span class="p">[</span><span class="n">HL</span><span class="p">];</span>
 
-# 成图展示
-mylabel=NinethMRF;
-print(mylabel)
-plt.figure(figsize=(6,6))
-im2 = Image.fromarray(mylabel);
-plt.imshow(im2,cmap=plt.cm.get_cmap(&#39;cubehelix_r&#39;,8));
-cbar=plt.colorbar()
-cbar.set_ticks(np.linspace(0,7,8))
-#cbar.set_ticklabels()
-plt.clim(-0.5,8)
-plt.title(&#39;Eight-Xianyan-NinethMRF&#39;);
-plt.show();
+<span class="c1"># 成图展示</span>
+<span class="n">mylabel</span><span class="o">=</span><span class="n">NinethMRF</span><span class="p">;</span>
+<span class="k">print</span><span class="p">(</span><span class="n">mylabel</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+<span class="n">im2</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">fromarray</span><span class="p">(</span><span class="n">mylabel</span><span class="p">);</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">im2</span><span class="p">,</span><span class="n">cmap</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">get_cmap</span><span class="p">(</span><span class="s1">&#39;cubehelix_r&#39;</span><span class="p">,</span><span class="mi">8</span><span class="p">));</span>
+<span class="n">cbar</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">()</span>
+<span class="n">cbar</span><span class="o">.</span><span class="n">set_ticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">))</span>
+<span class="c1">#cbar.set_ticklabels()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">clim</span><span class="p">(</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span><span class="mi">8</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Eight-Xianyan-NinethMRF&#39;</span><span class="p">);</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">();</span>
 </pre></div>
 </div>
 </div>
@@ -1263,50 +1265,50 @@ plt.show();
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3"><div class="highlight"><pre>
-<span></span>PPB=MNB.PPBeight(NinethMRF);
-L0F=np.sum((PPB==0),axis=0)/8;
-L1F=np.sum((PPB==1),axis=0)/8;
-L2F=np.sum((PPB==2),axis=0)/8;
-L3F=np.sum((PPB==3),axis=0)/8;
-L4F=np.sum((PPB==4),axis=0)/8;
-L5F=np.sum((PPB==5),axis=0)/8;
-L6F=np.sum((PPB==6),axis=0)/8;
+<span></span><span class="n">PPB</span><span class="o">=</span><span class="n">MNB</span><span class="o">.</span><span class="n">PPBeight</span><span class="p">(</span><span class="n">NinethMRF</span><span class="p">);</span>
+<span class="n">L0F</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">PPB</span><span class="o">==</span><span class="mi">0</span><span class="p">),</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">/</span><span class="mi">8</span><span class="p">;</span>
+<span class="n">L1F</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">PPB</span><span class="o">==</span><span class="mi">1</span><span class="p">),</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">/</span><span class="mi">8</span><span class="p">;</span>
+<span class="n">L2F</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">PPB</span><span class="o">==</span><span class="mi">2</span><span class="p">),</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">/</span><span class="mi">8</span><span class="p">;</span>
+<span class="n">L3F</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">PPB</span><span class="o">==</span><span class="mi">3</span><span class="p">),</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">/</span><span class="mi">8</span><span class="p">;</span>
+<span class="n">L4F</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">PPB</span><span class="o">==</span><span class="mi">4</span><span class="p">),</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">/</span><span class="mi">8</span><span class="p">;</span>
+<span class="n">L5F</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">PPB</span><span class="o">==</span><span class="mi">5</span><span class="p">),</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">/</span><span class="mi">8</span><span class="p">;</span>
+<span class="n">L6F</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">PPB</span><span class="o">==</span><span class="mi">6</span><span class="p">),</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">/</span><span class="mi">8</span><span class="p">;</span>
 
-ALLPP=[L0F,L1F,L2F,L3F,L4F,L5F,L6F];
+<span class="n">ALLPP</span><span class="o">=</span><span class="p">[</span><span class="n">L0F</span><span class="p">,</span><span class="n">L1F</span><span class="p">,</span><span class="n">L2F</span><span class="p">,</span><span class="n">L3F</span><span class="p">,</span><span class="n">L4F</span><span class="p">,</span><span class="n">L5F</span><span class="p">,</span><span class="n">L6F</span><span class="p">];</span>
 
-ALLpost=[];
-for j in range(0,len(ALLPP)):
-    TEMPpost=(ALLGBfrency[j]+0)*ALLPP[j];
-    ALLpost.append(TEMPpost);
+<span class="n">ALLpost</span><span class="o">=</span><span class="p">[];</span>
+<span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">ALLPP</span><span class="p">)):</span>
+    <span class="n">TEMPpost</span><span class="o">=</span><span class="p">(</span><span class="n">ALLGBfrency</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">+</span><span class="mi">0</span><span class="p">)</span><span class="o">*</span><span class="n">ALLPP</span><span class="p">[</span><span class="n">j</span><span class="p">];</span>
+    <span class="n">ALLpost</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">TEMPpost</span><span class="p">);</span>
 
-LastLabel=np.zeros(mk.shape[0]*mk.shape[1]);
-for n in range(0,mk.shape[0]*mk.shape[1]):
-    MAXP=0;   maxindex=0;      tempF=[];
-    for a in range(0,len(ALLpost)):
-        tempF.append(ALLpost[a][n]);
-    for k in range(0,len(tempF)):
-        if(tempF[k]&gt;MAXP):
-            MAXP=tempF[k];
-            maxindex=k;
-    LastLabel[n]=maxindex;
+<span class="n">LastLabel</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">mk</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">mk</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">mk</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">mk</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
+    <span class="n">MAXP</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>   <span class="n">maxindex</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>      <span class="n">tempF</span><span class="o">=</span><span class="p">[];</span>
+    <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">ALLpost</span><span class="p">)):</span>
+        <span class="n">tempF</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ALLpost</span><span class="p">[</span><span class="n">a</span><span class="p">][</span><span class="n">n</span><span class="p">]);</span>
+    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">tempF</span><span class="p">)):</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">tempF</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">&gt;</span><span class="n">MAXP</span><span class="p">):</span>
+            <span class="n">MAXP</span><span class="o">=</span><span class="n">tempF</span><span class="p">[</span><span class="n">k</span><span class="p">];</span>
+            <span class="n">maxindex</span><span class="o">=</span><span class="n">k</span><span class="p">;</span>
+    <span class="n">LastLabel</span><span class="p">[</span><span class="n">n</span><span class="p">]</span><span class="o">=</span><span class="n">maxindex</span><span class="p">;</span>
 
-TenthMRF=mk-2;
-for HL in range(0,len(LastLabel)):
-    h=math.floor(HL/1200); l=HL%1200;
-    TenthMRF[h][l]=LastLabel[HL];
+<span class="n">TenthMRF</span><span class="o">=</span><span class="n">mk</span><span class="o">-</span><span class="mi">2</span><span class="p">;</span>
+<span class="k">for</span> <span class="n">HL</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">LastLabel</span><span class="p">)):</span>
+    <span class="n">h</span><span class="o">=</span><span class="n">math</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="n">HL</span><span class="o">/</span><span class="mi">1200</span><span class="p">);</span> <span class="n">l</span><span class="o">=</span><span class="n">HL</span><span class="o">%</span><span class="k">1200</span>;
+    <span class="n">TenthMRF</span><span class="p">[</span><span class="n">h</span><span class="p">][</span><span class="n">l</span><span class="p">]</span><span class="o">=</span><span class="n">LastLabel</span><span class="p">[</span><span class="n">HL</span><span class="p">];</span>
 
-# 成图展示
-mylabel=TenthMRF;
-print(mylabel)
-plt.figure(figsize=(6,6))
-im2 = Image.fromarray(mylabel);
-plt.imshow(im2,cmap=plt.cm.get_cmap(&#39;cubehelix_r&#39;,8));
-cbar=plt.colorbar()
-cbar.set_ticks(np.linspace(0,7,8))
-#cbar.set_ticklabels()
-plt.clim(-0.5,8)
-plt.title(&#39;Eight-Xianyan-TenthMRF&#39;);
-plt.show();
+<span class="c1"># 成图展示</span>
+<span class="n">mylabel</span><span class="o">=</span><span class="n">TenthMRF</span><span class="p">;</span>
+<span class="k">print</span><span class="p">(</span><span class="n">mylabel</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+<span class="n">im2</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">fromarray</span><span class="p">(</span><span class="n">mylabel</span><span class="p">);</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">im2</span><span class="p">,</span><span class="n">cmap</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">get_cmap</span><span class="p">(</span><span class="s1">&#39;cubehelix_r&#39;</span><span class="p">,</span><span class="mi">8</span><span class="p">));</span>
+<span class="n">cbar</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">()</span>
+<span class="n">cbar</span><span class="o">.</span><span class="n">set_ticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">))</span>
+<span class="c1">#cbar.set_ticklabels()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">clim</span><span class="p">(</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span><span class="mi">8</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Eight-Xianyan-TenthMRF&#39;</span><span class="p">);</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">();</span>
 </pre></div>
 </div>
 </div>
@@ -1343,7 +1345,7 @@ plt.show();
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../2ndPart/index.html" class="btn btn-neutral float-right" title="1. 图像平面分类" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="../2ndPart/index.html" class="btn btn-neutral float-right" title="图像模式识别" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="One_7.3_Mul_Kmeans.html" class="btn btn-neutral" title="&lt;no title&gt;" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
