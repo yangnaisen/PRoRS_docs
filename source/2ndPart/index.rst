@@ -6,4 +6,3 @@
     :numbered:
 
  
-    Chapter7/7.5_SLICAlgorithmSegmentationImage.ipynb
