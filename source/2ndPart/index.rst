@@ -5,12 +5,12 @@
     :maxdepth: 2
     :numbered:
 
- 
-<<<<<<< HEAD
-    Chapter7/6.1_KMeanClustering.ipynb
-    Chapter7/6.2_GMMClustering.ipynb
-    Chapter7/7.1_ImageDataBiasClassifier.ipynb
-    Chapter7/7.2_PanMultispectralImageClassification.ipynb
-    Chapter7/7.3_SpatialElevationPan.ipynb
-    Chapter7/7.4_UnderClassPriorProbabilityConstraints.ipynb
-    Chapter7/7.5_SLICAlgorithmSegmentationImage.ipynb
+
+    6.1-KMeanClustering.ipynb
+    6.2-GMMClustering.ipynb
+    7.1-ImageDataBiasClassifier.ipynb
+    7.2-PanMultispectralImageClassification.ipynb
+    7.3-SpatialElevationPan.ipynb
+    7.4-UnderClassPriorProbabilityConstraints.ipynb
+    7.5-SLICAlgorithmSegmentationImage.ipynb
+    
