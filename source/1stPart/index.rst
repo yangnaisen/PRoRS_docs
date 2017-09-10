@@ -6,4 +6,10 @@
     :numbered:
 
 
+    1-NNN.ipynb
+    2-PattenFeatureRecognition.ipynb
+    3-LinearDiscriminantFunction.ipynb
+    4-MLP-SVM.ipynb
+    5-EnsembleClassification.ipynb
+
     

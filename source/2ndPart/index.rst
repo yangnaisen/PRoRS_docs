@@ -6,6 +6,7 @@
     :numbered:
 
  
+<<<<<<< HEAD
     Chapter7/6.1_GMMClustering.ipynb
     Chapter7/6.1_KMeanClustering.ipynb
     Chapter7/7.1_ImageDataBiasClassifier.ipynb
