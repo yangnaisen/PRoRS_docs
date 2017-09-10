@@ -11,6 +11,6 @@
     Chapter7/6.2_GMMClustering.ipynb
     Chapter7/7.1_ImageDataBiasClassifier.ipynb
     Chapter7/7.2_PanMultispectralImageClassification.ipynb
-    Chapter7/7.3_ClassificationSpatialElevationPanchromaticImagesAfterClassification.ipynb
-    Chapter7/7.4_ClassificationPanchromaticImagesUnderClassPriorProbabilityConstraints.ipynb
+    Chapter7/7.3_SpatialElevationPan.ipynb
+    Chapter7/7.4_UnderClassPriorProbabilityConstraints.ipynb
     Chapter7/7.5_SLICAlgorithmSegmentationImage.ipynb
