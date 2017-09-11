@@ -6,9 +6,6 @@
     :numbered:
 
 
-    Cheapter7/7.1-ImageDataBiasClassifier.ipynb
-    Cheapter7/7.2-PanMultispectralImageClassification.ipynb
-    Cheapter7/7.3-SpatialElevationPan.ipynb
-    Cheapter7/7.4-UnderClassPriorProbabilityConstraints.ipynb
-    Cheapter7/7.5-SLICAlgorithmSegmentationImage.ipynb
+    7-ImagePatternRecognition.ipynb
+
     
