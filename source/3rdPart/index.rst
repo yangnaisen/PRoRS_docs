@@ -2,9 +2,11 @@
 =================================
 
 .. toctree::
-   :maxdepth: 2
-   :numbered:
+    :maxdepth: 2
+    :numbered:
 
 
     1-GEE.ipynb
     2-GLandC.ipynb
+
+    
