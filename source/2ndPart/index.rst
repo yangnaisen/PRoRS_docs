@@ -6,4 +6,5 @@
 
 
     7-ImagePatternRecognition.ipynb
+    Chapter8.SceneClassification/index
     9-ObjectClassification.ipynb
