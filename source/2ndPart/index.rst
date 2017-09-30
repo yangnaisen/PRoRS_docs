@@ -3,9 +3,7 @@
 
 .. toctree::
     :maxdepth: 2
-    :numbered:
 
 
     7-ImagePatternRecognition.ipynb
     9-ObjectClassification.ipynb
-    
