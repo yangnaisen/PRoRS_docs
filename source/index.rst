@@ -8,7 +8,15 @@ Pattern Recognition of Remote sensing
 
 欢迎来到遥感图像模式识别课程主页！
 
-todo:加入课程图像
+.. |logo| image:: Cover/Cover.png
+
+.. toctree::
+    :maxdepth: 2
+
+    1stPart/1.Introduction/1.1Introduciton.ipynb
+    1stPart/1.Introduction/1.2ClassificationSample.ipynb
+    1stPart/1.Introduction/1.3Python.ipynb
+
 
 
 .. toctree::
