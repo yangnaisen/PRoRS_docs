@@ -2,7 +2,7 @@
 =================================
 
 .. toctree::
-    :maxdepth: 2
+    :maxdepth: 1
 
 
     1.Introduction/1.1Introduciton.ipynb
