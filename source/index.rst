@@ -12,7 +12,7 @@ Pattern Recognition of Remote sensing
 
 .. toctree::
     :maxdepth: 1
-    :caption: 第一部分:特征空间模式分类
+    :caption: 课程介绍
 
     Introduction/1.Introduction/index
 
