@@ -11,9 +11,10 @@ Pattern Recognition of Remote sensing
 .. image:: Cover/Cover.png
 
 .. toctree::
-    :maxdepth: 2
+    :maxdepth: 1
+    :caption: 第一部分:特征空间模式分类
 
-    Introduction/index
+    Introduction/1.Introduction/index
 
 
 
@@ -43,7 +44,7 @@ Pattern Recognition of Remote sensing
     3rdPart/2-GLandC.ipynb
 
 .. toctree::
-    :maxdepth: 2
+    :maxdepth: 1
     :caption: 学生报告
 
     StudentReports/2017Student/index
