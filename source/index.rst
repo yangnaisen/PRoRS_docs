@@ -11,7 +11,7 @@ Pattern Recognition of Remote sensing
 .. image:: Cover/Cover.png
 
 .. toctree::
-    :maxdepth: 1
+    :maxdepth: 2
 
     Introduction/index
 
@@ -21,19 +21,26 @@ Pattern Recognition of Remote sensing
     :maxdepth: 1
     :caption: 第一部分:特征空间模式分类
 
-    1stPart/index
+    2-PattenFeatureRecognition.ipynb
+    3-LinearDiscriminantFunction.ipynb
+    4-MLP-SVM.ipynb
+    5-EnsembleClassification.ipynb
+    6-ImageClustering.ipynb
 
 .. toctree::
     :maxdepth: 1
     :caption: 第二部分:图像模式识别
 
-    2ndPart/index
+    7-ImagePatternRecognition.ipynb
+    Chapter8.SceneClassification/index
+    9-ObjectClassification.ipynb
 
 .. toctree::
     :maxdepth: 1
     :caption: 第三部分:地表覆盖制图
 
-    3rdPart/index
+    1-GEE.ipynb
+    2-GLandC.ipynb
 
 .. toctree::
     :maxdepth: 1
