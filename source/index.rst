@@ -21,32 +21,32 @@ Pattern Recognition of Remote sensing
     :maxdepth: 1
     :caption: 第一部分:特征空间模式分类
 
-    2-PattenFeatureRecognition.ipynb
-    3-LinearDiscriminantFunction.ipynb
-    4-MLP-SVM.ipynb
-    5-EnsembleClassification.ipynb
-    6-ImageClustering.ipynb
+    1stPart/2-PattenFeatureRecognition.ipynb
+    1stPart/3-LinearDiscriminantFunction.ipynb
+    1stPart/4-MLP-SVM.ipynb
+    1stPart/5-EnsembleClassification.ipynb
+    1stPart/6-ImageClustering.ipynb
 
 .. toctree::
     :maxdepth: 1
     :caption: 第二部分:图像模式识别
 
-    7-ImagePatternRecognition.ipynb
-    Chapter8.SceneClassification/index
-    9-ObjectClassification.ipynb
+    2ndPart/7-ImagePatternRecognition.ipynb
+    2ndPart/Chapter8.SceneClassification/index
+    2ndPart/9-ObjectClassification.ipynb
 
 .. toctree::
     :maxdepth: 1
     :caption: 第三部分:地表覆盖制图
 
-    1-GEE.ipynb
-    2-GLandC.ipynb
+    3rdPart/1-GEE.ipynb
+    3rdPart/2-GLandC.ipynb
 
 .. toctree::
-    :maxdepth: 1
+    :maxdepth: 2
     :caption: 学生报告
 
-    StudentReports/index
+    StudentReports/2017Student/index
 
 搜索
 ==================
