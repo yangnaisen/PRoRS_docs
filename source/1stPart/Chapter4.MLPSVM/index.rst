@@ -4,4 +4,4 @@
 .. toctree::
     :maxdepth: 2
 
-    4-MLP-SVM.ipynb
+    4-MLPSVM.ipynb

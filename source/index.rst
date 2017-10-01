@@ -6,7 +6,7 @@
 Pattern Recognition of Remote sensing
 =======================================
 
-欢迎来到遥感图像模式识别课程主页 
+欢迎来到遥感图像模式识别课程主页
 
 .. image:: Cover/Cover.png
 
@@ -24,7 +24,7 @@ Pattern Recognition of Remote sensing
 
     1stPart/Chapter2.PattenFeatureRecognition/index
     1stPart/Chapter3.LinearDiscriminantFunction/index
-    1stPart/Chapter4.MLP-SVM/index
+    1stPart/Chapter4.MLPSVM/index
     1stPart/Chapter5.EnsembleClassification/index
     1stPart/Chapter6.ImageClustering/index
 
