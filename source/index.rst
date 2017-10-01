@@ -1,4 +1,4 @@
-.. PRoRS documentation master file, created by
+ï»¿.. PRoRS documentation master file, created by
    sphinx-quickstart on Thu Aug 10 16:32:29 2017.
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
@@ -6,13 +6,13 @@
 Pattern Recognition of Remote sensing
 =======================================
 
-»¶Ó­À´µ½Ò£¸ĞÍ¼ÏñÄ£Ê½Ê¶±ğ¿Î³ÌÖ÷Ò³
+æ¬¢è¿æ¥åˆ°é¥æ„Ÿå›¾åƒæ¨¡å¼è¯†åˆ«è¯¾ç¨‹ä¸»é¡µ
 
 .. image:: Cover/Cover.png
 
 .. toctree::
     :maxdepth: 1
-    :caption: ¿Î³Ì½éÉÜ
+    :caption: è¯¾ç¨‹ä»‹ç»
 
     Introduction/1.Introduction/index
 
@@ -20,7 +20,7 @@ Pattern Recognition of Remote sensing
 
 .. toctree::
     :maxdepth: 1
-    :caption: µÚÒ»²¿·Ö:ÌØÕ÷¿Õ¼äÄ£Ê½·ÖÀà
+    :caption: ç¬¬ä¸€éƒ¨åˆ†:ç‰¹å¾ç©ºé—´æ¨¡å¼åˆ†ç±»
 
     1stPart/Chapter2.PattenFeatureRecognition/index
     1stPart/Chapter3.LinearDiscriminantFunction/index
@@ -30,7 +30,7 @@ Pattern Recognition of Remote sensing
 
 .. toctree::
     :maxdepth: 1
-    :caption: µÚ¶ş²¿·Ö:Í¼ÏñÄ£Ê½Ê¶±ğ
+    :caption: ç¬¬äºŒéƒ¨åˆ†:å›¾åƒæ¨¡å¼è¯†åˆ«
 
     2ndPart/Chapter7.ImageClassification/index
     2ndPart/Chapter8.SceneClassification/index
@@ -38,18 +38,18 @@ Pattern Recognition of Remote sensing
 
 .. toctree::
     :maxdepth: 1
-    :caption: µÚÈı²¿·Ö:µØ±í¸²¸ÇÖÆÍ¼
+    :caption: ç¬¬ä¸‰éƒ¨åˆ†:åœ°è¡¨è¦†ç›–åˆ¶å›¾
 
     3rdPart/Chapter12.RSinterpretation/index
     3rdPart/Chapter13.LandCover/index
 
 .. toctree::
     :maxdepth: 1
-    :caption: Ñ§Éú±¨¸æ
+    :caption: å­¦ç”ŸæŠ¥å‘Š
 
     StudentReports/2017Student/index
 
-ËÑË÷
+æœç´¢
 ==================
 
 
