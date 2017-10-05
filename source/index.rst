@@ -35,6 +35,7 @@ Pattern Recognition of Remote sensing
     2ndPart/Chapter7.ImageClassification/index
     2ndPart/Chapter8.SceneClassification/index
     2ndPart/Chapter9.ObjectClassification/index
+    2ndPart/Chapter10.Segmentation/index
 
 .. toctree::
     :maxdepth: 1
