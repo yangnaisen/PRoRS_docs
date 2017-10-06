@@ -30,7 +30,7 @@ Pattern Recognition of Remote sensing
 
 .. toctree::
     :maxdepth: 1
-    :caption: 第二部分:图像模式识别
+    :caption: 第二部分:图像平面模式识别
 
     2ndPart/Chapter7.ImageClassification/index
     2ndPart/Chapter8.SceneClassification/index
@@ -39,7 +39,7 @@ Pattern Recognition of Remote sensing
 
 .. toctree::
     :maxdepth: 1
-    :caption: 第三部分:地表覆盖制图
+    :caption: 第三部分:地球表面遥感制图
 
     3rdPart/Chapter11.RSinterpretation/index
     3rdPart/Chapter12.LandCover/index
