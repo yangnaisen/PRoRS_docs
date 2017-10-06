@@ -5,3 +5,4 @@
     :maxdepth: 2
 
     7-ImagePatternRecognition.ipynb
+    7.4experiment.ipynb
