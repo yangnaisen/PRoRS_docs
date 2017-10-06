@@ -40,8 +40,8 @@ Pattern Recognition of Remote sensing
     :maxdepth: 1
     :caption: 第三部分:地表覆盖制图
 
-    3rdPart/Chapter12.RSinterpretation/index
-    3rdPart/Chapter13.LandCover/index
+    3rdPart/Chapter11.RSinterpretation/index
+    3rdPart/Chapter12.LandCover/index
 
 .. toctree::
     :maxdepth: 1
