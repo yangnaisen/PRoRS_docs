@@ -44,6 +44,7 @@ Pattern Recognition of Remote sensing
     3rdPart/Chapter11.RSinterpretation/index
     3rdPart/Chapter12.LandCover/index
     3rdPart/Chapter13.ThematicMap/index
+    3rdPart/Chapter14.ChangeDetection/index
 
 .. toctree::
     :maxdepth: 1
