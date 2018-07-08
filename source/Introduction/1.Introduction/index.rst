@@ -6,5 +6,6 @@
 
 
     1.1Introduciton.ipynb
-    1.2ClassificationSample.ipynb
+    1.2DemoOfClassification.ipynb
     1.3Python.ipynb
+    1.4ClassificationSample.ipynb
