@@ -4,4 +4,7 @@
 .. toctree::
     :maxdepth: 2
 
-    2-PattenFeatureRecognition.ipynb
+    PattenFeatureRecognition21.ipynb
+    ClassificationGNKNN22.ipynb
+    comparisonBayesNN23.ipynb
+    GBKNNquestion24.ipynb
