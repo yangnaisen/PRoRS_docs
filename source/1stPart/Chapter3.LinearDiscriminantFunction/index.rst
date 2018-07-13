@@ -4,4 +4,6 @@
 .. toctree::
     :maxdepth: 2
 
-    3-LinearDiscriminantFunction.ipynb
+    3.1LinearDiscriminantFunction.ipynb
+    3.2Classification function.ipynb
+    3.4Question.ipynb
