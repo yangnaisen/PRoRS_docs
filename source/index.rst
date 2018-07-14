@@ -24,7 +24,7 @@ Pattern Recognition of Remote Sensing
 
     1stPart/Chapter2.PattenFeatureRecognition/index
     1stPart/Chapter3.LinearDiscriminantFunction/index
-    1stPart/Chapter4.PattenFeatureRecognition/index
+    1stPart/Chapter4.NonLinearClassification/index
     1stPart/Chapter5.EnsembleClassification/index
     1stPart/Chapter6.ImageClustering/index
 
