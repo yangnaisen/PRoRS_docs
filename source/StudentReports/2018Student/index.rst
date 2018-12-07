@@ -5,8 +5,9 @@
     :maxdepth: 2
 
 
-    Liner.ipynb
-    Cluster.ipynb
-    SVM.ipynb
-    Adaboost.ipynb
-    RandomForest.ipynb
+    MLP.ipynb
+    RandomForestChangeParam.ipynb
+    Relu.ipynb
+    Segmentation.ipynb
+    SVM_parameters.ipynb
+    SVMPolyKernel.ipynb

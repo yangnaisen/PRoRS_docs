@@ -51,6 +51,7 @@ Pattern Recognition of Remote Sensing
     :caption: 学生报告
 
     StudentReports/2017Student/index
+    StudentReports/2018Student/index
 
 搜索
 ==================
