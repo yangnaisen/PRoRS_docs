@@ -8,7 +8,7 @@ Pattern Recognition of Remote Sensing
 
 欢迎来到遥感图像模式识别课程主页
 
-.. image:: Cover/Cover.png
+.. image:: Cover/Cover_new.png
 
 .. toctree::
     :maxdepth: 1
