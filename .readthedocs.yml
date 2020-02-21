@@ -22,5 +22,6 @@ build:
 # Optionally set the version of Python and requirements required to build your docs
 python:
   version: 3.5
+  system_packages: true
   install:
     - requirements: source/requirements.txt
