@@ -25,5 +25,4 @@ python:
   system_packages: true
   install:
     - requirements: source/requirements.txt
-    - method: pip
-      path: .
+
