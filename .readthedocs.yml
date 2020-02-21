@@ -26,3 +26,5 @@ python:
   install:
     - requirements: source/requirements.txt
 
+submodules:
+  include: all
