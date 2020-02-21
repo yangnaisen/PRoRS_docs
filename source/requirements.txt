@@ -1,3 +1,10 @@
 sphinx>=1.4
 nbsphinx
 ipykernel
+numpy
+matplotlib
+pandas
+sphinxcontrib-bibtex
+sphinxcontrib-svg2pdfconverter
+ipywidgets
+sphinx-copybutton
