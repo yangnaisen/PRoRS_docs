@@ -8,4 +8,4 @@
     ClassificationGNKNN22.ipynb
     comparisonBayesNN23.ipynb
     GBKNNquestion24.ipynb
-	Homeworkproblems25.ipynb
+    Homeworkproblems25.ipynb
