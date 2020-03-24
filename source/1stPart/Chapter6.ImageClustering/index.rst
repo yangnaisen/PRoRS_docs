@@ -5,3 +5,4 @@
     :maxdepth: 2
 
     6-ImageClustering.ipynb
+    Homeworkproblems.ipynb
