@@ -1,4 +1,4 @@
-﻿第07讲 图像结构化分类
+﻿第07讲 图像分类-CNN
 =================================
 
 .. toctree::
@@ -6,3 +6,6 @@
 
     7-ImagePatternRecognition.ipynb
     7.4experiment.ipynb
+    7.5 1DCNN_ClassificationAnalysis.ipynb
+    7.6 1DCNN_ClassificationProcess.ipynb
+    7.7 ConvLearnProcess.ipynb

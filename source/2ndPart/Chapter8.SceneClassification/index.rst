@@ -1,4 +1,4 @@
-﻿第08讲 图模型及推理
+﻿第08讲 对象检测-RCNN
 =================================
 
 .. toctree::
@@ -8,3 +8,4 @@
     ConvNet.ipynb
     NetStructure.ipynb
     CodeSample.ipynb
+    8.5 RCNN_Recommendation.ipynb

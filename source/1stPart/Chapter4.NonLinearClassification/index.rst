@@ -1,4 +1,4 @@
-﻿第04讲 像元非线性分类：特征变换
+﻿第04讲 学习算法-梯度下降
 =================================
 
 .. toctree::
@@ -9,3 +9,4 @@
     4.3 Example for code.ipynb
     4.4 Questions.ipynb
     4.5 Homeworkproblems.ipynb
+    4.6 MLPBackPropagation.ipynb

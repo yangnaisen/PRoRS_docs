@@ -8,7 +8,7 @@ Pattern Recognition of Remote Sensing
 
 欢迎来到遥感图像模式识别课程主页
 
-.. image:: Cover/Cover_new.png
+.. image:: Cover/Cover2020.jpg
 
 .. toctree::
     :maxdepth: 1
@@ -20,7 +20,7 @@ Pattern Recognition of Remote Sensing
 
 .. toctree::
     :maxdepth: 1
-    :caption: 第一部分:特征空间模式分类
+    :caption: 第一部分:特征空间像元分类
 
     1stPart/Chapter2.PattenFeatureRecognition/index
     1stPart/Chapter3.LinearDiscriminantFunction/index
@@ -30,7 +30,7 @@ Pattern Recognition of Remote Sensing
 
 .. toctree::
     :maxdepth: 1
-    :caption: 第二部分:图像平面模式识别
+    :caption: 第二部分:图像平面对象识别
 
     2ndPart/Chapter7.ImageClassification/index
     2ndPart/Chapter8.SceneClassification/index

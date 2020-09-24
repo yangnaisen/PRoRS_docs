@@ -1,4 +1,4 @@
-﻿第03讲 像元线性分类：机器学习原理
+﻿第03讲 神经网络-逼近能力
 =================================
 
 .. toctree::
@@ -9,3 +9,4 @@
     3.3Samplecode.ipynb
     3.4Question.ipynb
     3.5Homeworkproblems.ipynb
+    3.6MLPClassificationProcess.ipynb
