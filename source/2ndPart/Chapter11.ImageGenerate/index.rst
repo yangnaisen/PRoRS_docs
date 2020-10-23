@@ -4,6 +4,6 @@
 .. toctree::
     :maxdepth: 2
 
-    10.1 GAN_recommendation.ipynb
+    11.1 GAN_recommendation.ipynb
 
 
