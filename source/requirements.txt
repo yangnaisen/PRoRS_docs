@@ -1,6 +1,7 @@
 sphinx==1.8
-nbsphinx
+nbsphinx==0.6.0
 ipykernel==5.1.0
 sphinxcontrib-bibtex
 sphinxcontrib-svg2pdfconverter
 sphinx-copybutton
+Jinja2==2.11  
