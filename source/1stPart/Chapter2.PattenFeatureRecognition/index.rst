@@ -9,4 +9,4 @@
     comparisonBayesNN23.ipynb
     GBKNNquestion24.ipynb
     Homeworkproblems25.ipynb
-    Code-for-PPT/index
+    visualize_hyperspectral_image.ipynb
