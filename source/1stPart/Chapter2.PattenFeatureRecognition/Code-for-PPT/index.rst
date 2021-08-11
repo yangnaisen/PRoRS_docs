@@ -2,6 +2,6 @@
 =================================
 
 .. toctree::
-    :maxdepth: 2
+    :maxdepth: 1
 
     visualize_hyperspectral_image.ipynb
