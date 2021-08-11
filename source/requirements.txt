@@ -1,10 +1,6 @@
 sphinx>=1.8
 nbsphinx
 ipykernel==5.1.0
-numpy
-matplotlib
-pandas
 sphinxcontrib-bibtex
 sphinxcontrib-svg2pdfconverter
-ipywidgets
 sphinx-copybutton
