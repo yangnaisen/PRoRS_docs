@@ -1,4 +1,4 @@
-sphinx=1.8
+sphinx==1.8
 nbsphinx
 ipykernel==5.1.0
 sphinxcontrib-bibtex
