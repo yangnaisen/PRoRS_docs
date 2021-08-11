@@ -1,4 +1,4 @@
-﻿第02讲 像元分类-决策规则
+﻿第02讲 分类过程
 =================================
 
 .. toctree::
@@ -9,3 +9,4 @@
     comparisonBayesNN23.ipynb
     GBKNNquestion24.ipynb
     Homeworkproblems25.ipynb
+    Code-for-PPT/index
