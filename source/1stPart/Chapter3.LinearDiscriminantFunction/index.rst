@@ -1,4 +1,4 @@
-﻿第03讲 分类过程
+﻿第03讲 学习过程
 =================================
 
 .. toctree::
@@ -9,4 +9,4 @@
     3.3Samplecode.ipynb
     3.4Question.ipynb
     3.5Homeworkproblems.ipynb
-    3.6MLPClassificationProcess.ipynb
+    PPT-code/index

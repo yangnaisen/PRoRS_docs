@@ -5,3 +5,4 @@
     :maxdepth: 2
 
     visualize_hyperspectral_image.ipynb
+    jichao-visualize.ipynb
