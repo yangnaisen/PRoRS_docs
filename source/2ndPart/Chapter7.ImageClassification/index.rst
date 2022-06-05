@@ -9,3 +9,4 @@
     7.5 1DCNN_ClassificationAnalysis.ipynb
     7.6 1DCNN_ClassificationProcess.ipynb
     7.7 ConvLearnProcess.ipynb
+    7.8 ImageClassificationInterpretation.ipynb
