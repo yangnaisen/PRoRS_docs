@@ -5,5 +5,5 @@
     :maxdepth: 2
 
     11.1 GAN_recommendation.ipynb
-
+    11.3 GAN_Example.ipynb
 
