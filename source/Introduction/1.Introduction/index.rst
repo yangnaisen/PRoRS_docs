@@ -9,3 +9,4 @@
     1.2DemoOfClassification.ipynb
     1.3Python.ipynb
     1.4ClassificationSample.ipynb
+    1.5kaggle.ipynb

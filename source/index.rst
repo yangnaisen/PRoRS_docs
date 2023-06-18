@@ -27,6 +27,7 @@ Pattern Recognition of Remote Sensing
     1stPart/Chapter4.NonLinearClassification/index
     1stPart/Chapter5.EnsembleClassification/index
     1stPart/Chapter6.ImageClustering/index
+    1stPart/Homework.1/index
 
 .. toctree::
     :maxdepth: 1
@@ -37,6 +38,7 @@ Pattern Recognition of Remote Sensing
     2ndPart/Chapter9.ObjectClassification/index
     2ndPart/Chapter10.Segmentation/index
     2ndPart/Chapter11.ImageGenerate/index
+    2ndPart/Homework.2/index
 
 .. toctree::
     :maxdepth: 1
@@ -46,6 +48,7 @@ Pattern Recognition of Remote Sensing
     3rdPart/Chapter12.LandCover/index
     3rdPart/Chapter13.ThematicMap/index
     3rdPart/Chapter14.ChangeDetection/index
+    3rdPart/Homework.3/index
 
 .. toctree::
     :maxdepth: 1
