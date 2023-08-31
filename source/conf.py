@@ -59,7 +59,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = 'PRoRS'
-copyright = '2023, DREAM'
+copyright = '2024, DREAM'
 author = ' DREAM'
 
 # The version info for the project you're documenting, acts as replacement for

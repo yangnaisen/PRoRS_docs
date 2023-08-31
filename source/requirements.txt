@@ -1,8 +1,8 @@
-sphinx==1.8
-nbsphinx==0.8.3
-ipykernel==5.1.0
+sphinx
+nbsphinx
+ipykernel
 sphinx_rtd_theme
 sphinxcontrib-bibtex
 sphinxcontrib-svg2pdfconverter
 sphinx-copybutton
-Jinja2==2.11
+Jinja2
